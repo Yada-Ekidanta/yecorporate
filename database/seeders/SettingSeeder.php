@@ -37,8 +37,23 @@ class SettingSeeder extends Seeder
         $history = array(
             [
                 'title' => 'Founding',
-                'description' => 'Rizky Ramadhan Set Up An Office And Hired Four Developers To Support A New Programmer Outsourcing Venture Using Personal Savings Totaling Us$3,000.',
+                'description' => 'Rizky Ramadhan mendirikan kantor dan mempekerjakan empat pengembang untuk mendukung usaha outsourcing programmer baru dengan menggunakan tabungan pribadi sebesar US$4.000.',
+                'year' => '2017',
+            ],
+            [
+                'title' => 'Startup Studio',
+                'description' => 'Studio Rizky dengan cepat mengembangkan basis pelanggannya melalui situs freelancer, word-of- mouth, dan SEO, menjaring banyak startup di Indonesia sebagai pelanggan.',
+                'year' => '2018',
+            ],
+            [
+                'title' => 'YE Established',
+                'description' => 'Dengan bertambahnya jumlah karyawan, badan hukum baru didirikan, sehingga membuka jalan untuk mendapatkan pelanggan yang lebih besar di pasar domestik.',
                 'year' => '2021',
+            ],
+            [
+                'title' => 'Collaboration',
+                'description' => 'YE bercita-cita untuk menjadi platform berbagai pemangku kepentingan teknologi, untuk menyediakan cara yang lebih mudah dan lebih cepat bagi CEO dan CIO generasi mendatang untuk mendapatkan Teknologi Informasi.',
+                'year' => '2022',
             ],
         );
         $content = array(

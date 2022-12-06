@@ -61,7 +61,7 @@ class CrmSeeder extends Seeder
         );
         $clients = array(
             [
-                'company_industry_id' => '0',
+                'company_industry_id' => '13',
                 'company_name' => 'PT. Perkebunan Sumatera Utara',
                 'company_logo' => 'client_company/psu.png',
                 'title' => 'Direktur Keuangan & Umum',

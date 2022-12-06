@@ -17,21 +17,30 @@ class MasterSeeder extends Seeder
         $company = array(
             [
                 "name" => "CV Yada Ekidanta",
-                "address" => "Permata Buah Batu Residence Block C 15B",
+                "address" => "Permata Buah Batu Blok C 15B",
                 "phone" => "0818694745",
                 "email" => "hello@yadaekidanta.com",
                 "web_url" => "https://yadaekidanta.com",
-                "instagram_url" => "https://",
-                "linkedin_url" => "https://",
-                "facebook_url" => "https://",
-                "twitter_url" => "https://",
+                "instagram_url" => "https://instagram.com/yadaekidanta",
+                "linkedin_url" => "https://linkedin.com/company/yada-ekidanta",
+                "facebook_url" => "https://facebook.com/YadaEkidanta",
+                "twitter_url" => "https://twitter.com/YadaEkidanta",
             ],
         );
         $company_address = array(
             [
                 "company_id" => 1,
                 "name" => "HQ Yada Ekidanta",
-                "address" => "Permata Buah Batu Residence Bloc C 15B",
+                "address" => "Permata Buah Batu Blok C 15B",
+                "is_primary" => true,
+            ],
+        );
+        $company_bank = array(
+            [
+                "bank_id" => 15,
+                "company_id" => 1,
+                "account_number" => "847-0614286",
+                "branch_name" => "Bank BCA Batununggal",
                 "is_primary" => true,
             ],
         );
@@ -9582,6 +9591,15 @@ class MasterSeeder extends Seeder
                 "company_id" => $d['company_id'],
                 "name" => $d['name'],
                 "address" => $d['address'],
+                "is_primary" => $d['is_primary'],
+            ]);
+        }
+        foreach($company_bank AS $d){
+            CompanyBank::create([
+                "bank_id" => $d['bank_id'],
+                "company_id" => $d['company_id'],
+                "account_number" => $d['account_number'],
+                "branch_name" => $d['branch_name'],
                 "is_primary" => $d['is_primary'],
             ]);
         }

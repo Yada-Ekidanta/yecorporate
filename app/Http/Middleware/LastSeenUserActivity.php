@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Carbon\Carbon;
+use App\Models\Master\Vendor;
 use App\Models\CRM\Client;
 use App\Models\HRM\Employee;
 use Illuminate\Http\Request;
@@ -23,11 +24,17 @@ class LastSeenUserActivity
 
             //Last Seen
             Client::where('id', Auth::guard('clients')->user()->id)->update(['last_seen' => Carbon::now()]);
+        }elseif (Auth::guard('vendors')->check()) {
+            $expireTime = Carbon::now()->addMinute(1); // keep online for 1 min
+            Cache::put('is_vendor_online'.Auth::guard('vendors')->user()->id, true, $expireTime);
+
+            //Last Seen
+            Vendor::where('id', Auth::guard('vendors')->user()->id)->update(['last_seen' => Carbon::now()]);
         }elseif (Auth::guard('employees')->check()) {
-            $expireDay = Carbon::now()->addDay(1); // keep online for 1 min
+            // $expireDay = Carbon::now()->addDay(1); // keep online for 1 min
             $expireTime = Carbon::now()->addMinute(1); // keep online for 1 min
             Cache::put('is_employee_online'.Auth::guard('employees')->user()->id, true, $expireTime);
-            Cache::put('is_employee_onlen'.Auth::guard('employees')->user()->id, true, $expireDay);
+            // Cache::put('is_employee_onlen'.Auth::guard('employees')->user()->id, true, $expireDay);
 
             //Last Seen
             Employee::where('id', Auth::guard('employees')->user()->id)->update(['last_seen' => Carbon::now()]);

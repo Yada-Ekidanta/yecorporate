@@ -13,7 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        
+        Schema::create('client_chat_favorites', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('client_chat_messages', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('mails', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('subscribers', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**

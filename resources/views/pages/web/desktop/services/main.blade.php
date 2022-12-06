@@ -93,22 +93,22 @@
                                     <h4 class="title--grey">Services</h4>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#.">AGILE DEVELOPMENT</a>
+                                    <a class="nav-link active" href="#section1" data-no-swup>AGILE DEVELOPMENT</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#.">PROJECT BASED</a>
+                                    <a class="nav-link" href="#section2" data-no-swup>PROJECT BASED</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#.">MANAGED SERVICES</a>
+                                    <a class="nav-link" href="#section3" data-no-swup>MANAGED SERVICES</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#.">DESIGN SERVICES</a>
+                                    <a class="nav-link" href="#section4" data-no-swup>DESIGN SERVICES</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#.">TECHNICAL WRITER</a>
+                                    <a class="nav-link" href="#section5" data-no-swup>TECHNICAL WRITER</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#.">QUALITY ASSURANCE</a>
+                                    <a class="nav-link" href="#section6" data-no-swup>QUALITY ASSURANCE</a>
                                 </li>
                             </ul>
                         </nav>

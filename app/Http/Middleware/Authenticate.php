@@ -14,8 +14,20 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('office.auth.index');
+        if (request()->getHttpHost() === 'https://client.yadaekidanta.com') {
+            if (! $request->expectsJson()) {
+                return route('client.auth.index');
+            }
+        }
+        if (request()->getHttpHost() === 'https://office.yadaekidanta.com') {
+            if (! $request->expectsJson()) {
+                return route('office.auth.index');
+            }
+        }
+        if (request()->getHttpHost() === 'https://vendor.yadaekidanta.com') {
+            if (! $request->expectsJson()) {
+                return route('vendor.auth.index');
+            }
         }
     }
 }

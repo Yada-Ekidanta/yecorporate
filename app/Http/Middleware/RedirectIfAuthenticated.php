@@ -28,6 +28,9 @@ class RedirectIfAuthenticated
             elseif ($guard == "clients" && Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::DASHBOARD);
             }
+            elseif ($guard == "vendor" && Auth::guard($guard)->check()) {
+                return redirect(RouteServiceProvider::DASHBOARD);
+            }
             else if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }

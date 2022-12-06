@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'employees',
         ],
+        'vendors' => [
+            'driver' => 'session',
+            'provider' => 'vendors',
+        ],
     ],
 
     /*
@@ -79,6 +83,10 @@ return [
         'employees' => [
             'driver' => 'eloquent',
             'model' => App\Models\HRM\Employee::class,
+        ],
+        'vendors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Master\Vendor::class,
         ],
 
         // 'users' => [
@@ -117,6 +125,12 @@ return [
         ],
         'employees' => [
             'provider' => 'employees',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'vendors' => [
+            'provider' => 'vendors',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

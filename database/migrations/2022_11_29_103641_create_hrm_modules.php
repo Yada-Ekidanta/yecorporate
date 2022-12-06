@@ -13,26 +13,30 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('day_offs', function (Blueprint $table) {
+        Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->integer('employee_id')->default(0);
-            $table->date('date');
-            $table->string('amount',1);
-            $table->longText('reason')->nullable();
-            $table->enum('st',['Pending','Approved','Denied'])->nullable();
-            $table->integer('verified_by')->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('appraisals', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
+        });
+        Schema::create('deposits', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('document_uploads', function (Blueprint $table) {
+            $table->id();
+            $table->integer('position_id')->default(0);
             $table->string('name');
-            $table->longText('desc')->nullable();
-            $table->softDeletes();
+            $table->string('attachment');
+            $table->longText('desc');
+            $table->enum('is_private',['n','y'])->default('n');
+            $table->timestamps();
         });
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->integer('company_id')->default(0);
+            $table->integer('company_branch_id')->default(0);
             $table->string('nip',20)->unique()->nullable();
             $table->string('name');
             $table->string('email')->unique();
@@ -68,24 +72,250 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('employee_allowances', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_attendances', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_awards', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_bank_accounts', function (Blueprint $table) {
             $table->id();
             $table->integer('employee_id')->default(0);
-            $table->longText('name');
+            $table->string('name');
+            $table->integer('bank_id')->default(0);
+            $table->string('account_number')->unique()->default(0);
+            $table->string('branch_name')->default('-');
+            $table->boolean('is_primary');
+            $table->softDeletes();
+        });
+        Schema::create('employee_chat_favorites', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_chat_messages', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_commissions', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_complaints', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_contracts', function (Blueprint $table) {
+            $table->id();
+            $table->integer('employee_id')->default(0);
+            $table->string('name');
+            $table->string('subject');
+            $table->string('value');
+            $table->integer('contract_type_id')->default(0);
+            $table->date('start_at');
+            $table->date('end_at');
+            $table->longText('desc');
+            $table->longText('owner_signature');
+            $table->longText('client_signature');
+            $table->string('st');
+            $table->timestamps();
+        });
+        Schema::create('employee_contract_attachments', function (Blueprint $table) {
+            $table->id();
+            $table->integer('employee_id')->default(0);
+            $table->integer('contract_id')->default(0);
+            $table->string('files');
+            $table->timestamps();
+        });
+        Schema::create('employee_contract_comments', function (Blueprint $table) {
+            $table->id();
+            $table->integer('employee_id')->default(0);
+            $table->integer('contract_id')->default(0);
+            $table->longText('comment');
+            $table->timestamps();
+        });
+        Schema::create('employee_contract_notes', function (Blueprint $table) {
+            $table->id();
+            $table->integer('employee_id')->default(0);
+            $table->integer('contract_id')->default(0);
+            $table->longText('note');
+            $table->timestamps();
+        });
+        Schema::create('employee_holidays', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_loans', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_meetings', function (Blueprint $table) {
+            $table->id();
+            $table->integer('department_id')->default(0);
+            $table->longText('position_id')->nullable();
+            $table->longText('employee_id')->nullable();
+            $table->string('title');
+            $table->date('date')->nullable();
+            $table->time('time')->nullable();
+            $table->longText('note')->nullable();
+            $table->timestamps();
+        });
+        Schema::create('employee_memos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('employee_id')->default(0);
+            $table->longText('title');
+            $table->longText('body');
+            $table->timestamps();
+        });
+        Schema::create('employee_online_meetings', function (Blueprint $table) {
+            $table->id();
+            $table->integer('department_id')->default(0);
+            $table->longText('position_id')->nullable();
+            $table->longText('employee_id')->nullable();
+            $table->string('title');
+            $table->date('date');
+            $table->string('url');
+            $table->string('st');
+            $table->time('time');
+            $table->longText('note');
+            $table->timestamps();
+        });
+        Schema::create('employee_online_meeting_attendees', function (Blueprint $table) {
+            $table->id();
+            $table->integer('online_meeting_id')->default(0);
+            $table->integer('attendees_employee')->default(0);
+            $table->timestamps();
+        });
+        Schema::create('employee_overtimes', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('employee_promotions', function (Blueprint $table) {
+            $table->id();
+            $table->integer('employee_id')->default(0);
+            $table->integer('position_id')->default(0);
+            $table->string('promotion_title');
+            $table->date('promotion_date');
+            $table->longText('desc')->nullable();
+            $table->softDeletes();
+        });
+        Schema::create('employee_resignations', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+        });
+        Schema::create('employee_saturation_deductions', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+        });
+        Schema::create('employee_terminations', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+        });
+        Schema::create('employee_ticket_replies', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+        });
+        Schema::create('employee_tickets', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+        });
+        Schema::create('employee_trainings', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+        });
+        Schema::create('employee_transfers', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+        });
+        Schema::create('employee_travels', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+        });
+        Schema::create('employee_warnings', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+        });
+        Schema::create('events', function (Blueprint $table) {
+            $table->id();
+            $table->integer('department_id')->default(0);
+            $table->integer('employee_id')->default(0);
+            $table->longText('title');
             $table->longText('description')->nullable();
-            $table->string('type')->nullable();
-            $table->longText('url')->nullable();
+            $table->string('color')->nullable();
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
+            $table->enum('is_private',['n','y'])->default('n');
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('positions', function (Blueprint $table) {
+        Schema::create('experience_certificates', function (Blueprint $table) {
             $table->id();
-            $table->integer('department_id')->default(0);
-            $table->string('name');
-            $table->longText('desc')->nullable();
+            $table->timestamps();
+        });
+        Schema::create('generate_offer_letters', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('goal_trackings', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('indicators', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('interview_schedules', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('job_application_notes', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('job_applications', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('job_on_boards', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('jobs', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('joining_letters', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('leaves', function (Blueprint $table) {
+            $table->id();
+            $table->integer('employee_id')->default(0);
+            $table->integer('leave_type_id')->default(0);
+            $table->date('applied_on');
+            $table->date('start_at');
+            $table->date('end_at');
+            $table->string('total_leave_days');
+            $table->longText('leave_reason')->nullable();
+            $table->string('remark');
+            $table->longText('denied_reason')->nullable();
+            $table->enum('st',['Pending','Approved','Denied'])->nullable();
+            $table->integer('verified_by')->default(0);
+            $table->timestamps();
             $table->softDeletes();
+        });
+        Schema::create('noc_certificates', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+        Schema::create('payslips', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
