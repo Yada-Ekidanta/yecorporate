@@ -51,11 +51,11 @@ class AllowanceOptionController extends Controller
     {
         //
     }
-    public function edit(AllowanceOption $allowanceOption)
+    public function edit(AllowanceOption $allowance)
     {
-        return view('pages.office.master.allowance.input', ['data' => $allowanceOption]);
+        return view('pages.office.master.allowance.input', ['data' => $allowance]);
     }
-    public function update(Request $request, AllowanceOption $allowanceOption)
+    public function update(Request $request, AllowanceOption $allowance)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -67,16 +67,16 @@ class AllowanceOptionController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $allowanceOption->name = $request->name;
-        $allowanceOption->update();
+        $allowance->name = $request->name;
+        $allowance->update();
         return response()->json([
             'alert' => 'success',
             'message' => 'Allowance Option Updated',
         ]);
     }
-    public function destroy(AllowanceOption $allowanceOption)
+    public function destroy(AllowanceOption $allowance)
     {
-        $allowanceOption->delete();
+        $allowance->delete();
         return response()->json([
             'alert' => 'success',
             'message' => 'Allowance Option Deleted',

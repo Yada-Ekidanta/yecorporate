@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('payment_method')->default(0);
             $table->string('reference');
             $table->string('add_receipt');
-            $table->longText('desc');
+            $table->longText('desc')->nullable();
             $table->integer('created_by')->default(0);
             $table->timestamps();
         });
@@ -31,8 +31,8 @@ return new class extends Migration
             $table->integer('bill_id')->default(0);
             $table->string('name');
             $table->string('qty');
-            $table->string('tax');
-            $table->string('discount');
+            $table->string('tax')->nullable();
+            $table->string('discount')->default(0);
             $table->string('price')->default(0);
             $table->integer('created_by')->default(0);
             $table->timestamps();
@@ -70,7 +70,7 @@ return new class extends Migration
             $table->integer('chart_of_account_type_id')->default(0);
             $table->integer('chart_of_account_sub_type_id')->default(0);
             $table->integer('is_enabled')->default(0);
-            $table->longText('desc');
+            $table->longText('desc')->nullable();
             $table->integer('created_by')->default(0);
             $table->timestamps();
         });

@@ -1,20 +1,16 @@
-.transition-fade {
+.animation-class {
     transition: 1s;
     opacity: 1;
 }
-html.is-animating .transition-fade {
-    opacity: 0;
-    transform: translateY(-50px);
+html.is-animating .animation-class {
+    /* CSS styles when animating  */
 }
-.delay1{
-    transition-delay: .2s;
+html.is-changing .animation-class {
+    /* CSS styles when changing  */
 }
-.delay2{
-    transition-delay: .4s;
+html.is-leaving .animation-class {
+    /* CSS styles when leaving  */
 }
-.delay3{
-    transition-delay: .6s;
-}
-html.is-animating .is-leaving .transition-fade {
-    transition-delay: 0s!important;
+html.is-rendering .animation-class {
+    /* CSS styles when rendering  */
 }

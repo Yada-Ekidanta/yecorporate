@@ -31,7 +31,7 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Main-->
 					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
 						<!--begin::Content wrapper-->
-						<div class="d-flex flex-column flex-column-fluid transition-fade">
+						<div class="d-flex flex-column flex-column-fluid">
 							{{$slot}}
 						</div>
 						<!--end::Content wrapper-->

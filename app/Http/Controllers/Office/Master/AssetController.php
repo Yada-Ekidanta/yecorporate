@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Office\Master;
 
+use Illuminate\Support\Str;
 use App\Models\Master\Asset;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,7 +32,6 @@ class AssetController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'purchase_at' => 'required',
-            'supported_at' => 'required',
             'amount' => 'required',
         ]);
         if ($validator->fails()){
@@ -44,7 +44,7 @@ class AssetController extends Controller
         $asset->name = $request->name;
         $asset->purchase_at = $request->purchase_at;
         $asset->supported_at = $request->supported_at;
-        $asset->amount = $request->amount;
+        $asset->amount = Str::remove(',', $request->amount);
         $asset->desc = $request->desc;
         $asset->created_by = Auth::guard('employees')->user()->id;
         $asset->save();
@@ -66,7 +66,6 @@ class AssetController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'purchase_at' => 'required',
-            'supported_at' => 'required',
             'amount' => 'required',
         ]);
         if ($validator->fails()){
@@ -78,7 +77,7 @@ class AssetController extends Controller
         $asset->name = $request->name;
         $asset->purchase_at = $request->purchase_at;
         $asset->supported_at = $request->supported_at;
-        $asset->amount = $request->amount;
+        $asset->amount = Str::remove(',', $request->amount);
         $asset->desc = $request->desc;
         $asset->update();
         return response()->json([

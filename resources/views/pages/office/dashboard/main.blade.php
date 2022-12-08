@@ -1,6 +1,6 @@
 <x-office-layout title="Dashboard">
     <!--begin::Toolbar-->
-    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 is-animating transition-fade">
         <!--begin::Toolbar container-->
         <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
             <!--begin::Page title-->
@@ -46,7 +46,7 @@
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-fluid">
             <!--begin::Row-->
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 is-animating transition-fade delay1">
                 <!--begin::Col-->
                 <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
                     <!--begin::Card widget 20-->
@@ -430,7 +430,7 @@
             </div>
             <!--end::Row-->
             <!--begin::Row-->
-            <div class="row gx-5 gx-xl-10">
+            <div class="row gx-5 gx-xl-10 is-animating transition-fade delay2">
                 <!--begin::Col-->
                 <div class="col-xxl-6 mb-5 mb-xl-10">
                     <!--begin::Chart widget 8-->
@@ -1642,7 +1642,7 @@
             </div>
             <!--end::Row-->
             <!--begin::Row-->
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 is-animating transition-fade delay3">
                 <!--begin::Col-->
                 <div class="col-xxl-6">
                     <!--begin::Card widget 18-->
@@ -1841,7 +1841,7 @@
             </div>
             <!--end::Row-->
             <!--begin::Row-->
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 is-animating transition-fade delay4">
                 <!--begin::Col-->
                 <div class="col-xl-4">
                     <!--begin::Chart Widget 35-->
@@ -2606,7 +2606,7 @@
             </div>
             <!--end::Row-->
             <!--begin::Row-->
-            <div class="row gx-5 gx-xl-10">
+            <div class="row gx-5 gx-xl-10 is-animating transition-fade delay5">
                 <!--begin::Col-->
                 <div class="col-xl-4">
                     <!--begin::Chart widget 31-->
