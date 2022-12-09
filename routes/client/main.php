@@ -16,7 +16,7 @@ use App\Http\Controllers\Client\DashboardController;
 |
 */
 
-Route::group(['domain' => ''], function() {
+Route::group(['domain' => 'https://client.yadaekidanta.com'], function() {
     Route::prefix('client')->name('client.')->group(function(){
         Route::prefix('auth')->name('auth.')->group(function(){
             Route::get('',[AuthController::class, 'index'])->name('index');

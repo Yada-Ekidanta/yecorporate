@@ -26,7 +26,7 @@
     <!--begin::Body-->
     <div class="py-20">
         <!--begin::Form-->
-        <form class="form w-100" novalidate="novalidate" id="register_form" data-kt-redirect-url="{{route('office.auth.index')}}" action="{{route('office.auth.register')}}">
+        <form class="form w-100" novalidate="novalidate" id="form_register" data-kt-redirect-url="{{route('office.auth.index')}}" action="{{route('office.auth.doregister')}}">
             <!--begin::Heading-->
             <div class="text-start mb-10">
                 <!--begin::Title-->
@@ -41,14 +41,19 @@
             <div class="row fv-row mb-7">
                 <!--begin::Col-->
                 <div class="col-xl-6">
-                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="First Name" name="first-name" autocomplete="off" data-kt-translate="sign-up-input-first-name" />
+                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="First Name" name="first_name" autocomplete="off" data-kt-translate="sign-up-input-first-name" />
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
                 <div class="col-xl-6">
-                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Last Name" name="last-name" autocomplete="off" data-kt-translate="sign-up-input-last-name" />
+                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Last Name" name="last_name" autocomplete="off" data-kt-translate="sign-up-input-last-name" />
                 </div>
                 <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="fv-row mb-10">
+                <input class="form-control form-control-lg form-control-solid" type="tel" maxlength="13" placeholder="Phone Number" name="phone" autocomplete="off" data-kt-translate="sign-up-input-phone" />
             </div>
             <!--end::Input group-->
             <!--begin::Input group-->
@@ -86,13 +91,13 @@
             <!--end::Input group=-->
             <!--begin::Input group-->
             <div class="fv-row mb-10">
-                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="Confirm Password" name="confirm-password" autocomplete="off" data-kt-translate="sign-up-input-confirm-password" />
+                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="Confirm Password" name="password_confirmation" autocomplete="off" data-kt-translate="sign-up-input-confirm-password" />
             </div>
             <!--end::Input group-->
             <!--begin::Actions-->
             <div class="d-flex flex-stack">
                 <!--begin::Submit-->
-                <button id="tombol_register" class="btn btn-primary" data-kt-translate="sign-up-submit">
+                <button id="tombol_register" onclick="handle_post('#tombol_register','#form_register');" class="btn btn-primary" data-kt-translate="sign-up-submit">
                     <!--begin::Indicator label-->
                     <span class="indicator-label">Submit</span>
                     <!--end::Indicator label-->

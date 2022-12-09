@@ -16,8 +16,8 @@ use App\Http\Controllers\Vendor\DashboardController;
 |
 */
 
-Route::group(['domain' => ''], function() {
-    Route::prefix('vendor')->name('vendor.')->group(function(){
+Route::group(['domain' => 'https://vendor.yadaekidanta.com'], function() {
+    Route::prefix('')->name('vendor.')->group(function(){
         Route::prefix('auth')->name('auth.')->group(function(){
             Route::get('',[AuthController::class, 'index'])->name('index');
             Route::get('register',[AuthController::class, 'register'])->name('register');

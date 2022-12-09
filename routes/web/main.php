@@ -14,7 +14,7 @@ use App\Http\Controllers\Web\MainController;
 |
 */
 
-Route::group(['domain' => ''], function() {
+Route::group(['domain' => 'https://yadaekidanta.com'], function() {
     Route::prefix('')->name('web.')->group(function(){
         Route::get('',[MainController::class, 'index'])->name('home');
         Route::get('about',[MainController::class, 'about'])->name('about');

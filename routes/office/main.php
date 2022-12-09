@@ -54,8 +54,8 @@ use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
 |
 */
 
-Route::group(['domain' => ''], function() {
-    Route::prefix('office')->name('office.')->group(function(){
+Route::group(['domain' => 'https://office.yadaekidanta.com'], function() {
+    Route::prefix('')->name('office.')->group(function(){
         Route::prefix('auth')->name('auth.')->group(function(){
             Route::get('',[AuthController::class, 'index'])->name('index');
             Route::get('register',[AuthController::class, 'register'])->name('register');

@@ -20,7 +20,7 @@ class EmployeeRegisterNotification extends Notification
     }
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('Yada Ekidanta | Thank you for your enthusiasm')->from('noreply@yadaekidanta.com')->view('email.auth.welcome_employee',compact('notifiable'));
+        return (new MailMessage)->subject('Yada Ekidanta | Thank you for your enthusiasm')->from('noreply@yadaekidanta.com')->view('email.employee.welcome',compact('notifiable'));
     }
     public function toArray($notifiable)
     {
