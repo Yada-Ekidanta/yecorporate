@@ -133,6 +133,9 @@ Route::group(['domain' => ''], function() {
                 Route::resource('payment-type', PaymentTypeController::class);
                 Route::resource('payslip-type', PayslipTypeController::class);
                 Route::resource('performance-type', PerformanceTypeController::class);
+                Route::get('position/{position}/permission',[PositionController::class, 'permission'])->name('position.permission');
+                Route::get('position/{department}/create',[PositionController::class, 'create'])->name('position.create');
+                Route::get('positon/{department}/{position}/edit',[PositionController::class, 'edit'])->name('position.edit');
                 Route::resource('position', PositionController::class);
                 Route::resource('product-category', ProductCategoryController::class);
                 Route::resource('product-unit', ProductUnitController::class);
