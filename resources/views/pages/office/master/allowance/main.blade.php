@@ -1,6 +1,6 @@
 <x-office-layout title="Allowance Option">
     <!--begin::Toolbar-->
-    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
         <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
             <!--begin::Page title-->
@@ -49,7 +49,7 @@
         <!--end::Toolbar container-->
     </div>
     <!--end::Toolbar-->
-    <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6">
+    <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
                 <div class="card-header border-0 pt-6">

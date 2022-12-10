@@ -1,4 +1,4 @@
-<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Allowance Option">
+<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Regency">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
@@ -21,7 +21,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Master</li>
+                    <li class="breadcrumb-item text-muted">Regional</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Allowance Option</li>
+                    <li class="breadcrumb-item text-muted">Regency</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -60,16 +60,16 @@
     <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
-                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.master.allowance.index')}}" action="{{$data->id ? route('office.master.allowance.update',$data->id) : route('office.master.allowance.store')}}">
+                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.master.regional.show_regency',$regional->id)}}" action="{{$data->id ? route('office.master.regional.update_regency',$data->id) : route('office.master.regional.store_regency')}}">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Allowance Option</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Regency</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a id="back_form_button" href="{{route('office.master.allowance.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a id="back_form_button" href="{{route('office.master.regional.show_regency',$regional->id)}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
@@ -85,6 +85,19 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
+                                    <input type="hidden" class="form-control" id="province_id" name="province_id" placeholder="Indonesia" value="{{$regional->id}}"/>
+                                    <input type="text" class="form-control" readonly placeholder="Indonesia" value="{{$regional->name}}"/>
+                                    <label for="code">Province</label>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="code" name="code" placeholder="Indonesia" value="{{$data->id}}"/>
+                                    <label for="code">Code</label>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
                                 </div>
@@ -96,7 +109,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this allowance ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.allowance.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this allowance ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.regional.destroy_regency',$data->id)}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

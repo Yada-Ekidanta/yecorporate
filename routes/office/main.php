@@ -14,6 +14,7 @@ use App\Http\Controllers\Office\Master\CaseTypeController;
 use App\Http\Controllers\Office\Master\GoalTypeController;
 use App\Http\Controllers\Office\Master\JobStageController;
 use App\Http\Controllers\Office\Master\PositionController;
+use App\Http\Controllers\Office\Master\RegionalController;
 use App\Http\Controllers\Office\Master\AwardTypeController;
 use App\Http\Controllers\Office\Master\TaskStageController;
 use App\Http\Controllers\Office\Master\ClientTypeController;
@@ -54,8 +55,9 @@ use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
 |
 */
 
-Route::group(['domain' => 'https://office.yadaekidanta.com'], function() {
-    Route::prefix('')->name('office.')->group(function(){
+Route::group(['domain' => ''], function() {
+    Route::prefix('office')->name('office.')->group(function(){
+        Route::redirect('/','/auth');
         Route::prefix('auth')->name('auth.')->group(function(){
             Route::get('',[AuthController::class, 'index'])->name('index');
             Route::get('register',[AuthController::class, 'register'])->name('register');
@@ -71,6 +73,34 @@ Route::group(['domain' => 'https://office.yadaekidanta.com'], function() {
                 Route::get('ecommerce',[DashboardController::class, 'ecommerce'])->name('ecommerce');
             });
             Route::name('master.')->group(function(){
+                Route::get('regional/{regional}/create',[RegionalController::class, 'create_province'])->name('regional.create_province');
+                Route::post('regional/store-province',[RegionalController::class, 'store_province'])->name('regional.store_province');
+                Route::get('regional/{regional}/{province}/edit-province',[RegionalController::class, 'edit_province'])->name('regional.edit_province');
+                Route::patch('regional/{province}/update-province',[RegionalController::class, 'update_province'])->name('regional.update_province');
+                Route::delete('regional/{province}/destroy-province',[RegionalController::class, 'destroy_province'])->name('regional.destroy_province');
+
+                Route::get('province/{province}/show_regency',[RegionalController::class, 'show_regency'])->name('regional.show_regency');
+                Route::get('province/{province}/create',[RegionalController::class, 'create_regency'])->name('regional.create_regency');
+                Route::post('province/store-regency',[RegionalController::class, 'store_regency'])->name('regional.store_regency');
+                Route::get('province/{province}/{regency}/edit-regency',[RegionalController::class, 'edit_regency'])->name('regional.edit_regency');
+                Route::patch('province/{regency}/update-regency',[RegionalController::class, 'update_regency'])->name('regional.update_regency');
+                Route::delete('province/{regency}/destroy-regency',[RegionalController::class, 'destroy_regency'])->name('regional.destroy_regency');
+
+                Route::get('regency/{regency}/show_district',[RegionalController::class, 'show_district'])->name('regional.show_district');
+                Route::get('regency/{regency}/create',[RegionalController::class, 'create_district'])->name('regional.create_district');
+                Route::post('regency/store-district',[RegionalController::class, 'store_district'])->name('regional.store_district');
+                Route::get('regency/{regency}/{district}/edit-district',[RegionalController::class, 'edit_district'])->name('regional.edit_district');
+                Route::patch('regency/{district}/update-district',[RegionalController::class, 'update_district'])->name('regional.update_district');
+                Route::delete('regency/{district}/destroy-district',[RegionalController::class, 'destroy_district'])->name('regional.destroy_district');
+                
+                Route::get('district/{district}/show_village',[RegionalController::class, 'show_village'])->name('regional.show_village');
+                Route::get('district/{district}/create',[RegionalController::class, 'create_village'])->name('regional.create_village');
+                Route::post('district/store-village',[RegionalController::class, 'store_village'])->name('regional.store_village');
+                Route::get('district/{district}/{village}/edit-village',[RegionalController::class, 'edit_village'])->name('regional.edit_village');
+                Route::patch('district/{village}/update-village',[RegionalController::class, 'update_village'])->name('regional.update_village');
+                Route::delete('district/{village}/destroy-village',[RegionalController::class, 'destroy_village'])->name('regional.destroy_village');
+
+                Route::resource('regional', RegionalController::class);
                 Route::resource('allowance', AllowanceOptionController::class);
                 Route::resource('asset', AssetController::class);
                 Route::resource('award-type', AwardTypeController::class);
@@ -90,6 +120,11 @@ Route::group(['domain' => 'https://office.yadaekidanta.com'], function() {
                 Route::resource('goal-type', GoalTypeController::class);
                 Route::resource('income-type', IncomeTypeController::class);
                 Route::resource('job-stage', JobStageController::class);
+                Route::get('kbli/{kbli}/create',[KbliController::class, 'create_sub'])->name('kbli.create_sub');
+                Route::post('kbli/store-sub',[KbliController::class, 'store_sub'])->name('kbli.store_sub');
+                Route::get('kbli/{kbli}/{data}/edit-sub',[KbliController::class, 'edit_sub'])->name('kbli.edit_sub');
+                Route::patch('kbli/{kbli}/update-sub',[KbliController::class, 'update_sub'])->name('kbli.update_sub');
+                Route::delete('kbli/{kbli}/destroy-sub',[KbliController::class, 'destroy_sub'])->name('kbli.destroy_sub');
                 Route::resource('kbli', KbliController::class);
                 Route::resource('lead-source', LeadSourceController::class);
                 Route::resource('loan-option', LoanOptionController::class);
@@ -110,6 +145,14 @@ Route::group(['domain' => 'https://office.yadaekidanta.com'], function() {
                 Route::resource('trainer', TrainerController::class);
                 Route::resource('training-type', TrainingTypeController::class);
                 Route::resource('vendor', VendorController::class);
+            });
+            Route::prefix('crm')->name('crm.')->group(function(){
+            });
+            Route::prefix('finance')->name('finance.')->group(function(){
+            });
+            Route::prefix('project')->name('project.')->group(function(){
+            });
+            Route::prefix('setting')->name('setting.')->group(function(){
             });
             Route::prefix('profile')->name('profile.')->group(function(){
                 Route::get('',[ProfileController::class, 'index'])->name('index');

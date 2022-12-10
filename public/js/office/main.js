@@ -26,20 +26,60 @@
 // };
 const options = {
     containers: ['#kt_app_main'],
-    cache:true,
+    cache:false,
     animateHistoryBrowsing: true,
     linkSelector: '.menu-link:not([data-no-swup]), .menu-item:not([data-no-swup]), .nav-link:not([data-no-swup])',
-    animationSelector: '[class="app-wrapper"]'
+    animationSelector: '[class="app-toolbar"]',
 };
 const swup = new Swup(options);
-function init () {
-    load_list();
-    new number_only(element);
-    // any other scripts 
-}
-init();
-document.addEventListener("swup:contentReplaced",init);
-// document.addEventListener("swup:contentReplaced", () => {
-//     new load_list();
-//     number_only(obj);
-// });
+// document.addEventListener("swup:contentReplaced",init);
+document.addEventListener("swup:contentReplaced", () => {
+    load_list(1);
+    obj_autosize();
+    obj_time();
+    obj_date_time();
+    obj_date();
+    obj_birthdate();
+    obj_startdatenow();
+    obj_enddatenow();
+    obj_startdatenow('purchase_at');
+    obj_startdatenow('supported_at');
+    setTimeout(() => {
+        obj_quill('desc');
+    }, 1000);
+    $('.ribuan').keyup(function (event) {
+        if (event.which >= 37 && event.which <= 40) return;
+        // format number
+        $(this).val(function (index, value) {
+            return value
+                .replace(/\D/g, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        });
+        var id = $(this).data("id-selector");
+        var classs = $(this).data("class-selector");
+        var value = $(this).val();
+        var noCommas = value.replace(/,/g, "");
+        $('#' + id).val(noCommas);
+        $('.' + classs).val(noCommas);
+    });
+    $('.number_only').bind('keypress', function (event) {
+        var regex = new RegExp("^[0-9]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+    $('.format_email').bind('keypress', function (event) {
+        var regex = new RegExp("^[A-Za-z0-9@_.]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+    Inputmask({
+        "mask": "99.999.999.9-999.999"
+    }).mask(".npwp_format");
+    
+});

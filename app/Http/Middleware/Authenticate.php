@@ -19,12 +19,12 @@ class Authenticate extends Middleware
                 return route('client.auth.index');
             }
         }
-        if (request()->getHttpHost() === 'https://office.yadaekidanta.com') {
+        elseif (request()->getHttpHost() === 'https://office.yadaekidanta.com') {
             if (! $request->expectsJson()) {
                 return route('office.auth.index');
             }
         }
-        if (request()->getHttpHost() === 'https://vendor.yadaekidanta.com') {
+        elseif (request()->getHttpHost() === 'https://vendor.yadaekidanta.com') {
             if (! $request->expectsJson()) {
                 return route('vendor.auth.index');
             }

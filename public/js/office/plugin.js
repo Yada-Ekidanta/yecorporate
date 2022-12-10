@@ -1,28 +1,22 @@
-function number_only(obj) {
-    $('#' + obj).bind('keypress', function (event) {
-        var regex = new RegExp("^[0-9]+$");
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-    });
-}
-function format_email(obj) {
-    $('#' + obj).bind('keypress', function (event) {
-        var regex = new RegExp("^[A-Za-z0-9@_.]+$");
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-    });
-}
-function npwp_format(obj) {
-    Inputmask({
-        "mask": "99.999.999.9-999.999"
-    }).mask("#" + obj);
-}
+$('.number_only').bind('keypress', function (event) {
+    var regex = new RegExp("^[0-9]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+        event.preventDefault();
+        return false;
+    }
+});
+$('.format_email').bind('keypress', function (event) {
+    var regex = new RegExp("^[A-Za-z0-9@_.]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+        event.preventDefault();
+        return false;
+    }
+});
+Inputmask({
+    "mask": "99.999.999.9-999.999"
+}).mask(".npwp_format");
 
 function format_ribuan(nStr) {
     nStr += '';
@@ -36,27 +30,25 @@ function format_ribuan(nStr) {
     return x1 + x2;
 }
 
-function ribuan(obj) {
-    $('#' + obj).keyup(function (event) {
-        if (event.which >= 37 && event.which <= 40) return;
-        // format number
-        $(this).val(function (index, value) {
-            return value
-                .replace(/\D/g, "")
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        });
-        var id = $(this).data("id-selector");
-        var classs = $(this).data("class-selector");
-        var value = $(this).val();
-        var noCommas = value.replace(/,/g, "");
-        $('#' + id).val(noCommas);
-        $('.' + classs).val(noCommas);
+$('.ribuan').keyup(function (event) {
+    if (event.which >= 37 && event.which <= 40) return;
+    // format number
+    $(this).val(function (index, value) {
+        return value
+            .replace(/\D/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     });
-}
+    var id = $(this).data("id-selector");
+    var classs = $(this).data("class-selector");
+    var value = $(this).val();
+    var noCommas = value.replace(/,/g, "");
+    $('#' + id).val(noCommas);
+    $('.' + classs).val(noCommas);
+});
 
 function obj_tinymce(obj) {
     tinymce.init({
-        selector: '#' + obj
+        selector: '#' + obj,
     });
 }
 
@@ -75,7 +67,7 @@ function obj_quill(obj) {
         theme: 'snow' // or 'bubble'
     });
     quill.on('text-change', function (delta, oldDelta, source) {
-        document.querySelector("textarea[name='" + obj + "']").value = quill.root.innerHTML;
+        document.querySelector("textarea[name='"+obj+"']").value = quill.root.innerHTML;
     });
 }
 
@@ -176,36 +168,36 @@ function obj_jstree(obj) {
     });
 }
 
-function obj_select(obj, title) {
+function obj_select(obj) {
     $('#' + obj).select2({
-        placeholder: title,
+        placeholder: "Choose Data",
         language: {
             // You can find all of the options in the language files provided in the
             // build. They all must be functions that return the string that should be
             // displayed.
             "noResults": function () {
-                return "Data Tidak ditemukan";
+                return "Data Not Found";
             },
             "inputTooShort": function () {
-                return "Anda harus memasukkan setidaknya 1 karakter";
+                return "You Should Enter At Least 1 Character";
             }
         },
         width: '100%',
     });
 }
 
-function obj_select_multiple(obj, title) {
+function obj_select_multiple(obj) {
     $('#' + obj).select2({
-        placeholder: title,
+        placeholder: "Choose Data",
         language: {
             // You can find all of the options in the language files provided in the
             // build. They all must be functions that return the string that should be
             // displayed.
             "noResults": function () {
-                return "Data Tidak ditemukan";
+                return "Data Not Found";
             },
             "inputTooShort": function () {
-                return "Anda harus memasukkan setidaknya 1 karakter";
+                return "You Should Enter At Least 1 Character";
             }
         },
         width: '100%',
@@ -215,7 +207,7 @@ function obj_select_multiple(obj, title) {
 }
 
 function obj_select_ajax(obj, title, url) {
-    $('#' + obj).select2({
+    $('.select2_ajax').select2({
         placeholder: title,
         width: '90%',
         language: {
@@ -255,7 +247,7 @@ function obj_select_ajax(obj, title, url) {
 }
 
 function obj_tagify(obj) {
-    var input = document.querySelector(obj);
+    var input = document.querySelector('#' + obj);
     new Tagify(input);
 }
 

@@ -1,6 +1,6 @@
 <x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Bank">
     <!--begin::Toolbar-->
-    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 is-animating transition-fade">
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
         <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
             <!--begin::Page title-->
@@ -57,7 +57,7 @@
         <!--end::Toolbar container-->
     </div>
     <!--end::Toolbar-->
-    <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 is-animating transition-fade delay2">
+    <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
                 <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.master.bank.index')}}" action="{{$data->id ? route('office.master.bank.update',$data->id) : route('office.master.bank.store')}}">

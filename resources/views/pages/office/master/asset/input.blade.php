@@ -1,6 +1,6 @@
-<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Allowance Option">
+<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Asset">
     <!--begin::Toolbar-->
-    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 is-animating transition-fade">
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class duration-1">
         <!--begin::Toolbar container-->
         <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
             <!--begin::Page title-->
@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Allowance Option</li>
+                    <li class="breadcrumb-item text-muted">Asset</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -57,14 +57,14 @@
         <!--end::Toolbar container-->
     </div>
     <!--end::Toolbar-->
-    <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 is-animating transition-fade delay2">
+    <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
                 <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.master.asset.index')}}" action="{{$data->id ? route('office.master.asset.update',$data->id) : route('office.master.asset.store')}}">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Allowance Option</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Asset</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
@@ -91,27 +91,27 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="amount" name="amount" placeholder="Indonesia" value="{{number_format($data->amount)}}"/>
+                                    <input type="text" class="form-control number_only ribuan" id="amount" name="amount" placeholder="Indonesia" value="{{number_format($data->amount)}}"/>
                                     <label for="amount">Amount</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="purchase_at" name="purchase_at" placeholder="Indonesia" value="{{$data->purchase_at}}"/>
+                                    <input type="text" class="form-control datestartnow" id="purchase_at" name="purchase_at" placeholder="Indonesia" value="{{$data->purchase_at}}"/>
                                     <label for="purchase_at">Purchase At</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="supported_at" name="supported_at" placeholder="Indonesia" value="{{$data->supported_at}}"/>
+                                    <input type="text" class="form-control datestartnow" id="supported_at" name="supported_at" placeholder="Indonesia" value="{{$data->supported_at}}"/>
                                     <label for="supported_at">Supported At</label>
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
                                 <label for="supported_at">Description</label>
                                 <div class="form-floating">
-                                    <div id="desc"></div>
-                                    <textarea class="form-control d-none" name="desc"></textarea>
+                                    <div id="desc">{!!$data->desc!!}</div>
+                                    <textarea class="form-control d-none" name="desc">{{$data->desc}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -132,8 +132,6 @@
     </div>
     @section('custom_js')
     <script>
-        number_only('amount');
-        ribuan('amount');
         obj_startdatenow('purchase_at');
         obj_startdatenow('supported_at');
         obj_quill('desc');
