@@ -198,13 +198,13 @@ return new class extends Migration
             $table->longText('desc')->nullable();
             $table->softDeletes();
         });
-        Schema::create('products_units', function (Blueprint $table) {
+        Schema::create('product_units', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->integer('created_by')->default(0);
             $table->timestamps();
         });
-        Schema::create('products_categories', function (Blueprint $table) {
+        Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('type');
