@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Office\Master;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Master\ProductCategory;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ProductCategoryController extends Controller
@@ -15,8 +15,8 @@ class ProductCategoryController extends Controller
     }
     public function index(Request $request)
     {
-        if($request->ajax()){
-            $collection = ProductCategory::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+        if ($request->ajax()) {
+            $collection = ProductCategory::where('name', 'LIKE', '%' . $request->keyword . '%')->paginate(10);
             return view('pages.office.master.product_category.list', compact('collection'));
         }
         return view('pages.office.master.product_category.main');
@@ -30,8 +30,7 @@ class ProductCategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'alert' => 'error',
                 'message' => $validator->errors()->first(),
@@ -39,6 +38,8 @@ class ProductCategoryController extends Controller
         }
         $productCategory = new ProductCategory;
         $productCategory->name = $request->name;
+        $productCategory->type = $request->type;
+        $productCategory->color = $request->color;
         $productCategory->save();
         return response()->json([
             'alert' => 'success',
@@ -58,14 +59,16 @@ class ProductCategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'alert' => 'error',
                 'message' => $validator->errors()->first(),
             ], 200);
         }
         $productCategory->name = $request->name;
+        $productCategory->type = $request->type;
+$productCategory->color = $request->color;
+
         $productCategory->save();
         return response()->json([
             'alert' => 'success',

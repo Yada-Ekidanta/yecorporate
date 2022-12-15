@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Office\Master;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Master\EmployeeContractType;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Master\EmployeeContractType;
 
 class EmployeeContractTypeController extends Controller
 {
@@ -16,8 +16,8 @@ class EmployeeContractTypeController extends Controller
     }
     public function index(Request $request)
     {
-        if($request->ajax()){
-            $collection = EmployeeContractType::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+        if ($request->ajax()) {
+            $collection = EmployeeContractType::where('name', 'LIKE', '%' . $request->keyword . '%')->paginate(10);
             return view('pages.office.master.employee_contract_type.list', compact('collection'));
         }
         return view('pages.office.master.employee_contract_type.main');
@@ -31,8 +31,7 @@ class EmployeeContractTypeController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'alert' => 'error',
                 'message' => $validator->errors()->first(),
@@ -60,15 +59,13 @@ class EmployeeContractTypeController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'alert' => 'error',
                 'message' => $validator->errors()->first(),
             ], 200);
         }
         $employeeContractType->name = $request->name;
-        $employeeContractType->updated_by = Auth::guard('employees')->user()->id;
         $employeeContractType->save();
         return response()->json([
             'alert' => 'success',

@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Office;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('permission:dashboard-default', ['only' => ['index']]);
-        $this->middleware('permission:dashboard-ecommerce', ['only' => ['ecommerce']]);
+        // $this->middleware('auth');
+        // $this->middleware('permission:dashboard-default', ['only' => ['index']]);
+        // $this->middleware('permission:dashboard-ecommerce', ['only' => ['ecommerce']]);
     }
     public function index()
     {

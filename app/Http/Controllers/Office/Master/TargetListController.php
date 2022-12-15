@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Office\Master;
 
-use Illuminate\Http\Request;
-use App\Models\Master\TargetList;
 use App\Http\Controllers\Controller;
+use App\Models\Master\TargetList;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class TargetListController extends Controller
@@ -15,8 +15,8 @@ class TargetListController extends Controller
     }
     public function index(Request $request)
     {
-        if($request->ajax()){
-            $collection = TargetList::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+        if ($request->ajax()) {
+            $collection = TargetList::where('name', 'LIKE', '%' . $request->keyword . '%')->paginate(10);
             return view('pages.office.master.target_list.list', compact('collection'));
         }
         return view('pages.office.master.target_list.main');
@@ -30,8 +30,7 @@ class TargetListController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'alert' => 'error',
                 'message' => $validator->errors()->first(),
@@ -39,6 +38,8 @@ class TargetListController extends Controller
         }
         $targetList = new TargetList;
         $targetList->name = $request->name;
+        $targetList->desc = $request->desc;
+
         $targetList->save();
         return response()->json([
             'alert' => 'success',
@@ -58,14 +59,15 @@ class TargetListController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'alert' => 'error',
                 'message' => $validator->errors()->first(),
             ], 200);
         }
         $targetList->name = $request->name;
+        $targetList->desc = $request->desc;
+
         $targetList->save();
         return response()->json([
             'alert' => 'success',
