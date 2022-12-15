@@ -43,6 +43,7 @@ use App\Http\Controllers\Office\Master\OpportunityStageController;
 use App\Http\Controllers\Office\Master\ShippingProviderController;
 use App\Http\Controllers\Office\Master\ClientContractTypeController;
 use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
+use App\Http\Controllers\Office\Master\LeaveTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +113,7 @@ Route::group(['domain' => ''], function() {
                 Route::resource('competency', CompetencyController::class);
                 Route::resource('deduction-option', DeductionOptionController::class);
                 Route::resource('department', DepartmentController::class);
+                Route::resource('leave-type', LeaveTypeController::class);
                 Route::resource('document-folder', DocumentFolderController::class);
                 Route::resource('document-option', DocumentOptionController::class);
                 Route::resource('document-type', DocumentTypeController::class);
@@ -134,8 +136,8 @@ Route::group(['domain' => ''], function() {
                 Route::resource('payslip-type', PayslipTypeController::class);
                 Route::resource('performance-type', PerformanceTypeController::class);
                 Route::get('position/{position}/permission',[PositionController::class, 'permission'])->name('position.permission');
-                Route::get('position/{department}/create',[PositionController::class, 'create'])->name('position.create');
-                Route::get('positon/{department}/{position}/edit',[PositionController::class, 'edit'])->name('position.edit');
+                Route::get('position/{department}/create',[PositionController::class, 'createPosition'])->name('position.create-position');
+                Route::get('positon/{department}/{position}/edit',[PositionController::class, 'editPosition'])->name('position.edit-position');
                 Route::resource('position', PositionController::class);
                 Route::resource('product-category', ProductCategoryController::class);
                 Route::resource('product-unit', ProductUnitController::class);

@@ -141,9 +141,9 @@ class AuthController extends Controller
                 Notification::send($e, new OutNotification($e,$user));
             }
         }
-        $cek = EmployeeAttendance::where('employee_id', Auth::guard('employees')->user()->id)->whereRaw('DATE(presence_at) = CURDATE()')->first();
-        $cek->finish_at = date('Y-m-d H:i:s');
-        $cek->update();
+        // $cek = EmployeeAttendance::where('employee_id', Auth::guard('employees')->user()->id)->whereRaw('DATE(presence_at) = CURDATE()')->first();
+        // $cek->finish_at = date('Y-m-d H:i:s');
+        // $cek->update();
         $employee = Auth::guard('employees')->user();
         Auth::logout($employee);
         return redirect()->route('office.auth.index');

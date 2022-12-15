@@ -68,7 +68,7 @@ class EmployeeContractTypeController extends Controller
             ], 200);
         }
         $employeeContractType->name = $request->name;
-        $employeeContractType->updated_by = Auth::guard('employees')->user()->id;
+        $employeeContractType->created_by = Auth::guard('employees')->user()->id;
         $employeeContractType->save();
         return response()->json([
             'alert' => 'success',
