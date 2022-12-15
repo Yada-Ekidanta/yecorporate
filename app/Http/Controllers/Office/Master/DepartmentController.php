@@ -52,7 +52,7 @@ class DepartmentController extends Controller
     public function show(Request $request,Department $department)
     {
         if($request->ajax()){
-            $collection = Position::where('name','LIKE','%'.$request->keyword.'%')->where('department_id',$department->id)->paginate(10);
+            $collection = Position::where('name','LIKE','%'.$request->keyword.'%')->where('department_id',$department->id)->get();
             return view('pages.office.master.position.list', compact('collection','department'));
         }
         return view('pages.office.master.position.main', compact('department'));

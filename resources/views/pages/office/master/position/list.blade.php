@@ -33,7 +33,7 @@
             </div>
             <div class="card-footer flex-wrap pt-0">
                 <a href="{{route('office.master.position.permission',$item->id)}}" class="btn btn-light btn-active-primary my-1 me-2 menu-link">Edit Permission</a>
-                <a href="{{route('office.master.position.edit',$item->id)}}" onclick="" class="btn btn-light btn-active-warning my-1 me-2 menu-link">Edit</a>
+                <a href="{{route('office.master.position.edit-position',['department'=>$department->id,'position'=>$item->id])}}" onclick="" class="btn btn-light btn-active-warning my-1 me-2 menu-link">Edit</a>
                 <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this position ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.position.destroy',$item->id)}}');" class="btn btn-light btn-active-danger my-1 my-1">Delete</a>
             </div>
         </div>
@@ -42,7 +42,7 @@
     <div class="col-md-4">
         <div class="card h-md-100">
             <div class="card-body d-flex flex-center">
-                <a href="{{route('office.master.position.create',$department->id)}}" class="btn btn-clear d-flex flex-column flex-center menu-link">
+                <a href="{{route('office.master.position.create-position',$department->id)}}" class="btn btn-clear d-flex flex-column flex-center menu-link">
                     <img src="{{asset('metronic/media/illustrations/sketchy-1/4.png')}}" alt="" class="mw-100 mh-150px mb-7" />
                     <div class="fw-bold fs-3 text-gray-600 text-hover-primary">Add New Position</div>
                 </a>
