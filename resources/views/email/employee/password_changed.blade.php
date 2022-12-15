@@ -61,17 +61,8 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <h1 class="o_text-headline o_text-white o_mt-md o_mb-xs" style="font-family: Arial,&quot;Helvetica Neue&quot;,Helvetica,sans-serif;word-break: break-word;font-weight: bold;color: #ffffff;margin-top: 24px;margin-bottom: 8px;font-size: 32px;line-height: 41px;">Password Reset</h1>
-                                        <p class="o_text-lg o_text-sans o_text-white o_mb-lg" style="font-family: Arial,&quot;Helvetica Neue&quot;,Helvetica,sans-serif;word-break: break-word;color: #ffffff;margin-top: 0px;margin-bottom: 32px;font-size: 20px;line-height: 30px;">We received a request to reset your account's password. {{ \Carbon\Carbon::now()->format('F d Y, H:i:s')}}.</p>
-                                        <table class="o_btn" role="presentation" align="center" cellspacing="0" cellpadding="0" border="0" style="transition: all .15s ease-in;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin: 0 auto;">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="o_pbtn o_text-md o_br-max o_bg-white" align="center" style="padding: 14px 32px;vertical-align: top;background-color: #ffffff;border-radius: 56px;font-size: 18px;line-height: 27px;">
-                                                        <a class="o_text-headline o_text-dark" href="{{route('office.auth.reset',$data['token'])}}" style="font-family: Arial,&quot;Helvetica Neue&quot;,Helvetica,sans-serif;word-break: break-word;font-weight: bold;color: #212932;text-decoration: none;outline: none;display: block;"><span style="color: #212932;">Reset My Password</span></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <h1 class="o_text-headline o_text-white o_mt-md o_mb-xs" style="font-family: Arial,&quot;Helvetica Neue&quot;,Helvetica,sans-serif;word-break: break-word;font-weight: bold;color: #ffffff;margin-top: 24px;margin-bottom: 8px;font-size: 32px;line-height: 41px;">Password Changet</h1>
+                                        <p class="o_text-lg o_text-sans o_text-white o_mb-lg" style="font-family: Arial,&quot;Helvetica Neue&quot;,Helvetica,sans-serif;word-break: break-word;color: #ffffff;margin-top: 0px;margin-bottom: 32px;font-size: 20px;line-height: 30px;">Your password's has been changed. {{ \Carbon\Carbon::now()->format('F d Y, H:i:s')}}.</p>
                                         <div style="font-size: 8px; line-height: 8px; height: 8px;">&nbsp; </div>
                                     </div>
                                     <!--[if mso]>

@@ -26,7 +26,8 @@
     <!--begin::Body-->
     <div class="py-20">
         <!--begin::Form-->
-        <form class="form w-100" novalidate="novalidate" id="reset_form" data-kt-redirect-url="{{route('office.auth.index')}}" action="{{route('office.auth.doreset')}}">
+        <form class="form w-100" novalidate="novalidate" id="form_reset" data-redirect-url="{{route('office.auth.index')}}" action="{{route('office.auth.doreset')}}">
+            <input value="{{$token}}" class="form-control form-control-lg form-control-solid" type="hidden" placeholder="Confirm Password" name="token" autocomplete="off" data-kt-translate="new-password-confirm-password" />
             <!--begin::Heading-->
             <div class="text-start mb-10">
                 <!--begin::Title-->
@@ -67,13 +68,13 @@
             <!--end::Input group=-->
             <!--begin::Input group=-->
             <div class="fv-row mb-10">
-                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="Confirm Password" name="confirm-password" autocomplete="off" data-kt-translate="new-password-confirm-password" />
+                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="Confirm Password" name="password_confirmation" autocomplete="off" data-kt-translate="new-password-confirm-password" />
             </div>
             <!--end::Input group=-->
             <!--begin::Actions-->
             <div class="d-flex flex-stack">
                 <!--begin::Link-->
-                <button id="tombol_reset" class="btn btn-primary" data-kt-translate="new-password-submit">
+                <button id="tombol_reset" onclick="handle_post('#tombol_reset','#form_reset');" class="btn btn-primary" data-kt-translate="new-password-submit">
                     <!--begin::Indicator label-->
                     <span class="indicator-label">Submit</span>
                     <!--end::Indicator label-->

@@ -20,7 +20,7 @@ class PasswordChangedNotification extends Notification
     }
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('Yada Ekidanta | Password Changed')->from('noreply@yadaekidanta.com')->view('email.auth.password_changed',compact('notifiable'));
+        return (new MailMessage)->subject('Yada Ekidanta | Password Changed')->from('noreply@yadaekidanta.com')->view('email.employee.password_changed',compact('notifiable'));
     }
     public function toArray($notifiable)
     {

@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Models\Master;
+namespace App\Models\Setting;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class PasswordReset extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'email',
+        'token',
+        'created_at',
+    ];
     public $timestamps = false;
-    public function position ()
-    {
-        return $this->hasMany(Position::class);
-    }
 }

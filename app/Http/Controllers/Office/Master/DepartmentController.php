@@ -18,7 +18,7 @@ class DepartmentController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $collection = Department::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = Department::where('name','LIKE','%'.$request->keyword.'%')->get();
             return view('pages.office.master.department.list', compact('collection'));
         }
         return view('pages.office.master.department.main');
@@ -53,9 +53,9 @@ class DepartmentController extends Controller
     {
         if($request->ajax()){
             $collection = Position::where('name','LIKE','%'.$request->keyword.'%')->where('department_id',$department->id)->paginate(10);
-            return view('pages.office.master.department.show_list', compact('collection'));
+            return view('pages.office.master.position.list', compact('collection','department'));
         }
-        return view('pages.office.master.department.show', compact('department'));
+        return view('pages.office.master.position.main', compact('department'));
     }
     public function edit(Department $department)
     {

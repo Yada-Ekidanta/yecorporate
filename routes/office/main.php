@@ -63,6 +63,7 @@ Route::group(['domain' => ''], function() {
             Route::get('',[AuthController::class, 'index'])->name('index');
             Route::get('register',[AuthController::class, 'register'])->name('register');
             Route::get('forgot',[AuthController::class, 'forgot'])->name('forgot');
+            Route::get('reset/{token}',[AuthController::class, 'reset'])->name('reset');
             Route::post('do-login',[AuthController::class, 'do_login'])->name('dologin');
             Route::post('do-register',[AuthController::class, 'do_register'])->name('doregister');
             Route::post('do-forgot',[AuthController::class, 'do_forgot'])->name('doforgot');
@@ -134,6 +135,9 @@ Route::group(['domain' => ''], function() {
                 Route::resource('payment-type', PaymentTypeController::class);
                 Route::resource('payslip-type', PayslipTypeController::class);
                 Route::resource('performance-type', PerformanceTypeController::class);
+                Route::get('position/{position}/permission',[PositionController::class, 'permission'])->name('position.permission');
+                Route::get('position/{department}/create',[PositionController::class, 'create'])->name('position.create');
+                Route::get('positon/{department}/{position}/edit',[PositionController::class, 'edit'])->name('position.edit');
                 Route::resource('position', PositionController::class);
                 Route::resource('product-category', ProductCategoryController::class);
                 Route::resource('product-unit', ProductUnitController::class);
