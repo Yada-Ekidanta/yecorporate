@@ -7,6 +7,7 @@ use App\Http\Controllers\Office\DashboardController;
 use App\Http\Controllers\Office\Master\TaxController;
 use App\Http\Controllers\Office\Master\BankController;
 use App\Http\Controllers\Office\Master\KbliController;
+use App\Http\Controllers\Office\Master\RoleController;
 use App\Http\Controllers\Office\Master\AssetController;
 use App\Http\Controllers\Office\Master\ProductController;
 use App\Http\Controllers\Office\Master\TrainerController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Office\Master\JobStageController;
 use App\Http\Controllers\Office\Master\PositionController;
 use App\Http\Controllers\Office\Master\RegionalController;
 use App\Http\Controllers\Office\Master\AwardTypeController;
+use App\Http\Controllers\Office\Master\LeaveTypeController;
 use App\Http\Controllers\Office\Master\TaskStageController;
 use App\Http\Controllers\Office\Master\ClientTypeController;
 use App\Http\Controllers\Office\Master\CompetencyController;
@@ -43,7 +45,6 @@ use App\Http\Controllers\Office\Master\OpportunityStageController;
 use App\Http\Controllers\Office\Master\ShippingProviderController;
 use App\Http\Controllers\Office\Master\ClientContractTypeController;
 use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
-use App\Http\Controllers\Office\Master\LeaveTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,6 +140,7 @@ Route::group(['domain' => ''], function() {
                 Route::get('position/{position}/permission',[PositionController::class, 'permission'])->name('position.permission');
                 Route::get('position/{department}/create',[PositionController::class, 'createPosition'])->name('position.create-position');
                 Route::get('positon/{department}/{position}/edit',[PositionController::class, 'editPosition'])->name('position.edit-position');
+                Route::post('role/save',[RoleController::class, 'store'])->name('role.store');
                 Route::resource('position', PositionController::class);
                 Route::resource('product-category', ProductCategoryController::class);
                 Route::resource('product-unit', ProductUnitController::class);

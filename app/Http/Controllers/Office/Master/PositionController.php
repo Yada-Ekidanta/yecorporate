@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Office\Master;
 
-use App\Http\Controllers\Controller;
-use App\Models\HRM\Department;
-use App\Models\Master\Position;
 use Illuminate\Http\Request;
+use App\Models\HRM\Department;
+use App\Models\HRM\Permission;
+use App\Models\Master\Position;
+use App\Models\HRM\RolePermission;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class PositionController extends Controller
@@ -94,9 +96,11 @@ class PositionController extends Controller
 
     public function permission(Position $position)
     {
+        $modules = Permission::get();
         return view('pages.office.master.position.input-permission', [
-            'data' => new Position(),
-            // 'department' => $department,
+            'data' => new RolePermission,
+            'position' => $position,
+            'modules' => $modules,
         ]);
     }
 }
