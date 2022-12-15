@@ -10,12 +10,15 @@ use App\Models\Master\UserVerify;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Setting\PasswordReset;
 use Illuminate\Support\Facades\Cache;
 use App\Models\HRM\EmployeeAttendance;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\Attendance\InNotification;
 use App\Notifications\Attendance\OutNotification;
+use App\Notifications\Auth\ResetPasswordNotification;
+use App\Notifications\Auth\PasswordChangedNotification;
 use App\Notifications\Auth\EmployeeRegisterNotification;
 use App\Notifications\Auth\RegisterEmployeeNotification;
 
@@ -121,29 +124,67 @@ class AuthController extends Controller
     }
     public function do_forgot(Request $request)
     {
-        // 
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:employees',
+        ]);
+        if ($validator->fails()){
+            return response()->json([
+                'alert' => 'error',
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
+        $employee = Employee::where('email',$request->email)->first();
+        $token = Str::random(64);
+        PasswordReset::create([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+        $data = array(
+            'token' => $token,
+            'employee' => $employee
+        );
+        Notification::send($data['employee'], new ResetPasswordNotification($data));
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'We have e-mailed your password reset link!',
+        ]);
     }
     public function reset($token)
     {
-        // 
+        return view('pages.office.auth.new_password',['token' => $token]);
     }
     public function do_reset(Request $request)
     {
-        // 
+        $validator = Validator::make($request->all(), [
+            'token' => 'required|exists:password_resets',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|min:8'
+        ]);
+        if ($validator->fails()){
+            return response()->json([
+                'alert' => 'error',
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
+        $updatePassword = PasswordReset::where(['token' => $request->token])->first();
+        if (!$updatePassword) {
+            return response()->json([
+                'alert' => 'error',
+                'message' => 'Invalid token!',
+            ]);
+        }
+        Employee::where('email', $updatePassword->email)->update(['password' => Hash::make($request->password)]);
+        $users = Employee::where('email', $updatePassword->email)->first();
+        // PasswordReset::where(['email' => $updatePassword->email])->delete();
+        Notification::send($users, new PasswordChangedNotification($users));
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Your password has been changed!',
+        ]);
     }
     public function do_logout()
     {
-        $user = Auth::guard('employees')->user();
-        Employee::where('id', Auth::guard('employees')->user()->id)->update(['last_seen' => Carbon::now()]);
-        $allEmployee = Employee::where('id','!=', $user->id)->get();
-        foreach($allEmployee as $e){
-            if(Cache::has('is_employee_online'. $e->id) == 1){
-                Notification::send($e, new OutNotification($e,$user));
-            }
-        }
-        $cek = EmployeeAttendance::where('employee_id', Auth::guard('employees')->user()->id)->whereRaw('DATE(presence_at) = CURDATE()')->first();
-        $cek->finish_at = date('Y-m-d H:i:s');
-        $cek->update();
         $employee = Auth::guard('employees')->user();
         Auth::logout($employee);
         return redirect()->route('office.auth.index');

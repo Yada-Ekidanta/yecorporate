@@ -66,6 +66,18 @@ Route::group(['domain' => ''], function () {
             Route::post('do-register', [AuthController::class, 'do_register'])->name('doregister');
             Route::post('do-forgot', [AuthController::class, 'do_forgot'])->name('doforgot');
             Route::post('do-reset', [AuthController::class, 'do_reset'])->name('doreset');
+Route::group(['domain' => ''], function() {
+    Route::prefix('office')->name('office.')->group(function(){
+        Route::redirect('/','/auth');
+        Route::prefix('auth')->name('auth.')->group(function(){
+            Route::get('',[AuthController::class, 'index'])->name('index');
+            Route::get('register',[AuthController::class, 'register'])->name('register');
+            Route::get('forgot',[AuthController::class, 'forgot'])->name('forgot');
+            Route::get('reset/{token}',[AuthController::class, 'reset'])->name('reset');
+            Route::post('do-login',[AuthController::class, 'do_login'])->name('dologin');
+            Route::post('do-register',[AuthController::class, 'do_register'])->name('doregister');
+            Route::post('do-forgot',[AuthController::class, 'do_forgot'])->name('doforgot');
+            Route::post('do-reset',[AuthController::class, 'do_reset'])->name('doreset');
         });
         Route::middleware(['auth:employees'])->group(function () {
             Route::prefix('dashboard')->name('dashboard.')->group(function () {
