@@ -1,12 +1,12 @@
 <table class="table align-middle table-row-dashed fs-6 gy-5">
     <thead>
         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-            <th>
+            <th >
                 No
             </th>
             <th>Name</th>
             <th>Desc</th>
-            <th>Actions</th>
+            <th >Actions</th>
         </tr>
     </thead>
     <tbody class="text-gray-600 fw-semibold">
@@ -15,18 +15,9 @@
             <td>
                 {{$key+ $collection->firstItem()}}
             </td>
-            <td class="d-flex align-items-center">
-                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                    <a href="javascript:;">
-                        {!!$item->image!!}
-                    </a>
-                </div>
-                <div class="d-flex flex-column">
-                    <a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">{{$item->code}}</a>
-                    <span>{{$item->name}}</span>
-                </div>
-            </td>
-            <td>{{ $item->desc }}</td>
+            
+            <td>{{$item->name}}</td>
+            <td>{{$item->desc}}</td>
             <td>
                 <a href="{{route('office.master.target-list.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">
@@ -37,7 +28,7 @@
                         </svg>
                     </span>
                 </a>
-                <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this Target List ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.target-list.destroy',$item->id)}}');" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-danger w-30px h-30px">
+                <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this Contract ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.target-list.destroy',$item->id)}}');" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-danger w-30px h-30px">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"/>

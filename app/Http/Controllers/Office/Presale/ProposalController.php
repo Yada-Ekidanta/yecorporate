@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Office\Master;
+namespace App\Http\Controllers\Office\Presale;
 
 use App\Http\Controllers\Controller;
-use App\Models\Master\IncomeType;
+use App\Models\Presale\Proposal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class IncomeTypeController extends Controller
+class ProposalController extends Controller
 {
     public function __construct()
     {
@@ -16,19 +16,18 @@ class IncomeTypeController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $collection = IncomeType::where('name', 'LIKE', '%' . $request->keyword . '%')->paginate(10);
-            return view('pages.office.master.income_type.list', compact('collection'));
+            $collection = Proposal::where('id', 'LIKE', '%' . $request->keyword . '%')->paginate(10);
+            return view('pages.office.presale.proposal.list', compact('collection'));
         }
-        return view('pages.office.master.income_type.main');
+        return view('pages.office.presale.proposal.main');
     }
     public function create()
     {
-        return view('pages.office.master.income_type.input', ['data' => new IncomeType]);
+        return view('pages.office.presale.proposal.input', ['data' => new Proposal]);
     }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -36,26 +35,25 @@ class IncomeTypeController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $incomeType = new IncomeType;
-        $incomeType->name = $request->name;
-        $incomeType->save();
+        $proposal = new Proposal;
+
+        $proposal->save();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Income Type Created',
+            'message' => 'proposal has been saved',
         ], 200);
     }
-    public function show(IncomeType $incomeType)
+    public function show(proposal $proposal)
     {
         //
     }
-    public function edit(IncomeType $incomeType)
+    public function edit(proposal $proposal)
     {
-        return view('pages.office.master.income_type.input', ['data' => $incomeType]);
+        return view('pages.office.presale.proposal.input', ['data' => $proposal]);
     }
-    public function update(Request $request, IncomeType $incomeType)
+    public function update(Request $request, proposal $proposal)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -63,19 +61,18 @@ class IncomeTypeController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $incomeType->name = $request->name;
-        $incomeType->update();
+        $proposal->update();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Income Type Updated',
+            'message' => 'proposal has been updated',
         ], 200);
     }
-    public function destroy(IncomeType $incomeType)
+    public function destroy(proposal $proposal)
     {
-        $incomeType->delete();
+        $proposal->delete();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Income Type Deleted',
+            'message' => 'proposal has been deleted',
         ], 200);
     }
 }

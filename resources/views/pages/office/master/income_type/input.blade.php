@@ -1,4 +1,4 @@
-<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Document Type">
+<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Income Type">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
@@ -85,7 +85,7 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$data->name}}"/>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.income-type.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this Income ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.income-type.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

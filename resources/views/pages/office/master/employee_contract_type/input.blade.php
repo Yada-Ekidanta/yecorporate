@@ -1,4 +1,4 @@
-<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Document Type">
+<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Contract">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
@@ -64,7 +64,7 @@
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Contract Type</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Contract</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
@@ -85,7 +85,7 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$data->name}}"/>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.employee-contract-type.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this Contract ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.employee-contract-type.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Models\Master;
+namespace App\Models\Presale;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmployeeContractType extends Model
+class Proposal extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-
 }

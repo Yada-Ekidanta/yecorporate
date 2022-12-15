@@ -1,4 +1,4 @@
-<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Target List">
+<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Product Unit">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Target List</li>
+                    <li class="breadcrumb-item text-muted">Product Unit</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -60,16 +60,16 @@
     <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
-                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.master.target-list.index')}}" action="{{$data->id ? route('office.master.target-list.update',$data->id) : route('office.master.target-list.store')}}">
+                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.master.product-unit.index')}}" action="{{$data->id ? route('office.master.product-unit.update',$data->id) : route('office.master.product-unit.store')}}">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Target List</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Product Unit</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a id="back_form_button" href="{{route('office.master.target-list.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a id="back_form_button" href="{{route('office.master.product-unit.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
@@ -90,21 +90,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="desc" name="desc" placeholder="Indonesia" value="{{$data->desc}}"/>
-                                    <label for="desc">Desc</label>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="card-footer">
                         <button id="tombol_simpan" onclick="handle_upload('#tombol_simpan','#form_input','{{$data->id ? 'PATCH' : 'POST'}}');" class="btn btn-sm btn-{{$data->id ? 'warning' : 'success'}}">
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this Target ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.target-list.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this Category ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.product-unit.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif
