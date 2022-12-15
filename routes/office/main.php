@@ -42,6 +42,7 @@ use App\Http\Controllers\Office\Master\TerminationTypeController;
 use App\Http\Controllers\Office\Master\OpportunityStageController;
 use App\Http\Controllers\Office\Master\ShippingProviderController;
 use App\Http\Controllers\Office\Master\ClientContractTypeController;
+use App\Http\Controllers\Office\Setting\CompanyIndustryController;
 use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
 
 /*
@@ -147,6 +148,17 @@ Route::group(['domain' => ''], function() {
                 Route::resource('vendor', VendorController::class);
             });
             Route::prefix('crm')->name('crm.')->group(function(){
+                Route::resource('client-type', ClientTypeController::class);
+                Route::resource('company-industry', CompanyIndustryController::class);
+                Route::resource('document-type', DocumentTypeController::class);
+                Route::resource('target-list', TargetListController::class);
+                Route::resource('document-folder', DocumentFolderController::class);
+                Route::resource('campaign-type', CampaignTypeController::class);
+                Route::resource('lead-source', LeadSourceController::class);
+                Route::resource('opportunity-stage', OpportunityStageController::class);
+                Route::resource('case-type', CaseTypeController::class);
+                Route::resource('shipping-provider', ShippingProviderController::class);
+                Route::resource('task-stage', TaskStageController::class);
             });
             Route::prefix('finance')->name('finance.')->group(function(){
             });

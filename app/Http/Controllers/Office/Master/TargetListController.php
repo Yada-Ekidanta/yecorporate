@@ -29,6 +29,7 @@ class TargetListController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -39,6 +40,7 @@ class TargetListController extends Controller
         }
         $targetList = new TargetList;
         $targetList->name = $request->name;
+        $targetList->desc = $request->desc;
         $targetList->save();
         return response()->json([
             'alert' => 'success',
@@ -57,6 +59,7 @@ class TargetListController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -66,6 +69,7 @@ class TargetListController extends Controller
             ], 200);
         }
         $targetList->name = $request->name;
+        $targetList->desc = $request->desc;
         $targetList->save();
         return response()->json([
             'alert' => 'success',

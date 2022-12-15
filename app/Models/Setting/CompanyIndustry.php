@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Master;
+namespace App\Models\Setting;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OpportunityStage extends Model
+class CompanyIndustry extends Model
 {
     use HasFactory;
-    protected $table = "opportunities_stages";
+    public $timestamps = false;
 }
