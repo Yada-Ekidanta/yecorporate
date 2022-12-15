@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->integer('company_branch_id')->default(0);
+            $table->string('department_id')->default(0);
+            $table->string('employee_id')->default(0);
+            $table->longText('desc')->nullable();
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
         Schema::create('appraisals', function (Blueprint $table) {
@@ -96,10 +104,18 @@ return new class extends Migration
         });
         Schema::create('employee_chat_favorites', function (Blueprint $table) {
             $table->id();
+            $table->integer('employee_id');
+            $table->integer('favorite_id');
             $table->timestamps();
         });
         Schema::create('employee_chat_messages', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
+            $table->bigInteger('from_id');
+            $table->bigInteger('to_id');
+            $table->longText('body');
+            $table->longText('attachment');
+            $table->tinyInteger('seen');
             $table->timestamps();
         });
         Schema::create('employee_commissions', function (Blueprint $table) {

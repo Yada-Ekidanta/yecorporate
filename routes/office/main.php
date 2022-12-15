@@ -63,6 +63,7 @@ Route::group(['domain' => ''], function() {
             Route::get('',[AuthController::class, 'index'])->name('index');
             Route::get('register',[AuthController::class, 'register'])->name('register');
             Route::get('forgot',[AuthController::class, 'forgot'])->name('forgot');
+            Route::get('reset/{token}',[AuthController::class, 'reset'])->name('reset');
             Route::post('do-login',[AuthController::class, 'do_login'])->name('dologin');
             Route::post('do-register',[AuthController::class, 'do_register'])->name('doregister');
             Route::post('do-forgot',[AuthController::class, 'do_forgot'])->name('doforgot');

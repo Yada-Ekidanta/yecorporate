@@ -26,7 +26,7 @@
     <!--begin::Body-->
     <div class="py-20">
         <!--begin::Form-->
-        <form class="form w-100" novalidate="novalidate" id="forgot_form" data-kt-redirect-url="{{route('office.auth.index')}}" action="{{route('office.auth.doforgot')}}">
+        <form class="form w-100" novalidate="novalidate" id="form_forgot" data-redirect-url="{{route('office.auth.index')}}" action="{{route('office.auth.doforgot')}}">
             <!--begin::Heading-->
             <div class="text-start mb-10">
                 <!--begin::Title-->
@@ -46,7 +46,7 @@
             <div class="d-flex flex-stack">
                 <!--begin::Link-->
                 <div class="m-0">
-                    <button id="tombol_forgot" class="btn btn-primary me-2" data-kt-translate="password-reset-submit">
+                    <button id="tombol_forgot" onclick="handle_post('#tombol_forgot','#form_forgot');" class="btn btn-primary me-2" data-kt-translate="password-reset-submit">
                         <!--begin::Indicator label-->
                         <span class="indicator-label">Submit</span>
                         <!--end::Indicator label-->
