@@ -1,49 +1,50 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Office\AuthController;
+use App\Http\Controllers\Office\ProfileController;
 use App\Http\Controllers\Office\DashboardController;
-use App\Http\Controllers\Office\Master\AllowanceOptionController;
-use App\Http\Controllers\Office\Master\AssetController;
-use App\Http\Controllers\Office\Master\AwardTypeController;
+use App\Http\Controllers\Office\Master\TaxController;
 use App\Http\Controllers\Office\Master\BankController;
-use App\Http\Controllers\Office\Master\CampaignTypeController;
+use App\Http\Controllers\Office\Master\KbliController;
+use App\Http\Controllers\Office\Master\AssetController;
+use App\Http\Controllers\Office\Master\ProductController;
+use App\Http\Controllers\Office\Master\TrainerController;
 use App\Http\Controllers\Office\Master\CaseTypeController;
-use App\Http\Controllers\Office\Master\ClientContractTypeController;
+use App\Http\Controllers\Office\Master\GoalTypeController;
+use App\Http\Controllers\Office\Master\JobStageController;
+use App\Http\Controllers\Office\Master\PositionController;
+use App\Http\Controllers\Office\Master\RegionalController;
+use App\Http\Controllers\Office\Master\AwardTypeController;
+use App\Http\Controllers\Office\Master\TaskStageController;
+use App\Http\Controllers\Office\Presale\ProposalController;
 use App\Http\Controllers\Office\Master\ClientTypeController;
 use App\Http\Controllers\Office\Master\CompetencyController;
-use App\Http\Controllers\Office\Master\DeductionOptionController;
 use App\Http\Controllers\Office\Master\DepartmentController;
-use App\Http\Controllers\Office\Master\DocumentFolderController;
-use App\Http\Controllers\Office\Master\DocumentOptionController;
-use App\Http\Controllers\Office\Master\DocumentTypeController;
-use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
-use App\Http\Controllers\Office\Master\ExpenseTypeController;
-use App\Http\Controllers\Office\Master\GoalTypeController;
 use App\Http\Controllers\Office\Master\IncomeTypeController;
-use App\Http\Controllers\Office\Master\JobStageController;
-use App\Http\Controllers\Office\Master\KbliController;
 use App\Http\Controllers\Office\Master\LeadSourceController;
 use App\Http\Controllers\Office\Master\LoanOptionController;
 use App\Http\Controllers\Office\Master\MailConfigController;
-use App\Http\Controllers\Office\Master\OpportunityStageController;
+use App\Http\Controllers\Office\Master\TargetListController;
+use App\Http\Controllers\Office\Master\ExpenseTypeController;
 use App\Http\Controllers\Office\Master\PaymentTypeController;
 use App\Http\Controllers\Office\Master\PayslipTypeController;
-use App\Http\Controllers\Office\Master\PerformanceTypeController;
-use App\Http\Controllers\Office\Master\PositionController;
-use App\Http\Controllers\Office\Master\ProductCategoryController;
-use App\Http\Controllers\Office\Master\ProductController;
 use App\Http\Controllers\Office\Master\ProductUnitController;
-use App\Http\Controllers\Office\Master\RegionalController;
-use App\Http\Controllers\Office\Master\ShippingProviderController;
-use App\Http\Controllers\Office\Master\TargetListController;
-use App\Http\Controllers\Office\Master\TaskStageController;
-use App\Http\Controllers\Office\Master\TaxController;
-use App\Http\Controllers\Office\Master\TerminationTypeController;
-use App\Http\Controllers\Office\Master\TrainerController;
+use App\Http\Controllers\Office\Master\CampaignTypeController;
+use App\Http\Controllers\Office\Master\DocumentTypeController;
 use App\Http\Controllers\Office\Master\TrainingTypeController;
-use App\Http\Controllers\Office\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Office\Presale\ProposalController;
+use App\Http\Controllers\Office\Master\DocumentFolderController;
+use App\Http\Controllers\Office\Master\DocumentOptionController;
+use App\Http\Controllers\Office\Master\AllowanceOptionController;
+use App\Http\Controllers\Office\Master\DeductionOptionController;
+use App\Http\Controllers\Office\Master\PerformanceTypeController;
+use App\Http\Controllers\Office\Master\ProductCategoryController;
+use App\Http\Controllers\Office\Master\TerminationTypeController;
+use App\Http\Controllers\Office\Master\OpportunityStageController;
+use App\Http\Controllers\Office\Master\ShippingProviderController;
+use App\Http\Controllers\Office\Setting\CompanyIndustryController;
+use App\Http\Controllers\Office\Master\ClientContractTypeController;
+use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -146,9 +147,10 @@ Route::group(['domain' => ''], function () {
                 Route::resource('trainer', TrainerController::class);
                 Route::resource('training-type', TrainingTypeController::class);
                 Route::resource('vendor', VendorController::class);
-
+                
             });
             Route::prefix('crm')->name('crm.')->group(function () {
+                Route::resource('company-industry', CompanyIndustryController::class);
             });
             Route::prefix('finance')->name('finance.')->group(function () {
                 Route::resource('proposal', ProposalController::class);
