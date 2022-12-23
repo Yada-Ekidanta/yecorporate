@@ -21,7 +21,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Master</li>
+                    <li class="breadcrumb-item text-muted">Setting</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Document Type</li>
+                    <li class="breadcrumb-item text-muted">Company Back Accounts</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -60,16 +60,16 @@
     <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
-                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.master.document-type.index')}}" action="{{$data->id ? route('office.master.document-type.update',$data->id) : route('office.master.document-type.store')}}">
+                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.setting.company-bank.index')}}" action="{{$data->id ? route('office.setting.company-bank.update',$data->id) : route('office.setting.company-bank.store')}}">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Document Type</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Company Bank</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a id="back_form_button" href="{{route('office.master.document-type.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a id="back_form_button" href="{{route('office.setting.company-bank.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
@@ -83,32 +83,74 @@
                     </div>
                     <div class="card-body transition-fade">
                         <div class="form-group row">
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$data->name}}"/>
-                                    <label for="name">Name</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="employee_id" placeholder="Name" class="form-select"
-                                    readonly>
+                            <div class="col-8 mb-3">
+                                <div class="form-floating mb-3">
+                                    <select name="company_branch_id" placeholder="Name" class="form-select">
                                     @if($data->id == null)
-                                    @foreach ($employees as $employee)
-                                        <option value="{{ $employee->id }}">
-                                            {{ $employee->name }}
+                                    @foreach ($company_branch as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->name }}
                                         </option>
                                     @endforeach
                                     @else
-                                    @foreach ($employees as $employee)
-                                        <option value="{{ $employee->id }}" {{ $employee->id == $data->employee_id ? 'selected' : '' }}>
-                                            {{ $employee->name }}
+                                    @foreach ($company_branch as $item)
+                                        <option value="{{ $item->id }}" {{ $item->id == $data->company_branch_id ? 'selected' : '' }}>
+                                            {{ $item->name }}
                                         </option>
                                     @endforeach
                                     @endif
                                     </select>
-                                    <label for="employee_id">Employee</label>
+                                    <label for="company_branch_id">Company Branch</label>
                                 </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$data->name}}"/>
+                                    <label for="name">Name</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <select name="bank_id" placeholder="Name" class="form-select">
+                                    @if($data->id == null)
+                                    @foreach ($bank as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                    @else
+                                    @foreach ($bank as $item)
+                                        <option value="{{ $item->id }}" {{ $item->id == $data->bank_id ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                    @endif
+                                    </select>
+                                    <label for="bank_id">Bank</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="account_number" name="account_number" placeholder="account_number" value="{{$data->account_number}}"/>
+                                    <label for="account_number">Account Number</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="opening_balance" name="opening_balance" placeholder="opening_balance" value="{{$data->opening_balance}}"/>
+                                    <label for="opening_balance">Opening Balance</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="branch_name" name="branch_name" placeholder="branch_name" value="{{$data->branch_name}}"/>
+                                    <label for="branch_name">Branch Name</label>
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="is_primary" value="{{$data->is_primary}}" id="flexCheckChecked" {{ $data->is_primary ? "checked" : " "}}>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Is Primary
+                                        </label>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -117,7 +159,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.document-type.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.setting.company-bank.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

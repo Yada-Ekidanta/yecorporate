@@ -21,7 +21,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Master</li>
+                    <li class="breadcrumb-item text-muted">Setting</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Document Type</li>
+                    <li class="breadcrumb-item text-muted">Company</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -60,16 +60,16 @@
     <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
-                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.master.document-type.index')}}" action="{{$data->id ? route('office.master.document-type.update',$data->id) : route('office.master.document-type.store')}}">
+                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.setting.permission.index')}}" action="{{$data->id ? route('office.setting.permission.update',$data->id) : route('office.setting.permission.store')}}">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Document Type</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Company</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a id="back_form_button" href="{{route('office.master.document-type.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a id="back_form_button" href="{{route('office.setting.permission.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
@@ -91,23 +91,18 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <select name="employee_id" placeholder="Name" class="form-select"
-                                    readonly>
-                                    @if($data->id == null)
-                                    @foreach ($employees as $employee)
-                                        <option value="{{ $employee->id }}">
-                                            {{ $employee->name }}
-                                        </option>
-                                    @endforeach
-                                    @else
-                                    @foreach ($employees as $employee)
-                                        <option value="{{ $employee->id }}" {{ $employee->id == $data->employee_id ? 'selected' : '' }}>
-                                            {{ $employee->name }}
-                                        </option>
-                                    @endforeach
-                                    @endif
+                                    <select name="guard_name" placeholder="Name" class="form-select" readonly>
+                                        @if($data->id == null )
+                                        <option value="employees">Employee</option>
+                                        <option value="vendors">Vendors</option>
+                                        <option value="clients">Clients</option>
+                                        @else
+                                        <option value="employees" {{ $data->guard_name == "employees" ? "selected" : ""}}>Employee</option>
+                                        <option value="vendors" {{ $data->guard_name == "vendors" ? "selected" : ""}}>Vendors</option>
+                                        <option value="clients" {{ $data->guard_name == "clients" ? "selected" : ""}}>Clients</option>
+                                        @endif
                                     </select>
-                                    <label for="employee_id">Employee</label>
+                                    <label for="guard_name">Guard Name</label>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +112,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.document-type.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.setting.permission.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

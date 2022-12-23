@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Master;
+namespace App\Models\HRM;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Trainer extends Model
+class Document extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+    public $table = 'documents';
 }

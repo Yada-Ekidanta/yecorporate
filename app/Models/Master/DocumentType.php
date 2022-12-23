@@ -5,6 +5,7 @@ namespace App\Models\Master;
 use App\Models\HRM\Employee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class DocumentType extends Model
 {

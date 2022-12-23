@@ -1,4 +1,4 @@
-<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Position">
+<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Permission">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
@@ -31,8 +31,11 @@
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Executive</li>
                     <!--end::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Position</li>
+                    <li class="breadcrumb-item text-muted">Permission</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">

@@ -17,7 +17,7 @@ class LeaveTypeController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $collection = LeaveType::where('title','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = LeaveType::paginate(10);;
             return view('pages.office.master.leave_type.list', compact('collection'));
         }
         return view('pages.office.master.leave_type.main');

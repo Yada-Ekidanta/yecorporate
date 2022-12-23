@@ -3,83 +3,81 @@
 namespace App\Http\Controllers\Office\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Models\HRM\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PermissionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
         //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index(Request $request)
+    {
+        if($request->ajax()){
+            $collection = Permission::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            return view('pages.office.setting.permission.list', compact('collection'));
+        }
+        return view('pages.office.setting.permission.main');
+    }
     public function create()
     {
-        //
+        return view('pages.office.setting.permission.input', ['data' => new Permission]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+        if ($validator->fails()){
+            return response()->json([
+                'alert' => 'error',
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
+        $permission = new Permission;
+        $permission->name = $request->name;
+        $permission->guard_name = $request->guard_name;
+        $permission->save();
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Permission Created',
+        ]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Permission $permission)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
-        //
+        return view('pages.office.setting.permission.input', ['data' => $permission]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+        if ($validator->fails()){
+            return response()->json([
+                'alert' => 'error',
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
+        $permission->name = $request->name;
+        $permission->guard_name = $request->guard_name;
+        $permission->update();
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Permission Updated',
+        ]);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Permission Deleted',
+        ]);
     }
 }

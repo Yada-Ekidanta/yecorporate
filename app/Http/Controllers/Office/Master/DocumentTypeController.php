@@ -18,7 +18,7 @@ class DocumentTypeController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $collection = DocumentType::where('name','LIKE','%'.$request->keyword.'%')->paginate();;
+            $collection = DocumentType::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
             return view('pages.office.master.document_type.list', compact('collection'));
         }
         return view('pages.office.master.document_type.main');
