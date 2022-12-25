@@ -30,7 +30,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.department.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -39,22 +39,11 @@
             <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
+        
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Designation</span>
-            </a>
-            <!--end:Menu link-->
-        </div>
-        <!--end:Menu item-->
-        <!--begin:Menu item-->
-        <div class="menu-item">
-            <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.leave-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -66,7 +55,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.document-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -78,7 +67,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.payslip-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -102,7 +91,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.loan-option.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -114,7 +103,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.deduction-option.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -126,7 +115,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.goal-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -138,7 +127,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.training-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -150,7 +139,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.award-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -162,7 +151,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.termination-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -174,7 +163,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.job-stage.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -186,7 +175,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.performance-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -198,7 +187,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.competency.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -210,7 +199,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.expense-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -222,7 +211,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.income-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -234,7 +223,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.payment-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -246,7 +235,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.employee-contract-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -262,7 +251,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.master.employee.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -482,7 +471,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.master.trainer.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -846,7 +835,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.master.document.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -866,7 +855,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{route('office.setting.company-policy.index')}}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">

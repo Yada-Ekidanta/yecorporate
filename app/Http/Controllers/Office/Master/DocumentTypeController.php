@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Office\Master;
 use Illuminate\Http\Request;
 use App\Models\Master\DocumentType;
 use App\Http\Controllers\Controller;
+use App\Models\HRM\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,12 +25,17 @@ class DocumentTypeController extends Controller
     }
     public function create()
     {
-        return view('pages.office.master.document_type.input', ['data' => new DocumentType]);
+        $employees = Employee::all();
+        return view('pages.office.master.document_type.input', [
+            'data' => new DocumentType,
+            'employees' => $employees,
+        ]);
     }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'employee_id' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -40,6 +46,7 @@ class DocumentTypeController extends Controller
         }
         $document_type = new DocumentType;
         $document_type->name = $request->name;
+        $document_type->employee_id = $request->employee_id;
         $document_type->created_by = Auth::guard('employees')->user()->id;
         $document_type->save();
         return response()->json([
@@ -54,12 +61,17 @@ class DocumentTypeController extends Controller
     }
     public function edit(DocumentType $documentType)
     {
-        return view('pages.office.master.document_type.input', ['data' => $documentType]);
+        $employees = Employee::all();
+        return view('pages.office.master.document_type.input', [
+            'data' => $documentType,
+            'employees' => $employees,
+        ]);
     }
     public function update(Request $request, DocumentType $documentType)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'employee_id' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -69,6 +81,7 @@ class DocumentTypeController extends Controller
             ], 200);
         }
         $documentType->name = $request->name;
+        $documentType->employee_id = $request->employee_id;
         $documentType->update();
         return response()->json([
             'alert' => 'success',
