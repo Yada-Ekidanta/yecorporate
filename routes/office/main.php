@@ -2,6 +2,24 @@
 
 use App\Http\Controllers\Office\AuthController;
 use App\Http\Controllers\Office\DashboardController;
+use App\Http\Controllers\Office\Finance\Banking\AccountController;
+use App\Http\Controllers\Office\Finance\Banking\TransferController;
+use App\Http\Controllers\Office\Finance\De\JournalEntriesController;
+use App\Http\Controllers\Office\Finance\De\ChartOfAccountController;
+use App\Http\Controllers\Office\Finance\Expense\BillController;
+use App\Http\Controllers\Office\Finance\Expense\PaymentController;
+use App\Http\Controllers\Office\Finance\Expense\DebitNoteController;
+use App\HTtp\Controllers\Office\Finance\De\TrialController;
+use App\Http\Controllers\Office\Finance\GoalController;
+use App\Http\Controllers\Office\Finance\ContractController;
+use App\Http\Controllers\Office\Finance\BudgetController;
+
+use App\Http\Controllers\Office\Finance\Income\CreditController;
+use App\Http\Controllers\Office\Finance\Income\InvoiceController;
+use App\Http\Controllers\Office\Finance\Income\RevenueController;
+use App\HTtp\Controllers\Office\Finance\OrderController;
+use App\Http\Controllers\Office\Finance\Presale\ProposalController;
+use App\Http\Controllers\Office\Finance\Presale\RetainersController;
 use App\Http\Controllers\Office\Master\AllowanceOptionController;
 use App\Http\Controllers\Office\Master\AssetController;
 use App\Http\Controllers\Office\Master\AwardTypeController;
@@ -43,7 +61,7 @@ use App\Http\Controllers\Office\Master\TrainerController;
 use App\Http\Controllers\Office\Master\TrainingTypeController;
 use App\Http\Controllers\Office\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Office\Presale\ProposalController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,18 +84,6 @@ Route::group(['domain' => ''], function () {
             Route::post('do-register', [AuthController::class, 'do_register'])->name('doregister');
             Route::post('do-forgot', [AuthController::class, 'do_forgot'])->name('doforgot');
             Route::post('do-reset', [AuthController::class, 'do_reset'])->name('doreset');
-Route::group(['domain' => ''], function() {
-    Route::prefix('office')->name('office.')->group(function(){
-        Route::redirect('/','/auth');
-        Route::prefix('auth')->name('auth.')->group(function(){
-            Route::get('',[AuthController::class, 'index'])->name('index');
-            Route::get('register',[AuthController::class, 'register'])->name('register');
-            Route::get('forgot',[AuthController::class, 'forgot'])->name('forgot');
-            Route::get('reset/{token}',[AuthController::class, 'reset'])->name('reset');
-            Route::post('do-login',[AuthController::class, 'do_login'])->name('dologin');
-            Route::post('do-register',[AuthController::class, 'do_register'])->name('doregister');
-            Route::post('do-forgot',[AuthController::class, 'do_forgot'])->name('doforgot');
-            Route::post('do-reset',[AuthController::class, 'do_reset'])->name('doreset');
         });
         Route::middleware(['auth:employees'])->group(function () {
             Route::prefix('dashboard')->name('dashboard.')->group(function () {
@@ -163,6 +169,22 @@ Route::group(['domain' => ''], function() {
             });
             Route::prefix('finance')->name('finance.')->group(function () {
                 Route::resource('proposal', ProposalController::class);
+                Route::resource('retainers', RetainersController::class);
+                Route::resource('account', AccountController::class);
+                Route::resource('transfer', TransferController::class);
+                Route::resource('invoice', InvoiceController::class);
+                Route::resource('credit', CreditController::class);
+                Route::resource('goal', GoalController::class);
+                Route::resource('order', OrderController::class);
+                Route::resource('trial', TrialController::class);
+                Route::resource('journal', JournalEntriesController::class);
+                Route::resource('chart', ChartOfAccountController::class);
+                Route::resource('bill', BillController::class);
+                Route::resource('payment', PaymentController::class);
+                Route::resource('debit', DebitNoteController::class);
+                Route::resource('revenue', RevenueController::class);
+                Route::resource('contract', ContractController::class);
+                Route::resource('budget', BudgetController::class);
 
             });
             Route::prefix('project')->name('project.')->group(function () {
