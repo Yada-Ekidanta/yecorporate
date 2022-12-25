@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Contact Type</li>
+                    <li class="breadcrumb-item text-muted">Contract Type</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -62,7 +62,7 @@
                                         <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
                                     </svg>
                                 </span>
-                                <input type="text" name="keyword" onkeyup="load_list();" class="form-control form-control-solid w-250px ps-14" placeholder="Search Contract" />
+                                <input type="text" name="keyword" onkeyup="load_list();" class="form-control form-control-solid w-250px ps-14" placeholder="Search bank" />
                             </div>
                         </div>
                     </form>
@@ -123,7 +123,7 @@
                                         <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                                     </svg>
                                 </span>
-                                Add Contract
+                                Add Contract Type
                             </a>
                         </div>
                         <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">

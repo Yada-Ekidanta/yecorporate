@@ -111,7 +111,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('subject');
             $table->string('value');
-            $table->integer('contract_type_id')->default(0);
+            $table->integer('client_contract_type_id')->default(0);
             $table->date('start_at')->comment('tanggal tidak boleh kurang dari tanggal sekarang');
             $table->date('end_at')->comment('tanggal harus lebih atau sama dengan start at');
             $table->longText('desc')->nullable();

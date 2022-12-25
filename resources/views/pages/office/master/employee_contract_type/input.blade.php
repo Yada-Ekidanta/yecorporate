@@ -64,7 +64,7 @@
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Contract</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Contract Type</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
@@ -85,7 +85,7 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
                                 </div>
                             </div>

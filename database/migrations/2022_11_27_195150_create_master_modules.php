@@ -90,6 +90,13 @@ return new class extends Migration
             $table->longText('desc')->nullable();
             $table->softDeletes();
         });
+        Schema::create('leave_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->integer('days');
+            $table->integer('created_by')->default(0);
+            $table->timestamps();
+        });
         Schema::create('document_folders', function (Blueprint $table) {
             $table->id();
             $table->integer('employee_id')->default(0);
@@ -147,6 +154,12 @@ return new class extends Migration
             $table->string('code');
             $table->string('name');
             $table->softDeletes();
+        });
+        Schema::create('job_categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->integer('created_by')->default(0);
+            $table->timestamps();
         });
         Schema::create('job_stages', function (Blueprint $table) {
             $table->id();
