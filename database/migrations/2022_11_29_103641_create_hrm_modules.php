@@ -565,12 +565,12 @@ return new class extends Migration
             $table->string('salary_month')->nullable();
             $table->integer('st')->default(0);
             $table->string('basic_salary')->default(0);
-            $table->longText('allowance')->default(0);
-            $table->longText('commission')->default(0);
-            $table->longText('loan')->default(0);
-            $table->longText('saturation_deduction')->default(0);
-            $table->longText('other_payment')->default(0);
-            $table->longText('overtime')->default(0);
+            $table->longText('allowance')->nullable();
+            $table->longText('commission')->nullable();
+            $table->longText('loan')->nullable();
+            $table->longText('saturation_deduction')->nullable();
+            $table->longText('other_payment')->nullable();
+            $table->longText('overtime')->nullable();
             $table->integer('created_by')->default(0);
             $table->timestamps();
         });

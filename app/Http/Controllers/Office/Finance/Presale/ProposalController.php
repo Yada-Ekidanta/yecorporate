@@ -28,13 +28,14 @@ class ProposalController extends Controller
     }
     public function create()
     {
-        $categories = ProductCategory::orderBy('name', 'asc')->get();
+        // $categories = ProductCategory::orderBy('name', 'asc')->get();
         $proposal_number = $this->proposalNumber();
-        $productservices = ProductService::orderBy('name', 'asc')->get();
+        // $productservices = ProductService::orderBy('name', 'asc')->get();
         // $product_services = ProductService::pluck('name', 'id');
         $clients = Client::orderBy('name', 'asc')->get();
 
-        return view('pages.office.finance.presale.proposal.input', ['clients' => $clients, 'productservices' => $productservices, 'proposal_number' => $proposal_number, 'categories' => $categories, 'data' => new Proposal]);
+        // return view('pages.office.finance.presale.proposal.input', ['clients' => $clients, 'productservices' => $productservices, 'proposal_number' => $proposal_number, 'categories' => $categories, 'data' => new Proposal]);
+        return view('pages.office.finance.presale.proposal.input', ['clients' => $clients, 'data' => new Proposal, 'proposal_number' => $proposal_number]);
     }
     public function store(Request $request)
     {

@@ -35,8 +35,8 @@ return new class extends Migration
         Schema::create('projects_task_timers', function (Blueprint $table) {
             $table->id();
             $table->integer('task_id');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->timestamp('start_time')->nullable();
+            $table->timestamp('end_time')->nullable();
             $table->timestamps();
         });
         Schema::create('projects_tasks', function (Blueprint $table) {
@@ -177,8 +177,8 @@ return new class extends Migration
             $table->integer('tag_id');
             $table->string('name');
             $table->integer('is_billable');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->timestamp('start_time')->nullable();
+            $table->timestamp('end_time')->nullable();
             $table->string('total_time');
             $table->string('is_active');
             $table->integer('created_by');
