@@ -155,6 +155,12 @@ return new class extends Migration
             $table->string('name');
             $table->softDeletes();
         });
+        Schema::create('job_categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->integer('created_by')->default(0);
+            $table->timestamps();
+        });
         Schema::create('job_stages', function (Blueprint $table) {
             $table->id();
             $table->string('title');
