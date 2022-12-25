@@ -1,11 +1,11 @@
 <table class="table align-middle table-row-dashed fs-6 gy-5">
     <thead>
         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-            <th >
+            <th class="w-10px pe-2">
                 No
             </th>
-            <th>Name</th>
-            <th >Actions</th>
+            <th class="min-w-125px">Name</th>
+            <th class="text-end min-w-100px">Actions</th>
         </tr>
     </thead>
     <tbody class="text-gray-600 fw-semibold">
@@ -14,9 +14,10 @@
             <td>
                 {{$key+ $collection->firstItem()}}
             </td>
-            
-            <td>{{$item->name}}</td>
             <td>
+                <span>{{$item->name}}</span>
+            </td>
+            <td class="text-end">
                 <a href="{{route('office.master.employee-contract-type.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
