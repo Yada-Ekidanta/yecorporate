@@ -46,7 +46,6 @@ class DocumentTypeController extends Controller
         }
         $document_type = new DocumentType;
         $document_type->name = $request->name;
-        $document_type->employee_id = $request->employee_id;
         $document_type->created_by = Auth::guard('employees')->user()->id;
         $document_type->save();
         return response()->json([

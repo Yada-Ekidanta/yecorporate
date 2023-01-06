@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RegionalSeeder::class,
             HrmSeeder::class,
-            // MasterSeeder::class,
-            // CrmSeeder::class,
-            // SettingSeeder::class,
+            MasterSeeder::class,
+            CrmSeeder::class,
+            SettingSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 
