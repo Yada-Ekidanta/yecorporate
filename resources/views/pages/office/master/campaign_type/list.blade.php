@@ -5,7 +5,7 @@
                 No
             </th>
             <th>Name</th>
-            <th>Actions</th>
+            <th class="text-end min-w-100px">Actions</th>
         </tr>
     </thead>
     <tbody class="text-gray-600 fw-semibold">
@@ -25,7 +25,7 @@
                     <span>{{$item->name}}</span>
                 </div>
             </td>
-            <td>
+            <td class="text-end">
                 <a href="{{route('office.master.campaign-type.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
