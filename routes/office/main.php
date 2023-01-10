@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Office\AuthController;
 use App\Http\Controllers\Office\ProfileController;
 use App\Http\Controllers\Office\DashboardController;
-use App\Http\Controllers\Office\Master\DocumentController;
+use App\Http\Controllers\Office\CRM\ClientController;
 use App\Http\Controllers\Office\Master\TaxController;
 use App\Http\Controllers\Office\Master\BankController;
 use App\Http\Controllers\Office\Master\KbliController;
@@ -13,10 +13,13 @@ use App\Http\Controllers\Office\Master\AssetController;
 use App\Http\Controllers\Office\Master\ProductController;
 use App\Http\Controllers\Office\Master\TrainerController;
 use App\Http\Controllers\Office\Master\CaseTypeController;
+use App\Http\Controllers\Office\Master\DocumentController;
+use App\Http\Controllers\Office\Master\EmployeeController;
 use App\Http\Controllers\Office\Master\GoalTypeController;
 use App\Http\Controllers\Office\Master\JobStageController;
 use App\Http\Controllers\Office\Master\PositionController;
 use App\Http\Controllers\Office\Master\RegionalController;
+use App\Http\Controllers\Office\Setting\CompanyController;
 use App\Http\Controllers\Office\Master\AwardTypeController;
 use App\Http\Controllers\Office\Master\LeaveTypeController;
 use App\Http\Controllers\Office\Master\TaskStageController;
@@ -28,31 +31,30 @@ use App\Http\Controllers\Office\Master\LeadSourceController;
 use App\Http\Controllers\Office\Master\LoanOptionController;
 use App\Http\Controllers\Office\Master\MailConfigController;
 use App\Http\Controllers\Office\Master\TargetListController;
+use App\Http\Controllers\Office\Communication\ChatController;
 use App\Http\Controllers\Office\Master\ExpenseTypeController;
 use App\Http\Controllers\Office\Master\PaymentTypeController;
 use App\Http\Controllers\Office\Master\PayslipTypeController;
 use App\Http\Controllers\Office\Master\ProductUnitController;
+use App\Http\Controllers\Office\Setting\PermissionController;
 use App\Http\Controllers\Office\Master\CampaignTypeController;
 use App\Http\Controllers\Office\Master\DocumentTypeController;
 use App\Http\Controllers\Office\Master\TrainingTypeController;
+use App\Http\Controllers\Office\Setting\CompanyBankController;
 use App\Http\Controllers\Office\Master\DocumentFolderController;
 use App\Http\Controllers\Office\Master\DocumentOptionController;
+use App\Http\Controllers\Office\Setting\CompanyBranchController;
+use App\Http\Controllers\Office\Setting\CompanyPolicyController;
 use App\Http\Controllers\Office\Master\AllowanceOptionController;
 use App\Http\Controllers\Office\Master\DeductionOptionController;
 use App\Http\Controllers\Office\Master\PerformanceTypeController;
-use App\Http\Controllers\Office\Setting\PermissionController;
 use App\Http\Controllers\Office\Master\ProductCategoryController;
 use App\Http\Controllers\Office\Master\TerminationTypeController;
 use App\Http\Controllers\Office\Master\OpportunityStageController;
 use App\Http\Controllers\Office\Master\ShippingProviderController;
-use App\Http\Controllers\Office\Master\ClientContractTypeController;
 use App\Http\Controllers\Office\Setting\CompanyIndustryController;
+use App\Http\Controllers\Office\Master\ClientContractTypeController;
 use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
-use App\Http\Controllers\Office\Master\EmployeeController;
-use App\Http\Controllers\Office\Setting\CompanyBankController;
-use App\Http\Controllers\Office\Setting\CompanyBranchController;
-use App\Http\Controllers\Office\Setting\CompanyController;
-use App\Http\Controllers\Office\Setting\CompanyPolicyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +82,7 @@ Route::group(['domain' => ''], function() {
             Route::post('do-reset',[AuthController::class, 'do_reset'])->name('doreset');
         });
         Route::middleware(['auth:employees'])->group(function(){
+            Route::resource('chat', ChatController::class);
             Route::prefix('dashboard')->name('dashboard.')->group(function(){
                 Route::get('',[DashboardController::class, 'index'])->name('index');
                 Route::get('ecommerce',[DashboardController::class, 'ecommerce'])->name('ecommerce');
@@ -121,7 +124,8 @@ Route::group(['domain' => ''], function() {
                 Route::get('district/{district}/{village}/edit-village',[RegionalController::class, 'edit_village'])->name('regional.edit_village');
                 Route::patch('district/{village}/update-village',[RegionalController::class, 'update_village'])->name('regional.update_village');
                 Route::delete('district/{village}/destroy-village',[RegionalController::class, 'destroy_village'])->name('regional.destroy_village');
-
+                
+                Route::resource('company-industry', CompanyIndustryController::class);
                 Route::resource('regional', RegionalController::class);
                 Route::resource('allowance', AllowanceOptionController::class);
                 Route::resource('asset', AssetController::class);
@@ -176,17 +180,7 @@ Route::group(['domain' => ''], function() {
                 Route::resource('vendor', VendorController::class);
             });
             Route::prefix('crm')->name('crm.')->group(function(){
-                Route::resource('client-type', ClientTypeController::class);
-                Route::resource('company-industry', CompanyIndustryController::class);
-                Route::resource('document-type', DocumentTypeController::class);
-                Route::resource('target-list', TargetListController::class);
-                Route::resource('document-folder', DocumentFolderController::class);
-                Route::resource('campaign-type', CampaignTypeController::class);
-                Route::resource('lead-source', LeadSourceController::class);
-                Route::resource('opportunity-stage', OpportunityStageController::class);
-                Route::resource('case-type', CaseTypeController::class);
-                Route::resource('shipping-provider', ShippingProviderController::class);
-                Route::resource('task-stage', TaskStageController::class);
+                Route::resource('client', ClientController::class);
             });
             Route::prefix('finance')->name('finance.')->group(function(){
             });

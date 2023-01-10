@@ -98,6 +98,9 @@ return new class extends Migration
             $table->string('paypal')->nullable();
             $table->string('password')->nullable();
             $table->string('st',1)->nullable();
+            $table->integer('sound_effect')->default(0);
+            $table->integer('browser_notification')->default(0);
+            $table->integer('read_receipt')->default(0);
             $table->rememberToken();
             $table->timestamp('last_seen')->nullable();
             $table->timestamps();

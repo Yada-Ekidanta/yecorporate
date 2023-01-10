@@ -15,6 +15,7 @@ use App\Models\Master\DocumentType;
 use App\Models\Master\OpportunityStage;
 use App\Models\Master\ShippingProvider;
 use App\Models\Setting\CompanyIndustry;
+use App\Models\Master\ClientContractType;
 
 class CrmSeeder extends Seeder
 {
@@ -49,6 +50,22 @@ class CrmSeeder extends Seeder
         );
         foreach($case_type AS $i){
             CaseType::create([
+                'name' => $i['name']
+            ]);
+        }
+        $contract_type = array(
+            [
+                'name' => 'Fixed Price Contract (FP)'
+            ],
+            [
+                'name' => 'Time and Material Contract (T&M)'
+            ],
+            [
+                'name' => 'Cost Reimbursable Contract (CR)'
+            ],
+        );
+        foreach($contract_type AS $i){
+            ClientContractType::create([
                 'name' => $i['name']
             ]);
         }
