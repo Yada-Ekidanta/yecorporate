@@ -61,12 +61,16 @@ class Employee extends Authenticatable
         $columns    = preg_grep('/(.+ed_at)|(.*id)/', array_keys($profile->makeHidden(['nip','jobdesc','email_verified_at','google_id','paypal','password','remember_token','last_seen','created_at','updated_at','department_id','avatar','position_id'])->toArray()), PREG_GREP_INVERT);
         $per_column = count($columns) > 1 ? 100 / count($columns) : 0;
         $total      = 0;
-    
+
         foreach ($profile->toArray() as $key => $value) {
             if ($value !== NULL && $value !== [] && in_array($key, $columns)) {
                 $total += $per_column;
             }
         }
         return round($total);
+    }
+
+    public function team() {
+        return $this->hasMany(Team::class, 'employee_id');
     }
 }

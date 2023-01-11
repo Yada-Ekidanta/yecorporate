@@ -1,6 +1,6 @@
 // const options = {
-//     // when this option is enabled, swup disables browser native scroll control (sets scrollRestoration to manual) and takes over this task. 
-//     // This means that position of scroll on previous page(s) is not preserved (but can be implemented manually based on use case). 
+//     // when this option is enabled, swup disables browser native scroll control (sets scrollRestoration to manual) and takes over this task.
+//     // This means that position of scroll on previous page(s) is not preserved (but can be implemented manually based on use case).
 //     // Otherwise swup scrolls to top/#element on popstate as it does with normal browsing.
 //     animateHistoryBrowsing: false,
 //     // animation selector
@@ -44,6 +44,17 @@ document.addEventListener("swup:contentReplaced", () => {
     obj_enddatenow();
     obj_startdatenow('purchase_at');
     obj_startdatenow('supported_at');
+    obj_startdatenow('start_date');
+    obj_startdatenow('end_date');
+    obj_startdatenow('start_at');
+    obj_startdatenow('end_at');
+    obj_startdatenow('due_date');
+    obj_select('form-select-employee');
+    obj_select('form-select-project');
+    obj_select('form-select-task');
+    obj_select('form-select-status');
+    obj_select('form-select-priority');
+    obj_select('form-select-milestone');
     setTimeout(() => {
         obj_quill('desc');
     }, 1000);
@@ -81,5 +92,5 @@ document.addEventListener("swup:contentReplaced", () => {
     Inputmask({
         "mask": "99.999.999.9-999.999"
     }).mask(".npwp_format");
-    
+
 });

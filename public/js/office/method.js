@@ -22,6 +22,9 @@ $(document).ready(function() {
         // var myurl = $(this).attr('href');
         page = $(this).data('halaman').split('page=')[1];
         load_list(page);
+        load_milestone(page);
+        load_team(page);
+        load_task(page);
     });
 });
 function load_list(page){

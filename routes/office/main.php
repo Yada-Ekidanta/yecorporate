@@ -2,12 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Office\AuthController;
+use App\Http\Controllers\Office\PM\TaskController;
+use App\Http\Controllers\Office\PM\TeamController;
+use App\Http\Controllers\Office\PM\ZoomController;
 use App\Http\Controllers\Office\ProfileController;
 use App\Http\Controllers\Office\DashboardController;
 use App\Http\Controllers\Office\Master\TaxController;
+use App\Http\Controllers\Office\PM\ProjectController;
+use App\Http\Controllers\Office\PM\TrackerController;
 use App\Http\Controllers\Office\Master\BankController;
 use App\Http\Controllers\Office\Master\KbliController;
+use App\Http\Controllers\Office\PM\CalendarController;
+use App\Http\Controllers\Office\PM\TodoListController;
 use App\Http\Controllers\Office\Master\AssetController;
+use App\Http\Controllers\Office\PM\InvoicePMController;
+use App\Http\Controllers\office\PM\MilestoneController;
 use App\Http\Controllers\Office\Master\ProductController;
 use App\Http\Controllers\Office\Master\TrainerController;
 use App\Http\Controllers\Office\Master\CaseTypeController;
@@ -23,7 +32,7 @@ use App\Http\Controllers\Office\Master\DepartmentController;
 use App\Http\Controllers\Office\Master\IncomeTypeController;
 use App\Http\Controllers\Office\Master\LeadSourceController;
 use App\Http\Controllers\Office\Master\LoanOptionController;
-use App\Http\Controllers\Office\Master\MailConfigController;
+// use App\Http\Controllers\Office\Master\MailConfigController;
 use App\Http\Controllers\Office\Master\TargetListController;
 use App\Http\Controllers\Office\Master\ExpenseTypeController;
 use App\Http\Controllers\Office\Master\PaymentTypeController;
@@ -43,6 +52,7 @@ use App\Http\Controllers\Office\Master\OpportunityStageController;
 use App\Http\Controllers\Office\Master\ShippingProviderController;
 use App\Http\Controllers\Office\Master\ClientContractTypeController;
 use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
+use App\Http\Controllers\Office\PM\TimesheetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,7 +102,7 @@ Route::group(['domain' => ''], function() {
                 Route::get('regency/{regency}/{district}/edit-district',[RegionalController::class, 'edit_district'])->name('regional.edit_district');
                 Route::patch('regency/{district}/update-district',[RegionalController::class, 'update_district'])->name('regional.update_district');
                 Route::delete('regency/{district}/destroy-district',[RegionalController::class, 'destroy_district'])->name('regional.destroy_district');
-                
+
                 Route::get('district/{district}/show_village',[RegionalController::class, 'show_village'])->name('regional.show_village');
                 Route::get('district/{district}/create',[RegionalController::class, 'create_village'])->name('regional.create_village');
                 Route::post('district/store-village',[RegionalController::class, 'store_village'])->name('regional.store_village');
@@ -128,7 +138,7 @@ Route::group(['domain' => ''], function() {
                 Route::resource('kbli', KbliController::class);
                 Route::resource('lead-source', LeadSourceController::class);
                 Route::resource('loan-option', LoanOptionController::class);
-                Route::resource('mail-config', MailConfigController::class);
+                // Route::resource('mail-config', MailConfigController::class);
                 Route::resource('opportunity-stage', OpportunityStageController::class);
                 Route::resource('payment-type', PaymentTypeController::class);
                 Route::resource('payslip-type', PayslipTypeController::class);
@@ -144,13 +154,35 @@ Route::group(['domain' => ''], function() {
                 Route::resource('termination-type', TerminationTypeController::class);
                 Route::resource('trainer', TrainerController::class);
                 Route::resource('training-type', TrainingTypeController::class);
-                Route::resource('vendor', VendorController::class);
+                // Route::resource('vendor', VendorController::class);
             });
             Route::prefix('crm')->name('crm.')->group(function(){
             });
             Route::prefix('finance')->name('finance.')->group(function(){
             });
-            Route::prefix('project')->name('project.')->group(function(){
+            Route::prefix('pm')->name('pm.')->group(function(){
+                Route::resource('project', ProjectController::class);
+                Route::resource('milestone', MilestoneController::class);
+                Route::get('milestone/{project}/index',[MilestoneController::class, 'index'])->name('milestone.index');
+                Route::get('milestone/{project}/create',[MilestoneController::class, 'create'])->name('milestone.create');
+                Route::post('milestone/{project}/store',[MilestoneController::class, 'store'])->name('milestone.store');
+                Route::resource('invoice-pm', InvoicePMController::class);
+                Route::resource('tracker', TrackerController::class);
+                Route::post('/fetch-task/{id}',[TrackerController::class, 'fetchTask'])->name('tracker.fetchTask');
+                Route::resource('task', TaskController::class);
+                Route::get('task/{project}/index',[TaskController::class, 'index'])->name('task.index');
+                Route::get('task/{project}/create',[TaskController::class, 'create'])->name('task.create');
+                Route::post('task/{project}/store',[TaskController::class, 'store'])->name('task.store');
+                Route::resource('team', TeamController::class);
+                Route::get('team/{project}/index',[TeamController::class, 'index'])->name('team.index');
+                Route::get('team/{project}/create',[TeamController::class, 'create'])->name('team.create');
+                Route::post('team/{project}/store',[TeamController::class, 'store'])->name('team.store');
+                Route::resource('todo-list', TodoListController::class);
+                Route::get('todo-list/{task}/create',[TodoListController::class, 'create'])->name('todo-list.create');
+                Route::post('todo-list/{task}/store',[TodoListController::class, 'store'])->name('todo-list.store');
+                Route::resource('zoom', ZoomController::class);
+                Route::resource('calender', CalendarController::class);
+                Route::resource('time-sheet', TimesheetController::class);
             });
             Route::prefix('setting')->name('setting.')->group(function(){
             });
