@@ -35,6 +35,9 @@ const swup = new Swup(options);
 // document.addEventListener("swup:contentReplaced",init);
 document.addEventListener("swup:contentReplaced", () => {
     load_list(1);
+    load_milestone(1);
+    load_team(1);
+    load_task(1);
     obj_autosize();
     obj_time();
     obj_date_time();

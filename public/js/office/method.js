@@ -15,15 +15,39 @@ $(document).ready(function() {
     //         // load_list(1);
     //     }
     // });
-    $(document).on('click', '.page-link', function(event) {
+    $(document).on('click', '.page-link.default', function(event) {
         event.preventDefault();
-        $('.page-link').removeClass('active');
-        $(this).parent('.page-link').addClass('active');
+        $('.page-link.default').removeClass('active');
+        $(this).parent('.page-link.default').addClass('active');
         // var myurl = $(this).attr('href');
         page = $(this).data('halaman').split('page=')[1];
         load_list(page);
-        load_milestone(page);
+    });
+
+    $(document).on('click', '.page-link.team', function(event) {
+        event.preventDefault();
+        $('.page-link.team').removeClass('active');
+        $(this).parent('.page-link.team').addClass('active');
+        page = $(this).data('halaman').split('page=')[1];
+        console.log($(this).data('halaman'));
         load_team(page);
+    });
+
+    $(document).on('click', '.page-link.milestone', function(event) {
+        event.preventDefault();
+        $('.page-link.milestone').removeClass('active');
+        $(this).parent('.page-link.milestone').addClass('active');
+        page = $(this).data('halaman').split('page=')[1];
+        console.log($(this).data('halaman'));
+        load_milestone(page);
+    });
+
+    $(document).on('click', '.page-link.task', function(event) {
+        event.preventDefault();
+        $('.page-link.task').removeClass('active');
+        $(this).parent('.page-link.task').addClass('active');
+        page = $(this).data('halaman').split('page=')[1];
+        console.log($(this).data('halaman'));
         load_task(page);
     });
 });

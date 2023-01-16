@@ -43,6 +43,12 @@ class TaskController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'team_id' => 'required',
+            'milestone_id' => 'required',
+            'priority' => 'required',
+            'start_at' => 'required',
+            'end_at' => 'required',
+            'desc' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -58,6 +64,7 @@ class TaskController extends Controller
         $task->milestone_id = $request->milestone_id;
         $task->priority = $request->priority;
         $task->start_at = $request->start_at;
+
         if ($request->end_at >= $request->start_at) {
             $task->end_at = $request->end_at;
         } else {
@@ -66,6 +73,7 @@ class TaskController extends Controller
                 'message' => 'End Date cannot be less than Start Date',
             ]);
         }
+
         $task->project_id = $request->project_id;
         $task->desc = $request->desc;
         $task->created_by = Auth::guard('employees')->user()->name;
@@ -83,10 +91,15 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show(Request $request, Task $task)
     {
         $todoList = TodoList::where('task_id', $task->id)->get();
         return view('pages.office.pm.task.detail', ['data' => $task, 'todoList' => $todoList]);
+
+        // if ($request->ajax()) {
+        //     $todoList = TodoList::where('task_id', $task->id)->get();
+        //     return view('pages.office.pm.task.detail', ['data' => $task, 'todoList' => $todoList]);
+        // }
     }
 
     /**
@@ -114,6 +127,12 @@ class TaskController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'team_id' => 'required',
+            'milestone_id' => 'required',
+            'priority' => 'required',
+            'start_at' => 'required',
+            'end_at' => 'required',
+            'desc' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -128,6 +147,7 @@ class TaskController extends Controller
         $task->milestone_id = $request->milestone_id;
         $task->priority = $request->priority;
         $task->start_at = $request->start_at;
+
         if ($request->end_at >= $request->start_at) {
             $task->end_at = $request->end_at;
         } else {
@@ -136,6 +156,7 @@ class TaskController extends Controller
                 'message' => 'End Date cannot be less than Start Date',
             ]);
         }
+
         $task->desc = $request->desc;
         $task->save();
 

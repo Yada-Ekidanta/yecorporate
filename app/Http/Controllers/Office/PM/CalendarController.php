@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Office\PM;
 
-use App\Models\PM\Calendar;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
@@ -13,10 +11,8 @@ class CalendarController extends Controller
      *
      * @return response()
      */
-    public function index(Request $request)
+    public function index()
     {
-
         return view('pages.office.pm.calendar.main');
-
     }
 }

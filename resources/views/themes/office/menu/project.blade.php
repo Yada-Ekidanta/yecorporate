@@ -8,9 +8,9 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item" data-no-swup>
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.pm.project.index') }}">
+    <a class="menu-link" href="{{ route('office.pm.project.index') }}" data-no-swup>
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -28,7 +28,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+{{-- <div class="menu-item">
     <!--begin:Menu link-->
     <a class="menu-link" href="#">
         <span class="menu-icon">
@@ -45,12 +45,12 @@
         <span class="menu-title">Tasks</span>
     </a>
     <!--end:Menu link-->
-</div>
+</div> --}}
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item" data-no-swup>
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.pm.calender.index') }}">
+    <a class="menu-link" href="{{ route('office.pm.calender.index') }}" data-no-swup>
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -68,9 +68,9 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item" data-no-swup>
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.pm.time-sheet.index') }}" data-no-swup>
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -88,9 +88,9 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item" data-no-swup>
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.pm.tracker.index') }}">
+    <a class="menu-link" href="{{ route('office.pm.tracker.index') }}" data-no-swup>
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -108,7 +108,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+{{-- <div class="menu-item">
     <!--begin:Menu link-->
     <a class="menu-link" href="{{ route('office.pm.invoice-pm.index') }}">
         <span class="menu-icon">
@@ -125,12 +125,12 @@
         <span class="menu-title">Invoices</span>
     </a>
     <!--end:Menu link-->
-</div>
+</div> --}}
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item" data-no-swup>
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.pm.zoom.index') }}">
+    <a class="menu-link" href="{{ route('office.pm.zoom.index') }}" data-no-swup>
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">

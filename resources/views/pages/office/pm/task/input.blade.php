@@ -145,9 +145,9 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this task ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.task.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
+                            <button type="button" onclick="handle_confirm('Are you sure want to delete this task ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.task.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                                Delete
+                            </button>
                         @endif
                     </div>
                 </form>

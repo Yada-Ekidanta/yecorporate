@@ -26,8 +26,10 @@
     <link href="{{asset('css/animate.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/toastify.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('metronic/plugins/custom/jkanban/jkanban.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('metronic/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('metronic/plugins/custom/jkanban/jkanban.bundle.js') }}"></script>
+    <link href="{{ asset('metronic/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('metronic/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
+    <link href="{{ asset('metronic/plugins/custom/vis-timeline/vis-timeline.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('metronic/plugins/custom/vis-timeline/vis-timeline.bundle.js') }}"></script>
     <!--end::Global Stylesheets Bundle-->
 </head>

@@ -104,6 +104,7 @@
                         </div>
                         <div class="mb-5">
                             <div>
+                                <img src="{{ asset('storage/'.$data->image) }}" class="rounded img-responsive mb-5" style="width: 150px; height:100px;" alt="Project Image">
                                 <input type="file" class="form-control" id="image" name="image" value="{{$data->image}}"/>
                             </div>
                         </div>
@@ -140,9 +141,9 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
+                            <button type="button" onclick="handle_confirm('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                                Delete
+                            </button>
                         @endif
                     </div>
                 </form>

@@ -54,6 +54,9 @@
             <div class="card">
                 <div class="card-header border-0 pt-6">
                     <form id="content_filter">
+                        <input type="hidden" name="status" id="status">
+                        {{-- <input type="hidden" name="name" id="name"> --}}
+                        {{-- <input type="hidden" name="due_date" id="due_date"> --}}
                         <div class="card-title">
                             <a href="{{ route('office.pm.todo-list.create', $data->id) }}?id={{ request()->query('id') }}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                 <span class="svg-icon svg-icon-2">
@@ -68,7 +71,7 @@
                     </form>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                            <a id="back_form_button" href="{{route('office.pm.project.show', request()->query('id'))}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                            <a id="back_form_button" href="{{route('office.pm.project.show', request()->query('id'))}}" class="btn btn-primary btn-sm btn-hover-scale menu-link" data-no-swup>
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
@@ -90,16 +93,21 @@
     </div>
     @section('custom_js')
     <script>
-        let arr = [],
-            obj,
+        let obj,
             i,
+            status = 0,
+            active1 = [],
+            active2 = [],
+            active3 = [],
+            active4 = [],
             data = @json($todoList);
 
         for (i = 0; i < data.length; i++) {
-            let updateURL = "{{ route('office.pm.todo-list.update', ':id') }}";
-            updateURL = updateURL.replace(':id', data[i].id);
             let id = data[i].id;
-            // console.log(id);
+            let updateURL = "{{ route('office.pm.todo-list.edit', ':id') }}";
+            updateURL = updateURL.replace(':id', id);
+            // $('#name').val(data[i].name);
+            // $('#due_date').val(data[i].due_date);
             obj = {
                 id: id,
                 title: `<span class="font-weight-bold"> ${data[i].name} </span>
@@ -119,9 +127,23 @@
                             <br><br>
                         <span class="text-muted">${data[i].due_date}</span>`,
             };
-            arr.push(obj);
+
+            status = data[i].status;
+
+            switch (status) {
+                case 2:
+                    active2.push(obj);
+                    break;
+                case 3:
+                    active3.push(obj);
+                    break;
+                case 4:
+                    active4.push(obj);
+                    break;
+                default:
+                    active1.push(obj);
+            }
         }
-        // console.log(arr);
 
         let kanban = new jKanban({
             element: '#kt_docs_jkanban_basic',
@@ -129,35 +151,65 @@
             widthBoard: '200px',
             boards: [
                 {
-                    'id': '_todo',
-                    'title': 'Todo',
-                    'class': 'primary',
-                    'item': arr
+                    id: '_todo',
+                    title: 'Todo',
+                    class: 'primary',
+                    item: active1
                 },
                 {
-                    'id': '_in_progress',
-                    'title': 'In Progress',
-                    'class': 'warning',
-                    'item': []
+                    id: '_in_progress',
+                    title: 'In Progress',
+                    class: 'warning',
+                    item: active2
                 },
                 {
-                    'id': '_review',
-                    'title': 'Review',
-                    'class': 'info',
-                    'item': []
+                    id: '_review',
+                    title: 'Review',
+                    class: 'info',
+                    item: active3
                 },
                 {
-                    'id': '_done',
-                    'title': 'Done',
-                    'class': 'success',
-                    'item': []
+                    id: '_done',
+                    title: 'Done',
+                    class: 'success',
+                    item: active4
                 }
             ],
             dragBoards: true,
             dragendEl: function (el) {
-                // console.log('dragendEl:', el);
-                console.log('dragendEl:', el.dataset.eid);
-                console.log('dragendEl:', el.offsetParent.dataset.id);
+                let id = el.dataset.eid;
+
+                let updateURL = "{{ route('office.pm.todo-list.updateStatus', ':id') }}";
+                updateURL = updateURL.replace(':id', id);
+                // console.log(updateURL);
+
+                let status = el.offsetParent.dataset.id;
+
+                switch (status) {
+                    case '_todo':
+                        $('#status').val(1);
+                        break;
+                    case '_in_progress':
+                        $('#status').val(2);
+                        break;
+                    case '_review':
+                        $('#status').val(3);
+                        break;
+                    default:
+                        $('#status').val(4);
+                }
+
+                $.ajax({
+                    url: updateURL,
+                    type: 'PUT',
+                    data: {
+                        status: $('#status').val(),
+                        // name: $('#name').val(),
+                        // due_date: $('#due_date').val(),
+                    }
+                });
+                // console.log('dragendEl:', id);
+                // console.log('dragendEl:', status);
             },
         });
     </script>

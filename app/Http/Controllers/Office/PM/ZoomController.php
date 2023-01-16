@@ -46,6 +46,10 @@ class ZoomController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            'project_id' => 'required',
+            'start_date' => 'required|date',
+            'duration' => 'required|numeric',
+            'join_url' => 'required|url',
         ]);
 
         if ($validator->fails()){
@@ -103,6 +107,10 @@ class ZoomController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            'project_id' => 'required',
+            'start_date' => 'required|date',
+            'duration' => 'required|numeric',
+            'join_url' => 'required|url',
         ]);
 
         if ($validator->fails()){

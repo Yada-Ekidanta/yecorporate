@@ -12,16 +12,6 @@ use Illuminate\Support\Facades\Validator;
 class TodoListController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -41,6 +31,7 @@ class TodoListController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'due_date' => 'required|date',
         ]);
 
         if ($validator->fails()) {
@@ -56,23 +47,11 @@ class TodoListController extends Controller
         $todoList->due_date = $request->due_date;
         $todoList->status = 1;
         $todoList->save();
-        // dd($todoList);
 
         return response()->json([
             'alert' => 'success',
             'message' => 'Todo List has been created!',
         ], 200);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -98,6 +77,7 @@ class TodoListController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'due_date' => 'required|date',
         ]);
 
         if ($validator->fails()) {
@@ -109,6 +89,18 @@ class TodoListController extends Controller
 
         $todoList->name = $request->name;
         $todoList->due_date = $request->due_date;
+        $todoList->save();
+
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Todo List has been updated',
+        ], 200);
+    }
+
+    public function updateStatus(Request $request, TodoList $todoList)
+    {
+
+        $todoList->status = $request->status;
         $todoList->save();
 
         return response()->json([

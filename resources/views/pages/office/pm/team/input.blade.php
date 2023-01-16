@@ -101,9 +101,9 @@
                             {{$data->id ? 'Update' : 'Add Member'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this member ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.team.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
+                            <button type="button" onclick="handle_confirm('Are you sure want to delete this member ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.team.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                                Delete
+                            </button>
                         @endif
                     </div>
                 </form>

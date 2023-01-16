@@ -6,8 +6,10 @@ use App\Models\PM\Task;
 use App\Models\PM\Project;
 use App\Models\PM\Tracker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TrackerController extends Controller
 {
@@ -16,14 +18,21 @@ class TrackerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $collection = Tracker::all();
-        $project = Project::orderBy('name', 'asc')->get();
-        $task = Task::get();
         $status = Tracker::where('is_active', 1)->first();
         $status = $status ? $status : null;
-        return view('pages.office.pm.tracker.main', compact('collection', 'project', 'task', 'status'));
+        $time = Tracker::where('created_by', Auth::guard('employees')->user()->name)->sum(DB::raw("TIME_TO_SEC(total_time)"));
+        $timeConvert = gmdate("H:i:s", $time);
+        // dd($timeConvert);
+        $project = Project::orderBy('name', 'asc')->get();
+        $task = Task::get();
+        if ($request->ajax()) {
+            $collection = Tracker::where('created_by', Auth::guard('employees')->user()->name)->where('name','LIKE','%'.$request->keyword.'%')->paginate(5);
+            return view('pages.office.pm.tracker.list', compact('collection'));
+        }
+
+        return view('pages.office.pm.tracker.main', compact('project', 'task', 'status', 'timeConvert'));
     }
 
     public function fetchTask($project_id = null)
@@ -36,17 +45,6 @@ class TrackerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-        // return view('pages.office.pm.tracker.main');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -56,6 +54,8 @@ class TrackerController extends Controller
     {
         // $validator = Validator::make($request->all(), [
         //     'name' => 'required',
+        //     'project_id' => 'required',
+        //     'task_id' => 'required',
         // ]);
 
         // if ($validator->fails()){
@@ -75,34 +75,11 @@ class TrackerController extends Controller
         $tracker->is_active = $request->is_active;
         $tracker->created_by = Auth::guard('employees')->user()->name;
         $tracker->save();
-        // dd($tracker);
 
         // return response()->json([
         //     'alert' => 'success',
         //     'message' => 'Tracker created successfully',
         // ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -129,6 +106,7 @@ class TrackerController extends Controller
     public function destroy(Tracker $tracker)
     {
         $tracker->delete();
+
         return response()->json([
             'alert' => 'success',
             'message' => 'Tracker deleted successfully',

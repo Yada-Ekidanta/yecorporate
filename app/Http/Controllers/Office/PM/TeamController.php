@@ -8,6 +8,7 @@ use App\Models\HRM\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 class TeamController extends Controller
@@ -38,16 +39,18 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'employee_id' => 'unique:teams',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'employee_id' => ['required', Rule::unique('teams')->where(function ($query) use ($request) {
+                return $query->where('project_id', $request->project_id);
+            })],
+        ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'alert' => 'danger',
-        //         'message' => $validator->errors()->first(),
-        //     ], 200);
-        // }
+        if ($validator->fails()) {
+            return response()->json([
+                'alert' => 'danger',
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
 
         $team = new Team;
         $team->employee_id = $request->employee_id;
@@ -94,16 +97,18 @@ class TeamController extends Controller
      */
     public function update(Request $request, Team $team)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'employee_id' => 'unique:teams',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'employee_id' => ['required', Rule::unique('teams')->where(function ($query) use ($request) {
+                return $query->where('project_id', $request->query('id'));
+            })],
+        ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'alert' => 'danger',
-        //         'message' => $validator->errors()->first(),
-        //     ], 200);
-        // }
+        if ($validator->fails()) {
+            return response()->json([
+                'alert' => 'danger',
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
 
         $team->employee_id = $request->employee_id;
         $team->save();

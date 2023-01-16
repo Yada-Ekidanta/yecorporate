@@ -24,7 +24,6 @@ class MilestoneController extends Controller
     public function create(Project $project)
     {
         return view('pages.office.pm.milestone.input', ['data' => new Milestone, 'project' => $project]);
-
     }
 
     /**
@@ -37,6 +36,8 @@ class MilestoneController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            'status' => 'required',
+            'desc' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -94,6 +95,8 @@ class MilestoneController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            'status' => 'required',
+            'desc' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -123,6 +126,7 @@ class MilestoneController extends Controller
     public function destroy(Milestone $milestone)
     {
         $milestone->delete();
+
         return response()->json([
             'alert' => 'success',
             'message' => 'Milestone Deleted',

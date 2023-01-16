@@ -180,6 +180,7 @@ Route::group(['domain' => ''], function() {
                 Route::resource('todo-list', TodoListController::class);
                 Route::get('todo-list/{task}/create',[TodoListController::class, 'create'])->name('todo-list.create');
                 Route::post('todo-list/{task}/store',[TodoListController::class, 'store'])->name('todo-list.store');
+                Route::put('todo-list/{todo_list}',[TodoListController::class, 'updateStatus'])->name('todo-list.updateStatus');
                 Route::resource('zoom', ZoomController::class);
                 Route::resource('calender', CalendarController::class);
                 Route::resource('time-sheet', TimesheetController::class);

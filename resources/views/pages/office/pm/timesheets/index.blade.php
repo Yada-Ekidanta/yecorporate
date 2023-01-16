@@ -30,6 +30,7 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-auto mb-md-0">
                     <div class="mt-3">
+                        {{-- Ambil --}}
                         <i class="ti ti-caret-left preweek weak-prev weak_go"></i>
                         <span class="week_date"><span class="start_date"></span> {{__('To')}} <span class="end_date"></span></span>
                             <input type="hidden" id="cweek">

@@ -25,6 +25,7 @@ class ProjectController extends Controller
             $collection = Project::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.pm.project.list', compact('collection', 'type'));
         }
+
         return view('pages.office.pm.project.main');
     }
 
@@ -48,7 +49,13 @@ class ProjectController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'image' => 'image',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'estimated_hrs' => 'required|numeric',
+            'budget' => 'required|numeric',
+            'currency' => 'required',
+            'desc' => 'required',
+            'image' => 'required|image',
         ]);
 
         if ($validator->fails()){
@@ -61,6 +68,7 @@ class ProjectController extends Controller
         $project = new Project;
         $project->name = $request->name;
         $project->start_date = $request->start_date;
+
         if ($request->end_date >= $request->start_date) {
             $project->end_date = $request->end_date;
         } else {
@@ -69,6 +77,7 @@ class ProjectController extends Controller
                 'message' => 'End Date cannot be less than Start Date',
             ]);
         }
+
         if ($request->file('image')) {
             if($project->image != null){
                 Storage::delete($project->image);
@@ -78,6 +87,7 @@ class ProjectController extends Controller
         } else {
             $project->image = $project->image;
         }
+
         $project->estimated_hrs = $request->estimated_hrs;
         $project->budget = $request->budget;
         $project->currency = $request->currency;
@@ -103,6 +113,7 @@ class ProjectController extends Controller
         $milestones = Milestone::where('project_id', $project->id)->paginate(3);
         $tasks = Task::where('project_id', $project->id)->paginate(3);
         $teams = Team::where('project_id', $project->id)->paginate(3);
+
         return view('pages.office.pm.project.detail',
         [
             'data' =>  $project,
@@ -135,6 +146,12 @@ class ProjectController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'estimated_hrs' => 'required|numeric',
+            'budget' => 'required|numeric',
+            'currency' => 'required',
+            'desc' => 'required',
             'image' => 'image',
         ]);
 
@@ -147,6 +164,7 @@ class ProjectController extends Controller
 
         $project->name = $request->name;
         $project->start_date = $request->start_date;
+
         if ($request->end_date >= $request->start_date) {
             $project->end_date = $request->end_date;
         } else {
@@ -155,6 +173,7 @@ class ProjectController extends Controller
                 'message' => 'End Date cannot be less than Start Date',
             ]);
         }
+
         if ($request->file('image')) {
             if($project->image != null){
                 Storage::delete($project->image);
@@ -164,6 +183,7 @@ class ProjectController extends Controller
         } else {
             $project->image = $project->image;
         }
+
         $project->estimated_hrs = $request->estimated_hrs;
         $project->budget = $request->budget;
         $project->currency = $request->currency;
@@ -189,6 +209,7 @@ class ProjectController extends Controller
         }
 
         $project->delete();
+
         return response()->json([
             'alert' => 'success',
             'message' => 'Project Deleted',
