@@ -44,6 +44,9 @@ use App\Http\Controllers\Office\Master\ShippingProviderController;
 use App\Http\Controllers\Office\Master\ClientContractTypeController;
 use App\Http\Controllers\Office\Setting\CompanyIndustryController;
 use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
+use App\Http\Controllers\Office\Crm\ClientController;
+use App\Http\Controllers\Office\Crm\OpportunityController;
+use App\Http\Controllers\Office\Crm\LeadsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,6 +166,9 @@ Route::group(['domain' => ''], function() {
                 Route::resource('case-type', CaseTypeController::class);
                 Route::resource('shipping-provider', ShippingProviderController::class);
                 Route::resource('task-stage', TaskStageController::class);
+                Route::resource('client', ClientController::class);
+                Route::resource('opportunity', OpportunityController::class);
+                Route::resource('leads', LeadsController::class);
             });
             Route::prefix('finance')->name('finance.')->group(function(){
             });

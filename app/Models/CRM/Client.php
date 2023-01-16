@@ -8,6 +8,15 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\HRM\Employee;
+use App\Models\Master\ClientType;
+use App\Models\Setting\CompanyIndustry;
+use App\Models\Regional\Country;
+use App\Models\Regional\District;
+use App\Models\Regional\Province;
+use App\Models\Regional\Regency;
+use App\Models\Regional\Village;
+
 
 class Client extends Authenticatable
 {
@@ -28,5 +37,45 @@ class Client extends Authenticatable
     public function groups ()
     {
         return $this->belongsTo(ContactGroup::class,'contact_group_id','id');
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
+    }
+
+    public function clientType()
+    {
+        return $this->belongsTo(ClientType::class, 'client_type_id');
+    }
+
+    public function companyIndustry()
+    {
+        return $this->belongsTo(CompanyIndustry::class, 'company_industry_id');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id');
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class, 'regency_id');
+    }
+
+    public function village()
+    {
+        return $this->belongsTo(Village::class, 'village_id');
     }
 }

@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <textarea name="desc" class="form-control" cols="30" rows="10">{{$data->desc}}</textarea>
+                                    <textarea name="desc" class="form-control d-none">{{$data->desc}}</textarea>
                                     <label for="name">Desc</label>
                                 </div>
                             </div>

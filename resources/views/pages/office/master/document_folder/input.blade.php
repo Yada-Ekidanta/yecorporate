@@ -106,14 +106,12 @@
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="parent" name="parent"
                                             placeholder="parent" value="{{ $data->parent }}" />
-                                        <label for="name">Parent</label>
+                                        <label for="parent">Parent</label>
                                     </div>
                                 </div>
                                 <div class="col-4 mb-3">
                                     <div class="form-floating">
-                                        {{-- <input type="text" class="form-control" id="desc" name="desc"
-                                            placeholder="desc" value="{{ $data->desc }}" /> --}}
-                                        <textarea class="form-control" name="desc" id="desc" value="{{ $data->desc }}" placeholder="desc" cols="30" rows="10"></textarea>
+                                        <textarea name="desc" class="form-control ">{{$data->desc}}</textarea>
                                         <label for="name">Desc</label>
                                     </div>
                                 </div>
