@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Office\Master;
 use Illuminate\Http\Request;
 use App\Models\Master\Competency;
 use App\Http\Controllers\Controller;
+use App\Models\Master\PerformanceType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,7 +25,11 @@ class CompetencyController extends Controller
     }
     public function create()
     {
-        return view('pages.office.master.competency.input', ['data' => new Competency]);
+        $performances = PerformanceType::all();
+        return view('pages.office.master.competency.input', [
+            'data' => new Competency,
+            'performances' => $performances,
+        ]);
     }
     public function store(Request $request)
     {
@@ -40,6 +45,7 @@ class CompetencyController extends Controller
         }
         $competency = new Competency;
         $competency->name = $request->name;
+        $competency->performance_type_id = $request->performance_type_id;
         $competency->created_by = Auth::guard('employees')->user()->id;
         $competency->save();
         return response()->json([
@@ -53,7 +59,11 @@ class CompetencyController extends Controller
     }
     public function edit(Competency $competency)
     {
-        return view('pages.office.master.competency.input', ['data' => $competency]);
+        $performances = PerformanceType::all();
+        return view('pages.office.master.competency.input', [
+            'data' => $competency,
+            'performances' => $performances,
+        ]);
     }
     public function update(Request $request, Competency $competency)
     {
@@ -68,6 +78,7 @@ class CompetencyController extends Controller
             ], 200);
         }
         $competency->name = $request->name;
+        $competency->performance_type_id = $request->performance_type_id;
         $competency->update();
         return response()->json([
             'alert' => 'success',

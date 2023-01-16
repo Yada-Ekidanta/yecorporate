@@ -5,45 +5,13 @@ namespace Database\Seeders;
 use App\Models\Master\Day;
 use App\Models\Master\Bank;
 use App\Models\Master\Isic;
-use App\Models\Master\Company;
 use App\Models\Master\IsicType;
 use Illuminate\Database\Seeder;
-use App\Models\Master\CompanyAddress;
 
 class MasterSeeder extends Seeder
 {
     public function run()
     {
-        $company = array(
-            [
-                "name" => "CV Yada Ekidanta",
-                "address" => "Permata Buah Batu Blok C 15B",
-                "phone" => "0818694745",
-                "email" => "hello@yadaekidanta.com",
-                "web_url" => "https://yadaekidanta.com",
-                "instagram_url" => "https://instagram.com/yadaekidanta",
-                "linkedin_url" => "https://linkedin.com/company/yada-ekidanta",
-                "facebook_url" => "https://facebook.com/YadaEkidanta",
-                "twitter_url" => "https://twitter.com/YadaEkidanta",
-            ],
-        );
-        $company_address = array(
-            [
-                "company_id" => 1,
-                "name" => "HQ Yada Ekidanta",
-                "address" => "Permata Buah Batu Blok C 15B",
-                "is_primary" => true,
-            ],
-        );
-        $company_bank = array(
-            [
-                "bank_id" => 15,
-                "company_id" => 1,
-                "account_number" => "847-0614286",
-                "branch_name" => "Bank BCA Batununggal",
-                "is_primary" => true,
-            ],
-        );
         $jenis_kbli = array(
             [
                 "nama" => "Pertanian, Kehutanan, dan Perikanan"
@@ -9573,36 +9541,6 @@ class MasterSeeder extends Seeder
             "nama" => "Wells Fergo Bank"
             ]
         );
-        foreach($company AS $d){
-            Company::create([
-                "name" => $d['name'],
-                "address" => $d['address'],
-                "phone" => $d['phone'],
-                "email" => $d['email'],
-                "web_url" => $d['web_url'],
-                "instagram_url" => $d['instagram_url'],
-                "linkedin_url" => $d['linkedin_url'],
-                "facebook_url" => $d['facebook_url'],
-                "twitter_url" => $d['twitter_url'],
-            ]);
-        }
-        foreach($company_address AS $d){
-            CompanyAddress::create([
-                "company_id" => $d['company_id'],
-                "name" => $d['name'],
-                "address" => $d['address'],
-                "is_primary" => $d['is_primary'],
-            ]);
-        }
-        foreach($company_bank AS $d){
-            CompanyBank::create([
-                "bank_id" => $d['bank_id'],
-                "company_id" => $d['company_id'],
-                "account_number" => $d['account_number'],
-                "branch_name" => $d['branch_name'],
-                "is_primary" => $d['is_primary'],
-            ]);
-        }
         foreach($day AS $d){
             Day::create([
                 'id' => $d['d']
