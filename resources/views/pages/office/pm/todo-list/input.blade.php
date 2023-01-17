@@ -69,7 +69,7 @@
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a id="back_form_button" href="{{$data->id ? route('office.pm.task.show', request()->query('id')) : route('office.pm.task.show', $task->id)}}?id={{ request()->query('id') }}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a id="back_form_button" href="{{$data->id ? route('office.pm.task.show', request()->query('id')) : route('office.pm.task.show', $task->id)}}?id={{ request()->query('id') }}" class="btn btn-primary btn-sm btn-hover-scale menu-link" data-no-swup>
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>

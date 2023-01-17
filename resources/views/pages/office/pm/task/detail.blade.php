@@ -58,7 +58,7 @@
                         {{-- <input type="hidden" name="name" id="name"> --}}
                         {{-- <input type="hidden" name="due_date" id="due_date"> --}}
                         <div class="card-title">
-                            <a href="{{ route('office.pm.todo-list.create', $data->id) }}?id={{ request()->query('id') }}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                            <a href="{{ route('office.pm.todo-list.create', $data->id) }}?id={{ request()->query('id') }}" class="btn btn-primary btn-sm btn-hover-scale menu-link" data-no-swup>
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
@@ -106,6 +106,8 @@
             let id = data[i].id;
             let updateURL = "{{ route('office.pm.todo-list.edit', ':id') }}";
             updateURL = updateURL.replace(':id', id);
+            let deleteURL = "{{ route('office.pm.todo-list.destroy', ':id') }}";
+            deleteURL = deleteURL.replace(':id', id);
             // $('#name').val(data[i].name);
             // $('#due_date').val(data[i].due_date);
             obj = {
@@ -120,8 +122,8 @@
                                     </svg>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="${updateURL}?id={{ $data->id }}" class="menu-link">Edit</a></li>
-                                    <li><a class="dropdown-item" href="javascript:;" onclick="handle_confirm('Are you sure want to delete this todo list ?', 'Yes, i'm sure', 'No, i'm not','DELETE','{{route('office.pm.todo-list.destroy', 1)}}');"  class="menu-link">Delete</a></li>
+                                    <li><a class="dropdown-item" href="${updateURL}?id={{ $data->id }}"  class="menu-link" target="_parent">Edit</a></li>
+                                    <li><a class="dropdown-item" href="javascript:;" onclick="handle_confirm('Are you sure want to delete this todo list ?', 'Yes, im sure', 'No, im not','DELETE','${deleteURL}')"  class="menu-link">Delete</a></li>
                                 </ul>
                             </div>
                             <br><br>

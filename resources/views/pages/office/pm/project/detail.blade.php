@@ -220,9 +220,9 @@
             }, "html");
         }
 
-        module.exports.load_milestone = load_milestone;
-        module.exports.load_team = load_team;
-        module.exports.load_task = load_task;
+        // module.exports.load_milestone = load_milestone;
+        // module.exports.load_team = load_team;
+        // module.exports.load_task = load_task;
     </script>
     @endsection
 </x-office-layout>
