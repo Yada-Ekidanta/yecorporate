@@ -104,7 +104,9 @@
                         </div>
                         <div class="mb-5">
                             <div>
-                                <img src="{{ asset('storage/'.$data->image) }}" class="rounded img-responsive mb-5" style="width: 150px; height:100px;" alt="Project Image">
+                                @if ($data->id)
+                                    <img src="{{ asset('storage/'.$data->image) }}" class="rounded img-responsive mb-5" style="width: 150px; height:100px;" alt="Project Image">
+                                @endif
                                 <input type="file" class="form-control" id="image" name="image" value="{{$data->image}}"/>
                             </div>
                         </div>

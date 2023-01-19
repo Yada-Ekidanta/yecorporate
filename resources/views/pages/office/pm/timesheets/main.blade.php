@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Time Sheet</li>
+                    <li class="breadcrumb-item text-muted">Calender</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -53,31 +53,83 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
                 <div class="container p-5">
-                    <div id="visualization"></div>
+                    <div id="kt_docs_fullcalendar_drag"></div>
                 </div>
             </div>
         </div>
     </div>
     @section('custom_js')
-    <script type="text/javascript">
-        // DOM element where the Timeline will be attached
-        let containerTimeSheet = document.getElementById('visualization');
+        <script>
+            // https://stackoverflow.com/questions/44496686/how-to-customize-the-full-calendar-for-weekday-view
+            let calendarEl = document.getElementById("kt_docs_fullcalendar_drag");
+            var repeatingEvents = [{
+                "id": "1",
+                "title": "Event 1",
+                //in "start and "end", only set times of day, not dates.
+                "start": "09:00",
+                "end": "10:00",
+                //use standard dow property to define which days of the week the event will appear on
+                "dow": "1",
+                //the custom "ranges" sets when the repetition begins and ends
+                "ranges": [{
+                "start": "2023-01-01",
+                "end": "2023-01-30"
+                }],
+                "allDay": false
+            }, {
+                "id": "2",
+                "title": "Event 2",
+                "start": "10:00",
+                "end": "12:00",
+                "dow": "2",
+                "ranges": [{
+                "start": "2023-01-10",
+                "end": "2023-01-16"
+                }],
+                "allDay": false
+            }, {
+                "id": "3",
+                "title": "Event 3",
+                "start": "15:00",
+                "end": "16:30",
+                "dow": "3",
+                "ranges": [{
+                "start": "2023-01-01",
+                "end": "2023-01-30"
+                }],
+                "allDay": false
+            }];
+            let calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                // slotDuration: {
+                    // days: 1,
+                    // hours:1,
+                // },
+                headerToolbar: {
+                    left: "prev,next",
+                    center: "title",
+                    right: "today timeGridWeek"
+                },
+                dateAlignment: 'week',
+                allDaySlot: false,
+                contentHeight:"auto",
+                // eventContent: `Nanti di isi total time`,
+                events: [
+                {
+                    title: 'Test',
+                    start: '2023-01-18 00:00:00',
+                    end: '2023-01-18 10:00:00'
+                },
+                {
+                    title: 'Test',
+                    start: '2023-01-19 00:00:00',
+                    end: '2023-01-19 10:00:00'
+                },
+                ]
+            });
+            // console.log(calendar.el.children);
 
-        // Create a DataSet (allows two way data-binding)
-        let itemsTimeSheet = new vis.DataSet([
-            {id: 1, content: 'Project Name - Task', start: '2023-01-1', end: '2023-01-10'},
-            {id: 2, content: 'item 2', start: '2023-01-2'},
-            {id: 3, content: 'item 3', start: '2023-01-5'},
-            {id: 4, content: 'item 4', start: '2023-01-8', end: '2023-01-10'},
-            {id: 5, content: 'item 5', start: '2023-01-11'},
-            {id: 6, content: 'item 6', start: '2023-01-13'}
-        ]);
-
-        // Configuration for the Timeline
-        let optionsTimeSheet = {};
-
-        // Create a Timeline
-        let timeline = new vis.Timeline(containerTimeSheet, itemsTimeSheet, optionsTimeSheet);
-    </script>
+            calendar.render();
+        </script>
     @endsection
 </x-office-layout>
