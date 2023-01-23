@@ -207,7 +207,7 @@ function obj_select_multiple(obj) {
 }
 
 function obj_select_ajax(obj, title, url) {
-    $('.select2_ajax').select2({
+    $('#' + obj).select2({
         placeholder: title,
         width: '90%',
         language: {
@@ -242,6 +242,20 @@ function obj_select_ajax(obj, title, url) {
                     })
                 };
             }
+        }
+    });
+}
+
+function obj_repeater(obj) {
+    $('#' + obj).repeater({
+        initEmpty: false,
+
+        show: function() {
+            $(this).slideDown();
+        },
+
+        hide: function(deleteElement) {
+            $(this).slideUp(deleteElement);
         }
     });
 }

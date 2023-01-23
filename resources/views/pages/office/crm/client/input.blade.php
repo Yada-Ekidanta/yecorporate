@@ -1,4 +1,4 @@
-<x-office-layout title="{{ $data->id ? 'Update' : 'Create' }} Client">
+<x-office-layout title="{{ $data->id ? 'Update' : 'Create' }} Accounts">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
@@ -23,15 +23,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Master</li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Client</li>
+                    <li class="breadcrumb-item text-muted">Accounts</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -65,17 +57,17 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
                 <form class="form w-100" novalidate="novalidate" id="form_input"
-                    data-redirect-url="{{ route('office.crm.client.index') }}"
-                    action="{{ $data->id ? route('office.crm.client.update', $data->id) : route('office.crm.client.store') }}">
+                    data-redirect-url="{{ route('office.crm.accounts.index') }}"
+                    action="{{ $data->id ? route('office.crm.accounts.update', $data->id) : route('office.crm.accounts.store') }}">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{ $data->id ? 'Update' : 'Create' }} Client</h1>
+                                <h1>Form {{ $data->id ? 'Update' : 'Create' }} Accounts</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a id="back_form_button" href="{{ route('office.crm.client.index') }}"
+                                <a id="back_form_button" href="{{ route('office.crm.accounts.index') }}"
                                     class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -94,45 +86,26 @@
                         </div>
                     </div>
                     <div class="card-body transition-fade">
-                        <div class="form-group row">
+                        <div class="form-group row mb-3">
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="number" class="form-control" id="document_id" name="document_id"
-                                        placeholder="Document" value="{{ $data->document_id }}" />
-                                    <label for="name">Document_id</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="employee_id" id="employee_id" class="form-control">
-                                        <option selected>Select Employee</option>
-                                        @foreach ($employee as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->employee_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="client_type_id" id="client_type_id" class="form-control">
-                                        <option selected>Select Client Type</option>
+                                <div class="form-group">
+                                    <select name="client_type_id" id="client_type_id" class="form-select">
+                                        <option disabled selected>Select Client Type</option>
                                         @foreach ($client_type as $item)
                                             <option value="{{ $item->id }}"
-                                                {{ $item->client_type_id === $data->id ? 'selected' : '' }}>
+                                                {{ $data->client_type_id === $item->id ? 'selected' : '' }}>
                                                 {{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="company_industry_id" id="company_industry_id" class="form-control">
-                                        <option selected>Select Company Industry</option>
+                                <div class="form-group">
+                                    <select name="company_industry_id" id="company_industry_id" class="form-select">
+                                        <option disabled selected>Select Company Industry</option>
                                         @foreach ($company_industry as $item)
                                             <option value="{{ $item->id }}"
-                                                {{ $item->company_industry_id === $data->id ? 'selected' : '' }}>
+                                                {{ $data->company_industry_id === $item->id ? 'selected' : '' }}>
                                                 {{ $item->name }}</option>
                                         @endforeach
                                     </select>
@@ -142,21 +115,14 @@
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="company_name" name="company_name"
                                         placeholder="Enter Company Name" value="{{ $data->company_name }}" />
-                                    <label for="name">Company Name</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="file" class="form-control" id="company_logo" name="company_logo"
-                                        placeholder="Enter Company Logo" value="{{ $data->company_logo }}" />
-                                    <label for="name">Company Logo</label>
+                                    <label for="company_name">Company Name</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="title" name="title"
                                         placeholder="Enter Title" value="{{ $data->title }}" />
-                                    <label for="name">title</label>
+                                    <label for="title">Title</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
@@ -170,16 +136,51 @@
                                 <div class="form-floating">
                                     <input type="tel" class="form-control" id="phone" name="phone"
                                         placeholder="Enter phone" value="{{ $data->phone }}" />
-                                    <label for="name">Phone</label>
+                                    <label for="phone">Phone</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
                                     <input type="email" class="form-control" id="email" name="email"
                                         placeholder="Enter email" value="{{ $data->email }}" />
-                                    <label for="name">Email</label>
+                                    <label for="email">Email</label>
                                 </div>
                             </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Enter Password" />
+                                    <label for="name">Password</label>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
+                                    <input type="date" class="form-control" id="date_birth" name="date_birth"
+                                        placeholder="Enter Date Birth" value="{{ $data->date_birth }}" />
+                                    <label for="name">Date Birth</label>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-group">
+                                    <select name="category" id="category" class="form-select">
+                                        <option disabled selected>Category</option>
+                                        <option value="Online" {{ $data->category === 'Online' ? 'selected' : '' }}>Online</option>
+                                        <option value="Offline" {{ $data->category === 'Offline' ? 'selected' : '' }}>Offline</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-group">
+                                    <select name="st" id="st" class="form-select">
+                                        <option disabled selected>Status</option>
+                                        <option value="Active" {{ $data->st === 'Active' ? 'selected' : '' }}>Active</option>
+                                        <option value="Non Active" {{ $data->st === 'Non Active' ? 'selected' : '' }}>Non Active</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="form-label fw-bold ms-1">Billing Address</label>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="billing_address"
@@ -189,62 +190,42 @@
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="billing_country_id" id="billing_country_id" class="form-control">
-                                        <option selected>Select Billing Country</option>
+                                <div class="form-group">
+                                    <select name="billing_country_id" id="billing_country_id" class="form-select">
+                                        <option disabled selected>Select Billing Country</option>
                                         @foreach ($country as $item)
                                             <option value="{{ $item->id }}"
-                                                {{ $item->billing_country_id === $data->id ? 'selected' : '' }}>
+                                                {{ $data->billing_country_id === $item->id ? 'selected' : '' }}>
                                                 {{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="billing_province_id" id="billing_province_id" class="form-control">
-                                        <option selected>Select Billing Province</option>
-                                        @foreach ($province as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->billing_province_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
+                                <div class="form-group">
+                                    <select name="billing_province_id" id="billing_province_id" class="form-select" disabled>
+                                        <option disabled selected>Select Billing Province</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="billing_regency_id" id="billing_regency_id" class="form-control">
-                                        <option selected>Select Billing Regency</option>
-                                        @foreach ($regency as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->billing_regency_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
+                                <div class="form-group">
+                                    <select name="billing_regency_id" id="billing_regency_id" class="form-select" disabled>
+                                        <option disabled selected>Select Billing Regency</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="billing_district_id" id="billing_district_id" class="form-control">
-                                        <option selected>Select Billing District</option>
-                                        @foreach ($district as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->billing_district_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
+                                <div class="form-group">
+                                    <select name="billing_district_id" id="billing_district_id" class="form-select" disabled>
+                                        <option disabled selected>Select Billing District</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="billing_village_id" id="billing_village_id" class="form-control">
-                                        <option selected>Select Billing Village</option>
-                                        @foreach ($village as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->billing_village_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
+                                <div class="form-group">
+                                    <select name="billing_village_id" id="billing_village_id" class="form-select" disabled>
+                                        <option disabled selected>Select Billing Village</option>
                                     </select>
                                 </div>
                             </div>
@@ -253,76 +234,59 @@
                                     <input type="number" class="form-control" id="billing_postcode"
                                         name="billing_postcode" placeholder="Enter Postcode"
                                         value="{{ $data->billing_postcode }}" />
-                                    <label for="name">Billing Post Code</label>
+                                    <label for="billing_postcode">Billing Post Code</label>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="form-label fw-bold ms-1">Shipping Address</label>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="shipping_address"
                                         name="shipping_address" placeholder="Enter shipping_address"
                                         value="{{ $data->shipping_address }}" />
-                                    <label for="name">Shipping Address</label>
+                                    <label for="shipping_address">Shipping Address</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="shipping_country_id" id="shipping_country_id" class="form-control">
-                                        <option selected>Select Shipping Country</option>
+                                <div class="form-group">
+                                    <select name="shipping_country_id" id="shipping_country_id" class="form-select">
+                                        <option disabled selected>Select Shipping Country</option>
                                         @foreach ($country as $item)
                                             <option value="{{ $item->id }}"
-                                                {{ $item->shipping_country_id === $data->id ? 'selected' : '' }}>
+                                                {{ $data->shipping_country_id === $item->id ? 'selected' : '' }}>
                                                 {{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
+                                <div class="form-group">
                                     <select name="shipping_province_id" id="shipping_province_id"
-                                        class="form-control">
-                                        <option selected>Select Shipping Province</option>
-                                        @foreach ($province as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->shipping_province_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
+                                        class="form-select" disabled>
+                                        <option disabled selected>Select Shipping Province</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="shipping_regency_id" id="shipping_regency_id" class="form-control">
-                                        <option selected>Select Shipping Regency</option>
-                                        @foreach ($regency as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->shipping_regency_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
+                                <div class="form-group">
+                                    <select name="shipping_regency_id" id="shipping_regency_id" class="form-select" disabled>
+                                        <option disabled selected>Select Shipping Regency</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
+                                <div class="form-group">
                                     <select name="shipping_district_id" id="shipping_district_id"
-                                        class="form-control">
-                                        <option selected>Select Shipping District</option>
-                                        @foreach ($district as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->shipping_district_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
+                                        class="form-select" disabled>
+                                        <option disabled selected>Select Shipping District</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="shipping_village_id" id="shipping_village_id" class="form-control">
-                                        <option selected>Select Shipping Village</option>
-                                        @foreach ($village as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->shipping_village_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
+                                <div class="form-group">
+                                    <select name="shipping_village_id" id="shipping_village_id" class="form-select" disabled>
+                                        <option disabled selected>Select Shipping Village</option>
                                     </select>
                                 </div>
                             </div>
@@ -334,63 +298,13 @@
                                     <label for="name">Shipping Post Code</label>
                                 </div>
                             </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" name="password"
-                                        placeholder="Enter Password" value="{{ $data->password }}" />
-                                    <label for="name">Password</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" id="date_birth" name="date_birth"
-                                        placeholder="Enter Date Birth" value="{{ $data->date_birth }}" />
-                                    <label for="name">Date Birth</label>
-                                </div>
-                            </div>
-                            {{-- <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="url" class="form-control" id="url" name="url" placeholder="Enter Url" value="{{$data->url}}"/>
-                                    <label for="name">Url</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="paypal" name="paypal" placeholder="Enter Paypal" value="{{$data->paypal}}"/>
-                                    <label for="name">Paypal</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="goolge_id" name="goolge_id" placeholder="Enter Google Id" value="{{$data->goolge_id}}"/>
-                                    <label for="name">Goolge ID</label>
-                                </div>
-                            </div> --}}
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="category" name="category"
-                                        placeholder="Enter Category" value="{{ $data->category }}" />
-                                    <label for="name">Category:Offline/Online</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="st" name="st"
-                                        placeholder="Enter Status" value="{{ $data->st }}" />
-                                    <label for="name">Status:Active/Non Active</label>
-                                </div>
-                            </div>
-                            {{-- <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="company_logo" class="form-control" id="avatar" name="avatar" placeholder="Enter Avatar" value="{{$data->avatar}}"/>
-                                    <label for="name">Avatar</label>
-                                </div>
-                            </div> --}}
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" id="last_seen" name="last_seen"
-                                        placeholder="Enter Last Seen" value="{{ $data->last_seen }}" />
-                                    <label for="name">Last Seen</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="company_logo" class="form-label fw-bold ms-1">Company Logo</label>
+                                    <input type="file" class="form-control" id="company_logo" name="company_logo"
+                                    placeholder="Enter Company Logo" value="{{ $data->company_logo }}" />
                                 </div>
                             </div>
                         </div>
@@ -403,7 +317,7 @@
                         </button>
                         @if ($data->id)
                             <button type="button"
-                                onclick="handle_confirm('Are you sure want to delete this Client ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.client.destroy', $data->id) }}');"
+                                onclick="handle_confirm('Are you sure want to delete this Client ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.accounts.destroy', $data->id) }}');"
                                 class="btn btn-sm btn-danger">
                                 Delete
                             </button>
@@ -413,4 +327,209 @@
             </div>
         </div>
     </div>
+    @section('custom_js')
+    <script>
+        obj_select('document_id')
+        obj_select('employee_id')
+        obj_select('client_type_id')
+        obj_select('company_industry_id')
+        obj_select('billing_country_id')
+        obj_select('billing_province_id')
+        obj_select('billing_regency_id')
+        obj_select('billing_district_id')
+        obj_select('billing_village_id')
+        obj_select('shipping_country_id')
+        obj_select('shipping_province_id')
+        obj_select('shipping_regency_id')
+        obj_select('shipping_district_id')
+        obj_select('shipping_village_id')
+        obj_select('category')
+        obj_select('st')
+        obj_date('last_seen')
+        obj_date('date_birth')
+
+        $(document).ready(function() {
+            $("#billing_country_id").change(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('office.master.regional.filter_province') }}",
+                    data: {
+                        country: $("#billing_country_id").val()
+                    },
+                    success: function(response) {
+                        $("#billing_province_id").removeAttr("disabled");
+                        $("#billing_province_id").html(response);
+                        $("#billing_province_id").append("<option disabled selected>Select Billing Province</option>");
+                    }
+                });
+            });
+            $("#billing_province_id").change(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('office.master.regional.filter_regency') }}",
+                    data: {
+                        province: $("#billing_province_id").val()
+                    },
+                    success: function(response) {
+                        $("#billing_regency_id").removeAttr("disabled");
+                        $("#billing_regency_id").html(response);
+                        $("#billing_regency_id").append("<option disabled selected>Select Billing Regency</option>");
+                    }
+                });
+            });
+            $("#billing_regency_id").change(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('office.master.regional.filter_district') }}",
+                    data: {
+                        regency: $("#billing_regency_id").val()
+                    },
+                    success: function(response) {
+                        $("#billing_district_id").removeAttr("disabled");
+                        $("#billing_district_id").html(response);
+                        $("#billing_district_id").append("<option disabled selected>Select Billing District</option>");
+                    }
+                });
+            });
+            $("#billing_district_id").change(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('office.master.regional.filter_village') }}",
+                    data: {
+                        district: $("#billing_district_id").val()
+                    },
+                    success: function(response) {
+                        $("#billing_village_id").removeAttr("disabled");
+                        $("#billing_village_id").html(response);
+                        $("#billing_village_id").append("<option disabled selected>Select Billing Village</option>");
+                    }
+                });
+            });
+            $("#billing_village_id").change(function(){
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('office.master.regional.filter_postcode')}}",
+                    data: {village : $("#billing_village_id").val()},
+                    success: function(response){
+                        $("#billing_postcode").val(response);
+                    }
+                });
+            });
+            $("#shipping_country_id").change(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('office.master.regional.filter_province') }}",
+                    data: {
+                        country: $("#shipping_country_id").val()
+                    },
+                    success: function(response) {
+                        $("#shipping_province_id").removeAttr("disabled");
+                        $("#shipping_province_id").html(response);
+                        $("#shipping_province_id").append("<option disabled selected>Select Shipping Province</option>");
+                    }
+                });
+            });
+            $("#shipping_province_id").change(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('office.master.regional.filter_regency') }}",
+                    data: {
+                        province: $("#shipping_province_id").val()
+                    },
+                    success: function(response) {
+                        $("#shipping_regency_id").removeAttr("disabled");
+                        $("#shipping_regency_id").html(response);
+                        $("#shipping_regency_id").append("<option disabled selected>Select Shipping Regency</option>");
+                    }
+                });
+            });
+            $("#shipping_regency_id").change(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('office.master.regional.filter_district') }}",
+                    data: {
+                        regency: $("#shipping_regency_id").val()
+                    },
+                    success: function(response) {
+                        $("#shipping_district_id").removeAttr("disabled");
+                        $("#shipping_district_id").html(response);
+                        $("#shipping_district_id").append("<option disabled selected>Select Shipping District</option>");
+                    }
+                });
+            });
+            $("#shipping_district_id").change(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('office.master.regional.filter_village') }}",
+                    data: {
+                        district: $("#shipping_district_id").val()
+                    },
+                    success: function(response) {
+                        $("#shipping_village_id").removeAttr("disabled");
+                        $("#shipping_village_id").html(response);
+                        $("#shipping_village_id").append("<option disabled selected>Select Shipping Village</option>");
+                    }
+                });
+            });
+            $("#shipping_village_id").change(function(){
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('office.master.regional.filter_postcode')}}",
+                    data: {village : $("#shipping_village_id").val()},
+                    success: function(response){
+                        $("#shipping_postcode").val(response);
+                    }
+                });
+            });
+        });
+    </script>
+    @if ($data->billing_country_id)
+    <script>
+        $('#billing_country_id').val('{{ $data->billing_country_id }}');
+        setTimeout(function() {
+            $('#billing_country_id').trigger('change');
+            setTimeout(function() {
+                $('#billing_province_id').val('{{ $data->billing_province_id }}');
+                $('#billing_province_id').trigger('change');
+                setTimeout(function() {
+                    $('#billing_regency_id').val('{{ $data->billing_regency_id }}');
+                    $('#billing_regency_id').trigger('change');
+                    setTimeout(function() {
+                        $('#billing_district_id').val('{{ $data->billing_district_id }}');
+                        $('#billing_district_id').trigger('change');
+                        setTimeout(function() {
+                            $('#billing_village_id').val('{{ $data->billing_village_id }}');
+                            $('#billing_village_id').trigger('change');
+                        }, 1200);
+                    }, 1200);
+                }, 1200);
+            }, 1200);
+        }, 500);
+    </script>
+    @endif
+    @if ($data->shipping_country_id)
+    <script>
+        $('#shipping_country_id').val('{{ $data->shipping_country_id }}');
+        setTimeout(function() {
+            $('#shipping_country_id').trigger('change');
+            setTimeout(function() {
+                $('#shipping_province_id').val('{{ $data->shipping_province_id }}');
+                $('#shipping_province_id').trigger('change');
+                setTimeout(function() {
+                    $('#shipping_regency_id').val('{{ $data->shipping_regency_id }}');
+                    $('#shipping_regency_id').trigger('change');
+                    setTimeout(function() {
+                        $('#shipping_district_id').val('{{ $data->shipping_district_id }}');
+                        $('#shipping_district_id').trigger('change');
+                        setTimeout(function() {
+                            $('#shipping_village_id').val('{{ $data->shipping_village_id }}');
+                            $('#shipping_village_id').trigger('change');
+                        }, 1200);
+                    }, 1200);
+                }, 1200);
+            }, 1200);
+        }, 500);
+    </script>
+    @endif
+    @endsection
 </x-office-layout>

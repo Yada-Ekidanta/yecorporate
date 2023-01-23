@@ -23,14 +23,6 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Master</li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Leads</li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -96,136 +88,71 @@
                     <div class="card-body transition-fade">
                         <div class="form-group row">
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="employee_id" id="employee_id" class="form-control">
-                                        <option selected>Select Employee</option>
-                                        @foreach ($employee as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->employee_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="client_id" id="client_id" class="form-control">
-                                        <option selected>Select Client</option>
+                                <div class="form-group">
+                                    <select name="client_id" id="client_id" class="form-select">
+                                        <option disabled selected>Select Client</option>
                                         @foreach ($client as $item)
                                             <option value="{{ $item->id }}"
-                                                {{ $item->client_id === $data->id ? 'selected' : '' }}>
+                                                {{ $data->client_id === $item->id ? 'selected' : '' }}>
                                                 {{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
+                                <div class="form-group">
+                                    <select name="client_contact_id" id="client_contact_id" class="form-select" disabled>
+                                        <option disabled selected>Select Client Contact</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="title" class="form-control" id="title" name="title"
+                                    <input type="text" class="form-control" id="title" name="title"
                                         placeholder="Enter Title" value="{{ $data->title }}" />
-                                    <label for="name">Title</label>
+                                    <label for="title">Title</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name"
-                                        placeholder="Enter Name" value="{{ $data->name }}" />
-                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="opportunity_amount"
+                                    name="opportunity_amount" placeholder="Enter Opportunity Amount"
+                                    value="{{ $data->opportunity_amount }}" />
+                                    <label for="opportunity_amount">Opportunity Amount</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="tel" class="form-control" id="phone" name="phone"
-                                        placeholder="Enter Phone" value="{{ $data->phone }}" />
-                                    <label for="name">Phone</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        placeholder="Enter Email" value="{{ $data->email }}" />
-                                    <label for="name">Email</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="address" name="address"
-                                        placeholder="Enter Address" value="{{ $data->address }}" />
-                                    <label for="name">Address</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="country_id" id="country_id" class="form-control">
-                                        <option selected>Select Country</option>
-                                        @foreach ($country as $item)
+                                <div class="form-group">
+                                    <select name="campaign_id" id="campaign_id" class="form-select">
+                                        <option disabled selected>Select Campaign</option>
+                                        @foreach ($campaign as $item)
                                             <option value="{{ $item->id }}"
-                                                {{ $item->country_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
+                                                {{ $data->campaign_id === $item->id ? 'selected' : '' }}>
+                                                {{ $item->targetList->name . ' (' . $item->campaignType->name . ')' }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="province_id" id="province_id" class="form-control">
-                                        <option selected>Select Province</option>
-                                        @foreach ($province as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->province_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
+                                <div class="form-group">
+                                    <select name="st" id="st" class="form-select">
+                                        <option disabled selected>Select Status</option>
+                                        <option value="0" {{ $data->st === 0 ? 'selected' : '' }}>New</option>
+                                        <option value="1" {{ $data->st === 1 ? 'selected' : '' }}>Assigned</option>
+                                        <option value="2" {{ $data->st === 2 ? 'selected' : '' }}>In Process</option>
+                                        <option value="3" {{ $data->st === 3 ? 'selected' : '' }}>Converted</option>
+                                        <option value="4" {{ $data->st === 4 ? 'selected' : '' }}>Recycled</option>
+                                        <option value="5" {{ $data->st === 5 ? 'selected' : '' }}>Dead</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="regency_id" id="regency_id" class="form-control">
-                                        <option selected>Select Regency</option>
-                                        @foreach ($regency as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->regency_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="district_id" id="district_id" class="form-control">
-                                        <option selected>Select District</option>
-                                        @foreach ($district as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->district_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="village_id" id="village_id" class="form-control">
-                                        <option selected>Select Village</option>
-                                        @foreach ($village as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $item->village_id === $data->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="number" class="form-control" id="postcode"
-                                        name="postcode" placeholder="Enter Postcode"
-                                        value="{{ $data->postcode }}" />
-                                    <label for="name">Post Code</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <textarea name="description" class="form-control ">{{$data->description}}</textarea>
-                                    <label for="name">Description</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <label for="description" class="form-label ms-1">Description</label>
+                                    <div id="description" style="height: 150px">{!! $data->description !!}</div>
+                                    <textarea name="description" class="form-control d-none">{{$data->description}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -248,4 +175,41 @@
             </div>
         </div>
     </div>
+    @section('custom_js')
+    <script>
+        obj_quill('description')
+        obj_select('client_id')
+        obj_select('client_contact_id')
+        obj_select('campaign_id')
+        obj_select('st')
+
+        $(document).ready(function() {
+            $("#client_id").on('change', function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('office.crm.client-contact.filter-contact') }}",
+                    data: {
+                        option: "<option disabled>Select Client Contact</option>",
+                        client_id: $(this).val(),
+                    },
+                    success: function(response) {
+                        $("#client_contact_id").removeAttr("disabled");
+                        $("#client_contact_id").html(response);
+                    }
+                });
+            });
+        });
+    </script>
+    @if ($data->client_id)
+    <script>
+        $('#client_id').val('{{ $data->client_id }}');
+        setTimeout(function() {
+            $('#client_id').trigger('change');
+            setTimeout(function() {
+                $('#client_contact_id').val('{{ $data->client_contact_id }}');
+            }, 1200);
+        }, 500);
+    </script>
+    @endif
+    @endsection
 </x-office-layout>

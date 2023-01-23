@@ -95,26 +95,27 @@
                     </div>
                     <div class="card-body transition-fade">
                         <div class="form-group row">
-                            <div class="col-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="Document Folder" value="{{ $data->name }}" />
                                     <label for="name">Name</label>
                                 </div>
                             </div>
-                                <div class="col-4 mb-3">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="parent" name="parent"
-                                            placeholder="parent" value="{{ $data->parent }}" />
-                                        <label for="parent">Parent</label>
-                                    </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="" name="parent"
+                                        placeholder="parent" value="{{ $data->parent }}" />
+                                    <label for="parent">Parent</label>
                                 </div>
-                                <div class="col-4 mb-3">
-                                    <div class="form-floating">
-                                        <textarea name="desc" class="form-control ">{{$data->desc}}</textarea>
-                                        <label for="name">Desc</label>
-                                    </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <label for="name" class="form-label ms-1">Description</label>
+                                    <div id="desc" style="height: 150px">{!! $data->desc !!}</div>
+                                    <textarea name="desc" class="form-control d-none">{{$data->desc}}</textarea>
                                 </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -135,4 +136,9 @@
             </div>
         </div>
     </div>
+    @section('custom_js')
+        <script>
+            obj_quill('desc')
+        </script>
+    @endsection
 </x-office-layout>

@@ -4,76 +4,42 @@ namespace App\Http\Controllers\Office\Crm;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CRM\Campaign;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\CRM\Client;
+use App\Models\CRM\ClientContact;
 use App\Models\HRM\Employee;
 use App\Models\CRM\Leads;
-use App\Models\Regional\Country;
-use App\Models\Regional\District;
-use App\Models\Regional\Province;
-use App\Models\Regional\Regency;
-use App\Models\Regional\Village;
 
 class LeadsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-        //
         if($request->ajax())
         {
-            $collection = Client::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = Leads::where('title','LIKE','%'.$request->keyword.'%')->paginate(10);;
             return view('pages.office.crm.lead.list', compact('collection'));
         }
         return view('pages.office.crm.lead.main');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
-        $employee = Employee::get();
         $client = Client::get();
-        $country = Country::get();
-        $province = Province::get();
-        $district = District::get();
-        $regency = Regency::get();
-        $village = Village::get();
-        return view('pages.office.crm.lead.input', ['data' => new Leads(),'employee'=>$employee,'client'=>$client,'country'=>$country,'province'=>$province,'district'=>$district,'regency'=>$regency,'village'=>$village]);
+        $clientContact = ClientContact::get();
+        $campaign = Campaign::get();
+        return view('pages.office.crm.lead.input', ['data' => new Leads(),'client'=>$client,'clientContact'=>$clientContact,'campaign'=>$campaign]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
         $validator = Validator::make($request->all(), [
-            'employee_id' => 'required',
             'client_id' => 'required',
-            'title' => 'required',
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
-            'address' => 'required',
-            'country_id' => 'required',
-            'province_id' => 'required',
-            'regency_id' => 'required',
-            'district_id' => 'required',
-            'village_id' => 'required',
-            'postcode' => 'required',
+            'campaign_id' => 'required',
+            'title' => 'nullable',
+            'opportunity_amount' => 'required',
+            'st' => 'required',
             'description' => 'required',
         ]);
         if ($validator->fails())
@@ -83,84 +49,47 @@ class LeadsController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
+        $employee_id = Auth::guard('employees')->user()->id;
         $leads = new Leads();
-        $leads->employee_id = $request->employee_id;
+        $leads->employee_id = $employee_id;
         $leads->client_id = $request->client_id;
+        $leads->client_contact_id = $request->client_contact_id;
+        $leads->campaign_id = $request->campaign_id;
         $leads->title = $request->title;
-        $leads->name = $request->name;
-        $leads->phone= $request->phone;
-        $leads->email = $request->email;
-        $leads->address = $request->address;
-        $leads->country_id = $request->country_id;
-        $leads->province_id = $request->province_id;
-        $leads->regency_id = $request->regency_id;
-        $leads->district_id = $request->district_id;
-        $leads->village_id = $request->village_id;
-        $leads->postcode = $request->postcode;
+        $leads->opportunity_amount = $request->opportunity_amount;
+        $leads->st = $request->st;
         $leads->description = $request->description;
-        $leads->created_by = Auth::guard('employees')->user()->id;
+        $leads->created_by = $employee_id;
         $leads->save();
+
         return response()->json([
             'alert' => 'success',
             'message' => 'Leads Created',
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Leads $leads)
+    public function edit(Leads $lead)
     {
-        //
-        $employee = Employee::get();
         $client = Client::get();
-        $country = Country::get();
-        $province = Province::get();
-        $district = District::get();
-        $regency = Regency::get();
-        $village = Village::get();
-        return view('pages.office.crm.lead.input', ['data' =>$leads,'employee'=>$employee,'client'=>$client,'country'=>$country,'province'=>$province,'district'=>$district,'regency'=>$regency,'village'=>$village]);
+        $clientContact = ClientContact::get();
+        $campaign = Campaign::get();
+        return view('pages.office.crm.lead.input', ['data' =>$lead,'client'=>$client,'clientContact'=>$clientContact,'campaign'=>$campaign]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Leads $leads)
+    public function update(Request $request, Leads $lead)
     {
-        //
         $validator = Validator::make($request->all(), [
-            'employee_id' => 'required',
             'client_id' => 'required',
-            'title' => 'required',
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
-            'address' => 'required',
-            'country_id' => 'required',
-            'province_id' => 'required',
-            'regency_id' => 'required',
-            'district_id' => 'required',
-            'village_id' => 'required',
-            'postcode' => 'required',
-            'descriptiom' => 'required',
+            'campaign_id' => 'required',
+            'title' => 'nullable',
+            'opportunity_amount' => 'required',
+            'st' => 'required',
+            'description' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -169,38 +98,27 @@ class LeadsController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $leads->employee_id = $request->employee_id;
-        $leads->client_id = $request->client_id;
-        $leads->title = $request->title;
-        $leads->name = $request->name;
-        $leads->phone= $request->phone;
-        $leads->email = $request->email;
-        $leads->address = $request->address;
-        $leads->country_id = $request->country_id;
-        $leads->province_id = $request->province_id;
-        $leads->regency_id = $request->regency_id;
-        $leads->district_id = $request->district_id;
-        $leads->village_id = $request->village_id;
-        $leads->postcode = $request->postcode;
-        $leads->description = $request->description;
-        $leads->created_by = Auth::guard('employees')->user()->id;
-        $leads->update();
+        $employee_id = Auth::guard('employees')->user()->id;
+        $lead->employee_id = $employee_id;
+        $lead->client_id = $request->client_id;
+        $lead->client_contact_id = $request->client_contact_id;
+        $lead->campaign_id = $request->campaign_id;
+        $lead->title = $request->title;
+        $lead->opportunity_amount = $request->opportunity_amount;
+        $lead->st = $request->st;
+        $lead->description = $request->description;
+        $lead->created_by = $employee_id;
+        $lead->update();
+
         return response()->json([
             'alert' => 'success',
             'message' => 'Leads Update',
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Leads $leads)
+    public function destroy(Leads $lead)
     {
-        //
-        $leads->delete();
+        $lead->delete();
         return response()->json([
             'alert' => 'success',
             'message' => 'Leads Deleted',

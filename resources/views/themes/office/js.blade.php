@@ -30,4 +30,5 @@ if ( document.documentElement ) {
 <script src="{{asset('js/office/plugin.js')}}"></script>
 <script src="{{asset('js/office/method.js')}}"></script>
 <script src="{{asset('js/office/main.js')}}"></script>
+<script src="{{asset('metronic/plugins/custom/formrepeater/formrepeater.bundle.js')}}"></script>
 <!--end::Custom Javascript-->

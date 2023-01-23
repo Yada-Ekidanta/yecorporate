@@ -2,19 +2,15 @@
 
 namespace App\Models\CRM;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\HRM\Employee;
 use App\Models\CRM\Client;
-use App\Models\Regional\Country;
-use App\Models\Regional\District;
-use App\Models\Regional\Province;
-use App\Models\Regional\Regency;
-use App\Models\Regional\Village;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Leads extends Model
 {
     use HasFactory;
+    protected $table = 'leads';
 
     public function employee()
     {
@@ -26,28 +22,18 @@ class Leads extends Model
         return $this->belongsTo(Client::class, 'client_id');
     }
 
-    public function country()
+    public function clientContact()
     {
-        return $this->belongsTo(Country::class, 'country_id');
+        return $this->belongsTo(ClientContact::class, 'client_contact_id');
     }
 
-    public function district()
+    public function campaign()
     {
-        return $this->belongsTo(District::class, 'district_id');
+        return $this->belongsTo(Campaign::class, 'campaign_id');
     }
 
-    public function province()
+    public function callAttendees()
     {
-        return $this->belongsTo(Province::class, 'province_id');
-    }
-
-    public function regency()
-    {
-        return $this->belongsTo(Regency::class, 'regency_id');
-    }
-
-    public function village()
-    {
-        return $this->belongsTo(Village::class, 'village_id');
+        return $this->hasMany(CallAttendees::class, 'client_id');
     }
 }

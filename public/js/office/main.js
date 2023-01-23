@@ -1,6 +1,6 @@
 // const options = {
-//     // when this option is enabled, swup disables browser native scroll control (sets scrollRestoration to manual) and takes over this task. 
-//     // This means that position of scroll on previous page(s) is not preserved (but can be implemented manually based on use case). 
+//     // when this option is enabled, swup disables browser native scroll control (sets scrollRestoration to manual) and takes over this task.
+//     // This means that position of scroll on previous page(s) is not preserved (but can be implemented manually based on use case).
 //     // Otherwise swup scrolls to top/#element on popstate as it does with normal browsing.
 //     animateHistoryBrowsing: false,
 //     // animation selector
@@ -35,6 +35,21 @@ const swup = new Swup(options);
 // document.addEventListener("swup:contentReplaced",init);
 document.addEventListener("swup:contentReplaced", () => {
     load_list(1);
+    setTimeout(() => {
+        obj_quill('desc');
+    }, 1000);
+    setTimeout(() => {
+        obj_quill('address');
+    }, 1000);
+    setTimeout(() => {
+        obj_quill('description');
+    }, 1000);
+    setTimeout(() => {
+        obj_quill('owner_signature');
+    }, 1000);
+    setTimeout(() => {
+        obj_quill('client_signature');
+    }, 1000);
     obj_autosize();
     obj_time();
     obj_date_time();
@@ -44,9 +59,53 @@ document.addEventListener("swup:contentReplaced", () => {
     obj_enddatenow();
     obj_startdatenow('purchase_at');
     obj_startdatenow('supported_at');
-    setTimeout(() => {
-        obj_quill('desc');
-    }, 1000);
+    obj_select('st');
+    obj_select('direction');
+    obj_select('parent');
+    obj_select('call_id');
+    obj_select('attendees_employee');
+    obj_select('attendees_contact');
+    obj_select('attendees_lead');
+    obj_select('campaign_type_id');
+    obj_select('target_list');
+    obj_select('ex_target_list');
+    obj_select('document_id');
+    obj_select('category');
+    obj_select('employee_id');
+    obj_select('client_type_id');
+    obj_select('company_industry_id');
+    obj_select('billing_country_id');
+    obj_select('billing_province_id');
+    obj_select('billing_regency_id');
+    obj_select('billing_district_id');
+    obj_select('billing_village_id');
+    obj_select('shipping_country_id');
+    obj_select('shipping_district_id');
+    obj_select('shipping_province_id');
+    obj_select('shipping_regency_id');
+    obj_select('shipping_village_id');
+    obj_select('client_contact_id');
+    obj_select('client_id');
+    obj_select('client_contract_type_id');
+    obj_select('opportunitie_stage_id');
+    obj_select('lead_source_id');
+    obj_select('country_id');
+    obj_select('district_id');
+    obj_select('province_id');
+    obj_select('regency_id');
+    obj_select('village_id');
+    obj_select('campaign_id');
+    obj_select('document_folder_id');
+    obj_select('document_type_id');
+    obj_select('opportunity_id');
+    obj_select('meeting_id');
+    obj_date('last_seen');
+    obj_date('date_birth');
+    obj_date('start_at');
+    obj_date('end_at');
+    obj_date('close_date');
+    obj_date('publish_date');
+    obj_date('expiration_date');
     $('.ribuan').keyup(function (event) {
         if (event.which >= 37 && event.which <= 40) return;
         // format number
@@ -81,5 +140,5 @@ document.addEventListener("swup:contentReplaced", () => {
     Inputmask({
         "mask": "99.999.999.9-999.999"
     }).mask(".npwp_format");
-    
+
 });
