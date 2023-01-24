@@ -52,7 +52,7 @@
     <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
-                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.master.document.index')}}" action="{{$data->id ? route('office.master.document.update',$data->id) : route('office.master.document.store')}}">
+                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.hrm.document.index')}}" action="{{$data->id ? route('office.hrm.document.update',$data->id) : route('office.hrm.document.store')}}">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
@@ -61,7 +61,7 @@
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a id="back_form_button" href="{{route('office.master.document.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a id="back_form_button" href="{{route('office.hrm.document.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
@@ -75,18 +75,71 @@
                     </div>
                     <div class="card-body transition-fade">
                         <div class="form-group row">
-                            <div class="col-8 mb-3">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$data->name}}"/>
-                                    <label for="name">Name</label>
+                            <div class="col-6 mb-3">
+                                <div class="form-floating">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control datestartnow" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
+                                        <label for="name">Name</label>
+                                    </div>
                                 </div>
-                                <div class="form-floating mb-3">
+                            </div>
+                            <div class="col-6 mb-5">
+                                <div class="form-floating">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="is_required" value="{{$data->is_required}}" id="flexCheckChecked" {{ $data->is_required ? "checked" : " "}}>
+                                        <input class="form-check-input mb-5" type="checkbox" name="is_private" value="{{$data->is_private}}" id="flexCheckChecked" {{ $data->is_private == 'y' ? "checked" : " "}}>
                                         <label class="form-check-label" for="flexCheckChecked">
-                                            Is Required
+                                            Is Private
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-6 mb-3">
+                                <div class="form-floating">
+                                    <div class="form-floating">
+                                        
+                                        <div class="col-lg-6 mb-3">
+                                            Attachment :
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-1.jpg)"></div>
+                                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                    <i class="bi bi-pencil-fill fs-7"></i>
+                                                    <input type="file" name="attachment" accept=".png, .jpg, .jpeg" />
+                                                    <input type="hidden" name="avatar_remove" />
+                                                </label>
+                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                                    <i class="bi bi-x fs-2"></i>
+                                                </span>
+                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                                    <i class="bi bi-x fs-2"></i>
+                                                </span>
+                                            </div>
+                                            <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-6 mb-3">
+                                <div class="form-floating">
+                                    <select name="position_id" data-placeholder="Select a position..." id="position_id" class="form-select form-select-solid form-select-lg">
+                                        <option value=""></option>
+                                        @foreach ($position as $item)
+                                            <option value="{{ $item->id }}" {{ $item->id == $data->position_id ? 'selected' : '' }}>
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 mb-3">
+                                <label for="desc">Description</label>
+                                <div class="form-floating">
+                                    <div id="desc">{!!$data->desc!!}</div>
+                                    <textarea class="form-control d-none" name="desc">{{$data->desc}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +149,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.document.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.document.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif
@@ -105,4 +158,14 @@
             </div>
         </div>
     </div>
+    @section('custom_js')
+    <script>
+        obj_select('employee_id');
+        obj_select('company_branch_id');
+        obj_select('department_id');
+        obj_select('position_id');
+        obj_date('transfer_date');
+        obj_quill('desc');
+    </script>
+    @endsection
 </x-office-layout>

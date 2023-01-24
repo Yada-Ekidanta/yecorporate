@@ -76,4 +76,14 @@ class Employee extends Authenticatable
         }
         return round($total);
     }
+
+    public static function employee_name($name)
+    {
+        
+        $employee=Employee::where('id',$name)->first();
+        if(!empty($employee))
+        {
+            return $employee->name;
+        } 
+    }
 }

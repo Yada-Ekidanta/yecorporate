@@ -19,13 +19,13 @@ class DepartmentController extends Controller
     {
         if($request->ajax()){
             $collection = Department::where('name','LIKE','%'.$request->keyword.'%')->get();
-            return view('pages.office.master.department.list', compact('collection'));
+            return view('pages.office.hrm.master.department.list', compact('collection'));
         }
-        return view('pages.office.master.department.main');
+        return view('pages.office.hrm.master.department.main');
     }
     public function create()
     {
-        return view('pages.office.master.department.input', ['data' => new Department]);
+        return view('pages.office.hrm.master.department.input', ['data' => new Department]);
     }
     public function store(Request $request)
     {
@@ -53,13 +53,13 @@ class DepartmentController extends Controller
     {
         if($request->ajax()){
             $collection = Position::where('name','LIKE','%'.$request->keyword.'%')->where('department_id',$department->id)->get();
-            return view('pages.office.master.position.list', compact('collection','department'));
+            return view('pages.office.hrm.master.position.list', compact('collection','department'));
         }
-        return view('pages.office.master.position.main', compact('department'));
+        return view('pages.office.hrm.master.position.main', compact('department'));
     }
     public function edit(Department $department)
     {
-        return view('pages.office.master.department.input', ['data' => $department]);
+        return view('pages.office.hrm.master.department.input', ['data' => $department]);
     }
     public function update(Request $request, Department $department)
     {

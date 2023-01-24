@@ -35,8 +35,8 @@ return new class extends Migration
         Schema::create('projects_task_timers', function (Blueprint $table) {
             $table->id();
             $table->integer('task_id');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->timestamp('start_time')->useCurrent();
+            $table->timestamp('end_time')->useCurrent();
             $table->timestamps();
         });
         Schema::create('projects_tasks', function (Blueprint $table) {
@@ -177,8 +177,8 @@ return new class extends Migration
             $table->integer('tag_id');
             $table->string('name');
             $table->integer('is_billable');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->timestamp('start_time')->useCurrent();
+            $table->timestamp('end_time')->useCurrent();
             $table->string('total_time');
             $table->string('is_active');
             $table->integer('created_by');
@@ -189,7 +189,7 @@ return new class extends Migration
             $table->integer('project_id');
             $table->integer('user_id');
             $table->string('img_path');
-            $table->timestamp('time');
+            $table->timestamp('time')->useCurrent();
             $table->string('st');
             $table->timestamps();
         });
