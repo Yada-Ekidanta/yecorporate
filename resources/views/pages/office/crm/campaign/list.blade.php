@@ -4,7 +4,6 @@
             <th>
                 No
             </th>
-            <th>Employee</th>
             <th>Status</th>
             <th>Campaign Type</th>
             <th>Budget</th>
@@ -12,6 +11,7 @@
             <th>End at</th>
             <th>Target List</th>
             <th>Ex Target List</th>
+            <th>Assigned Employee</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -21,16 +21,15 @@
             <td>
                 {{$key+ $collection->firstItem()}}
             </td>
-            <td>{{$item->employee->name}}</td>
             <td>
                 @if ($item->st == 0)
                     Planning
                 @elseif ($item->st == 1)
                     Active
                 @elseif ($item->st == 2)
-                    Inactive
+                Inactive
                 @elseif ($item->st == 3)
-                    Complete
+                Complete
                 @endif
             </td>
             <td>{{$item->campaignType->name}}</td>
@@ -39,6 +38,7 @@
             <td class="text-nowrap">{{$item->end_at}}</td>
             <td>{{$item->targetList->name}}</td>
             <td>{{$item->exTargetList->name}}</td>
+            <td>{{$item->employee->name}}</td>
             <td class="text-nowrap">
                 <a href="{{route('office.crm.campaign.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

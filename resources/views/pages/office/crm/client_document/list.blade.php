@@ -4,7 +4,6 @@
             <th>
                 No
             </th>
-            <th>Employee</th>
             <th>Client</th>
             <th>Name</th>
             <th>Document Folder</th>
@@ -14,6 +13,7 @@
             <th>Expiration Date</th>
             <th>Status</th>
             <th>Attachment</th>
+            <th>Assigned Employee</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -23,7 +23,6 @@
             <td>
                 {{$key+ $collection->firstItem()}}
             </td>
-            <td>{{$item->employee->name}}</td>
             <td>{{$item->client->name}}</td>
             <td>{{$item->name}}</td>
             <td>{{$item->document_folder->name}}</td>
@@ -43,6 +42,7 @@
                 @endif
             </td>
             <td>{{$item->attachment}}</td>
+            <td>{{$item->employee->name}}</td>
             <td class="text-nowrap">
                 <a href="{{route('office.crm.client-document.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

@@ -5,13 +5,13 @@
                 No
             </th>
             <th>Client</th>
-            <th>Employee</th>
             <th>Title</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
             <th>Country</th>
             <th>Province</th>
+            <th>Assigned Employee</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -23,13 +23,13 @@
                 {{$key+ $collection->firstItem()}}
             </td>
             <td>{{$item->client->name}}</td>
-            <td>{{$item->employee->name}}</td>
             <td>{{$item->title}}</td>
             <td>{{$item->name}}</td>
             <td>{{$item->phone}}</td>
             <td>{{$item->email}}</td>
             <td class="text-nowrap">{{$item->country->name}}</td>
             <td class="text-nowrap">{{$item->province->name}}</td>
+            <td>{{$item->employee->name}}</td>
             <td>{{$item->st}}</td>
             <td class="text-nowrap">
                 <a href="{{route('office.crm.client-contact.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link" data-no-swup>

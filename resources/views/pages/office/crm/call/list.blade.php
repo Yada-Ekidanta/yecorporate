@@ -10,6 +10,7 @@
             <th>Start At</th>
             <th>End At</th>
             <th>Parent</th>
+            <th>Assigned Employee</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -39,6 +40,7 @@
             <td class="text-nowrap">{{$item->start_at}}</td>
             <td class="text-nowrap">{{$item->end_at}}</td>
             <td class="text-nowrap">{{ucfirst($item->parent)}}</td>
+            <td class="text-nowrap">{{$item->employee->name}}</td>
             <td class="text-nowrap">
                 <a href="{{route('office.crm.call.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

@@ -4,7 +4,6 @@
             <th>
                 No
             </th>
-            <th>Employee</th>
             <th>Client</th>
             <th>Name</th>
             <th>Client Contact</th>
@@ -13,6 +12,7 @@
             <th>Probability</th>
             <th>Close Date</th>
             <th>Lead Source</th>
+            <th>Assigned Employee</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -35,13 +35,13 @@
             </td> --}}
             <td>{{$item->name}}</td>
             <td>{{$item->client->name}}</td>
-            <td>{{$item->employee->name}}</td>
             <td>{{$item->client_contact->name . ' (' . $item->client_contact->phone . ')'}}</td>
             <td>{{$item->opportunityStage->name}}</td>
             <td>{{$item->amount}}</td>
             <td>{{$item->probability}}</td>
             <td class="text-nowrap">{{$item->close_date}}</td>
             <td>{{$item->leadSource->name}}</td>
+            <td>{{$item->employee->name}}</td>
             <td class="text-nowrap">
                 <a href="{{route('office.crm.opportunity.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link" data-no-swup>
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

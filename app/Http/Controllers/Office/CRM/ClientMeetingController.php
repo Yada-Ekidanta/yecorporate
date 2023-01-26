@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\CRM\ClientContact;
 use App\Models\CRM\ClientMeeting;
 use App\Http\Controllers\Controller;
+use App\Models\CRM\ClientMeetingAttendees;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,7 +29,7 @@ class ClientMeetingController extends Controller
         $employee = Employee::orderBy('name', 'asc')->get();
         $lead = Leads::orderBy('title', 'asc')->get();
         $client_contact = ClientContact::orderBy('name', 'asc')->get();
-        return view('pages.office.crm.client_meeting.input', ['data' => new ClientMeeting(), 'employee' => $employee, 'client_contact' => $client_contact, 'lead' => $lead]);
+        return view('pages.office.crm.client_meeting.input', ['data' => new ClientMeeting(), 'meeting_attendee' => new ClientMeetingAttendees(),'employee' => $employee, 'client_contact' => $client_contact, 'lead' => $lead]);
     }
 
     public function store(Request $request)
@@ -39,6 +40,9 @@ class ClientMeetingController extends Controller
             'start_at' => 'required',
             'end_at' => 'required',
             'parent' => 'required',
+            'attendees_employee' => 'required',
+            'attendees_contact' => 'required',
+            'attendees_lead' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -82,6 +86,13 @@ class ClientMeetingController extends Controller
         $client_meeting->desc = $request->desc;
         $client_meeting->save();
 
+        $meeting_attendee = new ClientMeetingAttendees();
+        $meeting_attendee->meeting_id = $client_meeting->id;
+        $meeting_attendee->attendees_employee = $request->attendees_employee;
+        $meeting_attendee->attendees_contact = $request->attendees_contact;
+        $meeting_attendee->attendees_lead = $request->attendees_lead;
+        $meeting_attendee->save();
+
         return response()->json([
             'alert' => 'success',
             'message' => 'Client Meeting Created',
@@ -98,7 +109,8 @@ class ClientMeetingController extends Controller
         $employee = Employee::orderBy('name', 'asc')->get();
         $lead = Leads::orderBy('title', 'asc')->get();
         $client_contact = ClientContact::orderBy('name', 'asc')->get();
-        return view('pages.office.crm.client_meeting.input', ['data' => $client_meeting, 'employee' => $employee, 'client_contact' => $client_contact, 'lead' => $lead]);
+        $meeting_attendee = ClientMeetingAttendees::where('meeting_id', $client_meeting->id)->first();
+        return view('pages.office.crm.client_meeting.input', ['data' => $client_meeting, 'meeting_attendee' => $meeting_attendee,'employee' => $employee, 'client_contact' => $client_contact, 'lead' => $lead]);
     }
 
     public function update(Request $request, ClientMeeting $client_meeting)
@@ -109,6 +121,9 @@ class ClientMeetingController extends Controller
             'start_at' => 'required',
             'end_at' => 'required',
             'parent' => 'required',
+            'attendees_employee' => 'required',
+            'attendees_contact' => 'required',
+            'attendees_lead' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -145,6 +160,13 @@ class ClientMeetingController extends Controller
         $client_meeting->parent_id = $parent_id;
         $client_meeting->desc = $request->desc;
         $client_meeting->update();
+
+        $meeting_attendee = ClientMeetingAttendees::where('meeting_id', $client_meeting->id)->first();
+        $meeting_attendee->meeting_id = $client_meeting->id;
+        $meeting_attendee->attendees_employee = $request->attendees_employee;
+        $meeting_attendee->attendees_contact = $request->attendees_contact;
+        $meeting_attendee->attendees_lead = $request->attendees_lead;
+        $meeting_attendee->update();
 
         return response()->json([
             'alert' => 'success',

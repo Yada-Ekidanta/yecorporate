@@ -131,6 +131,39 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row my-4">
+                            <label class="form-label fw-bold ms-1">Attendees</label>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <select name="attendees_employee" id="attendees_employee" class="form-select">
+                                        <option disabled selected>Select Attendees Employee</option>
+                                        @foreach ($employee as $item)
+                                            <option value="{{ $item->id }}" {{ $meeting_attendee->attendees_employee === $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <select name="attendees_contact" id="attendees_contact" class="form-select">
+                                        <option disabled selected>Select Attendees Contact</option>
+                                        @foreach ($client_contact as $item)
+                                            <option value="{{ $item->id }}" {{ $meeting_attendee->attendees_contact === $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <select name="attendees_lead" id="attendees_lead" class="form-select">
+                                        <option disabled selected>Select Attendees Lead</option>
+                                        @foreach ($lead as $item)
+                                            <option value="{{ $item->id }}" {{ $meeting_attendee->attendees_lead === $item->id ? 'selected' : '' }}>{{ $item->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-12 mb-3">
                                 <div class="form-group">

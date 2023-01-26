@@ -6,11 +6,11 @@
             </th>
             <th>Name</th>
             <th>Client</th>
-            <th>Employee</th>
             <th>Priority</th>
             <th>Number</th>
             <th>Client Contact</th>
             <th>Status</th>
+            <th>Assigned Employee</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -22,19 +22,19 @@
             </td>
             <td>{{$item->name}}</td>
             <td>{{$item->client->name}}</td>
-            <td>{{$item->employee->name}}</td>
             <td>{{$item->priority}}</td>
             <td>{{$item->number}}</td>
             <td>{{$item->client_contact->name . ' (' . $item->client_contact->phone . ')'}}</td>
             <td class="text-nowrap">
                 @if ($item->st == 0)
-                    Status 1
+                Status 1
                 @elseif ($item->st == 1)
-                    Status 2
+                Status 2
                 @elseif ($item->st == 2)
-                    Status 3
+                Status 3
                 @endif
             </td>
+            <td>{{$item->employee->name}}</td>
             <td class="text-nowrap">
                 <a href="{{route('office.crm.common-case.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link" data-no-swup>
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

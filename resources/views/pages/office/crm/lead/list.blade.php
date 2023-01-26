@@ -4,13 +4,13 @@
             <th>
                 No
             </th>
-            <th>Employee</th>
             <th>Client</th>
             <th>Client Contact</th>
             <th>Campaign</th>
             <th>Title</th>
             <th>Opportunity Amount</th>
             <th>Status</th>
+            <th>Assigned Employee</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -20,7 +20,6 @@
             <td>
                 {{$key+ $collection->firstItem()}}
             </td>
-            <td>{{$item->employee->name}}</td>
             <td>{{$item->client->name}}</td>
             <td>{{$item->client->phone}}</td>
             <td>{{$item->campaign->targetList->name}}</td>
@@ -28,19 +27,20 @@
             <td>{{$item->opportunity_amount}}</td>
             <td class="text-nowrap">
                 @if ($item->st == 0)
-                    New
+                New
                 @elseif ($item->st == 1)
-                    Assigned
+                Assigned
                 @elseif ($item->st == 2)
-                    In Proccess
+                In Proccess
                 @elseif ($item->st == 3)
-                    Converted
+                Converted
                 @elseif ($item->st == 4)
-                    Recycled
+                Recycled
                 @elseif ($item->st == 5)
-                    Dead
+                Dead
                 @endif
             </td>
+            <td>{{$item->employee->name}}</td>
             <td class="text-nowrap">
                 <a href="{{route('office.crm.leads.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link" data-no-swup>
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

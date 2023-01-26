@@ -124,9 +124,40 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-12 mb-3">
+                            <label class="form-label fw-bold ms-1 mt-4">Attendees</label>
+                            <div class="col-md-4 mb-3">
                                 <div class="form-group">
-                                    <label for="desc" class="form-label ms-1">Description</label>
+                                    <select name="attendees_employee" id="attendees_employee" class="form-select">
+                                        <option disabled selected>Select Attendees Employee</option>
+                                        @foreach ($employee as $item)
+                                            <option value="{{ $item->id }}" {{ $call_attendee->attendees_employee === $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <select name="attendees_contact" id="attendees_contact" class="form-select">
+                                        <option disabled selected>Select Attendees Contact</option>
+                                        @foreach ($contact as $item)
+                                            <option value="{{ $item->id }}" {{ $call_attendee->attendees_contact === $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <select name="attendees_lead" id="attendees_lead" class="form-select">
+                                        <option disabled selected>Select Attendees Lead</option>
+                                        @foreach ($lead as $item)
+                                            <option value="{{ $item->id }}" {{ $call_attendee->attendees_lead === $item->id ? 'selected' : '' }}>{{ $item->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3 mt-4">
+                                <div class="form-group">
+                                    <label for="desc" class="form-label fw-bold ms-1">Description</label>
                                     <div id="desc" style="height: 150px">{!! $data->desc !!}</div>
                                     <textarea name="desc" class="form-control d-none">{{ $data->desc }}</textarea>
                                 </div>
@@ -153,6 +184,9 @@
             obj_quill('desc');
             obj_select('direction');
             obj_select('parent');
+            obj_select('attendees_employee');
+            obj_select('attendees_contact');
+            obj_select('attendees_lead');
             obj_date('start_at');
             obj_date('end_at');
         </script>

@@ -14,7 +14,7 @@
             <th>Date Birth</th>
             <th>Category</th>
             <th>Status</th>
-            <th>Employee</th>
+            <th>Assigned Employee</th>
             <th>Actions</th>
         </tr>
     </thead>
