@@ -1,12 +1,6 @@
 <?php
 
-<<<<<<< HEAD
-use GuzzleHttp\Handler\Proxy;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-=======
 use Illuminate\Support\Facades\DB;
->>>>>>> f3d23f842a03c3523c1c433c57d02a96d612236c
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -30,7 +24,6 @@ return new class extends Migration
             $table->integer('created_by');
             $table->timestamps();
         });
-<<<<<<< HEAD
         Schema::create('milestones', function (Blueprint $table) {
             $table->id();
             $table->integer('project_id');
@@ -39,8 +32,6 @@ return new class extends Migration
             $table->longText('desc');
             $table->timestamps();
         });
-=======
->>>>>>> f3d23f842a03c3523c1c433c57d02a96d612236c
         Schema::create('projects_task_timers', function (Blueprint $table) {
             $table->id();
             $table->integer('task_id');
@@ -81,7 +72,6 @@ return new class extends Migration
         });
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
             $table->integer('client_id');
             $table->string('name');
             $table->string('color');
@@ -109,25 +99,6 @@ return new class extends Migration
             $table->longText('note');
             $table->integer('is_favourite');
             $table->integer('estimated_hrs');
-=======
-            $table->string('name');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('image');
-            $table->integer('estimated_hrs')->default(0);
-            $table->integer('budget')->default(0);
-            $table->string('currency', 50)->default('$');
-            $table->longText('desc');
-            $table->timestamps();
-        });
-        Schema::create('milestones', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('status');
-            $table->longText('desc');
-            $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
->>>>>>> f3d23f842a03c3523c1c433c57d02a96d612236c
             $table->timestamps();
         });
         Schema::create('tags', function (Blueprint $table) {
@@ -164,7 +135,6 @@ return new class extends Migration
             $table->integer('created_by');
             $table->timestamps();
         });
-<<<<<<< HEAD
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->integer('employee_id')->default(0);
@@ -188,31 +158,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('user');
             $table->integer('created_by');
-=======
-        Schema::create('teams', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('employee_id')->default(0);
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-            $table->string('created_by');
-            $table->timestamps();
-        });
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('team_id')->default(0);
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
-            $table->string('name');
-            $table->unsignedBigInteger('milestone_id')->default(0);
-            $table->foreign('milestone_id')->references('id')->on('milestones')->onDelete('cascade');
-            $table->string('priority');
-            $table->date('start_at');
-            $table->date('end_at');
-            $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-            $table->longText('desc');
-            $table->string('created_by');
->>>>>>> f3d23f842a03c3523c1c433c57d02a96d612236c
             $table->timestamps();
         });
         Schema::create('timesheets', function (Blueprint $table) {
@@ -227,7 +172,6 @@ return new class extends Migration
         });
         Schema::create('time_trackers', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
             $table->integer('project_id');
             $table->integer('task_id');
             $table->integer('tag_id');
@@ -238,18 +182,6 @@ return new class extends Migration
             $table->string('total_time');
             $table->string('is_active');
             $table->integer('created_by');
-=======
-            $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-            $table->unsignedBigInteger('task_id');
-            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
-            $table->string('name');
-            $table->timestamp('start_time')->nullable();
-            $table->timestamp('end_time')->nullable();
-            $table->string('total_time')->default(0);
-            $table->string('is_active');
-            $table->string('created_by');
->>>>>>> f3d23f842a03c3523c1c433c57d02a96d612236c
             $table->timestamps();
         });
         Schema::create('track_photos', function (Blueprint $table) {
