@@ -23,6 +23,11 @@ class Opportunity extends Model
         return $this->belongsTo(Client::class, 'client_id');
     }
 
+    public function client_contact()
+    {
+        return $this->belongsTo(ClientContact::class, 'client_contact_id');
+    }
+
     public function opportunityStage()
     {
         return $this->belongsTo(OpportunityStage::class, 'opportunities_stage_id');
@@ -30,6 +35,6 @@ class Opportunity extends Model
 
     public function leadSource()
     {
-        return $this->belongsTo(OpportunityStage::class, 'lead_source_id');
+        return $this->belongsTo(LeadSource::class, 'lead_source_id');
     }
 }

@@ -187,7 +187,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{route('office.crm.client.index')}}">
+    <a class="menu-link" href="{{route('office.crm.accounts.index')}}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -203,7 +203,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.crm.client-contact.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -254,7 +254,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.crm.services.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -322,7 +322,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.crm.common-case.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -360,7 +360,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.crm.client-meeting.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -392,7 +392,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.crm.call.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -410,7 +410,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.crm.client-contract.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -426,7 +426,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.crm.client-document.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -442,7 +442,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
+    <a class="menu-link" href="{{ route('office.crm.campaign.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">

@@ -21,14 +21,6 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Master</li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Leads</li>
                     <!--end::Item-->
                 </ul>
@@ -116,14 +108,14 @@
                                 </span>
                                 Export
                             </button>
-                            <a href="{{route('office.crm.leads.create')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                            <a href="{{route('office.crm.leads.create')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link" data-no-swup>
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
                                         <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                                     </svg>
                                 </span>
-                                Add Client
+                                Add Leads
                             </a>
                         </div>
                         <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">

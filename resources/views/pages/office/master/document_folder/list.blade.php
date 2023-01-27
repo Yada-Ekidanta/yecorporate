@@ -6,7 +6,7 @@
             </th>
             <th>Name</th>
             <th>Parent</th>
-            <th>Desc</th>
+            <th>Description</th>
             <th class="text-end min-w-100px">Actions</th>
         </tr>
     </thead>
@@ -16,19 +16,9 @@
             <td>
                 {{$key+ $collection->firstItem()}}
             </td>
-            <td class="d-flex align-items-center">
-                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                    <a href="javascript:;">
-                        {!!$item->image!!}
-                    </a>
-                </div>
-                <div class="d-flex flex-column">
-                    <a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">{{$item->code}}</a>
-                    <span>{{$item->name}}</span>
-                </div>
-            </td>
+            <td>{{ $item->name }}</td>
             <td>{{ $item->parent }}</td>
-            <td>{{ $item->desc }}</td>
+            <td>{!! $item->desc !!}</td>
             <td class="text-end">
                 <a href="{{route('office.master.document-folder.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">
@@ -52,7 +42,7 @@
         </tr>
         @empty
         <tr>
-            <td align="center" colspan="4">No Data</td>
+            <td align="center" colspan="6">No Data</td>
         </tr>
         @endforelse
     </tbody>

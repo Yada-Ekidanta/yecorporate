@@ -2,28 +2,25 @@
 
 namespace App\Http\Controllers\Office\Crm;
 
-use Illuminate\Http\Request;
 use App\Models\Crm\Client;
+use App\Models\HRM\Document;
 use App\Models\HRM\Employee;
-use App\Models\Master\ClientType;
-use App\Models\Setting\CompanyIndustry;
+use Illuminate\Http\Request;
 use App\Models\Regional\Country;
-use App\Models\Regional\District;
-use App\Models\Regional\Province;
 use App\Models\Regional\Regency;
 use App\Models\Regional\Village;
+use App\Models\Master\ClientType;
+use App\Models\Regional\District;
+use App\Models\Regional\Province;
+use App\Models\Master\DocumentType;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Setting\CompanyIndustry;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         if($request->ajax())
@@ -33,13 +30,10 @@ class ClientController extends Controller
         }
         return view('pages.office.crm.client.main');
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
+        $document = Employee::get();
         $employee = Employee::get();
         $client_type = ClientType::get();
         $company_industry = CompanyIndustry::get();
@@ -48,20 +42,13 @@ class ClientController extends Controller
         $district = District::get();
         $regency = Regency::get();
         $village = Village::get();
-        return view('pages.office.crm.client.input', ['data' => new Client(),'employee'=>$employee,'client_type'=>$client_type,'company_industry'=>$company_industry,'country'=>$country,'province'=>$province,'district'=>$district,'regency'=>$regency,'village'=>$village]);
+        return view('pages.office.crm.client.input', ['data' => new Client(),'employee'=>$employee,'document'=>$document,'client_type'=>$client_type,'company_industry'=>$company_industry,'country'=>$country,'province'=>$province,'district'=>$district,'regency'=>$regency,'village'=>$village]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'document_id' => 'required',
-            'employee_id' => 'required',
+            'document_id' => 'nullable',
             'client_type_id' => 'required',
             'company_industry_id' => 'required',
             'company_name' => 'required',
@@ -76,23 +63,14 @@ class ClientController extends Controller
             'billing_regency_id' => 'required',
             'billing_district_id' => 'required',
             'billing_village_id' => 'required',
-            'billing_postcode' => 'required',
             'shipping_address' => 'required',
             'shipping_country_id' => 'required',
             'shipping_province_id' => 'required',
             'shipping_regency_id' => 'required',
             'shipping_district_id' => 'required',
             'shipping_village_id' => 'required',
-            'shipping_postcode' => 'required',
             'password' => 'required',
-            // 'date_birth' => 'required',
-            // 'url' => 'required',
-            // 'paypal' => 'required',
-            // 'google_id' => 'required',
             'category' => 'required',
-            'st' => 'required',
-            // 'avatar' => 'required',
-            'last_seen' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -101,74 +79,56 @@ class ClientController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $client = new Client();
-        $client->document_id = $request->document_id;
-        $client->employee_id = $request->employee_id;  
-        $client->client_type_id = $request->client_type_id;
-        $client->company_industry_id = $request->company_industry_id;
-        $client->company_name = $request->company_name;
+        $account = new Client();
+        $account->document_id = $request->document_id;
+        $account->employee_id = Auth::guard('employees')->user()->id;
+        $account->client_type_id = $request->client_type_id;
+        $account->company_industry_id = $request->company_industry_id;
+        $account->company_name = $request->company_name;
         if($request->file('company_logo')){
-            if($client->company_logo != null){
-                Storage::delete($client->company_logo);
+            if($account->company_logo != null){
+                Storage::delete($account->company_logo);
             }
-            $file = $request->file('company_logo')->store('public/company_logo');
-            $client->company_logo=$file;
+            $file = $request->file('company_logo')->store('company_logo');
+            $account->company_logo=$file;
         }else{
-            $client->company_logo= $client->company_logo;
+            $account->company_logo= $account->company_logo;
         }
-        $client->title = $request->title;
-        $client->name = $request->name;
-        $client->phone = $request->phone;
-        $client->email = $request->email;
-        $client->billing_address = $request->billing_address;
-        $client->billing_country_id = $request->billing_country_id;
-        $client->billing_province_id = $request->billing_province_id;
-        $client->billing_regency_id = $request->billing_regency_id;
-        $client->billing_district_id = $request->billing_district_id;
-        $client->billing_village_id = $request->billing_village_id;
-        $client->billing_postcode = $request->billing_postcode;
-        $client->shipping_address = $request->shipping_address;
-        $client->shipping_country_id = $request->shipping_country_id;
-        $client->shipping_province_id = $request->shipping_province_id;
-        $client->shipping_regency_id = $request->shipping_regency_id;
-        $client->shipping_district_id = $request->shipping_district_id;
-        $client->shipping_village_id = $request->shipping_village_id;
-        $client->shipping_postcode = $request->shipping_postcode;
-        $client->password = $request->password;
-        $client->date_birth = $request->date_birth;
-        // $client->url = $request->url;
-        // $client->paypal = $request->paypal;
-        // $client->google_id = $request->google_id;
-        $client->category = $request->category;
-        $client->st = $request->st;
-        // $client->avatar = $request->avatar;
-        $client->last_seen = $request->last_seen;
-        // $client->created_by = Auth::guard('employees')->user()->id;
-        $client->save();
+        $account->title = $request->title;
+        $account->name = $request->name;
+        $account->phone = $request->phone;
+        $account->email = $request->email;
+        $account->billing_address = $request->billing_address;
+        $account->billing_country_id = $request->billing_country_id;
+        $account->billing_province_id = $request->billing_province_id;
+        $account->billing_regency_id = $request->billing_regency_id;
+        $account->billing_district_id = $request->billing_district_id;
+        $account->billing_village_id = $request->billing_village_id;
+        $account->billing_postcode = $request->billing_postcode;
+        $account->shipping_address = $request->shipping_address;
+        $account->shipping_country_id = $request->shipping_country_id;
+        $account->shipping_province_id = $request->shipping_province_id;
+        $account->shipping_regency_id = $request->shipping_regency_id;
+        $account->shipping_district_id = $request->shipping_district_id;
+        $account->shipping_village_id = $request->shipping_village_id;
+        $account->shipping_postcode = $request->shipping_postcode;
+        $account->password = $request->password;
+        $account->date_birth = $request->date_birth;
+        $account->category = $request->category;
+        $account->st = $request->st;
+        $account->save();
         return response()->json([
             'alert' => 'success',
             'message' => 'Client Created',
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Client $client)
+    public function edit(Client $account)
     {
         $employee = Employee::get();
         $client_type = ClientType::get();
@@ -178,25 +138,16 @@ class ClientController extends Controller
         $district = District::get();
         $regency = Regency::get();
         $village = Village::get();
-        return view('pages.office.crm.client.input', ['data' => $client,'employee'=>$employee,'client_type'=>$client_type,'company_industry'=>$company_industry,'country'=>$country,'province'=>$province,'district'=>$district,'regency'=>$regency,'village'=>$village]);
+        return view('pages.office.crm.client.input', ['data' => $account,'employee'=>$employee,'client_type'=>$client_type,'company_industry'=>$company_industry,'country'=>$country,'province'=>$province,'district'=>$district,'regency'=>$regency,'village'=>$village]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, Client $account)
     {
         $validator = Validator::make($request->all(), [
-            'document_id' => 'required',
-            'employee_id' => 'required',
             'client_type_id' => 'required',
             'company_industry_id' => 'required',
             'company_name' => 'required',
-            'company_logo' => 'required|image',
+            'company_logo' => 'nullable|image',
             'title' => 'required',
             'name' => 'required',
             'phone' => 'required',
@@ -207,23 +158,15 @@ class ClientController extends Controller
             'billing_regency_id' => 'required',
             'billing_district_id' => 'required',
             'billing_village_id' => 'required',
-            'billing_postcode' => 'required',
             'shipping_address' => 'required',
             'shipping_country_id' => 'required',
             'shipping_province_id' => 'required',
             'shipping_regency_id' => 'required',
             'shipping_district_id' => 'required',
             'shipping_village_id' => 'required',
-            'shipping_postcode' => 'required',
-            'password' => 'required',
             'date_birth' => 'required',
-            // 'url' => 'required',
-            // 'paypal' => 'required',
-            // 'google_id' => 'required',
             'category' => 'required',
             'st' => 'required',
-            // 'avatar' => 'required',
-            'last_seen' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -232,61 +175,48 @@ class ClientController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $client->document_id = $request->document_id;
-        $client->employee_id = $request->employee_id;  
-        $client->client_type_id = $request->client_type_id;
-        $client->company_industry_id = $request->company_industry_id;
-        $client->company_name = $request->company_name;
+        $account->employee_id = Auth::guard('employees')->user()->id;
+        $account->client_type_id = $request->client_type_id;
+        $account->company_industry_id = $request->company_industry_id;
+        $account->company_name = $request->company_name;
         if($request->file('company_logo')){
-            if($client->company_logo != null){
-                Storage::delete($client->company_logo);
+            if($account->company_logo != null){
+                Storage::delete($account->company_logo);
             }
-            $file = $request->file('company_logo')->store('public/company_logo');
-            $client->company_logo=$file;
+            $file = $request->file('company_logo')->store('company_logo');
+            $account->company_logo=$file;
         }else{
-            $client->company_logo= $client->company_logo;
+            $account->company_logo= $account->company_logo;
         }
-        $client->title = $request->title;
-        $client->name = $request->name;
-        $client->phone = $request->phone;
-        $client->email = $request->email;
-        $client->billing_address = $request->billing_address;
-        $client->billing_country_id = $request->billing_country_id;
-        $client->billing_province_id = $request->billing_province_id;
-        $client->billing_regency_id = $request->billing_regency_id;
-        $client->billing_district_id = $request->billing_district_id;
-        $client->billing_village_id = $request->billing_village_id;
-        $client->billing_postcode = $request->billing_postcode;
-        $client->shipping_address = $request->shipping_address;
-        $client->shipping_country_id = $request->shipping_country_id;
-        $client->shipping_province_id = $request->shipping_province_id;
-        $client->shipping_regency_id = $request->shipping_regency_id;
-        $client->shipping_district_id = $request->shipping_district_id;
-        $client->shipping_village_id = $request->shipping_village_id;
-        $client->shipping_postcode = $request->shipping_postcode;
-        $client->password = $request->password;
-        $client->date_birth = $request->date_birth;
-        // $client->url = $request->url;
-        // $client->paypal = $request->paypal;
-        // $client->google_id = $request->google_id;
-        $client->category = $request->category;
-        $client->st = $request->st;
-        // $client->avatar = $request->avatar;
-        $client->last_seen = $request->last_seen;
-        // $client->created_by = Auth::guard('employees')->user()->id;
-        $client->update();
+        $account->title = $request->title;
+        $account->name = $request->name;
+        $account->phone = $request->phone;
+        $account->email = $request->email;
+        $account->billing_address = $request->billing_address;
+        $account->billing_country_id = $request->billing_country_id;
+        $account->billing_province_id = $request->billing_province_id;
+        $account->billing_regency_id = $request->billing_regency_id;
+        $account->billing_district_id = $request->billing_district_id;
+        $account->billing_village_id = $request->billing_village_id;
+        $account->billing_postcode = $request->billing_postcode;
+        $account->shipping_address = $request->shipping_address;
+        $account->shipping_country_id = $request->shipping_country_id;
+        $account->shipping_province_id = $request->shipping_province_id;
+        $account->shipping_regency_id = $request->shipping_regency_id;
+        $account->shipping_district_id = $request->shipping_district_id;
+        $account->shipping_village_id = $request->shipping_village_id;
+        $account->shipping_postcode = $request->shipping_postcode;
+        $account->password = $request->password;
+        $account->date_birth = $request->date_birth;
+        $account->category = $request->category;
+        $account->st = $request->st;
+        $account->update();
         return response()->json([
             'alert' => 'success',
             'message' => 'Client Update',
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Client $client)
     {
         $client->delete();

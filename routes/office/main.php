@@ -3,15 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Office\AuthController;
 use App\Http\Controllers\Office\ProfileController;
+use App\Http\Controllers\Office\Crm\LeadsController;
 use App\Http\Controllers\Office\DashboardController;
-use App\Http\Controllers\Office\CRM\ClientController;
+use App\Http\Controllers\Office\Crm\ClientController;
 use App\Http\Controllers\Office\Master\TaxController;
 use App\Http\Controllers\Office\Master\BankController;
 use App\Http\Controllers\Office\Master\KbliController;
 use App\Http\Controllers\Office\Master\RoleController;
+use App\Http\Controllers\Office\Crm\CampaignController;
 use App\Http\Controllers\Office\Master\AssetController;
 use App\Http\Controllers\Office\Master\ProductController;
 use App\Http\Controllers\Office\Master\TrainerController;
+use App\Http\Controllers\Office\CRM\GetRegionalController;
+use App\Http\Controllers\Office\Crm\OpportunityController;
 use App\Http\Controllers\Office\Master\CaseTypeController;
 use App\Http\Controllers\Office\Master\DocumentController;
 use App\Http\Controllers\Office\Master\EmployeeController;
@@ -23,6 +27,7 @@ use App\Http\Controllers\Office\Setting\CompanyController;
 use App\Http\Controllers\Office\Master\AwardTypeController;
 use App\Http\Controllers\Office\Master\LeaveTypeController;
 use App\Http\Controllers\Office\Master\TaskStageController;
+use App\Http\Controllers\Office\Crm\ClientContactController;
 use App\Http\Controllers\Office\Master\ClientTypeController;
 use App\Http\Controllers\Office\Master\CompetencyController;
 use App\Http\Controllers\Office\Master\DepartmentController;
@@ -32,6 +37,11 @@ use App\Http\Controllers\Office\Master\LoanOptionController;
 use App\Http\Controllers\Office\Master\MailConfigController;
 use App\Http\Controllers\Office\Master\TargetListController;
 use App\Http\Controllers\Office\Communication\ChatController;
+use App\Http\Controllers\Office\Crm\CallController;
+use App\Http\Controllers\Office\Crm\ClientContractController;
+use App\Http\Controllers\Office\Crm\ClientDocumentController;
+use App\Http\Controllers\Office\Crm\ClientMeetingController;
+use App\Http\Controllers\Office\Crm\CommonCaseController;
 use App\Http\Controllers\Office\Master\ExpenseTypeController;
 use App\Http\Controllers\Office\Master\PaymentTypeController;
 use App\Http\Controllers\Office\Master\PayslipTypeController;
@@ -55,9 +65,7 @@ use App\Http\Controllers\Office\Master\ShippingProviderController;
 use App\Http\Controllers\Office\Setting\CompanyIndustryController;
 use App\Http\Controllers\Office\Master\ClientContractTypeController;
 use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
-// use App\Http\Controllers\Office\Crm\ClientController;
-use App\Http\Controllers\Office\Crm\OpportunityController;
-use App\Http\Controllers\Office\Crm\LeadsController;
+use App\Http\Controllers\Office\Crm\ServicesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,7 +98,7 @@ Route::group(['domain' => ''], function() {
                 Route::get('',[DashboardController::class, 'index'])->name('index');
                 Route::get('ecommerce',[DashboardController::class, 'ecommerce'])->name('ecommerce');
             });
-            Route::name('setting.')->group(function(){ 
+            Route::name('setting.')->group(function(){
                 Route::resource('permission', PermissionController::class);
                 Route::resource('company', CompanyController::class);
                 Route::resource('company-branch', CompanyBranchController::class);
@@ -106,6 +114,7 @@ Route::group(['domain' => ''], function() {
                 Route::get('regional/{regional}/{province}/edit-province',[RegionalController::class, 'edit_province'])->name('regional.edit_province');
                 Route::patch('regional/{province}/update-province',[RegionalController::class, 'update_province'])->name('regional.update_province');
                 Route::delete('regional/{province}/destroy-province',[RegionalController::class, 'destroy_province'])->name('regional.destroy_province');
+                Route::post('filter-province',[GetRegionalController::class, 'filter_province'])->name('regional.filter_province');
 
                 Route::get('province/{province}/show_regency',[RegionalController::class, 'show_regency'])->name('regional.show_regency');
                 Route::get('province/{province}/create',[RegionalController::class, 'create_regency'])->name('regional.create_regency');
@@ -113,6 +122,7 @@ Route::group(['domain' => ''], function() {
                 Route::get('province/{province}/{regency}/edit-regency',[RegionalController::class, 'edit_regency'])->name('regional.edit_regency');
                 Route::patch('province/{regency}/update-regency',[RegionalController::class, 'update_regency'])->name('regional.update_regency');
                 Route::delete('province/{regency}/destroy-regency',[RegionalController::class, 'destroy_regency'])->name('regional.destroy_regency');
+                Route::post('filter-regency',[GetRegionalController::class, 'filter_regency'])->name('regional.filter_regency');
 
                 Route::get('regency/{regency}/show_district',[RegionalController::class, 'show_district'])->name('regional.show_district');
                 Route::get('regency/{regency}/create',[RegionalController::class, 'create_district'])->name('regional.create_district');
@@ -120,14 +130,17 @@ Route::group(['domain' => ''], function() {
                 Route::get('regency/{regency}/{district}/edit-district',[RegionalController::class, 'edit_district'])->name('regional.edit_district');
                 Route::patch('regency/{district}/update-district',[RegionalController::class, 'update_district'])->name('regional.update_district');
                 Route::delete('regency/{district}/destroy-district',[RegionalController::class, 'destroy_district'])->name('regional.destroy_district');
-                
+                Route::post('filter-district',[GetRegionalController::class, 'filter_district'])->name('regional.filter_district');
+
                 Route::get('district/{district}/show_village',[RegionalController::class, 'show_village'])->name('regional.show_village');
                 Route::get('district/{district}/create',[RegionalController::class, 'create_village'])->name('regional.create_village');
                 Route::post('district/store-village',[RegionalController::class, 'store_village'])->name('regional.store_village');
                 Route::get('district/{district}/{village}/edit-village',[RegionalController::class, 'edit_village'])->name('regional.edit_village');
                 Route::patch('district/{village}/update-village',[RegionalController::class, 'update_village'])->name('regional.update_village');
                 Route::delete('district/{village}/destroy-village',[RegionalController::class, 'destroy_village'])->name('regional.destroy_village');
-                
+                Route::post('filter-village',[GetRegionalController::class, 'filter_village'])->name('regional.filter_village');
+                Route::post('filter-postcode',[GetRegionalController::class, 'filter_postcode'])->name('regional.filter_postcode');
+
                 Route::resource('company-industry', CompanyIndustryController::class);
                 Route::resource('regional', RegionalController::class);
                 Route::resource('allowance', AllowanceOptionController::class);
@@ -194,10 +207,18 @@ Route::group(['domain' => ''], function() {
                 Route::resource('case-type', CaseTypeController::class);
                 Route::resource('shipping-provider', ShippingProviderController::class);
                 Route::resource('task-stage', TaskStageController::class);
-                Route::resource('client', ClientController::class);
+                Route::resource('accounts', ClientController::class);
                 Route::resource('opportunity', OpportunityController::class);
                 Route::resource('leads', LeadsController::class);
-                Route::resource('client', ClientController::class);
+                Route::resource('campaign', CampaignController::class);
+                Route::resource('client-contact', ClientContactController::class);
+                Route::resource('services', ServicesController::class);
+                Route::resource('call', CallController::class);
+                Route::resource('client-contract', ClientContractController::class);
+                Route::resource('client-meeting', ClientMeetingController::class);
+                Route::resource('client-document', ClientDocumentController::class);
+                Route::resource('common-case', CommonCaseController::class);
+                Route::post('filter-client-contact', [ClientContactController::class, 'filterClientContacts'])->name('client-contact.filter-contact');
             });
             Route::prefix('finance')->name('finance.')->group(function(){
             });

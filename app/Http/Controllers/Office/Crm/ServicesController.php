@@ -1,98 +1,112 @@
 <?php
 
-namespace App\Http\Office\Crm\Controllers;
+namespace App\Http\Controllers\Office\Crm;
 
 use App\Models\CRM\Services;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ServicesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         if($request->ajax())
         {
-            $collection = Services::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = Services::where('title','LIKE','%'.$request->keyword.'%')->paginate(10);;
             return view('pages.office.crm.services.list', compact('collection'));
         }
         return view('pages.office.crm.services.main');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('pages.office.crm.opportunity.input', ['data' => new Services()]);
+        return view('pages.office.crm.services.input', ['data' => new Services()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'slug' => 'required|unique:services',
-            'description' => 'required',
-            'thumbnail' => 'required|image',
+            'slug' => 'nullable|unique:services',
+            'thumbnail' => 'nullable|image',
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json([
+                'alert' => 'error',
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
+        $service = new Services();
+        $service->title = $request->title;
+        $service->slug = $request->slug;
+        $service->description = $request->description;
+        if ($request->file('thumbnail')) {
+            if ($service->thumbnail != null) {
+                Storage::delete($service->thumbnail);
+            }
+            $file = request()->file('thumbnail')->store('services');
+            $service->thumbnail = $file;
+        } else {
+            $service->thumbnail = $service->thumbnail;
+        }
+        $service->save();
+
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Services Created',
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Services  $services
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Services $services)
+    public function show(Services $service)
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Services  $services
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Services $services)
+    public function edit(Services $service)
     {
-        //
+        return view('pages.office.crm.services.input', ['data' => $service]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Services  $services
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Services $services)
+    public function update(Request $request, Services $service)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'slug' => 'nullable|unique:services',
+            'thumbnail' => 'nullable|image',
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json([
+                'alert' => 'error',
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
+        $service->title = $request->title;
+        $service->slug = $request->slug;
+        $service->description = $request->description;
+        if ($request->file('thumbnail')) {
+            if ($service->thumbnail != null) {
+                Storage::delete($service->thumbnail);
+            }
+            $file = request()->file('thumbnail')->store('services');
+            $service->thumbnail = $file;
+        } else {
+            $service->thumbnail = $service->thumbnail;
+        }
+        $service->update();
+
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Services Updated',
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Services  $services
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Services $services)
+    public function destroy(Services $service)
     {
-        //
+        $service->delete();
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Services Deleted',
+        ]);
     }
 }
