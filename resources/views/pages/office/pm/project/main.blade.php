@@ -1,4 +1,4 @@
-<x-office-layout title="Bank">
+<x-office-layout title="Project">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
@@ -21,7 +21,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Master</li>
+                    <li class="breadcrumb-item text-muted">Project Management</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Bank</li>
+                    <li class="breadcrumb-item text-muted">Project</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -62,7 +62,39 @@
                                         <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
                                     </svg>
                                 </span>
-                                <input type="text" name="keyword" onkeyup="load_list();" class="form-control form-control-solid w-250px ps-14" placeholder="Search bank" />
+                                <input type="text" name="keyword" onkeyup="load_list();" class="form-control form-control-solid w-250px ps-14 me-5" placeholder="Search Project" />
+                            </div>
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <div class="row" name="type" onchange="load_list();">
+                                    <div class="col-md-5">
+                                        <!--begin::Option-->
+                                        <input type="radio" class="btn-check" name="type" value="grid" checked="checked"  id="kt_radio_buttons_2_option_1"/>
+                                        <label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-5" for="kt_radio_buttons_2_option_1">
+                                            <!--begin::Svg Icon | path: icons/duotune/coding/cod001.svg-->
+                                            <span class="svg-icon svg-icon-1x me-4">
+                                                <svg class="h-15px w-15px svg-icon svg-icon-5x" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6 7H3C2.4 7 2 6.6 2 6V3C2 2.4 2.4 2 3 2H6C6.6 2 7 2.4 7 3V6C7 6.6 6.6 7 6 7Z" fill="currentColor"/>
+                                                    <path opacity="0.3" d="M13 7H10C9.4 7 9 6.6 9 6V3C9 2.4 9.4 2 10 2H13C13.6 2 14 2.4 14 3V6C14 6.6 13.6 7 13 7ZM21 6V3C21 2.4 20.6 2 20 2H17C16.4 2 16 2.4 16 3V6C16 6.6 16.4 7 17 7H20C20.6 7 21 6.6 21 6ZM7 13V10C7 9.4 6.6 9 6 9H3C2.4 9 2 9.4 2 10V13C2 13.6 2.4 14 3 14H6C6.6 14 7 13.6 7 13ZM14 13V10C14 9.4 13.6 9 13 9H10C9.4 9 9 9.4 9 10V13C9 13.6 9.4 14 10 14H13C13.6 14 14 13.6 14 13ZM21 13V10C21 9.4 20.6 9 20 9H17C16.4 9 16 9.4 16 10V13C16 13.6 16.4 14 17 14H20C20.6 14 21 13.6 21 13ZM7 20V17C7 16.4 6.6 16 6 16H3C2.4 16 2 16.4 2 17V20C2 20.6 2.4 21 3 21H6C6.6 21 7 20.6 7 20ZM14 20V17C14 16.4 13.6 16 13 16H10C9.4 16 9 16.4 9 17V20C9 20.6 9.4 21 10 21H13C13.6 21 14 20.6 14 20ZM21 20V17C21 16.4 20.6 16 20 16H17C16.4 16 16 16.4 16 17V20C16 20.6 16.4 21 17 21H20C20.6 21 21 20.6 21 20Z" fill="currentColor"/>
+                                                </svg>
+                                            </span>
+                                        </label>
+                                        <!--end::Option-->
+                                    </div>
+                                    <div class="col-md-5">
+                                        <!--begin::Option-->
+                                        <input type="radio" class="btn-check" name="type" value="table" id="kt_radio_buttons_2_option_2"/>
+                                        <label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_radio_buttons_2_option_2">
+                                            <!--begin::Svg Icon | path: icons/duotune/communication/com003.svg-->
+                                            <span class="svg-icon svg-icon-1x me-4">
+                                                <svg class="h-15px w-15px svg-icon svg-icon-5x" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path opacity="0.3" d="M20 21H3C2.4 21 2 20.6 2 20V10C2 9.4 2.4 9 3 9H20C20.6 9 21 9.4 21 10V20C21 20.6 20.6 21 20 21Z" fill="currentColor"/>
+                                                    <path d="M20 7H3C2.4 7 2 6.6 2 6V3C2 2.4 2.4 2 3 2H20C20.6 2 21 2.4 21 3V6C21 6.6 20.6 7 20 7Z" fill="currentColor"/>
+                                                </svg>
+                                            </span>
+                                        </label>
+                                        <!--end::Option-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -116,14 +148,14 @@
                                 </span>
                                 Export
                             </button>
-                            <a href="{{route('office.master.bank.create')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                            <a href="{{route('office.pm.project.create')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link" data-no-swup>
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
                                         <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                                     </svg>
                                 </span>
-                                Add bank
+                                Add Project
                             </a>
                         </div>
                         <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">

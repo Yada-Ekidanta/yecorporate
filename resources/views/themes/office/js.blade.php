@@ -16,6 +16,7 @@ if ( document.documentElement ) {
     }
     document.documentElement.setAttribute("data-theme", themeMode);
 }
+
 </script>
 <script>var hostUrl = "assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
