@@ -60,51 +60,33 @@
     </div>
     @section('custom_js')
         <script>
-            // https://stackoverflow.com/questions/44496686/how-to-customize-the-full-calendar-for-weekday-view
+            let obj,
+                i,
+                start,
+                end,
+                arr = [],
+                data = @json($data),
+                timeConvert = @json($timeConvert);
+
+            for (i = 0; i < data.length; i++) {
+                // console.log(timeConvert);
+                start = data[i].start_time;
+                end = data[i].end_time;
+
+                obj = {
+                    title: `Employee working time ${timeConvert}`,
+                    start: start,
+                    end: end,
+                };
+
+                arr.push(obj);
+            }
+
+            console.log(arr);
+
             let calendarEl = document.getElementById("kt_docs_fullcalendar_drag");
-            var repeatingEvents = [{
-                "id": "1",
-                "title": "Event 1",
-                //in "start and "end", only set times of day, not dates.
-                "start": "09:00",
-                "end": "10:00",
-                //use standard dow property to define which days of the week the event will appear on
-                "dow": "1",
-                //the custom "ranges" sets when the repetition begins and ends
-                "ranges": [{
-                "start": "2023-01-01",
-                "end": "2023-01-30"
-                }],
-                "allDay": false
-            }, {
-                "id": "2",
-                "title": "Event 2",
-                "start": "10:00",
-                "end": "12:00",
-                "dow": "2",
-                "ranges": [{
-                "start": "2023-01-10",
-                "end": "2023-01-16"
-                }],
-                "allDay": false
-            }, {
-                "id": "3",
-                "title": "Event 3",
-                "start": "15:00",
-                "end": "16:30",
-                "dow": "3",
-                "ranges": [{
-                "start": "2023-01-01",
-                "end": "2023-01-30"
-                }],
-                "allDay": false
-            }];
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'timeGridWeek',
-                // slotDuration: {
-                    // days: 1,
-                    // hours:1,
-                // },
                 headerToolbar: {
                     left: "prev,next",
                     center: "title",
@@ -113,19 +95,9 @@
                 dateAlignment: 'week',
                 allDaySlot: false,
                 contentHeight:"auto",
-                // eventContent: `Nanti di isi total time`,
-                events: [
-                {
-                    title: 'Test',
-                    start: '2023-01-18 00:00:00',
-                    end: '2023-01-18 10:00:00'
-                },
-                {
-                    title: 'Test',
-                    start: '2023-01-19 00:00:00',
-                    end: '2023-01-19 10:00:00'
-                },
-                ]
+                events: arr,
+                slotDuration: "00:20:00",
+                // slotLabelInterval: "01:00:00"
             });
             // console.log(calendar.el.children);
 

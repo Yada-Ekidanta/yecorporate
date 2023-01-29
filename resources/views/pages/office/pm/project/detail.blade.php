@@ -220,9 +220,11 @@
             }, "html");
         }
 
-        // module.exports.load_milestone = load_milestone;
-        // module.exports.load_team = load_team;
-        // module.exports.load_task = load_task;
+        document.addEventListener("swup:contentReplaced", () => {
+            load_milestone(1);
+            load_team(1);
+            load_task(1);
+        });
     </script>
     @endsection
 </x-office-layout>
