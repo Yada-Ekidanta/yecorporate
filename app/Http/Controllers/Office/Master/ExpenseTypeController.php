@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Master\ExpenseType;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseTypeController extends Controller
 {
@@ -37,6 +38,16 @@ class ExpenseTypeController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
+        $expenseType = new expenseType;
+        $expenseType->name = $request->name;
+        $expenseType->created_by = Auth::guard('employees')->user()->id;
+        $expenseType->save();
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Expense Type Created',
+        ]);
+        
+        
     }
     public function show(ExpenseType $expenseType)
     {

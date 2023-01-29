@@ -2,6 +2,7 @@
 
 namespace App\Models\HRM;
 
+use App\Models\Setting\CompanyBranch;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Traits\HasRoles;
@@ -41,10 +42,16 @@ class Employee extends Authenticatable
             return "<div class='symbol-label fs-3 bg-light-danger text-danger'>".$name."</div>" . $simbol;
         }
     }
-    public function department ()
+    public function department()
     {
         return $this->belongsTo(Department::class,'department_id','id');
     }
+
+    public function branch()
+    {
+        return $this->belongsTo(CompanyBranch::class,'company_branch_id','id');
+    }
+    
     public function position ()
     {
         return $this->belongsTo(Position::class,'position_id','id');

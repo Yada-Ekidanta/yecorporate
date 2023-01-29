@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Master\JobStage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class JobStageController extends Controller
 {
@@ -16,7 +17,7 @@ class JobStageController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $collection = JobStage::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = JobStage::where('title','LIKE','%'.$request->keyword.'%')->paginate(10);;
             return view('pages.office.master.job_stage.list', compact('collection'));
         }
         return view('pages.office.master.job_stage.main');
@@ -28,7 +29,8 @@ class JobStageController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'title' => 'required',
+            'order' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -38,7 +40,9 @@ class JobStageController extends Controller
             ], 200);
         }
         $jobStage = new JobStage;
-        $jobStage->name = $request->name;
+        $jobStage->title = $request->title;
+        $jobStage->order = $request->order;
+        $jobStage->created_by = Auth::guard('employees')->user()->id;
         $jobStage->save();
         return response()->json([
             'alert' => 'success',
@@ -56,7 +60,8 @@ class JobStageController extends Controller
     public function update(Request $request, JobStage $jobStage)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'title' => 'required',
+            'order' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -65,7 +70,9 @@ class JobStageController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $jobStage->name = $request->name;
+        $jobStage->title = $request->title;
+        $jobStage->order = $request->order;
+        $jobStage->created_by = Auth::guard('employees')->user()->id;
         $jobStage->update();
         return response()->json([
             'alert' => 'success',

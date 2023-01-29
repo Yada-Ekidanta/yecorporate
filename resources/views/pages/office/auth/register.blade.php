@@ -26,7 +26,7 @@
     <!--begin::Body-->
     <div class="py-20">
         <!--begin::Form-->
-        <form class="form w-100" novalidate="novalidate" id="form_register" data-kt-redirect-url="{{route('office.auth.index')}}" action="{{route('office.auth.doregister')}}">
+        <form class="form w-100" novalidate="novalidate" id="form_register" data-redirect-url="{{route('office.auth.index')}}" action="{{route('office.auth.doregister')}}">
             <!--begin::Heading-->
             <div class="text-start mb-10">
                 <!--begin::Title-->

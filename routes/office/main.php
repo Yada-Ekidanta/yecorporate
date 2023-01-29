@@ -7,11 +7,13 @@ use App\Http\Controllers\Office\PM\TeamController;
 use App\Http\Controllers\Office\PM\ZoomController;
 use App\Http\Controllers\Office\ProfileController;
 use App\Http\Controllers\Office\DashboardController;
+use App\Http\Controllers\Office\Master\DocumentController;
 use App\Http\Controllers\Office\Master\TaxController;
 use App\Http\Controllers\Office\PM\ProjectController;
 use App\Http\Controllers\Office\PM\TrackerController;
 use App\Http\Controllers\Office\Master\BankController;
 use App\Http\Controllers\Office\Master\KbliController;
+use App\Http\Controllers\Office\Master\RoleController;
 use App\Http\Controllers\Office\PM\CalendarController;
 use App\Http\Controllers\Office\PM\TodoListController;
 use App\Http\Controllers\Office\Master\AssetController;
@@ -25,6 +27,7 @@ use App\Http\Controllers\Office\Master\JobStageController;
 use App\Http\Controllers\Office\Master\PositionController;
 use App\Http\Controllers\Office\Master\RegionalController;
 use App\Http\Controllers\Office\Master\AwardTypeController;
+use App\Http\Controllers\Office\Master\LeaveTypeController;
 use App\Http\Controllers\Office\Master\TaskStageController;
 use App\Http\Controllers\Office\Master\ClientTypeController;
 use App\Http\Controllers\Office\Master\CompetencyController;
@@ -46,12 +49,18 @@ use App\Http\Controllers\Office\Master\DocumentOptionController;
 use App\Http\Controllers\Office\Master\AllowanceOptionController;
 use App\Http\Controllers\Office\Master\DeductionOptionController;
 use App\Http\Controllers\Office\Master\PerformanceTypeController;
+use App\Http\Controllers\Office\Setting\PermissionController;
 use App\Http\Controllers\Office\Master\ProductCategoryController;
 use App\Http\Controllers\Office\Master\TerminationTypeController;
 use App\Http\Controllers\Office\Master\OpportunityStageController;
 use App\Http\Controllers\Office\Master\ShippingProviderController;
 use App\Http\Controllers\Office\Master\ClientContractTypeController;
 use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
+use App\Http\Controllers\Office\Master\EmployeeController;
+use App\Http\Controllers\Office\Setting\CompanyBankController;
+use App\Http\Controllers\Office\Setting\CompanyBranchController;
+use App\Http\Controllers\Office\Setting\CompanyController;
+use App\Http\Controllers\Office\Setting\CompanyPolicyController;
 use App\Http\Controllers\Office\PM\TimesheetController;
 
 /*
@@ -67,11 +76,13 @@ use App\Http\Controllers\Office\PM\TimesheetController;
 
 Route::group(['domain' => ''], function() {
     Route::prefix('office')->name('office.')->group(function(){
+
         Route::redirect('/','/auth');
         Route::prefix('auth')->name('auth.')->group(function(){
             Route::get('',[AuthController::class, 'index'])->name('index');
             Route::get('register',[AuthController::class, 'register'])->name('register');
             Route::get('forgot',[AuthController::class, 'forgot'])->name('forgot');
+            Route::get('reset/{token}',[AuthController::class, 'reset'])->name('reset');
             Route::post('do-login',[AuthController::class, 'do_login'])->name('dologin');
             Route::post('do-register',[AuthController::class, 'do_register'])->name('doregister');
             Route::post('do-forgot',[AuthController::class, 'do_forgot'])->name('doforgot');
@@ -81,6 +92,16 @@ Route::group(['domain' => ''], function() {
             Route::prefix('dashboard')->name('dashboard.')->group(function(){
                 Route::get('',[DashboardController::class, 'index'])->name('index');
                 Route::get('ecommerce',[DashboardController::class, 'ecommerce'])->name('ecommerce');
+            });
+            Route::name('setting.')->group(function(){ 
+                Route::resource('permission', PermissionController::class);
+                Route::resource('company', CompanyController::class);
+                Route::resource('company-branch', CompanyBranchController::class);
+                Route::resource('company-bank', CompanyBankController::class);
+                Route::resource('company-policy', CompanyPolicyController::class);
+                Route::get('company-branch-policy/{id}', [CompanyBranchController::class, 'showPolicy'])->name('company-branch.show-policy');
+                Route::get('image-logo/{id}', [CompanyController::class, 'displayImageLogo'])->name('image.displayImageLogo');
+                Route::get('image-icon/{id}', [CompanyController::class, 'displayImageIcon'])->name('image.displayImageIcon');
             });
             Route::name('master.')->group(function(){
                 Route::get('regional/{regional}/create',[RegionalController::class, 'create_province'])->name('regional.create_province');
@@ -120,8 +141,11 @@ Route::group(['domain' => ''], function() {
                 Route::resource('client-contract-type', ClientContractTypeController::class);
                 Route::resource('client-type', ClientTypeController::class);
                 Route::resource('competency', CompetencyController::class);
+                Route::resource('employee', EmployeeController::class);
                 Route::resource('deduction-option', DeductionOptionController::class);
                 Route::resource('department', DepartmentController::class);
+                Route::resource('leave-type', LeaveTypeController::class);
+                Route::resource('document', DocumentController::class);
                 Route::resource('document-folder', DocumentFolderController::class);
                 Route::resource('document-option', DocumentOptionController::class);
                 Route::resource('document-type', DocumentTypeController::class);
@@ -143,6 +167,10 @@ Route::group(['domain' => ''], function() {
                 Route::resource('payment-type', PaymentTypeController::class);
                 Route::resource('payslip-type', PayslipTypeController::class);
                 Route::resource('performance-type', PerformanceTypeController::class);
+                Route::get('position/{position}/permission',[PositionController::class, 'permission'])->name('position.permission');
+                Route::get('position/{department}/create',[PositionController::class, 'createPosition'])->name('position.create-position');
+                Route::get('positon/{department}/{position}/edit',[PositionController::class, 'editPosition'])->name('position.edit-position');
+                Route::post('role/save',[RoleController::class, 'store'])->name('role.store');
                 Route::resource('position', PositionController::class);
                 Route::resource('product-category', ProductCategoryController::class);
                 Route::resource('product-unit', ProductUnitController::class);

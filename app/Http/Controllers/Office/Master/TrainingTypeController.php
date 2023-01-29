@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Master\TrainingType;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class TrainingTypeController extends Controller
 {
@@ -39,6 +40,7 @@ class TrainingTypeController extends Controller
         }
         $trainingType = new TrainingType;
         $trainingType->name = $request->name;
+        $trainingType->created_by = Auth::guard('employees')->user()->id;
         $trainingType->save();
         return response()->json([
             'alert' => 'success',
@@ -66,6 +68,7 @@ class TrainingTypeController extends Controller
             ], 200);
         }
         $trainingType->name = $request->name;
+        $trainingType->created_by = Auth::guard('employees')->user()->id;
         $trainingType->save();
         return response()->json([
             'alert' => 'success',

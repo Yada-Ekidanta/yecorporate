@@ -89,18 +89,43 @@ return new class extends Migration
         });
         Schema::create('credit_notes', function (Blueprint $table) {
             $table->id();
+            $table->integer('invoice_id')->default(0);
+            $table->integer('client_id')->default(0);
+            $table->float('amount',20,0)->default(0);
+            $table->date('date')->default(0);
+            $table->longText('desc')->nullable();
             $table->timestamps();
         });
         Schema::create('debit_notes', function (Blueprint $table) {
             $table->id();
+            $table->integer('bill_id')->default(0);
+            $table->integer('vendor_id')->default(0);
+            $table->float('amount',20,0)->default(0);
+            $table->date('date')->default(0);
+            $table->longText('desc')->nullable();
             $table->timestamps();
         });
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->integer('category_id')->default(0);
+            $table->longText('desc')->nullable();
+            $table->float('amount',20,0)->default(0);
+            $table->date('date')->nullable();
+            $table->integer('project_id')->nullable();
+            $table->integer('employee_id')->nullable();
+            $table->string('attachment')->nullable();
+            $table->integer('created_by')->nullable();
             $table->timestamps();
         });
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('type');
+            $table->string('from');
+            $table->string('to');
+            $table->float('amount',20,0)->default(0);
+            $table->integer('is_display')->default(0);
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
         Schema::create('invoices', function (Blueprint $table) {
@@ -148,10 +173,20 @@ return new class extends Migration
         });
         Schema::create('journal_entries', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->string('referrence');
+            $table->longText('desc');
+            $table->integer('journal_id')->default(0);
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
         Schema::create('journal_items', function (Blueprint $table) {
             $table->id();
+            $table->integer('journal_id')->default(0);
+            $table->integer('åccount_id')->default(0);
+            $table->longText('desc');
+            $table->float('debit',20,0)->default(0);
+            $table->float('credit',20,0)->default(0);
             $table->timestamps();
         });
         Schema::create('other_payments', function (Blueprint $table) {
@@ -162,36 +197,122 @@ return new class extends Migration
             $table->enum('type',['fixed','percentage']);
             $table->timestamps();
         });
+        Schema::create('payments', function (Blueprint $table) {
+            $table->id();
+            $table->date('date')->nullable();
+            $table->string('amount')->default(0);
+            $table->integer('account_id')->default(0);
+            $table->longText('desc')->nullable();
+            $table->integer('category_id')->default(0);
+            $table->string('recurring')->nullable();
+            $table->integer('payment_method')->default(0);
+            $table->string('reference')->nullable();
+            $table->string('add_receipt')->nullable();
+            $table->integer('created_by')->default(0);
+            $table->timestamps();
+        });
         Schema::create('proposal_products', function (Blueprint $table) {
             $table->id();
+            $table->integer('proposal_id')->default(0);
+            $table->integer('product_id')->default(0);
+            $table->float('qty',20,0)->default(0);
+            $table->float('discount',20,0)->default(0);
+            $table->float('price',20,0)->default(0);
+            $table->string('tax')->nullable();
+            $table->longText('desc')->nullable();
             $table->timestamps();
         });
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
+            $table->integer('proposal_id')->default(0);
+            $table->integer('client_id')->default(0);
+            $table->date('issue_date');
+            $table->date('send_date')->nullable();
+            $table->integer('product_category_id')->default(0);
+            $table->integer('st')->default(0);
+            $table->integer('discount_apply')->default(0);
+            $table->integer('converted_invoice')->default(0);
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
         Schema::create('retainer_items', function (Blueprint $table) {
             $table->id();
+            $table->integer('retainer_id')->default(0);
+            $table->string('name')->nullable();
+            $table->string('qty')->default(0);
+            $table->string('tax')->default(0);
+            $table->string('discount')->default(0);
+            $table->string('price')->default(0);
+            $table->longText('desc')->nullable();
             $table->timestamps();
         });
         Schema::create('retainer_payments', function (Blueprint $table) {
             $table->id();
+            $table->integer('retainer_id')->default(0);
+            $table->date('date')->nullable();
+            $table->string('amount')->default(0);
+            $table->integer('account_id')->default(0);
+            $table->integer('payment_method')->default(0);
+            $table->string('receipt')->nullable();
+            $table->string('payment_type_id')->nullable();
+            $table->string('txn_id')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('order_id')->nullable();
+            $table->string('reference')->nullable();
+            $table->string('add_receipt')->nullable();
+            $table->longText('desc')->nullable();
             $table->timestamps();
         });
         Schema::create('retainers', function (Blueprint $table) {
             $table->id();
+            $table->integer('client_id')->default(0);
+            $table->date('issue_date')->nullable();
+            $table->date('due_date')->nullable();
+            $table->date('send_date')->nullable();
+            $table->integer('category_id')->default(0);
+            $table->integer('st')->default(0);
+            $table->integer('discount_apply')->default(0);
+            $table->integer('converted_invoice')->default(0);
+            $table->integer('is_convert')->default(0);
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
         Schema::create('revenues', function (Blueprint $table) {
             $table->id();
+            $table->date('date')->nullable();
+            $table->string('amount')->default(0);
+            $table->integer('account_id')->default(0);
+            $table->integer('client_id')->default(0);
+            $table->integer('category_id')->default(0);
+            $table->integer('payment_method')->default(0);
+            $table->string('reference')->nullable();
+            $table->string('add_receipt')->nullable();
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->integer('employee_id')->default(0);
+            $table->integer('account_id')->default(0);
+            $table->string('type')->nullable();
+            $table->string('amount')->default(0);
+            $table->longText('desc')->nullable();
+            $table->date('date')->nullable();
+            $table->integer('payment_id')->default(0);
+            $table->string('category')->nullable();
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
+            $table->integer('from_account')->default(0);
+            $table->integer('to_account')->default(0);
+            $table->string('amount')->default(0);
+            $table->date('date')->nullable();
+            $table->integer('payment_method')->default(0);
+            $table->string('reference')->nullable();
+            $table->longText('desc')->nullable();
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
     }

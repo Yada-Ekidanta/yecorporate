@@ -42,7 +42,7 @@ class LoanOptionController extends Controller
         $loanOption->save();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Data has been saved',
+            'message' => 'Loan Option has been saved',
         ], 200);
     }
     public function show(LoanOption $loanOption)

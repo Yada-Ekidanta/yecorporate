@@ -22,7 +22,7 @@ class ResetPasswordNotification extends Notification
     public function toMail($notifiable)
     {
         $data = $this->data;
-        return (new MailMessage)->subject('Yada Ekidanta | Reset Password Confirmation')->from('noreply@yadaekidanta.com')->view('email.auth.reset_password',compact('notifiable','data'));
+        return (new MailMessage)->subject('Yada Ekidanta | Reset Password Confirmation')->from('noreply@yadaekidanta.com')->view('email.employee.reset_password',compact('notifiable','data'));
     }
     public function toArray($notifiable)
     {
