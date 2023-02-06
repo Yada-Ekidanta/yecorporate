@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-floating mb-5">
-                                        <input type="text" class="form-control" id="title" name="title" placeholder="Indonesia" value="{{$data->title}}"/>
+                                        <input type="text" class="form-control form-control-solid" id="title" name="title" placeholder="Indonesia" value="{{$data->title}}"/>
                                         <label for="title">Title</label>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
                                     <label for="desc">Description</label>
                                     <div class="form-floating">
                                         <div id="desc">{!!$data->desc!!}</div>
-                                        <textarea name="desc" class="form-control d-none">{{$data->desc}}</textarea>
+                                        <textarea name="desc" class="form-control form-control-solid d-none">{{$data->desc}}</textarea>
                                     </div>
                                 </div>
                             </div>

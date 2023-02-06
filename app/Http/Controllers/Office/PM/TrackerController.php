@@ -22,13 +22,13 @@ class TrackerController extends Controller
     {
         $status = Tracker::where('is_active', 1)->first();
         $status = $status ? $status : null;
-        $time = Tracker::where('created_by', Auth::guard('employees')->user()->name)->sum(DB::raw("TIME_TO_SEC(total_time)"));
+        $time = Tracker::where('created_by', Auth::guard('employees')->user()->id)->sum(DB::raw("TIME_TO_SEC(total_time)"));
         $timeConvert = gmdate("H:i:s", $time);
         // dd($timeConvert);
         $project = Project::orderBy('name', 'asc')->get();
         $task = Task::get();
         if ($request->ajax()) {
-            $collection = Tracker::where('created_by', Auth::guard('employees')->user()->name)->where('name','LIKE','%'.$request->keyword.'%')->paginate(5);
+            $collection = Tracker::where('created_by', Auth::guard('employees')->user()->id)->where('name','LIKE','%'.$request->keyword.'%')->paginate(5);
             return view('pages.office.pm.tracker.list', compact('collection'));
         }
 
@@ -52,18 +52,18 @@ class TrackerController extends Controller
      */
     public function store(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required',
-        //     'project_id' => 'required',
-        //     'task_id' => 'required',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'project_id' => 'required',
+            'task_id' => 'required',
+        ]);
 
-        // if ($validator->fails()){
-        //     return response()->json([
-        //         'alert' => 'error',
-        //         'message' => $validator->errors()->first(),
-        //     ], 200);
-        // }
+        if ($validator->fails()){
+            return response()->json([
+                'alert' => 'error',
+                'message' => $validator->errors()->first(),
+            ], 200);
+        }
 
         $tracker = new Tracker;
         $tracker->name = $request->name;
@@ -71,9 +71,10 @@ class TrackerController extends Controller
         $tracker->task_id = $request->task_id;
         $tracker->start_time = $request->start_time;
         $tracker->end_time = $request->end_time;
+        $tracker->date = $request->date;
         $tracker->total_time = $request->total_time;
         $tracker->is_active = $request->is_active;
-        $tracker->created_by = Auth::guard('employees')->user()->name;
+        $tracker->created_by = Auth::guard('employees')->user()->id;
         $tracker->save();
 
         // return response()->json([

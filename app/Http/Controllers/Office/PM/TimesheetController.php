@@ -15,12 +15,22 @@ class TimesheetController extends Controller
      */
     public function index()
     {
-        $data = Tracker::select('start_time', 'end_time', 'total_time')->get();
-        // $start_time = Tracker::orderBy('start_time', 'desc')->select('start_time')->first();
-        // $end_time = Tracker::orderBy('end_time', 'desc')->select('end_time')->first();
-        $time = Tracker::where('start_time', date('Y-m-d'))->sum(DB::raw("TIME_TO_SEC(total_time)"));
-        $timeConvert = gmdate("H:i:s", $time);
-        // dd($time);
-        return view('pages.office.pm.timesheets.main', ['data' => $data, 'timeConvert' => $timeConvert]);
+        $TimeSheet = Tracker::select(DB::raw("date, SUM(TIME_TO_SEC(total_time)) as total_time"))->groupBy('date')->get();
+
+        $data = [];
+
+        foreach ($TimeSheet as $item) {
+            $date = $item->date;
+            $time = $item->total_time = gmdate("H:i:s", $item->total_time);
+
+            $getData = [
+                'title' => $time,
+                'start' => $date,
+            ];
+
+            array_push($data, $getData);
+        }
+
+        return view('pages.office.pm.timesheets.main', ['data' => $data]);
     }
 }

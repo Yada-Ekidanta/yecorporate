@@ -57,11 +57,12 @@
                         <div class="row">
                             <input type="hidden" id="start_time" name="start_time"/>
                             <input type="hidden" id="end_time" name="end_time"/>
+                            <input type="hidden" id="date" name="date"/>
                             <input type="hidden" id="is_active" name="is_active"/>
                             <input type="hidden" id="total_time" name="total_time"/>
                             <div class="col-md-4">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Indonesia" value=""/>
+                                    <input type="text" class="form-control form-control-solid" id="name" name="name" placeholder="Indonesia" value=""/>
                                     <label for="name">What are you working on?</label>
                                 </div>
                             </div>
@@ -183,6 +184,7 @@
                     ((''+start_day).length<2 ? '0' : '') + start_day;
                     let time = start_date.getHours() + ":" + start_date.getMinutes() + ":" + start_date.getSeconds();
                     $('#start_time').val(output_start+' '+time);
+                    $('#date').val(output_start);
                     $('#start-btn').hide();
                     $('#stop').show();
                     intervalId = setInterval(startTimer, 1000);

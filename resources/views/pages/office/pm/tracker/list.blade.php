@@ -27,10 +27,10 @@
                     <span>{{$item->task->name}}</span>
                 </td>
                 <td>
-                    <span>{{$item->start_time}}</span>
+                    <span>{{$item->start_date}} {{ $item->start_time }}</span>
                 </td>
                 <td>
-                    <span>{{$item->end_time}}</span>
+                    <span>{{$item->end_date}} {{ $item->end_time }}</span>
                 </td>
                 <td>
                     <span>{{$item->total_time}}</span>

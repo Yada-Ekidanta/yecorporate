@@ -84,7 +84,7 @@
                     <div class="card-body transition-fade">
                         <div class="mb-5">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Indonesia" value="{{$data->title}}"/>
+                                <input type="text" class="form-control form-control-solid" id="title" name="title" placeholder="Indonesia" value="{{$data->title}}"/>
                                 <label for="title">Title</label>
                             </div>
                         </div>
@@ -99,21 +99,21 @@
                             </div>
                             <div class="col-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="start_date" name="start_date" placeholder="Indonesia" value="{{$data->start_date}}"/>
-                                    <label for="start_date">Start Date</label>
+                                    <input type="text" class="form-control form-control-solid" id="start_date_time" name="start_date" placeholder="Indonesia" value="{{$data->start_date}}"/>
+                                    <label for="start_date_time">Start Date</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="tel" class="form-control number_only ribuan" id="duration" name="duration" placeholder="Indonesia" value="{{$data->duration}}"/>
+                                    <input type="tel" class="form-control form-control-solid number_only ribuan" id="duration" name="duration" placeholder="Indonesia" value="{{$data->duration}}"/>
                                     <label for="duration">Duration (H)</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="join_url" name="join_url" placeholder="Indonesia" value="{{$data->join_url}}"/>
+                                    <input type="text" class="form-control form-control-solid" id="join_url" name="join_url" placeholder="Indonesia" value="{{$data->join_url}}"/>
                                     <label for="join_url">Join URL</label>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
     </div>
     @section('custom_js')
         <script>
-            obj_startdatenow('start_date');
+            obj_date_time('start_date_time');
             obj_select('form-select-project');
         </script>
     @endsection

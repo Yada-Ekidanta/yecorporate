@@ -122,7 +122,7 @@
                                     </svg>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="${updateURL}?id={{ $data->id }}"  class="menu-link" target="_parent">Edit</a></li>
+                                    <li><a class="dropdown-item menu-link" href="${updateURL}?id={{ $data->id }}" target="_parent">Edit</a></li>
                                     <li><a class="dropdown-item" href="javascript:;" onclick="handle_confirm('Are you sure want to delete this todo list ?', 'Yes, im sure', 'No, im not','DELETE','${deleteURL}')"  class="menu-link">Delete</a></li>
                                 </ul>
                             </div>

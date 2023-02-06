@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Calender</li>
+                    <li class="breadcrumb-item text-muted">Time Sheet</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -65,41 +65,35 @@
                 start,
                 end,
                 arr = [],
-                data = @json($data),
-                timeConvert = @json($timeConvert);
+                data = @json($data);
 
             for (i = 0; i < data.length; i++) {
-                // console.log(timeConvert);
-                start = data[i].start_time;
-                end = data[i].end_time;
+                title = data[i].title;
+                start = data[i].start;
 
                 obj = {
-                    title: `Employee working time ${timeConvert}`,
+                    title: title,
                     start: start,
-                    end: end,
                 };
 
                 arr.push(obj);
             }
 
-            console.log(arr);
+            // console.log(arr);
 
             let calendarEl = document.getElementById("kt_docs_fullcalendar_drag");
             let calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'timeGridWeek',
+                initialView: 'dayGridWeek',
                 headerToolbar: {
                     left: "prev,next",
                     center: "title",
-                    right: "today timeGridWeek"
+                    right: "today dayGridWeek"
                 },
                 dateAlignment: 'week',
                 allDaySlot: false,
                 contentHeight:"auto",
                 events: arr,
-                slotDuration: "00:20:00",
-                // slotLabelInterval: "01:00:00"
             });
-            // console.log(calendar.el.children);
 
             calendar.render();
         </script>

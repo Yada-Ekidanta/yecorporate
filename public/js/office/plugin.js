@@ -431,3 +431,15 @@ function swa_message(type, msg) {
         timer: 2000
     });
 }
+function calendar_default(obj) {
+    let calendarDefault = document.getElementById(obj);
+    let calendarMainDefault = new FullCalendar.Calendar(calendarDefault, {
+        headerToolbar: {
+            left: "prev,next",
+            center: "title",
+            right: "today dayGridMonth"
+        },
+    });
+
+    calendarMainDefault.render();
+}

@@ -94,7 +94,7 @@
                             </div>
                             <div class="col-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
+                                    <input type="text" class="form-control form-control-solid" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
                                 </div>
                             </div>
@@ -121,13 +121,13 @@
                         <div class="form-group row">
                             <div class="col-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="start_at" name="start_at" placeholder="Indonesia" value="{{$data->start_at}}"/>
+                                    <input type="text" class="form-control form-control-solid" id="start_at" name="start_at" placeholder="Indonesia" value="{{$data->start_at}}"/>
                                     <label for="start_at">Start Date</label>
                                 </div>
                             </div>
                             <div class="col-6 mb-5">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="end_at" name="end_at" placeholder="Indonesia" value="{{$data->end_at}}"/>
+                                    <input type="text" class="form-control form-control-solid" id="end_at" name="end_at" placeholder="Indonesia" value="{{$data->end_at}}"/>
                                     <label for="end_at">End Date</label>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                             <label for="desc">Description</label>
                             <div class="form-floating">
                                 <div id="desc">{!!$data->desc!!}</div>
-                                <textarea name="desc" class="form-control d-none">{{$data->desc}}</textarea>
+                                <textarea name="desc" class="form-control form-control-solid d-none">{{$data->desc}}</textarea>
                             </div>
                         </div>
                     </div>

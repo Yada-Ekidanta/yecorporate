@@ -87,13 +87,13 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-floating mb-5">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
+                                        <input type="text" class="form-control form-control-solid" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
                                         <label for="name">Name</label>
                                     </div>
                                 </div>
                                 <div class="col-6 mb-5">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="due_date" name="due_date" placeholder="Indonesia" value="{{$data->due_date}}"/>
+                                        <input type="text" class="form-control form-control-solid" id="due_date" name="due_date" placeholder="Indonesia" value="{{$data->due_date}}"/>
                                         <label for="due_date">Due Date</label>
                                     </div>
                                 </div>

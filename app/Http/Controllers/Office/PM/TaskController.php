@@ -76,7 +76,7 @@ class TaskController extends Controller
 
         $task->project_id = $request->project_id;
         $task->desc = $request->desc;
-        $task->created_by = Auth::guard('employees')->user()->name;
+        $task->created_by = Auth::guard('employees')->user()->id;
         $task->save();
 
         return response()->json([

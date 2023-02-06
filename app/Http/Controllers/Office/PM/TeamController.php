@@ -55,7 +55,7 @@ class TeamController extends Controller
         $team = new Team;
         $team->employee_id = $request->employee_id;
         $team->project_id = $request->project_id;
-        $team->created_by = Auth::guard('employees')->user()->name;
+        $team->created_by = Auth::guard('employees')->user()->id;
         $team->save();
 
         return response()->json([

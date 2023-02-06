@@ -86,13 +86,13 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-floating mb-5">
-                                        <input type="text" readonly class="form-control" id="title" name="title" placeholder="Indonesia" value="{{$data->title}}"/>
+                                        <input type="text" readonly class="form-control form-control-solid" id="title" name="title" placeholder="Indonesia" value="{{$data->title}}"/>
                                         <label for="title">Title</label>
                                     </div>
                                 </div>
                                 <div class="col-6 mb-5">
                                     <div class="form-floating mb-5">
-                                        <input type="text" readonly class="form-control" id="status" name="status" placeholder="Indonesia" value="{{$data->status}}"/>
+                                        <input type="text" readonly class="form-control form-control-solid" id="status" name="status" placeholder="Indonesia" value="{{$data->status}}"/>
                                         <label for="status">Status</label>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                     <label for="desc">Description</label>
                                     <div class="form-floating">
                                         <div id="desc">{!!$data->desc!!}</div>
-                                        <textarea name="desc" readonly class="form-control d-none">{{$data->desc}}</textarea>
+                                        <textarea name="desc" readonly class="form-control form-control-solid d-none">{{$data->desc}}</textarea>
                                     </div>
                                 </div>
                             </div>
