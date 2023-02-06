@@ -60,26 +60,7 @@
     </div>
     @section('custom_js')
         <script>
-            let obj,
-                i,
-                start,
-                end,
-                arr = [],
-                data = @json($data);
-
-            for (i = 0; i < data.length; i++) {
-                title = data[i].title;
-                start = data[i].start;
-
-                obj = {
-                    title: title,
-                    start: start,
-                };
-
-                arr.push(obj);
-            }
-
-            // console.log(arr);
+            let data = @json($data);
 
             let calendarEl = document.getElementById("kt_docs_fullcalendar_drag");
             let calendar = new FullCalendar.Calendar(calendarEl, {
@@ -92,7 +73,7 @@
                 dateAlignment: 'week',
                 allDaySlot: false,
                 contentHeight:"auto",
-                events: arr,
+                events: data,
             });
 
             calendar.render();
