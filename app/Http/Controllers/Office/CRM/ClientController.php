@@ -117,7 +117,7 @@ class ClientController extends Controller
         $account->save();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Client Created',
+            'message' => 'Client has been Created',
         ]);
     }
 
@@ -211,7 +211,7 @@ class ClientController extends Controller
         $account->update();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Client Update',
+            'message' => 'Client has been Update',
         ]);
     }
 
@@ -219,10 +219,13 @@ class ClientController extends Controller
     {
         // dd($account->client_contact);
         $account->client_contact()->delete();
+        $account->lead()->delete();
+        $account->opportunity()->delete();
+        $account->common_case()->delete();
         $account->delete();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Client Deleted',
+            'message' => 'Client has been Deleted',
         ]);
     }
 }

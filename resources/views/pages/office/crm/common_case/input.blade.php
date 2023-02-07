@@ -89,28 +89,32 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name"
+                                    <input type="text" class="form-control form-control-solid" id="name" name="name"
                                         placeholder="Enter Name" value="{{ $data->name }}" />
                                     <label for="name">Name</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="number" class="form-control" id="number"
+                                    <input type="number" class="form-control form-control-solid" id="number"
                                     name="number" placeholder="Enter Number" value="{{ $data->number }}" />
                                     <label for="number">Number</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="number" class="form-control" id="priority"
-                                    name="priority" placeholder="Enter Priority" value="{{ $data->priority }}" />
-                                    <label for="priority">Priority</label>
+                                <div class="form-group">
+                                    <select name="priority" id="priority" class="form-select form-select-solid">
+                                        <option disabled selected>Select Priority</option>
+                                        <option value="0" {{ $data->priority === 0 ? 'selected' : '' }}>Low</option>
+                                        <option value="1" {{ $data->priority === 1 ? 'selected' : '' }}>Normal</option>
+                                        <option value="2" {{ $data->priority === 2 ? 'selected' : '' }}>High</option>
+                                        <option value="3" {{ $data->priority === 3 ? 'selected' : '' }}>Urgent</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="client_id" id="client_id" class="form-select">
+                                    <select name="client_id" id="client_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Client</option>
                                         @foreach ($client as $item)
                                             <option value="{{ $item->id }}"
@@ -122,24 +126,27 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="client_contact_id" id="client_contact_id" class="form-select" disabled>
+                                    <select name="client_contact_id" id="client_contact_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Client Contact</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="st" id="st" class="form-select">
+                                    <select name="st" id="st" class="form-select form-select-solid">
                                         <option disabled selected>Select Status</option>
-                                        <option value="0" {{ $data->st === 0 ? 'selected' : '' }}>Status 1</option>
-                                        <option value="1" {{ $data->st === 1 ? 'selected' : '' }}>Status 2</option>
-                                        <option value="2" {{ $data->st === 2 ? 'selected' : '' }}>Status 3</option>
+                                        <option value="0" {{ $data->st === 0 ? 'selected' : '' }}>New</option>
+                                        <option value="1" {{ $data->st === 1 ? 'selected' : '' }}>Assigned</option>
+                                        <option value="2" {{ $data->st === 2 ? 'selected' : '' }}>Pending</option>
+                                        <option value="3" {{ $data->st === 3 ? 'selected' : '' }}>Closed</option>
+                                        <option value="4" {{ $data->st === 4 ? 'selected' : '' }}>Rejected</option>
+                                        <option value="5" {{ $data->st === 5 ? 'selected' : '' }}>Duplicate</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="attachment"
+                                    <input type="text" class="form-control form-control-solid" id="attachment"
                                     name="attachment" placeholder="Enter Attachment" value="{{ $data->attachment }}" />
                                     <label for="attachment">Attachment</label>
                                 </div>
@@ -178,6 +185,7 @@
         obj_quill('desc')
         obj_select('client_id')
         obj_select('client_contact_id')
+        obj_select('priority')
         obj_select('st')
 
         $(document).ready(function() {
@@ -190,7 +198,6 @@
                         client_id: $(this).val(),
                     },
                     success: function(response) {
-                        $("#client_contact_id").removeAttr("disabled");
                         $("#client_contact_id").html(response);
                     }
                 });

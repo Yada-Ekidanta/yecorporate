@@ -148,7 +148,17 @@
                 type: 'PUT',
                 data: {
                     status: $('#status').val(),
-                }
+                },
+                success: function(response) {
+                    if(response.alert == "success"){
+                        handle_success(response);
+                    }else{
+                        toastify_message(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    handle_error(xhr);
+                },
             });
             // console.log('dragendEl:', id);
             // console.log('dragendEl:', $('#status').val());

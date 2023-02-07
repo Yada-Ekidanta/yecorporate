@@ -41,7 +41,6 @@ class LeadsController extends Controller
             'title' => 'nullable',
             'opportunity_amount' => 'required',
             'st' => 'required',
-            'description' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -65,7 +64,7 @@ class LeadsController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Leads Created',
+            'message' => 'Leads has been Created',
         ]);
     }
 
@@ -90,7 +89,6 @@ class LeadsController extends Controller
             'title' => 'nullable',
             'opportunity_amount' => 'required',
             'st' => 'required',
-            'description' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -113,7 +111,7 @@ class LeadsController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Leads Update',
+            'message' => 'Leads has been Update',
         ]);
     }
 
@@ -122,7 +120,7 @@ class LeadsController extends Controller
         $lead->delete();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Leads Deleted',
+            'message' => 'Leads has been Deleted',
         ]);
     }
 
@@ -134,6 +132,6 @@ class LeadsController extends Controller
         return response()->json([
             'alert' => 'success',
             'message' => 'Leads has been updated',
-        ], 200);
+        ]);
     }
 }

@@ -266,3 +266,18 @@ function handle_confirm_custom(title, confirm_title, deny_title, method, route, 
         }
     });
 }
+
+function sign_out(url, redirect) {
+    $.ajax({
+        type: GET,
+        url: url,
+        success: function(response) {
+            if(response.alert == "success"){
+                handle_success(response);
+            }else{
+                toastify_message(response.message);
+            }
+            window.location.href = redirect
+        },
+    });
+}

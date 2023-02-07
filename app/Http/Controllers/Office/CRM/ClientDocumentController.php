@@ -18,7 +18,7 @@ class ClientDocumentController extends Controller
     {
         if($request->ajax())
         {
-            $collection = ClientDocument::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = ClientDocument::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.crm.client_document.list', compact('collection'));
         }
         return view('pages.office.crm.client_document.main');

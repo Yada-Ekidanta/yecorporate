@@ -20,7 +20,7 @@ class ClientContractController extends Controller
     {
         if($request->ajax())
         {
-            $collection = ClientContract::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = ClientContract::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.crm.client_contract.list', compact('collection'));
         }
         return view('pages.office.crm.client_contract.main');

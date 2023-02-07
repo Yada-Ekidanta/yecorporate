@@ -317,8 +317,8 @@
             obj_quill('description');
             obj_quill('owner_signature');
             obj_quill('client_signature');
-            obj_date('start_at');
-            obj_date('end_at');
+            obj_startdatenow('start_at');
+            obj_startdatenow('end_at');
         </script>
     @endsection
 </x-office-layout>

@@ -78,7 +78,7 @@
                         <div class="row">
                         <div class="col-4 mb-3">
                             <div class="form-group">
-                                <select name="st" id="st" class="form-select">
+                                <select name="st" id="st" class="form-select form-select-solid">
                                     <option disabled selected>Select Status</option>
                                     <option value="0" {{ $data->st === 0 ? 'selected' : '' }}>Planning</option>
                                     <option value="1" {{ $data->st === 1 ? 'selected' : '' }}>Active</option>
@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-4 mb-3">
                             <div class="form-group">
-                                <select name="campaign_type_id" id="campaign_type_id" class="form-select">
+                                <select name="campaign_type_id" id="campaign_type_id" class="form-select form-select-solid">
                                     <option disabled selected>Select Campaign Type</option>
                                     @foreach ($campaignType as $item)
                                         <option value="{{ $item->id }}" {{ $data->campaign_type_id === $item->id ? 'selected' : '' }}>
@@ -100,25 +100,25 @@
                         </div>
                         <div class="col-4 mb-3">
                             <div class="form-floating">
-                                <input type="number" class="form-control" id="budget" name="budget" placeholder="Enter Budget" value="{{ $data->budget }}" />
+                                <input type="number" class="form-control form-control-solid" id="budget" name="budget" placeholder="Enter Budget" value="{{ $data->budget }}" />
                                 <label for="budget">Budget</label>
                             </div>
                         </div>
                         <div class="col-4 mb-3">
                             <div class="form-floating">
-                                <input type="date" class="form-control" id="start_at" name="start_at" placeholder="Enter Start at" value="{{ $data->start_at }}" />
+                                <input type="date" class="form-control form-control-solid" id="start_at" name="start_at" placeholder="Enter Start at" value="{{ $data->start_at }}" />
                                 <label for="start_at">Start at</label>
                             </div>
                         </div>
                         <div class="col-4 mb-3">
                             <div class="form-floating">
-                                <input type="date" class="form-control" id="end_at" name="end_at" placeholder="Enter End at" value="{{ $data->end_at }}" />
+                                <input type="date" class="form-control form-control-solid" id="end_at" name="end_at" placeholder="Enter End at" value="{{ $data->end_at }}" />
                                 <label for="end_at">End at</label>
                             </div>
                         </div>
                         <div class="col-4 mb-3">
                             <div class="form-group">
-                                <select name="target_list" id="target_list" class="form-select">
+                                <select name="target_list" id="target_list" class="form-select form-select-solid">
                                     <option disabled selected>Target List</option>
                                     @foreach ($targetList as $item)
                                         <option value="{{ $item->id }}" {{ $data->target_list === $item->id ? 'selected' : '' }}>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="col-4 mb-3">
                             <div class="form-group">
-                                <select name="ex_target_list" id="ex_target_list" class="form-select">
+                                <select name="ex_target_list" id="ex_target_list" class="form-select form-select-solid">
                                     <option disabled selected>Ex Target List</option>
                                     @foreach ($targetList as $item)
                                         <option value="{{ $item->id }}" {{ $data->ex_target_list === $item->id ? 'selected' : '' }}>
@@ -168,8 +168,8 @@
             obj_select('campaign_type_id');
             obj_select('target_list');
             obj_select('ex_target_list');
-            obj_date('start_at');
-            obj_date('end_at');
+            obj_startdatenow('start_at');
+            obj_startdatenow('end_at');
         </script>
     @endsection
 </x-office-layout>

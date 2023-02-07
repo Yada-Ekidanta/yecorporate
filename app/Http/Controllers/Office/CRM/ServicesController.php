@@ -14,7 +14,7 @@ class ServicesController extends Controller
     {
         if($request->ajax())
         {
-            $collection = Services::where('title','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = Services::where('title','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.crm.services.list', compact('collection'));
         }
         return view('pages.office.crm.services.main');
@@ -55,7 +55,7 @@ class ServicesController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Services Created',
+            'message' => 'Services has been Created',
         ]);
     }
 
@@ -97,7 +97,7 @@ class ServicesController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Services Updated',
+            'message' => 'Services has been Updated',
         ]);
     }
 
@@ -106,7 +106,7 @@ class ServicesController extends Controller
         $service->delete();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Services Deleted',
+            'message' => 'Services has been Deleted',
         ]);
     }
 }

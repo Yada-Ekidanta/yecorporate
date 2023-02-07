@@ -16,7 +16,7 @@ class CommonCaseController extends Controller
     {
         if($request->ajax())
         {
-            $collection = CommonCase::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = CommonCase::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.crm.common_case.list', compact('collection'));
         }
         return view('pages.office.crm.common_case.main');
@@ -62,7 +62,7 @@ class CommonCaseController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Common Case Created',
+            'message' => 'Common Case has been Created',
         ]);
     }
 
@@ -110,7 +110,7 @@ class CommonCaseController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Common Case Updated',
+            'message' => 'Common Case has been Updated',
         ]);
     }
 
@@ -119,7 +119,7 @@ class CommonCaseController extends Controller
         $common_case->delete();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Common Case Deleted',
+            'message' => 'Common Case has been Deleted',
         ]);
     }
 }

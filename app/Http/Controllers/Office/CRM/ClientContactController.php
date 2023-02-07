@@ -21,7 +21,7 @@ class ClientContactController extends Controller
     {
         if($request->ajax())
         {
-            $collection = ClientContact::where('client_id','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = ClientContact::where('client_id','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.crm.client_contact.list', compact('collection'));
         }
         return view('pages.office.crm.client_contact.main');
@@ -72,7 +72,7 @@ class ClientContactController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Client Contact Created'
+            'message' => 'Client Contact has been Created'
         ]);
     }
 
@@ -129,7 +129,7 @@ class ClientContactController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Client Contact Updated'
+            'message' => 'Client Contact has been Updated'
         ]);
     }
 
@@ -138,7 +138,7 @@ class ClientContactController extends Controller
         $clientContact->delete();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Client Contact Deleted',
+            'message' => 'Client Contact has been Deleted',
         ]);
     }
 

@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Setting\PasswordReset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\Auth\ResetPasswordNotification;
-use App\Notifications\Auth\PasswordChangedNotification;
+use App\Notifications\Auth\Client\ResetPasswordNotification;
+use App\Notifications\Auth\Client\PasswordChangedNotification;
 use App\Notifications\Auth\EmployeeRegisterNotification;
 use App\Notifications\Auth\RegisterEmployeeNotification;
 
@@ -45,7 +45,7 @@ class AuthController extends Controller
         {
             return response()->json([
                 'alert' => 'success',
-                'message' =>  'Welcome back '. Auth::guard('clients')->user()->name,
+                'message' =>  'Welcome back '. Auth::guard('clients')->user()->email,
             ]);
         }else{
             return response()->json([
@@ -149,6 +149,7 @@ class AuthController extends Controller
         Client::where('email', $updatePassword->email)->update(['password' => Hash::make($request->password)]);
         $users = Client::where('email', $updatePassword->email)->first();
         // PasswordReset::where(['email' => $updatePassword->email])->delete();
+        // dd($users);
         Notification::send($users, new PasswordChangedNotification($users));
         return response()->json([
             'alert' => 'success',

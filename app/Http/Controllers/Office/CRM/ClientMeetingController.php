@@ -18,7 +18,7 @@ class ClientMeetingController extends Controller
     {
         if($request->ajax())
         {
-            $collection = ClientMeeting::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = ClientMeeting::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.crm.client_meeting.list', compact('collection'));
         }
         return view('pages.office.crm.client_meeting.main');

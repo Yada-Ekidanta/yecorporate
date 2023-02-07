@@ -16,7 +16,7 @@ class CampaignController extends Controller
     {
         if($request->ajax())
         {
-            $collection = Campaign::where('st','LIKE','%'.$request->keyword.'%')->paginate(10);;
+            $collection = Campaign::where('st','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.crm.campaign.list', compact('collection'));
         }
         return view('pages.office.crm.campaign.main');
@@ -76,7 +76,7 @@ class CampaignController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Campaign Created'
+            'message' => 'Campaign has been Created'
         ]);
     }
 
@@ -132,7 +132,7 @@ class CampaignController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Campaign Updated'
+            'message' => 'Campaign has been Updated'
         ]);
     }
 
@@ -141,7 +141,7 @@ class CampaignController extends Controller
         $campaign->delete();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Campaign Deleted',
+            'message' => 'Campaign has been Deleted',
         ]);
     }
 }

@@ -47,7 +47,6 @@ class OpportunityController extends Controller
             'probability' => 'required',
             'close_date' => 'required',
             'lead_source_id' => 'required',
-            'desc' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -73,7 +72,7 @@ class OpportunityController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Opportunity Created',
+            'message' => 'Opportunity has been Created',
         ]);
     }
 
@@ -102,7 +101,6 @@ class OpportunityController extends Controller
             'probability' => 'required',
             'close_date' => 'required',
             'lead_source_id' => 'required',
-            'desc' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -127,7 +125,7 @@ class OpportunityController extends Controller
 
         return response()->json([
             'alert' => 'success',
-            'message' => 'Opportunity Update',
+            'message' => 'Opportunity has been Update',
         ]);
     }
 
@@ -136,7 +134,7 @@ class OpportunityController extends Controller
         $opportunity->delete();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Opportunity Deleted',
+            'message' => 'Opportunity has been Deleted',
         ]);
     }
 

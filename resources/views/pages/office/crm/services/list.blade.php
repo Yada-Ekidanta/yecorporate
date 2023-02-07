@@ -6,7 +6,7 @@
             </th>
             <th>Title</th>
             <th>Slug</th>
-            <th>Actions</th>
+            <th class="text-end">Actions</th>
         </tr>
     </thead>
     <tbody class="text-gray-600 fw-semibold">
@@ -17,7 +17,7 @@
             </td>
             <td>{{$item->title}}</td>
             <td>{{$item->slug}}</td>
-            <td class="text-nowrap">
+            <td class="text-nowrap text-end">
                 <a href="{{route('office.crm.services.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -187,8 +187,8 @@
             obj_select('attendees_employee');
             obj_select('attendees_contact');
             obj_select('attendees_lead');
-            obj_date('start_at');
-            obj_date('end_at');
+            obj_startdatenow('start_at');
+            obj_startdatenow('end_at');
         </script>
     @endsection
 </x-office-layout>

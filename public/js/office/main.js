@@ -26,7 +26,7 @@
 // };
 const options = {
     containers: ['#kt_app_main'],
-    cache:false,
+    cache: false,
     animateHistoryBrowsing: true,
     linkSelector: '.menu-link:not([data-no-swup]), .menu-item:not([data-no-swup]), .nav-link:not([data-no-swup])',
     animationSelector: '[class="app-toolbar"]',
@@ -99,10 +99,11 @@ document.addEventListener("swup:contentReplaced", () => {
     obj_select('document_type_id');
     obj_select('opportunity_id');
     obj_select('meeting_id');
+    obj_select('priority')
     obj_date('last_seen');
     obj_date('date_birth');
-    obj_date('start_at');
-    obj_date('end_at');
+    obj_startdatenow('start_at');
+    obj_startdatenow('end_at');
     obj_date('close_date');
     obj_date('publish_date');
     obj_date('expiration_date');

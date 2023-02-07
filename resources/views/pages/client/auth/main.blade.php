@@ -65,7 +65,7 @@
                     </button>
                     <!--end::Submit-->
                     <!--begin::Social-->
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center d-none">
                         <div class="text-gray-400 fw-semibold fs-6 me-3 me-md-6" data-kt-translate="general-or">Or</div>
                         <!--begin::Symbol-->
                         <a href="javascript:;" class="symbol symbol-circle symbol-45px w-45px bg-light me-3">

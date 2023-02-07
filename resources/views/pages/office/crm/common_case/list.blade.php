@@ -22,16 +22,32 @@
             </td>
             <td>{{$item->name}}</td>
             <td>{{$item->client->name}}</td>
-            <td>{{$item->priority}}</td>
+            <td class="text-nowrap">
+                @if ($item->priority == 0)
+                Low
+                @elseif ($item->priority == 1)
+                Normal
+                @elseif ($item->priority == 2)
+                High
+                @elseif ($item->priority == 3)
+                Urgent
+                @endif
+            </td>
             <td>{{$item->number}}</td>
             <td>{{$item->client_contact->name . ' (' . $item->client_contact->phone . ')'}}</td>
             <td class="text-nowrap">
                 @if ($item->st == 0)
-                Status 1
+                New
                 @elseif ($item->st == 1)
-                Status 2
+                Assigned
                 @elseif ($item->st == 2)
-                Status 3
+                Pending
+                @elseif ($item->st == 3)
+                Closed
+                @elseif ($item->st == 4)
+                Rejected
+                @elseif ($item->st == 5)
+                Duplicate
                 @endif
             </td>
             <td>{{$item->employee->name}}</td>

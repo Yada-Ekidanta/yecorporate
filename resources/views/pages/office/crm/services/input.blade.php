@@ -77,20 +77,20 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="{{ $data->title }}" />
+                                    <input type="text" class="form-control form-control-solid" id="title" name="title" placeholder="Enter Title" value="{{ $data->title }}" />
                                     <label for="title">Title</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="slug" name="slug" placeholder="Enter Slug" value="{{ $data->slug }}" />
+                                    <input type="text" class="form-control form-control-solid" id="slug" name="slug" placeholder="Enter Slug" value="{{ $data->slug }}" />
                                     <label for="slug">Slug</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="thumbnail" class="form-label ms-1">Thumbnail</label>
-                                    <input type="file" class="form-control" id="thumbnail" name="thumbnail" />
+                                    <input type="file" class="form-control form-control-solid" id="thumbnail" name="thumbnail" />
                                 </div>
                             </div>
                             <div class="col-12 mb-3">

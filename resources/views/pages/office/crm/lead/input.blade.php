@@ -193,7 +193,6 @@
                         client_id: $(this).val(),
                     },
                     success: function(response) {
-                        $("#client_contact_id").removeAttr("disabled");
                         $("#client_contact_id").html(response);
                     }
                 });

@@ -272,7 +272,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
         <span class="menu-icon">
@@ -288,7 +288,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
         <span class="menu-icon">
@@ -304,7 +304,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
         <span class="menu-icon">
@@ -338,7 +338,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
         <span class="menu-icon">
@@ -358,7 +358,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="{{ route('office.crm.client-meeting.index') }}">
         <span class="menu-icon">
@@ -374,7 +374,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
         <span class="menu-icon">
@@ -390,7 +390,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="{{ route('office.crm.call.index') }}">
         <span class="menu-icon">
@@ -408,7 +408,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="{{ route('office.crm.client-contract.index') }}">
         <span class="menu-icon">
@@ -424,7 +424,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="{{ route('office.crm.client-document.index') }}">
         <span class="menu-icon">
@@ -456,7 +456,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="../../demo1/dist/apps/calendar.html">
         <span class="menu-icon">

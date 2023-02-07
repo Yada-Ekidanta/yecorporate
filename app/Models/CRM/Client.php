@@ -24,7 +24,7 @@ class Client extends Authenticatable
     use HasFactory,HasRoles,Notifiable,SoftDeletes;
     protected $table = 'clients';
     protected $dates = ['deleted_at'];
-    
+
     public function getImageAttribute()
     {
         if($this->avatar){
@@ -61,6 +61,11 @@ class Client extends Authenticatable
     public function companyIndustry()
     {
         return $this->belongsTo(CompanyIndustry::class, 'company_industry_id');
+    }
+
+    public function lead()
+    {
+        return $this->hasMany(Leads::class, 'client_id');
     }
 
     public function opportunity()
