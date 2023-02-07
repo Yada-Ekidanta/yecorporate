@@ -89,7 +89,7 @@
                         <div class="form-group row mb-3">
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="client_type_id" id="client_type_id" class="form-select">
+                                    <select name="client_type_id" id="client_type_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Client Type</option>
                                         @foreach ($client_type as $item)
                                             <option value="{{ $item->id }}"
@@ -101,7 +101,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="company_industry_id" id="company_industry_id" class="form-select">
+                                    <select name="company_industry_id" id="company_industry_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Company Industry</option>
                                         @foreach ($company_industry as $item)
                                             <option value="{{ $item->id }}"
@@ -113,56 +113,56 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="company_name" name="company_name"
+                                    <input type="text" class="form-control form-control-solid" id="company_name" name="company_name"
                                         placeholder="Enter Company Name" value="{{ $data->company_name }}" />
                                     <label for="company_name">Company Name</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="title" name="title"
+                                    <input type="text" class="form-control form-control-solid" id="title" name="title"
                                         placeholder="Enter Title" value="{{ $data->title }}" />
                                     <label for="title">Title</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name"
+                                    <input type="text" class="form-control form-control-solid" id="name" name="name"
                                         placeholder="Enter Name" value="{{ $data->name }}" />
                                     <label for="name">Name</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="tel" class="form-control" id="phone" name="phone"
+                                    <input type="tel" class="form-control form-control-solid" id="phone" name="phone"
                                         placeholder="Enter phone" value="{{ $data->phone }}" />
                                     <label for="phone">Phone</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" name="email"
+                                    <input type="email" class="form-control form-control-solid" id="email" name="email"
                                         placeholder="Enter email" value="{{ $data->email }}" />
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" name="password"
+                                    <input type="password" class="form-control form-control-solid" id="password" name="password"
                                         placeholder="Enter Password" />
                                     <label for="name">Password</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="date" class="form-control" id="date_birth" name="date_birth"
+                                    <input type="date" class="form-control form-control-solid" id="date_birth" name="date_birth"
                                         placeholder="Enter Date Birth" value="{{ $data->date_birth }}" />
                                     <label for="name">Date Birth</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="category" id="category" class="form-select">
+                                    <select name="category" id="category" class="form-select form-select-solid">
                                         <option disabled selected>Category</option>
                                         <option value="Online" {{ $data->category === 'Online' ? 'selected' : '' }}>Online</option>
                                         <option value="Offline" {{ $data->category === 'Offline' ? 'selected' : '' }}>Offline</option>
@@ -171,7 +171,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="st" id="st" class="form-select">
+                                    <select name="st" id="st" class="form-select form-select-solid">
                                         <option disabled selected>Status</option>
                                         <option value="Active" {{ $data->st === 'Active' ? 'selected' : '' }}>Active</option>
                                         <option value="Non Active" {{ $data->st === 'Non Active' ? 'selected' : '' }}>Non Active</option>
@@ -183,7 +183,7 @@
                             <label class="form-label fw-bold ms-1">Billing Address</label>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="billing_address"
+                                    <input type="text" class="form-control form-control-solid" id="billing_address"
                                         name="billing_address" placeholder="Enter billing_address"
                                         value="{{ $data->billing_address }}" />
                                     <label for="name">Billing Address</label>
@@ -191,7 +191,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="billing_country_id" id="billing_country_id" class="form-select">
+                                    <select name="billing_country_id" id="billing_country_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Billing Country</option>
                                         @foreach ($country as $item)
                                             <option value="{{ $item->id }}"
@@ -203,35 +203,35 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="billing_province_id" id="billing_province_id" class="form-select" disabled>
+                                    <select name="billing_province_id" id="billing_province_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Billing Province</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="billing_regency_id" id="billing_regency_id" class="form-select" disabled>
+                                    <select name="billing_regency_id" id="billing_regency_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Billing Regency</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="billing_district_id" id="billing_district_id" class="form-select" disabled>
+                                    <select name="billing_district_id" id="billing_district_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Billing District</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="billing_village_id" id="billing_village_id" class="form-select" disabled>
+                                    <select name="billing_village_id" id="billing_village_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Billing Village</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="number" class="form-control" id="billing_postcode"
+                                    <input type="number" class="form-control form-control-solid" id="billing_postcode"
                                         name="billing_postcode" placeholder="Enter Postcode"
                                         value="{{ $data->billing_postcode }}" />
                                     <label for="billing_postcode">Billing Post Code</label>
@@ -242,7 +242,7 @@
                             <label class="form-label fw-bold ms-1">Shipping Address</label>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="shipping_address"
+                                    <input type="text" class="form-control form-control-solid" id="shipping_address"
                                         name="shipping_address" placeholder="Enter shipping_address"
                                         value="{{ $data->shipping_address }}" />
                                     <label for="shipping_address">Shipping Address</label>
@@ -250,7 +250,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="shipping_country_id" id="shipping_country_id" class="form-select">
+                                    <select name="shipping_country_id" id="shipping_country_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Shipping Country</option>
                                         @foreach ($country as $item)
                                             <option value="{{ $item->id }}"
@@ -263,14 +263,14 @@
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="shipping_province_id" id="shipping_province_id"
-                                        class="form-select" disabled>
+                                        class="form-select form-select-solid">
                                         <option disabled selected>Select Shipping Province</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="shipping_regency_id" id="shipping_regency_id" class="form-select" disabled>
+                                    <select name="shipping_regency_id" id="shipping_regency_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Shipping Regency</option>
                                     </select>
                                 </div>
@@ -278,21 +278,21 @@
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="shipping_district_id" id="shipping_district_id"
-                                        class="form-select" disabled>
+                                        class="form-select form-select-solid">
                                         <option disabled selected>Select Shipping District</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="shipping_village_id" id="shipping_village_id" class="form-select" disabled>
+                                    <select name="shipping_village_id" id="shipping_village_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Shipping Village</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="number" class="form-control" id="shipping_postcode"
+                                    <input type="number" class="form-control form-control-solid" id="shipping_postcode"
                                         name="shipping_postcode" placeholder="Enter Postcode"
                                         value="{{ $data->shipping_postcode }}" />
                                     <label for="name">Shipping Post Code</label>
@@ -303,7 +303,7 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="company_logo" class="form-label fw-bold ms-1">Company Logo</label>
-                                    <input type="file" class="form-control" id="company_logo" name="company_logo"
+                                    <input type="file" class="form-control form-control-solid" id="company_logo" name="company_logo"
                                     placeholder="Enter Company Logo" value="{{ $data->company_logo }}" />
                                 </div>
                             </div>
@@ -317,7 +317,7 @@
                         </button>
                         @if ($data->id)
                             <button type="button"
-                                onclick="handle_confirm('Are you sure want to delete this Client ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.accounts.destroy', $data->id) }}');"
+                                onclick="handle_confirm_custom('Are you sure want to delete this Client ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.accounts.destroy', $data->id) }}','{{ route('office.crm.accounts.index') }}');"
                                 class="btn btn-sm btn-danger">
                                 Delete
                             </button>
@@ -357,7 +357,6 @@
                         country: $("#billing_country_id").val()
                     },
                     success: function(response) {
-                        $("#billing_province_id").removeAttr("disabled");
                         $("#billing_province_id").html(response);
                         $("#billing_province_id").append("<option disabled selected>Select Billing Province</option>");
                     }
@@ -371,7 +370,6 @@
                         province: $("#billing_province_id").val()
                     },
                     success: function(response) {
-                        $("#billing_regency_id").removeAttr("disabled");
                         $("#billing_regency_id").html(response);
                         $("#billing_regency_id").append("<option disabled selected>Select Billing Regency</option>");
                     }
@@ -385,7 +383,6 @@
                         regency: $("#billing_regency_id").val()
                     },
                     success: function(response) {
-                        $("#billing_district_id").removeAttr("disabled");
                         $("#billing_district_id").html(response);
                         $("#billing_district_id").append("<option disabled selected>Select Billing District</option>");
                     }
@@ -399,7 +396,6 @@
                         district: $("#billing_district_id").val()
                     },
                     success: function(response) {
-                        $("#billing_village_id").removeAttr("disabled");
                         $("#billing_village_id").html(response);
                         $("#billing_village_id").append("<option disabled selected>Select Billing Village</option>");
                     }
@@ -423,7 +419,6 @@
                         country: $("#shipping_country_id").val()
                     },
                     success: function(response) {
-                        $("#shipping_province_id").removeAttr("disabled");
                         $("#shipping_province_id").html(response);
                         $("#shipping_province_id").append("<option disabled selected>Select Shipping Province</option>");
                     }
@@ -437,7 +432,6 @@
                         province: $("#shipping_province_id").val()
                     },
                     success: function(response) {
-                        $("#shipping_regency_id").removeAttr("disabled");
                         $("#shipping_regency_id").html(response);
                         $("#shipping_regency_id").append("<option disabled selected>Select Shipping Regency</option>");
                     }
@@ -451,7 +445,6 @@
                         regency: $("#shipping_regency_id").val()
                     },
                     success: function(response) {
-                        $("#shipping_district_id").removeAttr("disabled");
                         $("#shipping_district_id").html(response);
                         $("#shipping_district_id").append("<option disabled selected>Select Shipping District</option>");
                     }
@@ -465,7 +458,6 @@
                         district: $("#shipping_district_id").val()
                     },
                     success: function(response) {
-                        $("#shipping_village_id").removeAttr("disabled");
                         $("#shipping_village_id").html(response);
                         $("#shipping_village_id").append("<option disabled selected>Select Shipping Village</option>");
                     }

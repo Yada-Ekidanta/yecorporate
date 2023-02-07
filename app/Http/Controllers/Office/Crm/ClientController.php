@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Office\Crm;
 
 use App\Models\Crm\Client;
-use App\Models\HRM\Document;
 use App\Models\HRM\Employee;
 use Illuminate\Http\Request;
 use App\Models\Regional\Country;
@@ -12,7 +11,6 @@ use App\Models\Regional\Village;
 use App\Models\Master\ClientType;
 use App\Models\Regional\District;
 use App\Models\Regional\Province;
-use App\Models\Master\DocumentType;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Setting\CompanyIndustry;
@@ -217,9 +215,11 @@ class ClientController extends Controller
         ]);
     }
 
-    public function destroy(Client $client)
+    public function destroy(Client $account)
     {
-        $client->delete();
+        // dd($account->client_contact);
+        $account->client_contact()->delete();
+        $account->delete();
         return response()->json([
             'alert' => 'success',
             'message' => 'Client Deleted',

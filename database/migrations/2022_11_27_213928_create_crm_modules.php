@@ -83,7 +83,7 @@ return new class extends Migration
             $table->enum('st',['Active','Non Active'])->nullable();
             $table->string('avatar')->nullable();
             $table->timestamp('last_seen')->nullable();
-            $table->timestamps();
+            $table->timestamps();   
             $table->softDeletes();
         });
         Schema::create('client_contacts', function (Blueprint $table) {

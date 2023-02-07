@@ -209,7 +209,9 @@ Route::group(['domain' => ''], function() {
                 Route::resource('task-stage', TaskStageController::class);
                 Route::resource('accounts', ClientController::class);
                 Route::resource('opportunity', OpportunityController::class);
+                Route::put('opportunity/{opportunity}/update-lead-source', [OpportunityController::class, 'updateLeadSource'])->name('opportunity.update-lead-source');
                 Route::resource('leads', LeadsController::class);
+                Route::put('leads/{lead}/update-status', [LeadsController::class, 'updateStatus'])->name('leads.updateStatus');
                 Route::resource('campaign', CampaignController::class);
                 Route::resource('client-contact', ClientContactController::class);
                 Route::resource('services', ServicesController::class);

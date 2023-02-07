@@ -217,9 +217,9 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item" data-no-swup>
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{route('office.crm.leads.index')}}">
+    <a class="menu-link" href="{{route('office.crm.leads.index')}}" data-no-swup>
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -233,9 +233,9 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item" data-no-swup>
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{route('office.crm.opportunity.index')}}">
+    <a class="menu-link" href="{{route('office.crm.opportunity.index')}}" data-no-swup>
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">

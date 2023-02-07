@@ -89,7 +89,7 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="client_id" id="client_id" class="form-select">
+                                    <select name="client_id" id="client_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Client</option>
                                         @foreach ($client as $item)
                                             <option value="{{ $item->id }}"
@@ -101,21 +101,21 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="client_contact_id" id="client_contact_id" class="form-select" disabled>
+                                    <select name="client_contact_id" id="client_contact_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Client Contact</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="title" name="title"
+                                    <input type="text" class="form-control form-control-solid" id="title" name="title"
                                         placeholder="Enter Title" value="{{ $data->title }}" />
                                     <label for="title">Title</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="opportunity_amount"
+                                    <input type="text" class="form-control form-control-solid" id="opportunity_amount"
                                     name="opportunity_amount" placeholder="Enter Opportunity Amount"
                                     value="{{ $data->opportunity_amount }}" />
                                     <label for="opportunity_amount">Opportunity Amount</label>
@@ -123,7 +123,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="campaign_id" id="campaign_id" class="form-select">
+                                    <select name="campaign_id" id="campaign_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Campaign</option>
                                         @foreach ($campaign as $item)
                                             <option value="{{ $item->id }}"
@@ -135,7 +135,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="st" id="st" class="form-select">
+                                    <select name="st" id="st" class="form-select form-select-solid">
                                         <option disabled selected>Select Status</option>
                                         <option value="0" {{ $data->st === 0 ? 'selected' : '' }}>New</option>
                                         <option value="1" {{ $data->st === 1 ? 'selected' : '' }}>Assigned</option>
@@ -165,7 +165,7 @@
                         </button>
                         @if ($data->id)
                             <button type="button"
-                                onclick="handle_confirm('Are you sure want to delete this Leads ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.leads.destroy', $data->id) }}');"
+                                onclick="handle_confirm_custom('Are you sure want to delete this Leads ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.leads.destroy', $data->id) }}','{{ route('office.crm.leads.index') }}');"
                                 class="btn btn-sm btn-danger">
                                 Delete
                             </button>

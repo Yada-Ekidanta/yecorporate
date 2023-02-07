@@ -78,7 +78,7 @@
                         <div class="row">
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="client_id" id="client_id" class="form-select">
+                                    <select name="client_id" id="client_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Client</option>
                                         @foreach ($client as $item)
                                             <option value="{{ $item->id }}" {{ $data->client_id === $item->id ? 'selected' : '' }}>
@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="st" id="st" class="form-select">
+                                    <select name="st" id="st" class="form-select form-select-solid">
                                         <option disabled selected>Select Status</option>
                                         <option value="Active" {{ $data->st === 'Active' ? 'selected' : '' }}>Active</option>
                                         <option value="Non Active" {{ $data->st === 'Non Active' ? 'selected' : '' }}>Non Active</option>
@@ -98,31 +98,31 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="{{ $data->title }}" />
+                                    <input type="text" class="form-control form-control-solid" id="title" name="title" placeholder="Enter Title" value="{{ $data->title }}" />
                                     <label for="itle">Title</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="{{ $data->name }}" />
+                                    <input type="text" class="form-control form-control-solid" id="name" name="name" placeholder="Enter Name" value="{{ $data->name }}" />
                                     <label for="name">Name</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phonet" value="{{ $data->phone }}" />
+                                    <input type="tel" class="form-control form-control-solid" id="phone" name="phone" placeholder="Enter Phonet" value="{{ $data->phone }}" />
                                     <label for="phone">Phone</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="{{ $data->email }}" />
+                                    <input type="email" class="form-control form-control-solid" id="email" name="email" placeholder="Enter Email" value="{{ $data->email }}" />
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="country_id" id="country_id" class="form-select">
+                                    <select name="country_id" id="country_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Country</option>
                                         @foreach ($country as $item)
                                             <option value="{{ $item->id }}" {{ $data->country_id === $item->id ? 'selected' : '' }}>
@@ -133,35 +133,35 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="province_id" id="province_id" class="form-select" disabled>
+                                    <select name="province_id" id="province_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Province</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="regency_id" id="regency_id" class="form-select" disabled>
+                                    <select name="regency_id" id="regency_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Regency</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="district_id" id="district_id" class="form-select" disabled>
+                                    <select name="district_id" id="district_id" class="form-select form-select-solid">
                                         <option disabled selected>Select District</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="village_id" id="village_id" class="form-select" disabled>
+                                    <select name="village_id" id="village_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Village</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Enter Postcode" value="{{ $data->postcode }}" />
+                                    <input type="text" class="form-control form-control-solid" id="postcode" name="postcode" placeholder="Enter Postcode" value="{{ $data->postcode }}" />
                                     <label for="postcode">Postcode</label>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@
                                 {{ $data->id ? 'Update' : 'Create' }}
                             </button>
                             @if ($data->id)
-                                <button type="button" onclick="handle_confirm('Are you sure want to delete this Opportunity ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.client-contact.destroy', $data->id) }}');"
+                                <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this Opportunity ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.client-contact.destroy', $data->id) }}','{{ route('office.crm.client-contact.index') }}');"
                                     class="btn btn-sm btn-danger">
                                     Delete
                                 </button>

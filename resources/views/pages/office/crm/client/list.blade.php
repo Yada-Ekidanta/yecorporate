@@ -46,7 +46,7 @@
             <td>{{$item->category}}</td>
             <td>{{$item->st}}</td>
             <td>{{$item->employee->name}}</td>
-            <td class="text-nowrap">
+            <td class="text-nowrap text-center">
                 <a href="{{route('office.crm.accounts.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link" data-no-swup>
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

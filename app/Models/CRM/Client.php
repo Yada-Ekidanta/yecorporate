@@ -22,6 +22,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Client extends Authenticatable
 {
     use HasFactory,HasRoles,Notifiable,SoftDeletes;
+    protected $table = 'clients';
+    protected $dates = ['deleted_at'];
+    
     public function getImageAttribute()
     {
         if($this->avatar){
@@ -43,6 +46,11 @@ class Client extends Authenticatable
     public function employee()
     {
         return $this->belongsTo(Employee::class, 'employee_id');
+    }
+
+    public function client_contact()
+    {
+        return $this->hasMany(ClientContact::class, 'client_id');
     }
 
     public function clientType()

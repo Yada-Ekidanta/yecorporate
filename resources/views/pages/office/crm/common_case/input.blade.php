@@ -163,7 +163,7 @@
                         </button>
                         @if ($data->id)
                             <button type="button"
-                                onclick="handle_confirm('Are you sure want to delete this Leads ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.common-case.destroy', $data->id) }}');"
+                                onclick="handle_confirm_custom('Are you sure want to delete this Leads ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.common-case.destroy', $data->id) }}','{{ route('office.crm.common-case.index') }}');"
                                 class="btn btn-sm btn-danger">
                                 Delete
                             </button>

@@ -22,7 +22,7 @@ class Leads extends Model
         return $this->belongsTo(Client::class, 'client_id');
     }
 
-    public function clientContact()
+    public function client_contact()
     {
         return $this->belongsTo(ClientContact::class, 'client_contact_id');
     }

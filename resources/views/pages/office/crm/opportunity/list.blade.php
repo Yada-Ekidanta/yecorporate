@@ -1,73 +1,170 @@
-<table class="table align-middle table-row-dashed fs-6 gy-5">
-    <thead>
-        <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0 text-nowrap">
-            <th>
-                No
-            </th>
-            <th>Client</th>
-            <th>Name</th>
-            <th>Client Contact</th>
-            <th>Opportunity Stage</th>
-            <th>Amount</th>
-            <th>Probability</th>
-            <th>Close Date</th>
-            <th>Lead Source</th>
-            <th>Assigned Employee</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody class="text-gray-600 fw-semibold">
-        @forelse ($collection as $key => $item)
-        <tr>
-            <td>
-                {{$key+ $collection->firstItem()}}
-            </td>
-            {{-- <td class="d-flex align-items-center">
-                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                    <a href="javascript:;">
-                        {!!$item->image!!}
-                    </a>
-                </div>
-                <div class="d-flex flex-column">
-                    <a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">{{$item->code}}</a>
-                    <span>{{$item->name}}</span>
-                </div>
-            </td> --}}
-            <td>{{$item->name}}</td>
-            <td>{{$item->client->name}}</td>
-            <td>{{$item->client_contact->name . ' (' . $item->client_contact->phone . ')'}}</td>
-            <td>{{$item->opportunityStage->name}}</td>
-            <td>{{$item->amount}}</td>
-            <td>{{$item->probability}}</td>
-            <td class="text-nowrap">{{$item->close_date}}</td>
-            <td>{{$item->leadSource->name}}</td>
-            <td>{{$item->employee->name}}</td>
-            <td class="text-nowrap">
-                <a href="{{route('office.crm.opportunity.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link" data-no-swup>
-                    <span class="svg-icon svg-icon-5 svg-icon-gray-700">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="currentColor"/>
-                            <path d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z" fill="currentColor"/>
-                            <path d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z" fill="currentColor"/>
-                        </svg>
-                    </span>
-                </a>
-                <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this Opportunity ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.crm.opportunity.destroy',$item->id)}}');" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-danger w-30px h-30px">
-                    <span class="svg-icon svg-icon-5 svg-icon-gray-700">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"/>
-                            <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="currentColor"/>
-                            <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="currentColor"/>
-                        </svg>
-                    </span>
-                </a>
-            </td>
-        </tr>
-        @empty
-        <tr>
-            <td align="center" colspan="4">No Data</td>
-        </tr>
-        @endforelse
-    </tbody>
-</table>
-{{$collection->links('themes.office.pagination')}}
+<style>
+    .kanban-container {
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+    }
+</style>
+
+<div id="_jkanban_basic"></div>
+
+<script>
+    let obj,
+        i,
+        lead_source = 0,
+        call_ = [],
+        email = [],
+        existing_customer = [],
+        partner = [],
+        public_relations = [],
+        website = [],
+        campaign = [],
+        data = @json($collection);
+
+    for (i = 0; i < data.length; i++) {
+        let id = data[i].id;
+        let updateURL = "{{ route('office.crm.opportunity.edit', ':id') }}";
+        let deleteURL = "{{ route('office.crm.opportunity.destroy', ':id') }}";
+        deleteURL = deleteURL.replace(':id', id);
+        let clientName = data[i].client.name;
+        let clientContact = data[i].client_contact.name + " (" + data[i].client_contact.phone + ")";
+        // console.log(clientContact);
+        function editPage (id) {
+            updateURL = updateURL.replace(':id', id);
+            window.location.href = updateURL;
+        }
+        obj = {
+            id: id,
+            title: `<span class="font-weight-bold"> ${data[i].name} </span>
+                        <input type="hidden" id="lead_source" value="${data[i].lead_source_id}" />
+                        <div class="btn-group" style="position: absolute; right:70px; width:0px;">
+                            <a href="#" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="10" width="4" height="4" rx="2" fill="currentColor"/>
+                                    <rect x="10" y="3" width="4" height="4" rx="2" fill="currentColor"/>
+                                    <rect x="10" y="17" width="4" height="4" rx="2" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="javascript:;" onclick="editPage(${data[i].id})";>Edit</a></li>
+                                <li><a class="dropdown-item" href="javascript:;" onclick="handle_confirm('Are you sure want to delete this todo list ?', 'Yes, im sure', 'No, im not','DELETE','${deleteURL}')"  class="menu-link">Delete</a></li>
+                            </ul>
+                        </div>
+                        <br><br>
+                    <span class="text-muted" style="white-space: nowrap; text-overflow: ellipsis;">${clientName + " - " + clientContact}</span>`,
+        };
+        lead_source = data[i].lead_source_id;
+        switch (lead_source) {
+            case 1:
+                call_.push(obj);
+                break;
+            case 2:
+                email.push(obj);
+                break;
+            case 3:
+                existing_customer.push(obj);
+                break;
+            case 4:
+                partner.push(obj);
+                break;
+            case 5:
+                public_relations.push(obj);
+                break;
+            case 6:
+                website.push(obj);
+                break;
+            case 7:
+                campaign.push(obj);
+                break;
+        }
+    }
+
+    let kanban = new jKanban({
+        element: '#_jkanban_basic',
+        gutter: '0',
+        widthBoard: '270px',
+        boards: [
+            {
+                id: '_call',
+                title: 'Call',
+                class: 'primary',
+                item: call_
+            },
+            {
+                id: '_email',
+                title: 'Email',
+                class: 'info',
+                item: email
+            },
+            {
+                id: '_existing_customer',
+                title: 'Existing Customer',
+                class: 'warning',
+                item: existing_customer
+            },
+            {
+                id: '_partner',
+                title: 'Partner',
+                class: 'dark',
+                item: partner
+            },
+            {
+                id: '_public_relations',
+                title: 'Public Relations',
+                class: 'success',
+                item: public_relations
+            },
+            {
+                id: '_website',
+                title: 'Website',
+                class: 'secondary',
+                item: website
+            },
+            {
+                id: '_campaign',
+                title: 'Campaign',
+                class: 'danger',
+                item: campaign
+            },
+        ],
+        dragBoards: true,
+        dragendEl: function(el) {
+            let id = el.dataset.eid;
+            let updateURL = "{{ route('office.crm.opportunity.update-lead-source', ':id') }}";
+            updateURL = updateURL.replace(':id', id);
+            // console.log(updateURL);
+            let lead_source = el.offsetParent.dataset.id;
+            switch (lead_source) {
+                case '_call':
+                    $('#lead_source').val(1);
+                    break;
+                case '_email':
+                    $('#lead_source').val(2);
+                    break;
+                case '_existing_customer':
+                    $('#lead_source').val(3);
+                    break;
+                case '_partner':
+                    $('#lead_source').val(4);
+                    break;
+                case '_public_relations':
+                    $('#lead_source').val(5);
+                    break;
+                case '_website':
+                    $('#lead_source').val(6);
+                    break;
+                case '_campaign':
+                    $('#lead_source').val(7);
+                    break;
+            }
+            $.ajax({
+                url: updateURL,
+                type: 'PUT',
+                data: {
+                    lead_source: $('#lead_source').val(),
+                }
+            });
+            // console.log('dragendEl:', id);
+            // console.log('dragendEl:', $('#lead_source').val());
+        },
+    });
+</script>

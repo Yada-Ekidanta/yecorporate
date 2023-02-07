@@ -44,9 +44,9 @@
     <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
-                <div class="card-header border-0 pt-6">
+                <div class="card-header border-0 py-6">
                     <form id="content_filter">
-                        <div class="card-title">
+                        {{-- <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
                                 <span class="svg-icon svg-icon-1 position-absolute ms-6">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +56,7 @@
                                 </span>
                                 <input type="text" name="keyword" onkeyup="load_list();" class="form-control form-control-solid w-250px ps-14" placeholder="Search Leads" />
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
@@ -176,9 +176,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <div id="list_result"></div>
-                    </div>
+                    <div id="list_result"></div>
                 </div>
             </div>
         </div>

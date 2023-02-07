@@ -86,31 +86,30 @@
                         <div class="row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="{{ $data->name }}" />
+                                    <input type="text" class="form-control form-control-solid" id="name" name="name" placeholder="Enter Name" value="{{ $data->name }}" />
                                     <label for="name">Name</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="client_id" id="client_id" class="form-select">
+                                    <select name="client_id" id="client_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Client</option>
                                         @foreach ($client as $item)
-                                            <option value="{{ $item->id }}" {{ $data->client_id === $item->id ? 'selected' : '' }}>
-                                                {{ $item->name }}</option>
+                                            <option value="{{ $item->id }}" {{ $data->client_id === $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="client_contact_id" id="client_contact_id" class="form-select" disabled>
+                                    <select name="client_contact_id" id="client_contact_id" class="form-select form-select-solid" disabled>
                                         <option disabled selected>Select Client Contact</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
-                                    <select name="opportunities_stage_id" id="opportunitie_stage_id" class="form-select">
+                                    <select name="opportunities_stage_id" id="opportunitie_stage_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Opportunities Stage</option>
                                         @foreach ($opportunityStage as $item)
                                             <option value="{{ $item->id }}" {{ $data->opportunities_stage_id === $item->id ? 'selected' : '' }}>
@@ -121,25 +120,25 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter Amount" value="{{ $data->amount }}" />
+                                    <input type="number" class="form-control form-control-solid" id="amount" name="amount" placeholder="Enter Amount" value="{{ $data->amount }}" />
                                     <label for="name">Amount</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="number" class="form-control" id="probability" name="probability" placeholder="Enter Probability" value="{{ $data->probability }}" />
+                                    <input type="number" class="form-control form-control-solid" id="probability" name="probability" placeholder="Enter Probability" value="{{ $data->probability }}" />
                                     <label for="name">Probability</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="date" class="form-control" id="close_date" name="close_date" placeholder="Enter Close Date" value="{{ $data->close_date }}" />
+                                    <input type="date" class="form-control form-control-solid" id="close_date" name="close_date" placeholder="Enter Close Date" value="{{ $data->close_date }}" />
                                     <label for="name">Close Date</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <select name="lead_source_id" id="lead_source_id" class="form-control">
+                                    <select name="lead_source_id" id="lead_source_id" class="form-control form-control-solid">
                                         <option disabled selected>Lead Source</option>
                                         @foreach ($leadSource as $item)
                                             <option value="{{ $item->id }}" {{ $data->lead_source_id === $item->id ? 'selected' : '' }}>
@@ -161,7 +160,7 @@
                                 {{ $data->id ? 'Update' : 'Create' }}
                             </button>
                             @if ($data->id)
-                                <button type="button" onclick="handle_confirm('Are you sure want to delete this Opportunity ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.opportunity.destroy', $data->id) }}');"
+                            <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this Opportunity ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.opportunity.destroy', $data->id) }}','{{ route('office.crm.opportunity.index') }}');"
                                     class="btn btn-sm btn-danger">
                                     Delete
                                 </button>

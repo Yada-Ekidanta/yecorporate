@@ -16,7 +16,7 @@ use App\Http\Controllers\Client\DashboardController;
 |
 */
 
-Route::group(['domain' => 'https://client.yadaekidanta.com'], function() {
+Route::group(['domain' => ''], function() {
     Route::prefix('client')->name('client.')->group(function(){
         Route::prefix('auth')->name('auth.')->group(function(){
             Route::get('',[AuthController::class, 'index'])->name('index');
@@ -31,17 +31,17 @@ Route::group(['domain' => 'https://client.yadaekidanta.com'], function() {
             Route::prefix('dashboard')->name('dashboard.')->group(function(){
                 Route::get('',[DashboardController::class, 'index'])->name('index');
             });
-            Route::prefix('profile')->name('profile.')->group(function(){
-                Route::get('',[ProfileController::class, 'index'])->name('index');
-                Route::get('setting',[ProfileController::class, 'setting'])->name('setting');
-                Route::get('security',[ProfileController::class, 'security'])->name('security');
-                Route::get('activity',[ProfileController::class, 'activity'])->name('activity');
-                Route::get('billing',[ProfileController::class, 'billing'])->name('billing');
-                Route::get('statement',[ProfileController::class, 'statement'])->name('statement');
-                Route::get('referral',[ProfileController::class, 'referral'])->name('referral');
-                Route::get('apikey',[ProfileController::class, 'apikey'])->name('apikey');
-                Route::get('log',[ProfileController::class, 'log'])->name('log');
-            });
+            // Route::prefix('profile')->name('profile.')->group(function(){
+            //     Route::get('',[ProfileController::class, 'index'])->name('index');
+            //     Route::get('setting',[ProfileController::class, 'setting'])->name('setting');
+            //     Route::get('security',[ProfileController::class, 'security'])->name('security');
+            //     Route::get('activity',[ProfileController::class, 'activity'])->name('activity');
+            //     Route::get('billing',[ProfileController::class, 'billing'])->name('billing');
+            //     Route::get('statement',[ProfileController::class, 'statement'])->name('statement');
+            //     Route::get('referral',[ProfileController::class, 'referral'])->name('referral');
+            //     Route::get('apikey',[ProfileController::class, 'apikey'])->name('apikey');
+            //     Route::get('log',[ProfileController::class, 'log'])->name('log');
+            // });
             Route::get('logout',[AuthController::class, 'do_logout'])->name('auth.logout');
         });
     });
