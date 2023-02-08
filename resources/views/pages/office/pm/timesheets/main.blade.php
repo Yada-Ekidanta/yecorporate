@@ -53,7 +53,7 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
                 <div class="container p-5">
-                    <div id="kt_docs_fullcalendar_drag"></div>
+                    <div id="timeSheet"></div>
                 </div>
             </div>
         </div>
@@ -62,8 +62,8 @@
         <script>
             let data = @json($data);
 
-            let calendarEl = document.getElementById("kt_docs_fullcalendar_drag");
-            let calendar = new FullCalendar.Calendar(calendarEl, {
+            let timeSheetEl = document.getElementById("timeSheet");
+            let timeSheet = new FullCalendar.Calendar(timeSheetEl, {
                 initialView: 'dayGridWeek',
                 headerToolbar: {
                     left: "prev,next",
@@ -76,7 +76,7 @@
                 events: data,
             });
 
-            calendar.render();
+            timeSheet.render();
         </script>
     @endsection
 </x-office-layout>

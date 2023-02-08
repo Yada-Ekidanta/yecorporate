@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="desc">Description</label>
+                                <label for="desc" class="mb-3">Description</label>
                                 <div class="form-floating">
                                     <div id="desc">{!!$data->desc!!}</div>
                                     <textarea name="desc" class="form-control form-control-solid d-none">{{$data->desc}}</textarea>
@@ -143,7 +143,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                            <button type="button" onclick="handle_confirm('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                            <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$data->id)}}', '{{route('office.pm.project.index')}}');" class="btn btn-sm btn-danger">
                                 Delete
                             </button>
                         @endif

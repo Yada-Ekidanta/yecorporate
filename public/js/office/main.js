@@ -49,7 +49,7 @@ document.addEventListener("swup:contentReplaced", () => {
     obj_startdatenow('start_at');
     obj_startdatenow('end_at');
     obj_startdatenow('due_date');
-    obj_date_time('start_date_time');
+    obj_date_timenow('start_date_time');
     obj_select('form-select-employee');
     obj_select('form-select-project');
     obj_select('form-select-task');
@@ -59,7 +59,7 @@ document.addEventListener("swup:contentReplaced", () => {
     setTimeout(() => {
         obj_quill('desc');
     }, 1000);
-    calendar_default('calendar');
+    calendar('calendar');
     $('.ribuan').keyup(function (event) {
         if (event.which >= 37 && event.which <= 40) return;
         // format number

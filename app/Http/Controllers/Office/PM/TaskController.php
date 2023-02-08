@@ -93,6 +93,13 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        // if ($request->ajax()) {
+        //     $todoList = TodoList::where('task_id', $task->id)->get();
+        //     return view('pages.office.pm.todo-list.list', ['todoList' => $todoList]);
+        // }
+
+        // return view('pages.office.pm.task.detail', ['data' => $task]);
+
         $todoList = TodoList::where('task_id', $task->id)->get();
         return view('pages.office.pm.task.detail', ['data' => $task, 'todoList' => $todoList]);
     }

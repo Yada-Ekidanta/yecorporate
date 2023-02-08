@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label for="desc">Description</label>
+                                    <label for="desc" class="mb-3">Description</label>
                                     <div class="form-floating">
                                         <div id="desc">{!!$data->desc!!}</div>
                                         <textarea name="desc" readonly class="form-control form-control-solid d-none">{{$data->desc}}</textarea>
@@ -113,6 +113,7 @@
     @section('custom_js')
         <script>
             obj_quill('desc');
+            // $(".ql-formats").css("display", "none");
         </script>
     @endsection
 </x-office-layout>

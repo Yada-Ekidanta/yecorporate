@@ -60,7 +60,7 @@
     </div>
     @section('custom_js')
         <script>
-            calendar_default('calendar');
+            calendar('calendar');
         </script>
     @endsection
 </x-office-layout>

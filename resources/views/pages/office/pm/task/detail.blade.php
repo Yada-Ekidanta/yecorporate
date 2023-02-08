@@ -85,7 +85,7 @@
                 </div>
                 <div class="card-body">
                     <div class="container mx-4">
-                        <div id="kt_docs_jkanban_basic"></div>
+                        <div id="jkanban_basic"></div>
                     </div>
                 </div>
             </div>
@@ -100,6 +100,8 @@
             active2 = [],
             active3 = [],
             active4 = [],
+            date = new Date(),
+            dateFormat = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
             data = @json($todoList);
 
         for (i = 0; i < data.length; i++) {
@@ -110,6 +112,19 @@
             deleteURL = deleteURL.replace(':id', id);
             // $('#name').val(data[i].name);
             // $('#due_date').val(data[i].due_date);
+
+            let dueDate = '';
+
+            if (data[i].status < 4) {
+                if (data[i].due_date < dateFormat) {
+                    dueDate = `<span class="text-danger">${data[i].due_date}</span>`;
+                } else {
+                    dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
+                }
+            } else {
+                dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
+            }
+
             obj = {
                 id: id,
                 title: `<span class="font-weight-bold"> ${data[i].name} </span>
@@ -127,7 +142,7 @@
                                 </ul>
                             </div>
                             <br><br>
-                        <span class="text-muted">${data[i].due_date}</span>`,
+                        ` + dueDate,
             };
 
             status = data[i].status;
@@ -148,7 +163,7 @@
         }
 
         let kanban = new jKanban({
-            element: '#kt_docs_jkanban_basic',
+            element: '#jkanban_basic',
             gutter: '0',
             widthBoard: '200px',
             boards: [

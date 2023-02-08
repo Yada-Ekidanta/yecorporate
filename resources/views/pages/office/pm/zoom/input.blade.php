@@ -124,7 +124,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                            <button type="button" onclick="handle_confirm('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.zoom.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                            <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.zoom.destroy',$data->id)}}', '{{route('office.pm.zoom.index')}}');" class="btn btn-sm btn-danger">
                                 Delete
                             </button>
                         @endif
@@ -135,7 +135,7 @@
     </div>
     @section('custom_js')
         <script>
-            obj_date_time('start_date_time');
+            obj_date_timenow('start_date_time');
             obj_select('form-select-project');
         </script>
     @endsection

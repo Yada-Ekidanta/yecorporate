@@ -15,7 +15,7 @@
         @forelse ($collection as $key => $item)
             <tr>
                 <td>
-                    {{$key+ 1}}
+                    {{$key+ $collection->firstItem()}}
                 </td>
                 <td>
                     <span>{{$item->name}}</span>
@@ -27,15 +27,24 @@
                     <span>{{$item->task->name}}</span>
                 </td>
                 <td>
-                    <span>{{$item->start_date}} {{ $item->start_time }}</span>
+                    <span>{{ $item->start_time }}</span>
                 </td>
                 <td>
-                    <span>{{$item->end_date}} {{ $item->end_time }}</span>
+                    <span>{{ $item->end_time }}</span>
                 </td>
                 <td>
                     <span>{{$item->total_time}}</span>
                 </td>
-                <td class="text-center">
+                <td class="text-nowrap text-center">
+                    @if(!$status)
+                        <button class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px carryOn" itemid="{{ $item->id }}" id="{{ $item->total_time }}">
+                            <span class="svg-icon svg-icon-5 svg-icon-gray-700">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/>
+                                </svg>
+                            </span>
+                        </button>
+                    @endif
                     <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this tracker ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.tracker.destroy',$item->id)}}');" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-danger w-30px h-30px">
                         <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,4 +63,33 @@
         @endforelse
     </tbody>
 </table>
+<script>
+    $('body').on('click', '.carryOn', function() {
+        location.reload(true);
+        let time = $(this).attr('id');
+        let convertToSeconds = time.split(':');
+        let seconds = (+convertToSeconds[0]) * 60 * 60 + (+convertToSeconds[1]) * 60 + (+convertToSeconds[2]) * 1000;
+        // console.log(seconds);
+        // console.log($(this).attr('itemid'));
+        // intervalId = setTimeout(startTimer, seconds);
+        $('#start-btn').hide();
+        $('#stop').show();
+        $('#is_active').val(1);
+
+        totalSeconds = seconds;
+        // console.log(totalSeconds);
+
+        let url = "{{route('office.pm.tracker.carry_on', ':id')}}";
+        url = url.replace(':id', $(this).attr('itemid'));
+        // console.log(url);
+        $.ajax({
+            url: url,
+            type: 'PUT',
+            data: $('#form_input').serialize(),
+            success: function(data) {
+                $('#id').val(data.id);
+            }
+        });
+    });
+</script>
 {{$collection->links('themes.office.pagination')}}

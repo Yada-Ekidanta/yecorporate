@@ -100,7 +100,13 @@ function obj_date_time(obj) {
         enableTime: true,
     });
 }
-
+function obj_date_timenow(obj) {
+    $("#" + obj).flatpickr({
+        dateFormat: "Y-m-d H:i",
+        enableTime: true,
+        minDate: "today"
+    });
+}
 function obj_date(obj) {
     $("#" + obj).flatpickr({
         dateFormat: "Y-m-d",
@@ -431,9 +437,9 @@ function swa_message(type, msg) {
         timer: 2000
     });
 }
-function calendar_default(obj) {
-    let calendarDefault = document.getElementById(obj);
-    let calendarMainDefault = new FullCalendar.Calendar(calendarDefault, {
+function calendar(obj) {
+    let calendarEl = document.getElementById(obj);
+    let calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
             left: "prev,next",
             center: "title",
@@ -441,5 +447,5 @@ function calendar_default(obj) {
         },
     });
 
-    calendarMainDefault.render();
+    calendar.render();
 }

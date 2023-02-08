@@ -3086,7 +3086,7 @@
                 <!--begin::Search-->
                 <div class="app-navbar-item align-items-stretch ms-1 ms-md-3">
                     <!--begin::Search-->
-                    <div id="kt_header_search" class="header-search d-flex align-items-stretch" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-menu-trigger="auto" data-kt-menu-overflow="false" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-end">
+                    <div id="kt_header_search" class="header-search d-none align-items-stretch" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-menu-trigger="auto" data-kt-menu-overflow="false" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-end">
                         <!--begin::Search toggle-->
                         <div class="d-flex align-items-center" data-kt-search-element="toggle" id="kt_header_search_toggle">
                             <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px">
@@ -3828,7 +3828,7 @@
                 </div>
                 <!--end::Search-->
                 <!--begin::Activities-->
-                <div class="app-navbar-item ms-1 ms-md-3">
+                <div class="app-navbar-item ms-1 ms-md-3 d-none">
                     <!--begin::Drawer toggle-->
                     <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
@@ -3846,7 +3846,7 @@
                 </div>
                 <!--end::Activities-->
                 <!--begin::Notifications-->
-                <div class="app-navbar-item ms-1 ms-md-3">
+                <div class="app-navbar-item ms-1 ms-md-3 d-none">
                     <!--begin::Menu- wrapper-->
                     <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'click'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -4387,9 +4387,9 @@
                 </div>
                 <!--end::Notifications-->
                 <!--begin::Chat-->
-                <div class="app-navbar-item ms-1 ms-md-3">
+                <div class="app-navbar-item ms-1 ms-md-3 d-none">
                     <!--begin::Menu wrapper-->
-                    <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px position-relative" id="kt_drawer_chat_toggle">
+                    {{-- <a class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px position-relative nav-link" href="{{route('office.chat.index')}}"> --}}
                         <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
                         <span class="svg-icon svg-icon-2 svg-icon-md-1">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -4400,12 +4400,12 @@
                         </span>
                         <!--end::Svg Icon-->
                         <span class="bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"></span>
-                    </div>
+                    </a>
                     <!--end::Menu wrapper-->
                 </div>
                 <!--end::Chat-->
                 <!--begin::My apps links-->
-                <div class="app-navbar-item ms-1 ms-md-3">
+                <div class="app-navbar-item ms-1 ms-md-3 d-none">
                     <!--begin::Menu wrapper-->
                     <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'click'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -4797,12 +4797,12 @@
                         <div class="separator my-2"></div>
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
+                        <div class="menu-item px-5 d-none">
                             <a href="{{route('office.profile.index')}}" class="menu-link px-5">My Profile</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
+                        <div class="menu-item px-5 d-none">
                             <a href="../../demo1/dist/apps/projects/list.html" class="menu-link px-5">
                                 <span class="menu-text">My Projects</span>
                                 <span class="menu-badge">
@@ -4812,7 +4812,7 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
+                        <div class="menu-item px-5 d-none" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
                             <a href="#" class="menu-link px-5">
                                 <span class="menu-title">My Subscription</span>
                                 <span class="menu-arrow"></span>
@@ -4858,22 +4858,22 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
+                        <div class="menu-item px-5 d-none">
                             <a href="../../demo1/dist/account/statements.html" class="menu-link px-5">My Statements</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->
-                        <div class="separator my-2"></div>
+                        {{-- <div class="separator my-2"></div> --}}
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
+                        <div class="menu-item px-5 d-none" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
                             <a href="#" class="menu-link px-5">
                                 <span class="menu-title position-relative">Language
                                 <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
                                 <img class="w-15px h-15px rounded-1 ms-2" src="{{asset('metronic/media/flags/united-states.svg')}}" alt="" /></span></span>
                             </a>
                             <!--begin::Menu sub-->
-                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                            <div class="menu-sub menu-sub-dropdown w-175px py-4 ">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
                                     <a href="../../demo1/dist/account/settings.html" class="menu-link d-flex px-5 active">
@@ -4919,7 +4919,7 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5 my-1">
+                        <div class="menu-item px-5 my-1 d-none">
                             <a href="../../demo1/dist/account/settings.html" class="menu-link px-5">Account Settings</a>
                         </div>
                         <!--end::Menu item-->

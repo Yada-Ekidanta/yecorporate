@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p class="text-end me-3">End Date :</p>
-                                    <p class="fw-bold text-end text-danger">{{ $data->end_date }}</p>
+                                    <p class="fw-bold text-end {{date('Y-m-d') > $data->end_date ? 'text-danger' : '' }}">{{ $data->end_date }}</p>
                                 </div>
                             </div>
                         </div>

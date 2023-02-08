@@ -24,12 +24,12 @@ class TrackerController extends Controller
         $status = $status ? $status : null;
         $time = Tracker::where('created_by', Auth::guard('employees')->user()->id)->sum(DB::raw("TIME_TO_SEC(total_time)"));
         $timeConvert = gmdate("H:i:s", $time);
-        // dd($timeConvert);
         $project = Project::orderBy('name', 'asc')->get();
         $task = Task::get();
+        
         if ($request->ajax()) {
             $collection = Tracker::where('created_by', Auth::guard('employees')->user()->id)->where('name','LIKE','%'.$request->keyword.'%')->paginate(5);
-            return view('pages.office.pm.tracker.list', compact('collection'));
+            return view('pages.office.pm.tracker.list', compact('collection', 'status'));
         }
 
         return view('pages.office.pm.tracker.main', compact('project', 'task', 'status', 'timeConvert'));
@@ -61,7 +61,6 @@ class TrackerController extends Controller
         if ($validator->fails()){
             return response()->json([
                 'alert' => 'error',
-                'message' => $validator->errors()->first(),
             ], 200);
         }
 
@@ -76,11 +75,6 @@ class TrackerController extends Controller
         $tracker->is_active = $request->is_active;
         $tracker->created_by = Auth::guard('employees')->user()->id;
         $tracker->save();
-
-        // return response()->json([
-        //     'alert' => 'success',
-        //     'message' => 'Tracker created successfully',
-        // ]);
     }
 
     /**
@@ -94,6 +88,12 @@ class TrackerController extends Controller
     {
         $tracker->end_time = $request->end_time;
         $tracker->total_time = $request->total_time;
+        $tracker->is_active = $request->is_active;
+        $tracker->save();
+    }
+
+    public function carry_on(Request $request, Tracker $tracker)
+    {
         $tracker->is_active = $request->is_active;
         $tracker->save();
     }
