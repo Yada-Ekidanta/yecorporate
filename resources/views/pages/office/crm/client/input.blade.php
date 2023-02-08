@@ -150,14 +150,21 @@
                                 <div class="form-floating">
                                     <input type="password" class="form-control form-control-solid" id="password" name="password"
                                         placeholder="Enter Password" />
-                                    <label for="name">Password</label>
+                                    <label for="password">Password</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
                                     <input type="date" class="form-control form-control-solid" id="date_birth" name="date_birth"
                                         placeholder="Enter Date Birth" value="{{ $data->date_birth }}" />
-                                    <label for="name">Date Birth</label>
+                                    <label for="date_birth">Date Birth</label>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
+                                    <input type="url" class="form-control form-control-solid" id="url" name="url"
+                                        placeholder="Enter Company Url" value="{{ $data->url }}" />
+                                    <label for="url">Company Url</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
@@ -186,7 +193,7 @@
                                     <input type="text" class="form-control form-control-solid" id="billing_address"
                                         name="billing_address" placeholder="Enter billing_address"
                                         value="{{ $data->billing_address }}" />
-                                    <label for="name">Billing Address</label>
+                                    <label for="billing_address">Billing Address</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">

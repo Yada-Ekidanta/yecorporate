@@ -56,6 +56,7 @@ class ClientController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'email' => 'required',
+            'url' => 'nullable|url',
             'billing_country_id' => 'required',
             'billing_province_id' => 'required',
             'billing_regency_id' => 'required',
@@ -111,6 +112,7 @@ class ClientController extends Controller
         $account->shipping_postcode = $request->shipping_postcode;
         $account->password = Hash::make($request->password);
         $account->date_birth = $request->date_birth;
+        $account->url = $request->url;
         $account->category = $request->category;
         $account->st = $request->st;
         $account->save();
@@ -149,6 +151,7 @@ class ClientController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'email' => 'required',
+            'url' => 'nullable|url',
             'billing_country_id' => 'required',
             'billing_province_id' => 'required',
             'billing_regency_id' => 'required',
@@ -203,6 +206,7 @@ class ClientController extends Controller
         $account->shipping_postcode = $request->shipping_postcode;
         $account->password = Hash::make($request->password);
         $account->date_birth = $request->date_birth;
+        $account->url = $request->url;
         $account->category = $request->category;
         $account->st = $request->st;
         $account->update();
