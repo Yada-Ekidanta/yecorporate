@@ -33,7 +33,6 @@ class CommonCaseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'number' => 'required',
             'st' => 'required',
             'client_id' => 'required',
             'priority' => 'required',
@@ -50,7 +49,7 @@ class CommonCaseController extends Controller
         $common_case = new CommonCase();
         $common_case->employee_id = $employee_id;
         $common_case->name = $request->name;
-        $common_case->number = $request->number;
+        $common_case->number = $employee_id;
         $common_case->st = $request->st;
         $common_case->client_id = $request->client_id;
         $common_case->priority = $request->priority;
@@ -82,7 +81,6 @@ class CommonCaseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'number' => 'required',
             'st' => 'required',
             'client_id' => 'required',
             'priority' => 'required',
@@ -98,7 +96,7 @@ class CommonCaseController extends Controller
         $employee_id = Auth::guard('employees')->user()->id;
         $common_case->employee_id = $employee_id;
         $common_case->name = $request->name;
-        $common_case->number = $request->number;
+        $common_case->number = $employee_id;
         $common_case->st = $request->st;
         $common_case->client_id = $request->client_id;
         $common_case->priority = $request->priority;

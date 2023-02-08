@@ -1,4 +1,4 @@
-<div class="m-0">
+<div class="m-0 d-none">
     <!--begin::Toggle-->
     <button class="btn btn-flex btn-link rotate" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" data-kt-menu-offset="0px, 0px">
         <img data-kt-element="current-lang-flag" class="w-25px h-25px rounded-circle me-3" src="{{asset('metronic/media/flags/united-states.svg')}}" alt="" />

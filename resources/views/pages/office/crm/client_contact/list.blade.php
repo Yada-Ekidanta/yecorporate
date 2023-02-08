@@ -22,9 +22,9 @@
             <td>
                 {{$key+ $collection->firstItem()}}
             </td>
-            <td>{{$item->client->name}}</td>
-            <td>{{$item->title}}</td>
-            <td>{{$item->name}}</td>
+            <td class="text-nowrap">{{$item->client->name}}</td>
+            <td class="text-nowrap">{{$item->title}}</td>
+            <td class="text-nowrap">{{$item->name}}</td>
             <td>{{$item->phone}}</td>
             <td>{{$item->email}}</td>
             <td class="text-nowrap">{{$item->country->name}}</td>

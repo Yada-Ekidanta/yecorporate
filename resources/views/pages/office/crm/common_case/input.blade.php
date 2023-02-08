@@ -95,13 +95,6 @@
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="number" class="form-control form-control-solid" id="number"
-                                    name="number" placeholder="Enter Number" value="{{ $data->number }}" />
-                                    <label for="number">Number</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="priority" id="priority" class="form-select form-select-solid">
                                         <option disabled selected>Select Priority</option>

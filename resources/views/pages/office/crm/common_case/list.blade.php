@@ -21,7 +21,7 @@
                 {{$key+ $collection->firstItem()}}
             </td>
             <td>{{$item->name}}</td>
-            <td>{{$item->client->name}}</td>
+            <td class="text-nowrap">{{$item->client->name}}</td>
             <td class="text-nowrap">
                 @if ($item->priority == 0)
                 Low
@@ -34,7 +34,7 @@
                 @endif
             </td>
             <td>{{$item->number}}</td>
-            <td>{{$item->client_contact->name . ' (' . $item->client_contact->phone . ')'}}</td>
+            <td class="text-nowrap">{{$item->client_contact->name . ' (' . $item->client_contact->phone . ')'}}</td>
             <td class="text-nowrap">
                 @if ($item->st == 0)
                 New
