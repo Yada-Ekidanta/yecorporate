@@ -13,6 +13,7 @@ use App\Models\Regional\District;
 use App\Models\Regional\Province;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Setting\CompanyIndustry;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -55,13 +56,11 @@ class ClientController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'email' => 'required',
-            'billing_address' => 'required',
             'billing_country_id' => 'required',
             'billing_province_id' => 'required',
             'billing_regency_id' => 'required',
             'billing_district_id' => 'required',
             'billing_village_id' => 'required',
-            'shipping_address' => 'required',
             'shipping_country_id' => 'required',
             'shipping_province_id' => 'required',
             'shipping_regency_id' => 'required',
@@ -110,7 +109,7 @@ class ClientController extends Controller
         $account->shipping_district_id = $request->shipping_district_id;
         $account->shipping_village_id = $request->shipping_village_id;
         $account->shipping_postcode = $request->shipping_postcode;
-        $account->password = $request->password;
+        $account->password = Hash::make($request->password);
         $account->date_birth = $request->date_birth;
         $account->category = $request->category;
         $account->st = $request->st;
@@ -150,13 +149,11 @@ class ClientController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'email' => 'required',
-            'billing_address' => 'required',
             'billing_country_id' => 'required',
             'billing_province_id' => 'required',
             'billing_regency_id' => 'required',
             'billing_district_id' => 'required',
             'billing_village_id' => 'required',
-            'shipping_address' => 'required',
             'shipping_country_id' => 'required',
             'shipping_province_id' => 'required',
             'shipping_regency_id' => 'required',
@@ -204,7 +201,7 @@ class ClientController extends Controller
         $account->shipping_district_id = $request->shipping_district_id;
         $account->shipping_village_id = $request->shipping_village_id;
         $account->shipping_postcode = $request->shipping_postcode;
-        $account->password = $request->password;
+        $account->password = Hash::make($request->password);
         $account->date_birth = $request->date_birth;
         $account->category = $request->category;
         $account->st = $request->st;

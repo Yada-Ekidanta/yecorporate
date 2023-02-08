@@ -52,6 +52,16 @@ class ClientContact extends Model
         return $this->hasMany(CallAttendees::class, 'client_id');
     }
 
+    public function lead()
+    {
+        return $this->hasMany(Leads::class, 'client_contact_id');
+    }
+
+    public function opportunity()
+    {
+        return $this->hasMany(Opportunity::class, 'client_contact_id');
+    }
+
     public function common_case()
     {
         return $this->hasMany(CommonCase::class, 'client_contact_id');

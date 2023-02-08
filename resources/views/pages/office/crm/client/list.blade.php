@@ -24,8 +24,7 @@
             <td>
                 {{$key+ $collection->firstItem()}}
             </td>
-            {{-- <td>{{$item->document_id}}</td> --}}
-            <td class="d-flex align-items-center">
+            <td class="d-flex align-items-center text-nowrap">
                 <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                     <a href="javascript:;">
                         {!!$item->image!!}
@@ -38,14 +37,14 @@
             </td>
             <td>{{$item->email}}</td>
             <td>{{$item->phone}}</td>
-            <td>{{$item->clientType->name}}</td>
-            <td>{{$item->companyIndustry->name}}</td>
-            <td>{{$item->company_name}}</td>
-            <td>{{$item->title}}</td>
-            <td class="text-nowrap">{{$item->date_birth}}</td>
-            <td>{{$item->category}}</td>
-            <td>{{$item->st}}</td>
-            <td>{{$item->employee->name}}</td>
+            <td>{{is_null($item->clientType) ? '-' : $item->clientType->name}}</td>
+            <td>{{is_null($item->companyIndustry) ? '-' : $item->companyIndustry->name}}</td>
+            <td>{{is_null($item->company_name) ? '-' : $item->company_name}}</td>
+            <td>{{is_null($item->title) ? '' : $item->title}}</td>
+            <td class="text-nowrap">{{is_null($item->date_birth) ? '-' : $item->date_birth}}</td>
+            <td>{{is_null($item->category) ? '-' : $item->category}}</td>
+            <td>{{is_null($item->st) ? '-' : $item->st }}</td>
+            <td>{{is_null($item->employee) ? '-' : $item->employee->name}}</td>
             <td class="text-nowrap text-center">
                 <a href="{{route('office.crm.accounts.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link" data-no-swup>
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

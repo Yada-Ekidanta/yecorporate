@@ -135,6 +135,9 @@ class ClientContactController extends Controller
 
     public function destroy(ClientContact $clientContact)
     {
+        $clientContact->common_case()->delete();
+        $clientContact->lead()->delete();
+        $clientContact->opportunity()->delete();
         $clientContact->delete();
         return response()->json([
             'alert' => 'success',

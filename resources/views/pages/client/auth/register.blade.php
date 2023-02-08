@@ -38,17 +38,8 @@
             </div>
             <!--end::Heading-->
             <!--begin::Input group-->
-            <div class="row fv-row mb-7">
-                <!--begin::Col-->
-                <div class="col-xl-6">
-                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="First Name" name="first_name" autocomplete="off" data-kt-translate="sign-up-input-first-name" />
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-6">
-                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="Last Name" name="last_name" autocomplete="off" data-kt-translate="sign-up-input-last-name" />
-                </div>
-                <!--end::Col-->
+            <div class="fv-row mb-10">
+                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="ame" name="name" autocomplete="off" data-kt-translate="sign-up-input-name" />
             </div>
             <!--end::Input group-->
             <!--begin::Input group-->
@@ -108,7 +99,7 @@
                 </button>
                 <!--end::Submit-->
                 <!--begin::Social-->
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center d-none">
                     <div class="text-gray-400 fw-semibold fs-6 me-6">Or</div>
                     <!--begin::Symbol-->
                     <a href="#" class="symbol symbol-circle symbol-45px w-45px bg-light me-3">

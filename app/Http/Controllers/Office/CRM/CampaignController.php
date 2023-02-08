@@ -138,6 +138,7 @@ class CampaignController extends Controller
 
     public function destroy(Campaign $campaign)
     {
+        $campaign->lead()->delete();
         $campaign->delete();
         return response()->json([
             'alert' => 'success',

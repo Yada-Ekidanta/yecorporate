@@ -108,7 +108,7 @@
                 </button>
                 <!--end::Submit-->
                 <!--begin::Social-->
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center d-none">
                     <div class="text-gray-400 fw-semibold fs-6 me-6">Or</div>
                     <!--begin::Symbol-->
                     <a href="#" class="symbol symbol-circle symbol-45px w-45px bg-light me-3">

@@ -31,4 +31,9 @@ class Campaign extends Model
     {
         return $this->belongsTo(TargetList::class, 'ex_target_list');
     }
+
+    public function lead()
+    {
+        return $this->hasMany(Leads::class, 'campaign_id');
+    }
 }

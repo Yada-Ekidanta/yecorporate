@@ -45,7 +45,7 @@ class AuthController extends Controller
         {
             return response()->json([
                 'alert' => 'success',
-                'message' =>  'Welcome back '. Auth::guard('clients')->user()->email,
+                'message' =>  'Welcome back '. Auth::guard('clients')->user()->name,
             ]);
         }else{
             return response()->json([
@@ -61,8 +61,9 @@ class AuthController extends Controller
     public function do_register(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'name' => 'required',
             'phone' => 'required|unique:employees|min:9|max:13',
-            'email' => 'required|email|unique:employees',
+            'email' => 'required|email|unique:clients',
             'password' => 'required|min:8|confirmed',
             'password_confirmation' => 'required|min:8',
         ]);
@@ -74,7 +75,7 @@ class AuthController extends Controller
             ], 200);
         }
         $client = new Client;
-        $client->name = Str::title($request->first) . ' ' . Str::title($request->last);
+        $client->name = $request->name;
         $client->phone = $request->phone;
         $client->email = $request->email;
         $client->password = Hash::make($request->password);

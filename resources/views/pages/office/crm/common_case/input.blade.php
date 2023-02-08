@@ -144,13 +144,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control form-control-solid" id="attachment"
-                                    name="attachment" placeholder="Enter Attachment" value="{{ $data->attachment }}" />
-                                    <label for="attachment">Attachment</label>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-12 mb-3">

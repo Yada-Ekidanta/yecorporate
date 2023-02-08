@@ -139,7 +139,8 @@
                             </div>
                         </div>
                         <div class="col-12 mb-3">
-                            <div class="form-floating">
+                            <div class="form-group">
+                                <label for="desc" class="form-label ms-1">Description</label>
                                 <div id="desc" style="height: 150px">{!! $data->desc !!}</div>
                                 <textarea name="desc" class="form-control d-none">{{ $data->desc }}</textarea>
                             </div>
