@@ -161,6 +161,7 @@ return new class extends Migration
             $table->string('name');
             $table->timestamp('start_time')->nullable();
             $table->timestamp('end_time')->nullable();
+            $table->date('date');
             $table->string('total_time')->default(0);
             $table->string('is_active');
             $table->integer('created_by');
