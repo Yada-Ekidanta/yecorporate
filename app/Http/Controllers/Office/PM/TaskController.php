@@ -91,17 +91,19 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show(Request $request,Task $task)
     {
-        // if ($request->ajax()) {
-        //     $todoList = TodoList::where('task_id', $task->id)->get();
-        //     return view('pages.office.pm.todo-list.list', ['todoList' => $todoList]);
-        // }
-
-        // return view('pages.office.pm.task.detail', ['data' => $task]);
-
         $todoList = TodoList::where('task_id', $task->id)->get();
+
+        if ($request->ajax()) {
+            $todoList = TodoList::where('task_id', $task->id)->get();
+            return view('pages.office.pm.todo-list.list', ['data' => $task, 'todoList' => $todoList]);
+        }
+
         return view('pages.office.pm.task.detail', ['data' => $task, 'todoList' => $todoList]);
+
+        // $todoList = TodoList::where('task_id', $task->id)->get();
+        // return view('pages.office.pm.task.detail', ['data' => $task, 'todoList' => $todoList]);
     }
 
     /**

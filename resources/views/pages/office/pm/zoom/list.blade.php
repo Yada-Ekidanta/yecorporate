@@ -26,7 +26,7 @@
                     <span>{{$item->start_date}}</span>
                 </td>
                 <td>
-                    <span>{{$item->duration}}</span>
+                    <span>{{$item->duration}} Hours</span>
                 </td>
                 <td>
                     <span><a class="menu-link" data-no-swup href="{{ $item->join_url }}" target="_blank">{{$item->join_url}}</a></span>

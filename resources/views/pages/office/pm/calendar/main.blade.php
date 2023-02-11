@@ -53,14 +53,14 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
                 <div class="container p-5">
-                    <div id="calendar"></div>
+                    <div id="list_result"></div>
                 </div>
             </div>
         </div>
     </div>
     @section('custom_js')
         <script>
-            calendar('calendar');
+            load_list(1);
         </script>
     @endsection
 </x-office-layout>

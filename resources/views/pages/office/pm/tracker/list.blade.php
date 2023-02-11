@@ -33,11 +33,12 @@
                     <span>{{ $item->end_time }}</span>
                 </td>
                 <td>
+                    {{-- <span>{{\Carbon\Carbon::parse($item->total_time)->diffForHumans(null, true)}}</span> --}}
                     <span>{{$item->total_time}}</span>
                 </td>
                 <td class="text-nowrap text-center">
                     @if(!$status)
-                        <button class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px carryOn" itemid="{{ $item->id }}" id="{{ $item->total_time }}">
+                        <button class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px carryOn" itemid="{{ $item->id }}" itemstart="{{ $item->start_time }}" itemend="{{ $item->end_time }}">
                             <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/>
@@ -66,22 +67,33 @@
 <script>
     $('body').on('click', '.carryOn', function() {
         location.reload(true);
-        let time = $(this).attr('id');
-        let convertToSeconds = time.split(':');
-        let seconds = (+convertToSeconds[0]) * 60 * 60 + (+convertToSeconds[1]) * 60 + (+convertToSeconds[2]) * 1000;
-        // console.log(seconds);
-        // console.log($(this).attr('itemid'));
-        // intervalId = setTimeout(startTimer, seconds);
+
+        let start = $(this).attr('itemstart');
+        let end = $(this).attr('itemend');
+
+        let convertStart = moment(start);
+        let nowStart = moment();
+        let secondStart = nowStart.diff(convertStart, 'seconds');
+
+        let convertEnd = moment(end);
+        let nowEnd = moment();
+        let secondEnd = nowEnd.diff(convertEnd, 'seconds');
+
+        let curentTime = secondStart - secondEnd;
+
+        console.log(curentTime);
+
+        localStorage.setItem("curentTime", curentTime);
+
+        // totalSeconds += curentTime;
+
         $('#start-btn').hide();
         $('#stop').show();
         $('#is_active').val(1);
 
-        totalSeconds = seconds;
-        // console.log(totalSeconds);
-
         let url = "{{route('office.pm.tracker.carry_on', ':id')}}";
         url = url.replace(':id', $(this).attr('itemid'));
-        // console.log(url);
+
         $.ajax({
             url: url,
             type: 'PUT',

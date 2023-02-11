@@ -4925,8 +4925,11 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{route('office.auth.logout')}}" class="menu-link px-5">Sign Out</a>
+                            <a href="#" class="menu-link px-5" onclick="event.preventDefault(); document.getElementById('logout').submit();">Sign Out</a>
                         </div>
+                        <form action="{{ route('office.auth.logout') }}" method="post" id="logout">
+                            @csrf
+                        </form>
                         <!--end::Menu item-->
                     </div>
                     <!--end::User account menu-->

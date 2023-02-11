@@ -26,7 +26,7 @@ class TrackerController extends Controller
         $timeConvert = gmdate("H:i:s", $time);
         $project = Project::orderBy('name', 'asc')->get();
         $task = Task::get();
-        
+
         if ($request->ajax()) {
             $collection = Tracker::where('created_by', Auth::guard('employees')->user()->id)->where('name','LIKE','%'.$request->keyword.'%')->paginate(5);
             return view('pages.office.pm.tracker.list', compact('collection', 'status'));

@@ -67,9 +67,9 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item" data-no-swup>
+<div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.pm.time-sheet.index') }}" data-no-swup>
+    <a class="menu-link" href="{{ route('office.pm.time-sheet.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">

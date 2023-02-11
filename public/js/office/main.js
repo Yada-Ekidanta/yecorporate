@@ -59,7 +59,6 @@ document.addEventListener("swup:contentReplaced", () => {
     setTimeout(() => {
         obj_quill('desc');
     }, 1000);
-    calendar('calendar');
     $('.ribuan').keyup(function (event) {
         if (event.which >= 37 && event.which <= 40) return;
         // format number

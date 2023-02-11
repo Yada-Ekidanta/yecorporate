@@ -437,15 +437,3 @@ function swa_message(type, msg) {
         timer: 2000
     });
 }
-function calendar(obj) {
-    let calendarEl = document.getElementById(obj);
-    let calendar = new FullCalendar.Calendar(calendarEl, {
-        headerToolbar: {
-            left: "prev,next",
-            center: "title",
-            right: "today dayGridMonth"
-        },
-    });
-
-    calendar.render();
-}

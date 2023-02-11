@@ -129,6 +129,7 @@
             obj_select('form-select-project');
             obj_select('form-select-task');
             load_list(1);
+
             $(document).ready(function() {
                 // Dinamic Dropdown
                 $('#form-select-project').on('change', function() {
@@ -188,6 +189,7 @@
                     $('#start-btn').hide();
                     $('#stop').show();
                     intervalId = setInterval(startTimer, 1000);
+                    localStorage.removeItem("curentTime");
                     $('#is_active').val(1);
                     $('#total_time').val('0:0:0');
                     $.post('{{route('office.pm.tracker.store')}}', $('#form_input').serialize(), function(data) {
@@ -207,6 +209,7 @@
                     $('#end_time').val(output_end+' '+time);
                     $('#start-btn').show();
                     $('#stop').hide();
+                    localStorage.removeItem("curentTime");
                     if (intervalId)
                     clearInterval(intervalId);
                     $('#is_active').val(0);
@@ -223,11 +226,18 @@
                     });
                 });
 
-                if ("{{ $status }}" != null) {
+                if ({!! $status ? $status : "false" !!} != false) {
                     let start_date = moment("{{ $status ? $status->start_time : null }}");
                     let now = moment();
                     let curent_time = now.diff(start_date, 'seconds');
-                    totalSeconds = curent_time;
+                    let storedCurentTime = localStorage.getItem("curentTime");
+
+                    if (storedCurentTime != false) {
+                        totalSeconds += storedCurentTime;
+                    } else {
+                        totalSeconds = curent_time;
+                    }
+
                     intervalId = setInterval(startTimer, 1000);
                 }
             });

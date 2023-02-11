@@ -53,30 +53,14 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
                 <div class="container p-5">
-                    <div id="timeSheet"></div>
+                    <div id="list_result"></div>
                 </div>
             </div>
         </div>
     </div>
     @section('custom_js')
         <script>
-            let data = @json($data);
-
-            let timeSheetEl = document.getElementById("timeSheet");
-            let timeSheet = new FullCalendar.Calendar(timeSheetEl, {
-                initialView: 'dayGridWeek',
-                headerToolbar: {
-                    left: "prev,next",
-                    center: "title",
-                    right: "today dayGridWeek"
-                },
-                dateAlignment: 'week',
-                allDaySlot: false,
-                contentHeight:"auto",
-                events: data,
-            });
-
-            timeSheet.render();
+            load_list(1);
         </script>
     @endsection
 </x-office-layout>

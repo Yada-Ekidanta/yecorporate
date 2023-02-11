@@ -54,7 +54,6 @@
             <div class="card">
                 <div class="card-header border-0 pt-6">
                     <form id="content_filter">
-                        <input type="hidden" name="status" id="status">
                         {{-- <input type="hidden" name="name" id="name"> --}}
                         {{-- <input type="hidden" name="due_date" id="due_date"> --}}
                         <div class="card-title">
@@ -71,7 +70,7 @@
                     </form>
                     <div class="card-toolbar">
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                            <a id="back_form_button" href="{{route('office.pm.project.show', request()->query('id'))}}" class="btn btn-primary btn-sm btn-hover-scale menu-link" data-no-swup>
+                            <a id="back_form_button" href="{{route('office.pm.project.show', request()->query('id'))}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
@@ -86,149 +85,147 @@
                 <div class="card-body">
                     <div class="container mx-4">
                         <div id="jkanban_basic"></div>
+                        <div id="list_result"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @section('custom_js')
-    <script>
-        let obj,
-            i,
-            status = 0,
-            active1 = [],
-            active2 = [],
-            active3 = [],
-            active4 = [],
-            date = new Date(),
-            dateFormat = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
-            data = @json($todoList);
+        <script>
+            // let obj,
+            //     i,
+            //     status = 0,
+            //     active1 = [],
+            //     active2 = [],
+            //     active3 = [],
+            //     active4 = [],
+            //     // date = new Date(),
+            //     // dateFormat = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
+            //     data = @json($todoList);
 
-        for (i = 0; i < data.length; i++) {
-            let id = data[i].id;
-            let updateURL = "{{ route('office.pm.todo-list.edit', ':id') }}";
-            updateURL = updateURL.replace(':id', id);
-            let deleteURL = "{{ route('office.pm.todo-list.destroy', ':id') }}";
-            deleteURL = deleteURL.replace(':id', id);
-            // $('#name').val(data[i].name);
-            // $('#due_date').val(data[i].due_date);
+            //     for (i = 0; i < data.length; i++) {
+            //         id = data[i].id;
 
-            let dueDate = '';
+            //         let updateURL = "{{ route('office.pm.todo-list.edit', ':id') }}";
+            //         updateURL = updateURL.replace(':id', id);
 
-            if (data[i].status < 4) {
-                if (data[i].due_date < dateFormat) {
-                    dueDate = `<span class="text-danger">${data[i].due_date}</span>`;
-                } else {
-                    dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
-                }
-            } else {
-                dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
-            }
+            //         let deleteURL = "{{ route('office.pm.todo-list.destroy', ':id') }}";
+            //         deleteURL = deleteURL.replace(':id', id);
 
-            obj = {
-                id: id,
-                title: `<span class="font-weight-bold"> ${data[i].name} </span>
-                            <div class="btn-group" style="position: absolute; right:60px; width:0px;">
-                                <a href="#" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect x="10" y="10" width="4" height="4" rx="2" fill="currentColor"/>
-                                        <rect x="10" y="3" width="4" height="4" rx="2" fill="currentColor"/>
-                                        <rect x="10" y="17" width="4" height="4" rx="2" fill="currentColor"/>
-                                    </svg>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item menu-link" href="${updateURL}?id={{ $data->id }}" target="_parent">Edit</a></li>
-                                    <li><a class="dropdown-item" href="javascript:;" onclick="handle_confirm('Are you sure want to delete this todo list ?', 'Yes, im sure', 'No, im not','DELETE','${deleteURL}')"  class="menu-link">Delete</a></li>
-                                </ul>
-                            </div>
-                            <br><br>
-                        ` + dueDate,
-            };
+            //         // let dueDate = '';
 
-            status = data[i].status;
+            //         // if (data[i].status < 4) {
+            //         //     if (data[i].due_date < dateFormat) {
+            //         //         dueDate = `<span class="text-danger">${data[i].due_date}</span>`;
+            //         //     } else {
+            //         //         dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
+            //         //     }
+            //         // } else {
+            //         //     dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
+            //         // }
 
-            switch (status) {
-                case 2:
-                    active2.push(obj);
-                    break;
-                case 3:
-                    active3.push(obj);
-                    break;
-                case 4:
-                    active4.push(obj);
-                    break;
-                default:
-                    active1.push(obj);
-            }
-        }
+            //         obj = {
+            //             id: id,
+            //             title: `<span class="font-weight-bold"> ${data[i].name} </span>
+            //                         <input type="hidden" name="status" id="status">
+            //                         <div class="btn-group" style="position: absolute; right:60px; width:0px;">
+            //                             <a href="#" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
+            //                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            //                                     <rect x="10" y="10" width="4" height="4" rx="2" fill="currentColor"/>
+            //                                     <rect x="10" y="3" width="4" height="4" rx="2" fill="currentColor"/>
+            //                                     <rect x="10" y="17" width="4" height="4" rx="2" fill="currentColor"/>
+            //                                 </svg>
+            //                             </a>
+            //                             <ul class="dropdown-menu">
+            //                                 <li><a class="dropdown-item menu-link" href="${updateURL}?id={{ $data->id }}" target="_parent">Edit</a></li>
+            //                                 <li><a class="dropdown-item" href="javascript:;" onclick="handle_confirm('Are you sure want to delete this todo list ?', 'Yes, im sure', 'No, im not','DELETE','${deleteURL}')"  class="menu-link">Delete</a></li>
+            //                             </ul>
+            //                         </div>
+            //                         <br><br>
+            //                     <span class="text-muted">${data[i].due_date}</span>`,
+            //         };
 
-        let kanban = new jKanban({
-            element: '#jkanban_basic',
-            gutter: '0',
-            widthBoard: '200px',
-            boards: [
-                {
-                    id: '_todo',
-                    title: 'Todo',
-                    class: 'primary',
-                    item: active1
-                },
-                {
-                    id: '_in_progress',
-                    title: 'In Progress',
-                    class: 'warning',
-                    item: active2
-                },
-                {
-                    id: '_review',
-                    title: 'Review',
-                    class: 'info',
-                    item: active3
-                },
-                {
-                    id: '_done',
-                    title: 'Done',
-                    class: 'success',
-                    item: active4
-                }
-            ],
-            dragBoards: true,
-            dragendEl: function (el) {
-                let id = el.dataset.eid;
+            //         status = data[i].status;
 
-                let updateURL = "{{ route('office.pm.todo-list.updateStatus', ':id') }}";
-                updateURL = updateURL.replace(':id', id);
-                // console.log(updateURL);
+            //         switch (status) {
+            //             case 2:
+            //                 active2.push(obj);
+            //                 break;
+            //             case 3:
+            //                 active3.push(obj);
+            //                 break;
+            //             case 4:
+            //                 active4.push(obj);
+            //                 break;
+            //             default:
+            //                 active1.push(obj);
+            //         }
+            //     }
 
-                let status = el.offsetParent.dataset.id;
+            //     let kanban = new jKanban({
+            //         element: '#jkanban_basic',
+            //         gutter: '0',
+            //         widthBoard: '200px',
+            //         boards: [
+            //             {
+            //                 id: '_todo',
+            //                 title: 'Todo',
+            //                 class: 'primary',
+            //                 item: active1
+            //             },
+            //             {
+            //                 id: '_in_progress',
+            //                 title: 'In Progress',
+            //                 class: 'warning',
+            //                 item: active2
+            //             },
+            //             {
+            //                 id: '_review',
+            //                 title: 'Review',
+            //                 class: 'info',
+            //                 item: active3
+            //             },
+            //             {
+            //                 id: '_done',
+            //                 title: 'Done',
+            //                 class: 'success',
+            //                 item: active4
+            //             }
+            //         ],
+            //         dragBoards: true,
+            //         dragendEl: function (el) {
+            //             id = el.dataset.eid;
 
-                switch (status) {
-                    case '_todo':
-                        $('#status').val(1);
-                        break;
-                    case '_in_progress':
-                        $('#status').val(2);
-                        break;
-                    case '_review':
-                        $('#status').val(3);
-                        break;
-                    default:
-                        $('#status').val(4);
-                }
+            //             updateURL = "{{ route('office.pm.todo-list.updateStatus', ':id') }}";
+            //             updateURL = updateURL.replace(':id', id);
 
-                $.ajax({
-                    url: updateURL,
-                    type: 'PUT',
-                    data: {
-                        status: $('#status').val(),
-                        // name: $('#name').val(),
-                        // due_date: $('#due_date').val(),
-                    }
-                });
-                // console.log('dragendEl:', id);
-                // console.log('dragendEl:', status);
-            },
-        });
-    </script>
+            //             status = el.offsetParent.dataset.id;
+
+            //             switch (status) {
+            //                 case '_todo':
+            //                     $('#status').val(1);
+            //                     break;
+            //                 case '_in_progress':
+            //                     $('#status').val(2);
+            //                     break;
+            //                 case '_review':
+            //                     $('#status').val(3);
+            //                     break;
+            //                 default:
+            //                     $('#status').val(4);
+            //             }
+
+            //             $.ajax({
+            //                 url: updateURL,
+            //                 type: 'PUT',
+            //                 data: {
+            //                     status: $('#status').val(),
+            //                 }
+            //             });
+            //         },
+            //     });
+            load_list(1);
+        </script>
     @endsection
 </x-office-layout>
