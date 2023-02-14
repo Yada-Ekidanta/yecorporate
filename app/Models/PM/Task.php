@@ -17,6 +17,14 @@ class Task extends Model
         return $this->belongsTo(Team::class, 'team_id');
     }
 
+    public function milestone() {
+        return $this->belongsTo(Milestone::class, 'milestone_id');
+    }
+
+    public function todoList() {
+        return $this->hasMany(TodoList::class, 'task_id');
+    }
+
     public function tracker() {
         return $this->hasMany(Tracker::class, 'task_id');
     }

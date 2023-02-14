@@ -10,7 +10,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.pm.project.index') }}">
+    <a class="menu-link {{ Request::is('office/pm/project*') ? 'active' : '' }}" href="{{ route('office.pm.project.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -27,7 +27,7 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-{{-- <div class="menu-item">
+<div class="menu-item d-none">
     <!--begin:Menu link-->
     <a class="menu-link" href="#">
         <span class="menu-icon">
@@ -44,7 +44,7 @@
         <span class="menu-title">Tasks</span>
     </a>
     <!--end:Menu link-->
-</div> --}}
+</div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
 <div class="menu-item">
@@ -69,7 +69,7 @@
 <!--begin:Menu item-->
 <div class="menu-item" data-no-swup>
     <!--begin:Menu link-->
-    <a class="menu-link {{ Request::is('office/pm/tracker') ? 'active' : '' }}" href="{{ route('office.pm.tracker.index') }}" data-no-swup>
+    <a class="menu-link {{ Request::is('office/pm/tracker*') ? 'active' : '' }}" href="{{ route('office.pm.tracker.index') }}" data-no-swup>
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">

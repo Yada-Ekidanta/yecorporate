@@ -9,12 +9,12 @@ class Project extends Model
 {
     use HasFactory;
 
-    public function zoom() {
-        return $this->hasMany(Zoom::class, 'project_id');
+    public function team() {
+        return $this->hasMany(Team::class, 'project_id');
     }
 
-    public function invoice() {
-        return $this->hasMany(InvoicePM::class, 'project_id');
+    public function milestone() {
+        return $this->hasMany(Milestone::class, 'project_id');
     }
 
     public function task() {
@@ -23,5 +23,9 @@ class Project extends Model
 
     public function tracker() {
         return $this->hasMany(Tracker::class, 'project_id');
+    }
+
+    public function zoom() {
+        return $this->hasMany(Zoom::class, 'project_id');
     }
 }

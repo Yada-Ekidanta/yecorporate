@@ -196,7 +196,7 @@ Route::group(['domain' => ''], function() {
                 Route::post('milestone/{project}/store',[MilestoneController::class, 'store'])->name('milestone.store');
                 Route::resource('invoice-pm', InvoicePMController::class);
                 Route::resource('tracker', TrackerController::class);
-                Route::put('tracker/carryOn/{tracker}',[TrackerController::class, 'carry_on'])->name('tracker.carry_on');
+                // Route::put('tracker/carryOn/{tracker}',[TrackerController::class, 'carry_on'])->name('tracker.carry_on');
                 Route::post('/fetch-task/{id}',[TrackerController::class, 'fetchTask'])->name('tracker.fetchTask');
                 Route::resource('task', TaskController::class);
                 Route::get('task/{project}/index',[TaskController::class, 'index'])->name('task.index');

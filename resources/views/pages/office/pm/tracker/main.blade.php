@@ -88,7 +88,11 @@
                             <div class="col-md-2">
                                 <p class="fw-bold">Timer <span id="hour"></span>:<span id="minute"></span>:<span id="seconds"></span></p>
                                 @if ($status)
+                                <div class="text-nowrap">
+                                    <button type="button" id="pause" class="btn btn-sm btn-warning">Pause</button>
+                                    <button type="button" id="resume" class="btn btn-sm btn-info d-none">Resume</button>
                                     <button type="button" id="stop" class="btn btn-sm btn-danger">Stop</button>
+                                </div>
                                 @else
                                     <button type="button" id="start-btn" class="btn btn-sm btn-primary">Start</button>
                                 @endif
@@ -197,6 +201,20 @@
                     });
                 });
 
+                $( "#pause" ).click(function() {
+                    $('#pause').hide();
+                    $('#resume').removeClass('d-none').show();
+                    clearInterval(intervalId);
+                    localStorage.setItem("curentTime", totalSeconds);
+                });
+
+                $( "#resume" ).click(function() {
+                    $('#resume').hide();
+                    $('#pause').show();
+                    intervalId = setInterval(startTimer, 1000);
+                    totalSeconds = localStorage.getItem("curentTime");
+                });
+
                 $( "#stop" ).click(function() {
                     location.reload(true);
                     let end_date = new Date();
@@ -230,13 +248,15 @@
                     let start_date = moment("{{ $status ? $status->start_time : null }}");
                     let now = moment();
                     let curent_time = now.diff(start_date, 'seconds');
-                    let storedCurentTime = localStorage.getItem("curentTime");
 
-                    if (storedCurentTime != false) {
-                        totalSeconds += storedCurentTime;
-                    } else {
-                        totalSeconds = curent_time;
-                    }
+                    totalSeconds = curent_time;
+                    // let storedCurentTime = localStorage.getItem("curentTime");
+
+                    // if (storedCurentTime != false) {
+                    //     totalSeconds += storedCurentTime;
+                    // } else {
+                    //     totalSeconds = curent_time;
+                    // }
 
                     intervalId = setInterval(startTimer, 1000);
                 }

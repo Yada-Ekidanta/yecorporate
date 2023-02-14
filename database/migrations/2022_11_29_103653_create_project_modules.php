@@ -195,6 +195,14 @@ return new class extends Migration
             $table->string('join_url')->nullable();
             $table->timestamps();
         });
+        Schema::create('calendar_pm', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->date('start');
+            $table->date('end');
+            $table->boolean('all_day');
+            $table->timestamps();
+        });
     }
 
     /**

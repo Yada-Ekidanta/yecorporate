@@ -60,7 +60,7 @@ function obj_quill(obj) {
                     header: [1, 2, false]
                 }],
                 ['bold', 'italic', 'underline'],
-                ['image', 'code-block']
+                // ['image', 'code-block']
             ]
         },
         placeholder: 'Type your text here...',

@@ -9,4 +9,8 @@ class TodoList extends Model
 {
     use HasFactory;
     protected $table = 'todo_list';
+
+    public function task() {
+        return $this->belongsTo(Task::class, 'task_id');
+    }
 }

@@ -92,11 +92,11 @@ class TrackerController extends Controller
         $tracker->save();
     }
 
-    public function carry_on(Request $request, Tracker $tracker)
-    {
-        $tracker->is_active = $request->is_active;
-        $tracker->save();
-    }
+    // public function carry_on(Request $request, Tracker $tracker)
+    // {
+    //     $tracker->is_active = $request->is_active;
+    //     $tracker->save();
+    // }
 
     /**
      * Remove the specified resource from storage.

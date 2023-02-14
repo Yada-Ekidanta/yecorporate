@@ -94,13 +94,14 @@ document.addEventListener("swup:contentReplaced", () => {
         "mask": "99.999.999.9-999.999"
     }).mask(".npwp_format");
 
-    // Buat Class Active Menu Guyss Tapi Masih Aga Error
-    let currentUrl = window.location.href;
-
     $('.menu-item a').each(function() {
         let menuLink = $(this).attr('href');
+        let currentUrl = window.location.href;
+        let regex = new RegExp(menuLink);
+        let menuLink2 = $(this).attr('href') + '/.*';
+        let regex2 = new RegExp(menuLink2);
 
-        if (currentUrl == menuLink) {
+        if (regex.test(currentUrl) || regex2.test(currentUrl)) {
           $(this).addClass('active');
         } else {
           $(this).removeClass('active');
