@@ -111,23 +111,31 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-4 mb-5">
+                            <div class="col-3 mb-5">
                                 <div class="form-floating">
                                     <input type="tel" class="form-control form-control-solid number_only ribuan" id="estimated_hrs" name="estimated_hrs" placeholder="Indonesia" value="{{$data->estimated_hrs}}"/>
                                     <label for="estimated_hrs">Estimated Hours</label>
                                 </div>
                             </div>
-                            <div class="col-4 mb-5">
+                            <div class="col-3 mb-5">
                                 <div class="form-floating">
                                     <input type="tel" class="form-control form-control-solid number_only ribuan" id="budget" name="budget" placeholder="Indonesia" value="{{$data->budget}}"/>
                                     <label for="budget">Budget</label>
                                 </div>
                             </div>
-                            <div class="col-4 mb-5">
+                            <div class="col-3 mb-5">
                                 <div class="form-floating">
                                     <input type="text" class="form-control form-control-solid" id="currency" name="currency" placeholder="Indonesia" value="{{$data->currency}}"/>
                                     <label for="currency">Currency</label>
                                 </div>
+                            </div>
+                            <div class="col-3 mb-5">
+                                <select name="status" id="form-select-status" class="form-select form-select-solid form-select-lg">
+                                    <option selected disabled>Select Status</option>
+                                    <option value="On Hold" {{ $data->status === 'On Hold' ? 'selected' : '' }}>On Hold</option>
+                                    <option value="In Progres" {{ $data->status === 'In Progres' ? 'selected' : '' }}>In Progres</option>
+                                    <option value="Closed" {{ $data->status === 'Closed' ? 'selected' : '' }}>Closed</option>
+                                </select>
                             </div>
                             <div class="col-12">
                                 <label for="desc" class="mb-3">Description</label>

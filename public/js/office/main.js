@@ -57,7 +57,9 @@ document.addEventListener("swup:contentReplaced", () => {
     obj_select('form-select-priority');
     obj_select('form-select-milestone');
     setTimeout(() => {
-        obj_quill('desc');
+        if ($('#desc').length > 0) {
+            obj_quill('desc');
+        }
     }, 1000);
     $('.ribuan').keyup(function (event) {
         if (event.which >= 37 && event.which <= 40) return;

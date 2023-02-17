@@ -17,8 +17,8 @@
         <!--end::Sidebar mobile toggle-->
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-            <a href="../../demo1/dist/index.html" class="d-lg-none">
-                <img alt="Logo" src="assets/media/logos/default-small.svg" class="h-30px" />
+            <a href="#" class="d-lg-none">
+                <img alt="Logo" src="#" class="h-30px" />
             </a>
         </div>
         <!--end::Mobile logo-->
@@ -51,7 +51,7 @@
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item p-0 m-0">
                                                     <!--begin:Menu link-->
-                                                    <a href="../../demo1/dist/index.html" class="menu-link active">
+                                                    <a href="#" class="menu-link active">
                                                         <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
                                                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                                                             <span class="svg-icon svg-icon-primary svg-icon-1">
@@ -694,7 +694,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-4">
-                                                <img src="assets/media/stock/600x600/img-82.jpg" class="rounded mw-100" alt="" />
+                                                <img src="#" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -804,7 +804,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-7">
-                                                <img src="assets/media/stock/900x600/46.jpg" class="rounded mw-100" alt="" />
+                                                <img src="#" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -1525,7 +1525,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-5 pe-lg-5">
-                                                <img src="assets/media/stock/600x600/img-84.jpg" class="rounded mw-100" alt="" />
+                                                <img src="#" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -1596,7 +1596,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-8">
-                                                <img src="assets/media/stock/900x600/44.jpg" class="rounded mw-100" alt="" />
+                                                <img src="#" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -2995,7 +2995,7 @@
                                     <!--end:Col-->
                                     <!--begin:Col-->
                                     <div class="col-lg-6 mb-3 py-lg-3 pe-lg-8 d-flex align-items-center">
-                                        <img src="assets/media/stock/900x600/45.jpg" class="rounded mw-100" alt="" />
+                                        <img src="#" class="rounded mw-100" alt="" />
                                     </div>
                                     <!--end:Col-->
                                 </div>
@@ -3180,7 +3180,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-6.jpg" alt="" />
+                                                <img src="#" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3195,7 +3195,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-2.jpg" alt="" />
+                                                <img src="#" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3210,7 +3210,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-9.jpg" alt="" />
+                                                <img src="#" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3225,7 +3225,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-14.jpg" alt="" />
+                                                <img src="#" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3240,7 +3240,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-11.jpg" alt="" />
+                                                <img src="#" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3259,7 +3259,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/brand-logos/volicity-9.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="#" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -3276,7 +3276,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/brand-logos/tvit.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="#" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -3293,7 +3293,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/misc/infography.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="#" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -3310,7 +3310,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/brand-logos/leaf.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="#" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -3327,7 +3327,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/brand-logos/tower.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="#" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -4147,7 +4147,7 @@
                                     <!--end::Section-->
                                     <!--begin::Illustration-->
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-200px" alt="image" src="assets/media/illustrations/sketchy-1/1.png" />
+                                        <img class="mw-100 mh-200px" alt="image" src="#" />
                                     </div>
                                     <!--end::Illustration-->
                                 </div>

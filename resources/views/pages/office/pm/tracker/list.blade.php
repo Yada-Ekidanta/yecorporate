@@ -64,44 +64,136 @@
         @endforelse
     </tbody>
 </table>
-{{-- <script>
-    $('body').on('click', '.carryOn', function() {
-        location.reload(true);
+<script>
+    function tracker() {
+        $(document).ready(function() {
+            // Dinamic Dropdown
+            $('#form-select-project').on('change', function() {
+                let project_id = $(this).val();
+                // console.log(project_id);
 
-        let start = $(this).attr('itemstart');
-        let end = $(this).attr('itemend');
+                if (project_id == '') {
+                    let project_id = 0;
+                }
 
-        let convertStart = moment(start);
-        let nowStart = moment();
-        let secondStart = nowStart.diff(convertStart, 'seconds');
+                $.ajax({
+                    url: '{{ url("/office/pm/fetch-task/") }}/'+project_id,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                        // console.log(response);
 
-        let convertEnd = moment(end);
-        let nowEnd = moment();
-        let secondEnd = nowEnd.diff(convertEnd, 'seconds');
+                        $('#form-select-task').find('option').not(':first').remove();
 
-        let curentTime = secondStart - secondEnd;
+                        if (response['task'].length > 0) {
+                            $.each(response['task'], function(key, value) {
+                                $('#form-select-task').append('<option id="'+value.id+'" value="'+value.id+'">'+value.name+'</option>');
+                            });
+                        }
+                    }
+                })
+            });
 
-        console.log(curentTime);
+            // Timer
+            let hour = 0
+                minute = 0
+                seconds = 0
+                totalSeconds = 0
+                intervalId = null;
 
-        localStorage.setItem("curentTime", curentTime);
+            function startTimer() {
+                ++totalSeconds;
+                hour = Math.floor(totalSeconds /3600);
+                minute = Math.floor((totalSeconds - hour*3600)/60);
+                seconds = totalSeconds - (hour*3600 + minute*60);
+                $('#hour').html(hour);
+                $('#minute').html(minute);
+                $('#seconds').html(seconds);
+            }
 
-        // totalSeconds += curentTime;
+            $( "#start-btn" ).click(function() {
+                location.reload(true);
+                let start_date = new Date();
+                let start_month = start_date.getMonth()+1;
+                let start_day = start_date.getDate();
+                let output_start = start_date.getFullYear() + '-' +
+                ((''+start_month).length<2 ? '0' : '') + start_month + '-' +
+                ((''+start_day).length<2 ? '0' : '') + start_day;
+                let time = start_date.getHours() + ":" + start_date.getMinutes() + ":" + start_date.getSeconds();
+                $('#start_time').val(output_start+' '+time);
+                $('#date').val(output_start);
+                $('#start-btn').hide();
+                $('#stop').show();
+                intervalId = setInterval(startTimer, 1000);
+                localStorage.removeItem("curentTime");
+                $('#is_active').val(1);
+                $('#total_time').val('0:0:0');
+                $.post('{{route('office.pm.tracker.store')}}', $('#form_input').serialize(), function(data) {
+                    $('#id').val(data.id);
+                });
+            });
 
-        $('#start-btn').hide();
-        $('#stop').show();
-        $('#is_active').val(1);
+            $( "#pause" ).click(function() {
+                $('#pause').hide();
+                $('#resume').removeClass('d-none').show();
+                clearInterval(intervalId);
+                localStorage.setItem("curentTime", totalSeconds);
+            });
 
-        let url = "{{route('office.pm.tracker.carry_on', ':id')}}";
-        url = url.replace(':id', $(this).attr('itemid'));
+            $( "#resume" ).click(function() {
+                $('#resume').hide();
+                $('#pause').show();
+                intervalId = setInterval(startTimer, 1000);
+                totalSeconds = localStorage.getItem("curentTime");
+            });
 
-        $.ajax({
-            url: url,
-            type: 'PUT',
-            data: $('#form_input').serialize(),
-            success: function(data) {
-                $('#id').val(data.id);
+            $( "#stop" ).click(function() {
+                location.reload(true);
+                let end_date = new Date();
+                let end_month = end_date.getMonth()+1;
+                let end_day = end_date.getDate();
+                let output_end = end_date.getFullYear() + '-' +
+                ((''+end_month).length<2 ? '0' : '') + end_month + '-' +
+                ((''+end_day).length<2 ? '0' : '') + end_day;
+                let time = end_date.getHours() + ":" + end_date.getMinutes() + ":" + end_date.getSeconds();
+                $('#end_time').val(output_end+' '+time);
+                $('#start-btn').show();
+                $('#stop').hide();
+                localStorage.removeItem("curentTime");
+                if (intervalId)
+                clearInterval(intervalId);
+                $('#is_active').val(0);
+                $('#total_time').val(hour+':'+minute+':'+seconds);
+                let url = '{{route('office.pm.tracker.update', 'id_tracker')}}';
+                url = url.replace('id_tracker', "{{ $status ? $status->id : null }}");
+                $.ajax({
+                    url: url,
+                    type: 'PUT',
+                    data: $('#form_input').serialize(),
+                    success: function(data) {
+                        $('#id').val(data.id);
+                    }
+                });
+            });
+
+            if ({!! $status ? $status : "false" !!} != false) {
+                let start_date = moment("{{ $status ? $status->start_time : null }}");
+                let now = moment();
+                let curent_time = now.diff(start_date, 'seconds');
+
+                totalSeconds = curent_time;
+                // let storedCurentTime = localStorage.getItem("curentTime");
+
+                // if (storedCurentTime != false) {
+                //     totalSeconds += storedCurentTime;
+                // } else {
+                //     totalSeconds = curent_time;
+                // }
+
+                intervalId = setInterval(startTimer, 1000);
             }
         });
-    });
-</script> --}}
+    }
+    tracker();
+</script>
 {{$collection->links('themes.office.pagination')}}

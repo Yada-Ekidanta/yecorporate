@@ -9,8 +9,7 @@
             active2 = [],
             active3 = [],
             active4 = [],
-            // date = new Date(),
-            // dateFormat = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
+            date = new Date(),
             data = @json($todoList);
 
         for (i = 0; i < data.length; i++) {
@@ -22,17 +21,17 @@
             let deleteURL = "{{ route('office.pm.todo-list.destroy', ':id') }}";
             deleteURL = deleteURL.replace(':id', id);
 
-            // let dueDate = '';
+            let dueDate = '';
 
-            // if (data[i].status < 4) {
-            //     if (data[i].due_date < dateFormat) {
-            //         dueDate = `<span class="text-danger">${data[i].due_date}</span>`;
-            //     } else {
-            //         dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
-            //     }
-            // } else {
-            //     dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
-            // }
+            if (data[i].status < 4) {
+                if (new Date(data[i].due_date) < date) {
+                    dueDate = `<span class="text-danger">${data[i].due_date}</span>`;
+                } else {
+                    dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
+                }
+            } else {
+                dueDate = `<span class="text-muted">${data[i].due_date}</span>`;
+            }
 
             obj = {
                 id: id,
@@ -51,8 +50,7 @@
                                     <li><a class="dropdown-item" href="javascript:;" onclick="handle_confirm('Are you sure want to delete this todo list ?', 'Yes, im sure', 'No, im not','DELETE','${deleteURL}')"  class="menu-link">Delete</a></li>
                                 </ul>
                             </div>
-                            <br><br>
-                        <span class="text-muted">${data[i].due_date}</span>`,
+                            <br><br>` + dueDate,
             };
 
             status = data[i].status;

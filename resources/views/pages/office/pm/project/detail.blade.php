@@ -60,12 +60,13 @@
                             </div>
                             <div class="col-md-9 mt-9">
                                 <div class="card-title">
-                                    <h1>{{$data->name}}</h1>
+                                    <h1>{{ $data->name }}</h1>
+                                    <span>{{ $data->status }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body pt-4">
-                            <p class="card-text">{!! $data->desc!!}</p>
+                            <p class="card-text">{!! $data->desc !!}</p>
                         </div>
                         <div class="card-footer flex-wrap pt-0">
                             <div class="row">

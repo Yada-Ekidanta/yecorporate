@@ -51,9 +51,10 @@ class ProjectController extends Controller
             'name' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-            'estimated_hrs' => 'required|numeric',
-            'budget' => 'required|numeric',
+            'estimated_hrs' => 'required',
+            'budget' => 'required',
             'currency' => 'required',
+            'status' => 'required',
             'desc' => 'required',
             'image' => 'required|image',
         ]);
@@ -91,6 +92,7 @@ class ProjectController extends Controller
         $project->estimated_hrs = $request->estimated_hrs;
         $project->budget = $request->budget;
         $project->currency = $request->currency;
+        $project->status = $request->status;
         $project->desc = $request->desc;
         $project->save();
 
@@ -148,9 +150,10 @@ class ProjectController extends Controller
             'name' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-            'estimated_hrs' => 'required|numeric',
-            'budget' => 'required|numeric',
+            'estimated_hrs' => 'required',
+            'budget' => 'required',
             'currency' => 'required',
+            'status' => 'required',
             'desc' => 'required',
             'image' => 'image',
         ]);
@@ -187,6 +190,7 @@ class ProjectController extends Controller
         $project->estimated_hrs = $request->estimated_hrs;
         $project->budget = $request->budget;
         $project->currency = $request->currency;
+        $project->status = $request->status;
         $project->desc = $request->desc;
         $project->save();
 

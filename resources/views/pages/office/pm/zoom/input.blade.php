@@ -108,7 +108,7 @@
                             <div class="col-md-6 mb-5">
                                 <div class="form-floating">
                                     <input type="tel" class="form-control form-control-solid number_only ribuan" id="duration" name="duration" placeholder="Indonesia" value="{{$data->duration}}"/>
-                                    <label for="duration">Duration (H)</label>
+                                    <label for="duration">Duration (Hours)</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-5">
