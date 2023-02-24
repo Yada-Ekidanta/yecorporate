@@ -60,7 +60,7 @@
         </div>
         <ul class="listview image-listview flush transparent no-line">
             <li>
-                <a href="{{route('web.show_blog','kementerian-pertahanan-gelar-indo-defence-2022-expo-forum-pameran-industri')}}" class="item ye-anima-link">
+                <a href="{{route('web.show_insights','kementerian-pertahanan-gelar-indo-defence-2022-expo-forum-pameran-industri')}}" class="item ye-anima-link">
                     <img src="{{asset('img/blog/thumbnail/rdi.jpeg')}}" alt="image" class="image">
                     <div class="in">
                         <div>Kementerian Pertahanan Gelar Indo Defence 2022 Expo & Forum, Pameran Industri Pertahanan Bertaraf Internasional</div>
@@ -68,7 +68,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('web.show_blog',Str::slug('Paparan Pengembangan Aplikasi Penduduk Non Permanen Dukcapil Kementerian Dalam Negeri Republik Indonesia'))}}" class="item">
+                <a href="{{route('web.show_insights',Str::slug('Paparan Pengembangan Aplikasi Penduduk Non Permanen Dukcapil Kementerian Dalam Negeri Republik Indonesia'))}}" class="item">
                     <img src="{{asset('img/blog/thumbnail/nonper.jpeg')}}" alt="image" class="image">
                     <div class="in">
                         <div>Paparan Pengembangan Aplikasi Penduduk Non Permanen Dukcapil Kementerian Dalam Negeri Republik Indonesia</div>
@@ -76,7 +76,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('web.show_blog',Str::slug('Paparan Pengembangan Aplikasi eOffice Dukcapil Kementerian Dalam Negeri Republik Indonesia'))}}" class="item">
+                <a href="{{route('web.show_insights',Str::slug('Paparan Pengembangan Aplikasi eOffice Dukcapil Kementerian Dalam Negeri Republik Indonesia'))}}" class="item">
                     <img src="{{asset('img/blog/thumbnail/eoffice.jpeg')}}" alt="image" class="image">
                     <div class="in">
                         <div>Paparan Pengembangan Aplikasi eOffice Dukcapil Kementerian Dalam Negeri Republik Indonesia</div>
@@ -84,7 +84,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('web.show_blog',Str::slug('Paparan Pengembangan Aplikasi Program Hibah Luar Negeri Tahap 1'))}}" class="item">
+                <a href="{{route('web.show_insights',Str::slug('Paparan Pengembangan Aplikasi Program Hibah Luar Negeri Tahap 1'))}}" class="item">
                     <img src="{{asset('img/blog/thumbnail/phln.jpeg')}}" alt="image" class="image">
                     <div class="in">
                         <div>Paparan Pengembangan Aplikasi Program Hibah Luar Negeri Tahap 1</div>

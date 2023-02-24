@@ -909,7 +909,7 @@ function testMode() {
     var colorSuccess = "color: #34C759; font-weight:bold;"
 
     console.clear();
-    console.log("%cMobilekit (v" + Mobilekit.version + ")", "font-size: 1.3em; font-weight: bold; color: #FFF; background-color: #ffd54f; padding: 14px 70px; margin-bottom: 16px;")
+    console.log("%cMobilekit (v" + Mobilekit.version + ")", "font-size: 1.3em; font-weight: bold; color: #FFF; background-color: #6366f1; padding: 14px 70px; margin-bottom: 16px;")
     console.log("%c🚀 TEST MODE ACTIVATED ..!", "font-size: 1em; font-weight: bold; margin: 4px 0;");
 
     function testModeMsg(value, msg) {
@@ -921,7 +921,7 @@ function testMode() {
         }
     }
     function testModeInfo(value, msg) {
-        console.log("%c|" + "%c " + msg + " : " + "%c" + value, "color: #444; font-size :1.2em; font-weight: bold;", "color: inherit", "color:#ffd54f; font-weight: bold;");
+        console.log("%c|" + "%c " + msg + " : " + "%c" + value, "color: #444; font-size :1.2em; font-weight: bold;", "color: inherit", "color:#6366f1; font-weight: bold;");
     }
     function testModeSubtitle(msg) {
         console.log("%c # " + msg, "color: #FFF; background: #444; font-size: 1.2em; padding: 8px 16px; margin-top: 16px; border-radius: 12px 12px 0 0");

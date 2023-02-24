@@ -7,12 +7,12 @@ trait ResponseView{
         // dd("boom");
         if($agent->isMobile()){
             // dd("sad");
-            if(view()->exists('pages.web.mobile.'.$view)){
+            if(view()->exists('pages.web.desktop.'.$view)){
                 #return view mobile
                 if($compact!=null){
-                    return view('pages.web.mobile.'.$view,$compact);
+                    return view('pages.web.desktop.'.$view,$compact);
                 }else{
-                    return view('pages.web.mobile.'.$view);
+                    return view('pages.web.desktop.'.$view);
                 }
             }else{
                 return redirect($alternativePath);

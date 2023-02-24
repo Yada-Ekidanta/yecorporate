@@ -1,0 +1,3 @@
+<x-web-layout title="Forgot Password" description="ye, cv ye, yada ekidanta, cv yada ekidanta, YE is one of the largest enterprise software development company based in Jakarta & Bandung, Indonesia." keywords="application development, enterprise software, software outsourcing in jakarta, ios app development, android app development, top it company in indonesia, top software house in indonesia, rizky ramadhan, perusahaan consultant it, perusahaan konsultan it">
+    
+</x-web-layout>

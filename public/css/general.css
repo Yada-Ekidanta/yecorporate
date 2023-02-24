@@ -157,7 +157,7 @@ hr.light-blue {
 }
 hr.blue {
     height: 2px !important;
-    background: #ffd54f;
+    background: #6366f1;
     opacity: 1;
 }
 hr.grey {
@@ -176,7 +176,7 @@ h4 {
     font-size: 14px;
     line-height: 100%;
     letter-spacing: 3px;
-    color: #ffd54f;
+    color: #6366f1;
 }
 .subtitle--white {
     font-weight: bold;
@@ -212,7 +212,7 @@ p {
     letter-spacing: 0;
 }
 .btn-primary {
-    background: #ffd54f;
+    background: #6366f1;
     font-size: 16px;
     font-weight: bold;
     padding: 10px 20px;
@@ -223,8 +223,8 @@ p {
     font-weight: bold;
     font-size: 16px;
     line-height: 200%;
-    color: #ffd54f !important;
-    border: 1px solid #ffd54f !important;
+    color: #6366f1 !important;
+    border: 1px solid #6366f1 !important;
     font-size: 16px;
     font-weight: bold;
     padding: 10px 20px;
@@ -565,13 +565,13 @@ p {
 }
 .header-menu.navbar-expand-lg .navbar-nav .dropdown-menu > ul.parent-menu > li > a:hover {
     color: #ffffff !important;
-    background: #ffd54f;
+    background: #6366f1;
 }
 .header-menu.navbar-expand-lg .navbar-nav .dropdown-menu > ul.parent-menu > li > a:hover {
-    background: #ffd54f;
+    background: #6366f1;
 }
 .header-menu.navbar-expand-lg .navbar-nav .dropdown-menu > ul.parent-menu > li > a:hover:before {
-    background: #ffd54f;
+    background: #6366f1;
     color: #ffffff;
     display: block;
     width: calc(100% - 65px);
@@ -637,7 +637,7 @@ p {
     font-size: 20px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #ffd54f;
+    color: #6366f1;
     margin-bottom: 20px;
 }
 .header-menu .children-menu a {
@@ -650,10 +650,10 @@ p {
     color: #fff;
 }
 .header-menu .dropdown-item.show {
-    background: #ffd54f;
+    background: #6366f1;
 }
 .header-menu .dropdown-item.show:before {
-    background: #ffd54f;
+    background: #6366f1;
     color: #ffffff;
     display: block;
     width: calc(100% - 65px);
@@ -680,7 +680,7 @@ p {
     font-size: 16px;
     line-height: 200%;
     letter-spacing: 3px;
-    color: #ffd54f;
+    color: #6366f1;
     text-transform: uppercase;
 }
 .header-menu .search {
@@ -993,20 +993,20 @@ p {
     text-align: center;
 }
 .blue-bg {
-    background: #ffd54f;
+    background: #6366f1;
 }
 .ye_banner--shape-outline {
     background: transparent;
     position: absolute;
     right: 5%;
     top: -2px;
-    border: 1px solid #ffd54f;
+    border: 1px solid #6366f1;
     width: 45%;
     height: 91vh;
     transform: skew(-13deg);
 }
 .ye_banner--shape-blue {
-    background: #ffd54f;
+    background: #6366f1;
     width: 48%;
     height: 70px;
     position: absolute;
@@ -1120,7 +1120,7 @@ p {
     top: auto;
 }
 .fixed .nav-link.dropdown-toggle.with-arrow.show:before {
-    border-bottom: 8px solid #ffd54f;
+    border-bottom: 8px solid #6366f1;
     bottom: -12px;
 }
 .header-menu.navbar-expand-lg.fixed .navbar-nav .dropdown-menu.not-full-menu {
@@ -1151,7 +1151,7 @@ p {
     font-weight: bold;
     font-size: 16px;
     line-height: 150%;
-    color: #ffd54f;
+    color: #6366f1;
     margin-bottom: 0;
     transition: 0.5s all;
     position: relative;
@@ -1223,7 +1223,7 @@ p {
 }
 .right-head:after {
     content: "";
-    background: #ffd54f;
+    background: #6366f1;
     height: 70px;
     display: block;
     position: absolute;
@@ -1289,7 +1289,7 @@ p {
     border-top: 2px solid #001ff6;
 }
 .fixed.header-menu .language .dropdown-menu:after {
-    border-bottom: 8px solid #ffd54f;
+    border-bottom: 8px solid #6366f1;
 }
 .radio {
     position: relative;
@@ -1325,7 +1325,7 @@ p {
     border-radius: 50%;
 }
 .radio input:checked + label::before {
-    border: 3px solid #ffd54f;
+    border: 3px solid #6366f1;
 }
 .radio input:checked + label {
     font-style: normal;
@@ -1341,7 +1341,7 @@ p {
     left: 5px;
     top: 5px;
     transition: opacity 0.2s ease-in-out;
-    background: #ffd54f;
+    background: #6366f1;
     width: 5px;
     height: 5px;
 }

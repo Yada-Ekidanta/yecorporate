@@ -92,7 +92,7 @@ return new class extends Migration
             $table->integer('invoice_id')->default(0);
             $table->integer('client_id')->default(0);
             $table->float('amount',20,0)->default(0);
-            $table->date('date')->default(0);
+            $table->date('date');
             $table->longText('desc')->nullable();
             $table->timestamps();
         });
@@ -101,7 +101,7 @@ return new class extends Migration
             $table->integer('bill_id')->default(0);
             $table->integer('vendor_id')->default(0);
             $table->float('amount',20,0)->default(0);
-            $table->date('date')->default(0);
+            $table->date('date');
             $table->longText('desc')->nullable();
             $table->timestamps();
         });
