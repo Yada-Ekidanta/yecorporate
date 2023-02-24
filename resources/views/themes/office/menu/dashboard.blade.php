@@ -1,5 +1,5 @@
 <!--begin:Menu item-->
-<div data-kt-menu-trigger="click" class="menu-item {{request()->is('dashboard') || request()->is('dashboard-ecommerce') || request()->is('dashboard-project') || request()->is('dashboard-marketing') || request()->is('dashboard-analytic') || request()->is('dashboard-finance') ? 'here show' : ''}} menu-accordion" data-no-swup>
+<div data-kt-menu-trigger="click" class="menu-item {{request()->is('office/dashboard') || request()->is('office/dashboard-ecommerce') || request()->is('office/dashboard-project') || request()->is('office/dashboard-marketing') || request()->is('office/dashboard-analytic') || request()->is('office/dashboard-finance') || request()->is('office/dashboard/crm') ? 'here show' : ''}} menu-accordion" data-no-swup>
     <!--begin:Menu link-->
     <span class="menu-link" data-no-swup>
         <span class="menu-icon">
@@ -23,7 +23,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link {{request()->is('dashboard') ? 'active' : ''}}" href="{{route('office.dashboard.index')}}">
+            <a class="menu-link {{request()->is('office/dashboard') && !(request()->is('office/dashboard/crm')) ? 'active' : ''}}" href="{{route('office.dashboard.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -35,7 +35,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
+            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="#">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -47,7 +47,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
+            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="#">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -59,7 +59,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
+            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="#">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -71,7 +71,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
+            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="#">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -84,7 +84,7 @@
             <!--begin:Menu item-->
             <div class="menu-item">
                 <!--begin:Menu link-->
-                <a class="menu-link" href="../../demo1/dist/dashboards/bidding.html">
+                <a class="menu-link {{ request()->is('office/dashboard/crm') ? 'active' : '' }}" href="{{ route('office.dashboard.crm') }}">
                     <span class="menu-bullet">
                         <span class="bullet bullet-dot"></span>
                     </span>
@@ -97,7 +97,7 @@
         <div class="menu-item" data-no-swup>
             <div class="menu-content">
                 <a class="btn btn-flex btn-color-primary d-flex flex-stack fs-base p-0 ms-2 mb-2 toggle collapsible collapsed" data-bs-toggle="collapse" href="#kt_app_sidebar_menu_dashboards_collapse" data-kt-toggle-text="Show Less" data-no-swup>
-                    <span data-kt-toggle-text-target="true">Show 12 More</span>
+                    <span data-kt-toggle-text-target="true">Show More</span>
                     <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                     <span class="svg-icon toggle-on svg-icon-2 me-0">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

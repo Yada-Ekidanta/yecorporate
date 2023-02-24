@@ -43,7 +43,7 @@ Route::group(['domain' => ''], function() {
             //     Route::get('apikey',[ProfileController::class, 'apikey'])->name('apikey');
             //     Route::get('log',[ProfileController::class, 'log'])->name('log');
             // });
-            Route::get('logout',[AuthController::class, 'do_logout'])->name('auth.logout');
+            Route::post('logout',[AuthController::class, 'do_logout'])->name('auth.logout');
         });
     });
 });

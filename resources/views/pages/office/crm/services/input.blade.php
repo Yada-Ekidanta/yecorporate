@@ -20,6 +20,15 @@
                         <span class="bullet bg-gray-400 w-5px h-2px"></span>
                     </li>
                     <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">CRM</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Services</li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -107,7 +116,7 @@
                             {{ $data->id ? 'Update' : 'Create' }}
                         </button>
                         @if ($data->id)
-                            <button type="button" onclick="handle_confirm('Are you sure want to delete this Opportunity ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.services.destroy', $data->id) }}');"
+                            <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this Opportunity ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.services.destroy', $data->id) }}','{{ route('office.crm.services.index') }}');"
                                 class="btn btn-sm btn-danger">
                                 Delete
                             </button>

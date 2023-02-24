@@ -156,142 +156,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div id="contract_attachment" class="mt-5">
-                            <label class="form-label ms-1 fw-bold">Contarct Attachment</label>
-                            <div class="form-group">
-                                <div data-repeater-list="contract_attachment">
-                                    @if ($data->id)
-                                        @foreach ($data->client_contract_attachment as $key => $value)
-                                            <div data-repeater-item>
-                                                <div class="form-group row mb-4">
-                                                    <input type="hidden" name="id" value="{{ $value->id }}">
-                                                    <div class="col-sm-5">
-                                                        <label class="form-label ms-1">Files</label>
-                                                        <input type="file" class="form-control mb-2 mb-md-0" name="files" />
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
-                                                            <i class="la la-trash-o"></i>Delete
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div data-repeater-item>
-                                            <div class="form-group row mb-4">
-                                                <div class="col-sm-5">
-                                                    <label class="form-label ms-1">Files</label>
-                                                    <input type="file" class="form-control mb-2 mb-md-0" name="files" />
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
-                                                        <i class="la la-trash-o"></i>Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group my-5">
-                                <a href="javascript:;" data-repeater-create class="btn btn-sm btn-light-primary">
-                                    <i class="la la-plus"></i>Add
-                                </a>
-                            </div>
-                        </div>
-                        <div id="contract_comment" class="mt-5">
-                            <label class="form-label ms-1 fw-bold">Contarct Comment</label>
-                            <div class="form-group">
-                                <div data-repeater-list="contract_comment">
-                                    @if ($data->id)
-                                        @foreach ($data->client_contract_comment as $key => $value)
-                                            <div data-repeater-item>
-                                                <div class="form-group row mb-4">
-                                                    <input type="hidden" name="id" value="{{ $value->id }}">
-                                                    <div class="col-sm-10">
-                                                        <label class="form-label ms-1">Comment</label>
-                                                        <div id="comment" style="height: 150px">{!! $data->comment !!}</div>
-                                                        <textarea name="comment" class="form-control d-none">{{ $data->comment }}</textarea>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
-                                                            <i class="la la-trash-o"></i>Delete
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div data-repeater-item>
-                                            <div class="form-group row mb-4">
-                                                <div class="col-sm-10">
-                                                    <label class="form-label ms-1">Comment</label>
-                                                    <div id="comment" style="height: 150px">{!! $data->comment !!}</div>
-                                                    <textarea name="comment" class="form-control">{{ $data->comment }}</textarea>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
-                                                        <i class="la la-trash-o"></i>Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group my-5">
-                                <a href="javascript:;" data-repeater-create class="btn btn-sm btn-light-primary">
-                                    <i class="la la-plus"></i>Add
-                                </a>
-                            </div>
-                        </div>
-                        <div id="contract_note" class="mt-5">
-                            <label class="form-label ms-1 fw-bold">Contarct Note</label>
-                            <div class="form-group">
-                                <div data-repeater-list="contract_note">
-                                    @if ($data->id)
-                                        @foreach ($data->client_contract_note as $key => $value)
-                                            <div data-repeater-item>
-                                                <div class="form-group row mb-4">
-                                                    <input type="hidden" name="id" value="{{ $value->id }}">
-                                                    <div class="col-sm-10">
-                                                        <label class="form-label ms-1">Note</label>
-                                                        <div id="note" style="height: 150px">{!! $data->note !!}</div>
-                                                        <textarea name="note" class="form-control d-none">{{ $data->note }}</textarea>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
-                                                            <i class="la la-trash-o"></i>Delete
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div data-repeater-item>
-                                            <div class="form-group row mb-4">
-                                                <div class="col-sm-10">
-                                                    <label class="form-label ms-1">Note</label>
-                                                    <div id="note" style="height: 150px">{!! $data->note !!}</div>
-                                                    <textarea name="note" class="form-control">{{ $data->note }}</textarea>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
-                                                        <i class="la la-trash-o"></i>Delete
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group mt-5">
-                                <a href="javascript:;" data-repeater-create class="btn btn-sm btn-light-primary">
-                                    <i class="la la-plus"></i>Add
-                                </a>
-                            </div>
-                        </div> --}}
                     </div>
                     <div class="card-footer">
                         <button id="tombol_simpan" onclick="handle_upload('#tombol_simpan','#form_input','{{ $data->id ? 'PATCH' : 'POST' }}');" class="btn btn-sm btn-{{ $data->id ? 'warning' : 'success' }}">
@@ -315,8 +179,8 @@
             obj_select('client_contract_type_id');
             obj_select('st')
             obj_quill('description');
-            obj_quill('owner_signature');
-            obj_quill('client_signature');
+            // obj_quill('owner_signature');
+            // obj_quill('client_signature');
             obj_startdatenow('start_at');
             obj_startdatenow('end_at');
         </script>

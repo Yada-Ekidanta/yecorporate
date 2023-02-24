@@ -5,7 +5,7 @@
         <div class="me-2"></div>
         <!--end::Back link-->
         <!--begin::Sign Up link-->
-        <div class="m-0">
+        <div class="m-0 d-none">
             <span class="text-gray-400 fw-bold fs-5 me-2" data-kt-translate="sign-in-head-desc">Wanna join us?</span>
             <a href="{{route('office.auth.register')}}" class="link-primary fw-bold fs-5 ye-anima-link" data-kt-translate="sign-in-head-link">Sign Up</a>
         </div>
@@ -31,7 +31,7 @@
                 <!--begin::Input group=-->
                 <div class="fv-row mb-8">
                     <!--begin::Email-->
-                    <input type="email" placeholder="Email" id="email" name="email" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid" data-login="1" data-validation="The email field is required" data-format="The email must be a valid email address" />
+                    <input type="email" placeholder="Email" id="email" name="email" autocomplete="on" data-kt-translate="sign-in-input-email" class="form-control form-control-solid" data-login="1" data-validation="The email field is required" data-format="The email must be a valid email address" />
                     <!--end::Email-->
                 </div>
                 <!--end::Input group=-->

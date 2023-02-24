@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Office\Crm;
 
 use App\Models\CRM\Client;
-use App\Models\HRM\Employee;
 use Illuminate\Http\Request;
 use App\Models\Regional\Country;
 use App\Models\Regional\Regency;
@@ -21,7 +20,7 @@ class ClientContactController extends Controller
     {
         if($request->ajax())
         {
-            $collection = ClientContact::where('client_id','LIKE','%'.$request->keyword.'%')->paginate(10);
+            $collection = ClientContact::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.crm.client_contact.list', compact('collection'));
         }
         return view('pages.office.crm.client_contact.main');
@@ -145,10 +144,10 @@ class ClientContactController extends Controller
         ]);
     }
 
-    public function filterClientContacts(Request $request)
+    public function filterClientContacts(Client $client)
     {
-        $clientContacts = ClientContact::where('client_id', $request->client_id)->get();
-        $list = $request->option;
+        $clientContacts = ClientContact::where('client_id', $client->id)->orderBy('name', 'asc')->get();
+        $list = '';
         foreach ($clientContacts as $row) {
             $list .= "<option value='$row->id'>$row->name ($row->phone)</option>";
         }

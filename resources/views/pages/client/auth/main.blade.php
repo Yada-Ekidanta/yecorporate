@@ -31,7 +31,7 @@
                 <!--begin::Input group=-->
                 <div class="fv-row mb-8">
                     <!--begin::Email-->
-                    <input type="email" placeholder="Email" id="email" name="email" autocomplete="off" data-kt-translate="sign-in-input-email" class="form-control form-control-solid" data-login="1" data-validation="The email field is required" data-format="The email must be a valid email address" />
+                    <input type="email" placeholder="Email" id="email" name="email" autocomplete="email" data-kt-translate="sign-in-input-email" class="form-control form-control-solid" data-login="1" data-validation="The email field is required" data-format="The email must be a valid email address" />
                     <!--end::Email-->
                 </div>
                 <!--end::Input group=-->

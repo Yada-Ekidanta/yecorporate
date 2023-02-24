@@ -4,11 +4,12 @@
             <th>
                 No
             </th>
-            <th>Status</th>
+            <th>Name</th>
             <th>Campaign Type</th>
             <th>Budget</th>
             <th>Start at</th>
             <th>End at</th>
+            <th>Status</th>
             <th>Target List</th>
             <th>Ex Target List</th>
             <th>Assigned Employee</th>
@@ -21,6 +22,11 @@
             <td>
                 {{$key+ $collection->firstItem()}}
             </td>
+            <td class="text-nowrap">{{$item->name}}</td>
+            <td>{{$item->campaignType->name}}</td>
+            <td>{{$item->budget}}</td>
+            <td class="text-nowrap">{{$item->start_at}}</td>
+            <td class="text-nowrap">{{$item->end_at}}</td>
             <td>
                 @if ($item->st == 0)
                     Planning
@@ -32,12 +38,8 @@
                 Complete
                 @endif
             </td>
-            <td>{{$item->campaignType->name}}</td>
-            <td>{{$item->budget}}</td>
-            <td class="text-nowrap">{{$item->start_at}}</td>
-            <td class="text-nowrap">{{$item->end_at}}</td>
-            <td>{{$item->targetList->name}}</td>
-            <td>{{$item->exTargetList->name}}</td>
+            <td class="text-nowrap">{{$item->targetList->name}}</td>
+            <td class="text-nowrap">{{$item->exTargetList->name}}</td>
             <td>{{$item->employee->name}}</td>
             <td class="text-nowrap">
                 <a href="{{route('office.crm.campaign.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">

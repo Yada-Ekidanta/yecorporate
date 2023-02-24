@@ -37,7 +37,7 @@
                     <!--end:Menu content-->
                 </div>
                 <!--end:Menu item-->
-                {{-- @include('themes.client.menu.client') --}}
+                @include('themes.client.menu.client')
                 <!--begin:Menu item-->
                 <div class="menu-item pt-5">
                     <!--begin:Menu content-->

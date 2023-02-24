@@ -50,12 +50,7 @@ class ClientController extends Controller
             'document_id' => 'nullable',
             'client_type_id' => 'required',
             'company_industry_id' => 'required',
-            'company_name' => 'required',
-            'company_logo' => 'required|image',
-            'title' => 'required',
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
+            'company_logo' => 'nullable|image',
             'url' => 'nullable|url',
             'billing_country_id' => 'required',
             'billing_province_id' => 'required',
@@ -67,8 +62,6 @@ class ClientController extends Controller
             'shipping_regency_id' => 'required',
             'shipping_district_id' => 'required',
             'shipping_village_id' => 'required',
-            'password' => 'required',
-            'category' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -145,12 +138,7 @@ class ClientController extends Controller
         $validator = Validator::make($request->all(), [
             'client_type_id' => 'required',
             'company_industry_id' => 'required',
-            'company_name' => 'required',
             'company_logo' => 'nullable|image',
-            'title' => 'required',
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
             'url' => 'nullable|url',
             'billing_country_id' => 'required',
             'billing_province_id' => 'required',
@@ -163,7 +151,6 @@ class ClientController extends Controller
             'shipping_district_id' => 'required',
             'shipping_village_id' => 'required',
             'date_birth' => 'required',
-            'category' => 'required',
             'st' => 'required',
         ]);
         if ($validator->fails())

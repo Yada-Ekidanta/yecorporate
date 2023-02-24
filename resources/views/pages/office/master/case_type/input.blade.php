@@ -96,7 +96,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this CaseType ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.case-type.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this CaseType ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.case-type.destroy',$data->id)}}','{{route('office.master.case-type.index')}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

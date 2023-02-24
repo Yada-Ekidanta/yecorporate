@@ -130,6 +130,6 @@ class Client extends Authenticatable
 
     public function common_case()
     {
-        return $this->hasMany(CommonCase::class, 'client_contact_id');
+        return $this->hasMany(CommonCase::class, 'client_id');
     }
 }

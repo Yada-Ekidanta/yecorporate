@@ -81,7 +81,7 @@ use App\Http\Controllers\Office\Crm\ServicesController;
 Route::group(['domain' => ''], function () {
     Route::prefix('office')->name('office.')->group(function () {
 
-        Route::redirect('/', '/auth');
+        Route::redirect('/', '/office/auth');
         Route::prefix('auth')->name('auth.')->group(function () {
             Route::get('', [AuthController::class, 'index'])->name('index');
             Route::get('register', [AuthController::class, 'register'])->name('register');
@@ -97,6 +97,7 @@ Route::group(['domain' => ''], function () {
             Route::prefix('dashboard')->name('dashboard.')->group(function () {
                 Route::get('', [DashboardController::class, 'index'])->name('index');
                 Route::get('ecommerce', [DashboardController::class, 'ecommerce'])->name('ecommerce');
+                Route::get('crm', [DashboardController::class, 'crm'])->name('crm');
             });
             Route::name('setting.')->group(function () {
                 Route::resource('permission', PermissionController::class);
@@ -114,7 +115,7 @@ Route::group(['domain' => ''], function () {
                 Route::get('regional/{regional}/{province}/edit-province', [RegionalController::class, 'edit_province'])->name('regional.edit_province');
                 Route::patch('regional/{province}/update-province', [RegionalController::class, 'update_province'])->name('regional.update_province');
                 Route::delete('regional/{province}/destroy-province', [RegionalController::class, 'destroy_province'])->name('regional.destroy_province');
-                Route::post('filter-province', [GetRegionalController::class, 'filter_province'])->name('regional.filter_province');
+                Route::get('get-province/{country}', [GetRegionalController::class, 'get_province'])->name('regional.get_province');
 
                 Route::get('province/{province}/show_regency', [RegionalController::class, 'show_regency'])->name('regional.show_regency');
                 Route::get('province/{province}/create', [RegionalController::class, 'create_regency'])->name('regional.create_regency');
@@ -122,7 +123,7 @@ Route::group(['domain' => ''], function () {
                 Route::get('province/{province}/{regency}/edit-regency', [RegionalController::class, 'edit_regency'])->name('regional.edit_regency');
                 Route::patch('province/{regency}/update-regency', [RegionalController::class, 'update_regency'])->name('regional.update_regency');
                 Route::delete('province/{regency}/destroy-regency', [RegionalController::class, 'destroy_regency'])->name('regional.destroy_regency');
-                Route::post('filter-regency', [GetRegionalController::class, 'filter_regency'])->name('regional.filter_regency');
+                Route::get('get-regency/{province}', [GetRegionalController::class, 'get_regency'])->name('regional.get_regency');
 
                 Route::get('regency/{regency}/show_district', [RegionalController::class, 'show_district'])->name('regional.show_district');
                 Route::get('regency/{regency}/create', [RegionalController::class, 'create_district'])->name('regional.create_district');
@@ -130,7 +131,7 @@ Route::group(['domain' => ''], function () {
                 Route::get('regency/{regency}/{district}/edit-district', [RegionalController::class, 'edit_district'])->name('regional.edit_district');
                 Route::patch('regency/{district}/update-district', [RegionalController::class, 'update_district'])->name('regional.update_district');
                 Route::delete('regency/{district}/destroy-district', [RegionalController::class, 'destroy_district'])->name('regional.destroy_district');
-                Route::post('filter-district', [GetRegionalController::class, 'filter_district'])->name('regional.filter_district');
+                Route::get('get-district/{regency}', [GetRegionalController::class, 'get_district'])->name('regional.get_district');
 
                 Route::get('district/{district}/show_village', [RegionalController::class, 'show_village'])->name('regional.show_village');
                 Route::get('district/{district}/create', [RegionalController::class, 'create_village'])->name('regional.create_village');
@@ -138,8 +139,8 @@ Route::group(['domain' => ''], function () {
                 Route::get('district/{district}/{village}/edit-village', [RegionalController::class, 'edit_village'])->name('regional.edit_village');
                 Route::patch('district/{village}/update-village', [RegionalController::class, 'update_village'])->name('regional.update_village');
                 Route::delete('district/{village}/destroy-village', [RegionalController::class, 'destroy_village'])->name('regional.destroy_village');
-                Route::post('filter-village', [GetRegionalController::class, 'filter_village'])->name('regional.filter_village');
-                Route::post('filter-postcode', [GetRegionalController::class, 'filter_postcode'])->name('regional.filter_postcode');
+                Route::get('get-village/{district}', [GetRegionalController::class, 'get_village'])->name('regional.get_village');
+                Route::get('get-postcode/{village}', [GetRegionalController::class, 'get_postcode'])->name('regional.get_postcode');
 
                 Route::resource('company-industry', CompanyIndustryController::class);
                 Route::resource('regional', RegionalController::class);
@@ -220,7 +221,7 @@ Route::group(['domain' => ''], function () {
                 Route::resource('client-meeting', ClientMeetingController::class);
                 Route::resource('client-document', ClientDocumentController::class);
                 Route::resource('common-case', CommonCaseController::class);
-                Route::post('filter-client-contact', [ClientContactController::class, 'filterClientContacts'])->name('client-contact.filter-contact');
+                Route::get('get-contact/{client}', [ClientContactController::class, 'filterClientContacts'])->name('client-contact.filter-contact');
             });
             Route::prefix('finance')->name('finance.')->group(function () {
             });

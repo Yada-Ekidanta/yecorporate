@@ -21,6 +21,14 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">CRM</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Campaign</li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -76,86 +84,95 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                        <div class="col-4 mb-3">
-                            <div class="form-group">
-                                <select name="st" id="st" class="form-select form-select-solid">
-                                    <option disabled selected>Select Status</option>
-                                    <option value="0" {{ $data->st === 0 ? 'selected' : '' }}>Planning</option>
-                                    <option value="1" {{ $data->st === 1 ? 'selected' : '' }}>Active</option>
-                                    <option value="2" {{ $data->st === 2 ? 'selected' : '' }}>Inactive</option>
-                                    <option value="3" {{ $data->st === 3 ? 'selected' : '' }}>Complete</option>
-                                </select>
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control form-control-solid" id="name"
+                                    name="name" placeholder="Enter Name"
+                                    value="{{ $data->name }}" />
+                                    <label for="name">Name</label>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-group">
+                                    <select name="st" id="st" class="form-select form-select-solid">
+                                        <option disabled selected>Select Status</option>
+                                        <option value="0" {{ $data->st === 0 ? 'selected' : '' }}>Planning</option>
+                                        <option value="1" {{ $data->st === 1 ? 'selected' : '' }}>Active</option>
+                                        <option value="2" {{ $data->st === 2 ? 'selected' : '' }}>Inactive</option>
+                                        <option value="3" {{ $data->st === 3 ? 'selected' : '' }}>Complete</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-group">
+                                    <select name="campaign_type_id" id="campaign_type_id" class="form-select form-select-solid">
+                                        <option disabled selected>Select Campaign Type</option>
+                                        @foreach ($campaignType as $item)
+                                            <option value="{{ $item->id }}" {{ $data->campaign_type_id === $item->id ? 'selected' : '' }}>
+                                                {{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control form-control-solid" id="budget" name="budget" placeholder="Enter Budget" value="{{ $data->budget }}" />
+                                    <label for="budget">Budget</label>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
+                                    <input type="date" class="form-control form-control-solid" id="start_at" name="start_at" placeholder="Enter Start at" value="{{ $data->start_at }}" />
+                                    <label for="start_at">Start at</label>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-floating">
+                                    <input type="date" class="form-control form-control-solid" id="end_at" name="end_at" placeholder="Enter End at" value="{{ $data->end_at }}" />
+                                    <label for="end_at">End at</label>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-group">
+                                    <select name="target_list" id="target_list" class="form-select form-select-solid">
+                                        <option disabled selected>Target List</option>
+                                        @foreach ($targetList as $item)
+                                            <option value="{{ $item->id }}" {{ $data->target_list === $item->id ? 'selected' : '' }}>
+                                                {{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="form-group">
+                                    <select name="ex_target_list" id="ex_target_list" class="form-select form-select-solid">
+                                        <option disabled selected>Ex Target List</option>
+                                        @foreach ($targetList as $item)
+                                            <option value="{{ $item->id }}" {{ $data->ex_target_list === $item->id ? 'selected' : '' }}>
+                                                {{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <label for="desc" class="form-label ms-1">Description</label>
+                                    <div id="desc" style="height: 150px">{!! $data->desc !!}</div>
+                                    <textarea name="desc" class="form-control d-none">{{ $data->desc }}</textarea>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-group">
-                                <select name="campaign_type_id" id="campaign_type_id" class="form-select form-select-solid">
-                                    <option disabled selected>Select Campaign Type</option>
-                                    @foreach ($campaignType as $item)
-                                        <option value="{{ $item->id }}" {{ $data->campaign_type_id === $item->id ? 'selected' : '' }}>
-                                            {{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-floating">
-                                <input type="number" class="form-control form-control-solid" id="budget" name="budget" placeholder="Enter Budget" value="{{ $data->budget }}" />
-                                <label for="budget">Budget</label>
-                            </div>
-                        </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-floating">
-                                <input type="date" class="form-control form-control-solid" id="start_at" name="start_at" placeholder="Enter Start at" value="{{ $data->start_at }}" />
-                                <label for="start_at">Start at</label>
-                            </div>
-                        </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-floating">
-                                <input type="date" class="form-control form-control-solid" id="end_at" name="end_at" placeholder="Enter End at" value="{{ $data->end_at }}" />
-                                <label for="end_at">End at</label>
-                            </div>
-                        </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-group">
-                                <select name="target_list" id="target_list" class="form-select form-select-solid">
-                                    <option disabled selected>Target List</option>
-                                    @foreach ($targetList as $item)
-                                        <option value="{{ $item->id }}" {{ $data->target_list === $item->id ? 'selected' : '' }}>
-                                            {{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-4 mb-3">
-                            <div class="form-group">
-                                <select name="ex_target_list" id="ex_target_list" class="form-select form-select-solid">
-                                    <option disabled selected>Ex Target List</option>
-                                    @foreach ($targetList as $item)
-                                        <option value="{{ $item->id }}" {{ $data->ex_target_list === $item->id ? 'selected' : '' }}>
-                                            {{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-3">
-                            <div class="form-group">
-                                <label for="desc" class="form-label ms-1">Description</label>
-                                <div id="desc" style="height: 150px">{!! $data->desc !!}</div>
-                                <textarea name="desc" class="form-control d-none">{{ $data->desc }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ps-0">
-                        <button id="tombol_simpan" onclick="handle_upload('#tombol_simpan','#form_input','{{ $data->id ? 'PATCH' : 'POST' }}');" class="btn btn-sm btn-{{ $data->id ? 'warning' : 'success' }}">
-                            {{ $data->id ? 'Update' : 'Create' }}
-                        </button>
-                        @if ($data->id)
-                            <button type="button" onclick="handle_confirm('Are you sure want to delete this Opportunity ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.campaign.destroy', $data->id) }}');"
-                                class="btn btn-sm btn-danger">
-                                Delete
+                        <div class="card-footer ps-0">
+                            <button id="tombol_simpan" onclick="handle_upload('#tombol_simpan','#form_input','{{ $data->id ? 'PATCH' : 'POST' }}');" class="btn btn-sm btn-{{ $data->id ? 'warning' : 'success' }}">
+                                {{ $data->id ? 'Update' : 'Create' }}
                             </button>
-                        @endif
+                            @if ($data->id)
+                                <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this Opportunity ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{ route('office.crm.campaign.destroy', $data->id) }}','{{ route('office.crm.campaign.index') }}');"
+                                    class="btn btn-sm btn-danger">
+                                    Delete
+                                </button>
+                            @endif
+                        </div>
                     </div>
                 </form>
             </div>

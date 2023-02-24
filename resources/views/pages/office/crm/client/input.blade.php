@@ -23,6 +23,14 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">CRM</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Accounts</li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -87,6 +95,7 @@
                     </div>
                     <div class="card-body transition-fade">
                         <div class="form-group row mb-3">
+                            <input type="hidden" id="data" value="{{$data}}">
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="client_type_id" id="client_type_id" class="form-select form-select-solid">
@@ -199,7 +208,7 @@
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="billing_country_id" id="billing_country_id" class="form-select form-select-solid">
-                                        <option disabled selected>Select Billing Country</option>
+                                        <option disabled selected>Select Country</option>
                                         @foreach ($country as $item)
                                             <option value="{{ $item->id }}"
                                                 {{ $data->billing_country_id === $item->id ? 'selected' : '' }}>
@@ -211,28 +220,28 @@
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="billing_province_id" id="billing_province_id" class="form-select form-select-solid">
-                                        <option disabled selected>Select Billing Province</option>
+                                        <option disabled selected>Select Province</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="billing_regency_id" id="billing_regency_id" class="form-select form-select-solid">
-                                        <option disabled selected>Select Billing Regency</option>
+                                        <option disabled selected>Select Regency</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="billing_district_id" id="billing_district_id" class="form-select form-select-solid">
-                                        <option disabled selected>Select Billing District</option>
+                                        <option disabled selected>Select District</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="billing_village_id" id="billing_village_id" class="form-select form-select-solid">
-                                        <option disabled selected>Select Billing Village</option>
+                                        <option disabled selected>Select Village</option>
                                     </select>
                                 </div>
                             </div>
@@ -241,7 +250,7 @@
                                     <input type="number" class="form-control form-control-solid" id="billing_postcode"
                                         name="billing_postcode" placeholder="Enter Postcode"
                                         value="{{ $data->billing_postcode }}" />
-                                    <label for="billing_postcode">Billing Post Code</label>
+                                    <label for="billing_postcode">Post Code</label>
                                 </div>
                             </div>
                         </div>
@@ -258,7 +267,7 @@
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="shipping_country_id" id="shipping_country_id" class="form-select form-select-solid">
-                                        <option disabled selected>Select Shipping Country</option>
+                                        <option disabled selected>Select Country</option>
                                         @foreach ($country as $item)
                                             <option value="{{ $item->id }}"
                                                 {{ $data->shipping_country_id === $item->id ? 'selected' : '' }}>
@@ -271,14 +280,14 @@
                                 <div class="form-group">
                                     <select name="shipping_province_id" id="shipping_province_id"
                                         class="form-select form-select-solid">
-                                        <option disabled selected>Select Shipping Province</option>
+                                        <option disabled selected>Select Province</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="shipping_regency_id" id="shipping_regency_id" class="form-select form-select-solid">
-                                        <option disabled selected>Select Shipping Regency</option>
+                                        <option disabled selected>Select Regency</option>
                                     </select>
                                 </div>
                             </div>
@@ -286,14 +295,14 @@
                                 <div class="form-group">
                                     <select name="shipping_district_id" id="shipping_district_id"
                                         class="form-select form-select-solid">
-                                        <option disabled selected>Select Shipping District</option>
+                                        <option disabled selected>Select District</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="shipping_village_id" id="shipping_village_id" class="form-select form-select-solid">
-                                        <option disabled selected>Select Shipping Village</option>
+                                        <option disabled selected>Select Village</option>
                                     </select>
                                 </div>
                             </div>
@@ -302,7 +311,7 @@
                                     <input type="number" class="form-control form-control-solid" id="shipping_postcode"
                                         name="shipping_postcode" placeholder="Enter Postcode"
                                         value="{{ $data->shipping_postcode }}" />
-                                    <label for="name">Shipping Post Code</label>
+                                    <label for="name">Post Code</label>
                                 </div>
                             </div>
                         </div>
@@ -355,180 +364,24 @@
         obj_date('last_seen')
         obj_date('date_birth')
 
-        $(document).ready(function() {
-            $("#billing_country_id").change(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.master.regional.filter_province') }}",
-                    data: {
-                        country: $("#billing_country_id").val()
-                    },
-                    success: function(response) {
-                        $("#billing_province_id").html(response);
-                        $("#billing_province_id").append("<option disabled selected>Select Billing Province</option>");
-                    }
-                });
-            });
-            $("#billing_province_id").change(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.master.regional.filter_regency') }}",
-                    data: {
-                        province: $("#billing_province_id").val()
-                    },
-                    success: function(response) {
-                        $("#billing_regency_id").html(response);
-                        $("#billing_regency_id").append("<option disabled selected>Select Billing Regency</option>");
-                    }
-                });
-            });
-            $("#billing_regency_id").change(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.master.regional.filter_district') }}",
-                    data: {
-                        regency: $("#billing_regency_id").val()
-                    },
-                    success: function(response) {
-                        $("#billing_district_id").html(response);
-                        $("#billing_district_id").append("<option disabled selected>Select Billing District</option>");
-                    }
-                });
-            });
-            $("#billing_district_id").change(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.master.regional.filter_village') }}",
-                    data: {
-                        district: $("#billing_district_id").val()
-                    },
-                    success: function(response) {
-                        $("#billing_village_id").html(response);
-                        $("#billing_village_id").append("<option disabled selected>Select Billing Village</option>");
-                    }
-                });
-            });
-            $("#billing_village_id").change(function(){
-                $.ajax({
-                    type: "POST",
-                    url: "{{route('office.master.regional.filter_postcode')}}",
-                    data: {village : $("#billing_village_id").val()},
-                    success: function(response){
-                        $("#billing_postcode").val(response);
-                    }
-                });
-            });
-            $("#shipping_country_id").change(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.master.regional.filter_province') }}",
-                    data: {
-                        country: $("#shipping_country_id").val()
-                    },
-                    success: function(response) {
-                        $("#shipping_province_id").html(response);
-                        $("#shipping_province_id").append("<option disabled selected>Select Shipping Province</option>");
-                    }
-                });
-            });
-            $("#shipping_province_id").change(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.master.regional.filter_regency') }}",
-                    data: {
-                        province: $("#shipping_province_id").val()
-                    },
-                    success: function(response) {
-                        $("#shipping_regency_id").html(response);
-                        $("#shipping_regency_id").append("<option disabled selected>Select Shipping Regency</option>");
-                    }
-                });
-            });
-            $("#shipping_regency_id").change(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.master.regional.filter_district') }}",
-                    data: {
-                        regency: $("#shipping_regency_id").val()
-                    },
-                    success: function(response) {
-                        $("#shipping_district_id").html(response);
-                        $("#shipping_district_id").append("<option disabled selected>Select Shipping District</option>");
-                    }
-                });
-            });
-            $("#shipping_district_id").change(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.master.regional.filter_village') }}",
-                    data: {
-                        district: $("#shipping_district_id").val()
-                    },
-                    success: function(response) {
-                        $("#shipping_village_id").html(response);
-                        $("#shipping_village_id").append("<option disabled selected>Select Shipping Village</option>");
-                    }
-                });
-            });
-            $("#shipping_village_id").change(function(){
-                $.ajax({
-                    type: "POST",
-                    url: "{{route('office.master.regional.filter_postcode')}}",
-                    data: {village : $("#shipping_village_id").val()},
-                    success: function(response){
-                        $("#shipping_postcode").val(response);
-                    }
-                });
-            });
-        });
+        get_province('billing_country_id', 'billing_province_id');
+        get_regency('billing_province_id', 'billing_regency_id');
+        get_district('billing_regency_id', 'billing_district_id');
+        get_village('billing_district_id', 'billing_village_id');
+        get_postcode('billing_village_id', 'billing_postcode');
+
+        get_province('shipping_country_id', 'shipping_province_id');
+        get_regency('shipping_province_id', 'shipping_regency_id');
+        get_district('shipping_regency_id', 'shipping_district_id');
+        get_village('shipping_district_id', 'shipping_village_id');
+        get_postcode('shipping_village_id', 'shipping_postcode');
+
+        var getData = $('#data').val();
+        var data =  JSON.parse(getData);
+        if (data.id != null) {
+            get_regional_data('billing_country_id', 'billing_province_id', 'billing_regency_id', 'billing_district_id', 'billing_village_id', data.billing_country_id, data.billing_province_id, data.billing_regency_id, data.billing_district_id, data.billing_village_id);
+            get_regional_data('shipping_country_id', 'shipping_province_id', 'shipping_regency_id', 'shipping_district_id', 'shipping_village_id', data.shipping_country_id, data.shipping_province_id, data.shipping_regency_id, data.shipping_district_id, data.shipping_village_id);
+        }
     </script>
-    @if ($data->billing_country_id)
-    <script>
-        $('#billing_country_id').val('{{ $data->billing_country_id }}');
-        setTimeout(function() {
-            $('#billing_country_id').trigger('change');
-            setTimeout(function() {
-                $('#billing_province_id').val('{{ $data->billing_province_id }}');
-                $('#billing_province_id').trigger('change');
-                setTimeout(function() {
-                    $('#billing_regency_id').val('{{ $data->billing_regency_id }}');
-                    $('#billing_regency_id').trigger('change');
-                    setTimeout(function() {
-                        $('#billing_district_id').val('{{ $data->billing_district_id }}');
-                        $('#billing_district_id').trigger('change');
-                        setTimeout(function() {
-                            $('#billing_village_id').val('{{ $data->billing_village_id }}');
-                            $('#billing_village_id').trigger('change');
-                        }, 1200);
-                    }, 1200);
-                }, 1200);
-            }, 1200);
-        }, 500);
-    </script>
-    @endif
-    @if ($data->shipping_country_id)
-    <script>
-        $('#shipping_country_id').val('{{ $data->shipping_country_id }}');
-        setTimeout(function() {
-            $('#shipping_country_id').trigger('change');
-            setTimeout(function() {
-                $('#shipping_province_id').val('{{ $data->shipping_province_id }}');
-                $('#shipping_province_id').trigger('change');
-                setTimeout(function() {
-                    $('#shipping_regency_id').val('{{ $data->shipping_regency_id }}');
-                    $('#shipping_regency_id').trigger('change');
-                    setTimeout(function() {
-                        $('#shipping_district_id').val('{{ $data->shipping_district_id }}');
-                        $('#shipping_district_id').trigger('change');
-                        setTimeout(function() {
-                            $('#shipping_village_id').val('{{ $data->shipping_village_id }}');
-                            $('#shipping_village_id').trigger('change');
-                        }, 1200);
-                    }, 1200);
-                }, 1200);
-            }, 1200);
-        }, 500);
-    </script>
-    @endif
     @endsection
 </x-office-layout>

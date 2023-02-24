@@ -10,7 +10,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo1/layout-builder.html">
+    <a class="menu-link" href="#">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -29,7 +29,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo1/layout-builder.html">
+    <a class="menu-link" href="#">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -48,7 +48,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="https://preview.keenthemes.com/metronic8/demo1/layout-builder.html">
+    <a class="menu-link" href="#">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
             <span class="svg-icon svg-icon-2">

@@ -23,6 +23,14 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">CRM</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Common Case</li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -87,6 +95,7 @@
                     </div>
                     <div class="card-body transition-fade">
                         <div class="form-group row">
+                            <input type="hidden" id="data" value="{{ $data }}">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
                                     <input type="text" class="form-control form-control-solid" id="name" name="name"
@@ -174,32 +183,12 @@
         obj_select('priority')
         obj_select('st')
 
-        $(document).ready(function() {
-            $("#client_id").on('change', function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.crm.client-contact.filter-contact') }}",
-                    data: {
-                        option: "<option disabled>Select Client Contact</option>",
-                        client_id: $(this).val(),
-                    },
-                    success: function(response) {
-                        $("#client_contact_id").html(response);
-                    }
-                });
-            });
-        });
+        var getData = $('#data').val();
+        var data = JSON.parse(getData);
+        get_contact('client_id', 'client_contact_id')
+        if (data.id != null) {
+            get_contact_data('client_id', 'client_contact_id', data.client_id, data.client_contact_id)
+        }
     </script>
-    @if ($data->client_id)
-    <script>
-        $('#client_id').val('{{ $data->client_id }}');
-        setTimeout(function() {
-            $('#client_id').trigger('change');
-            setTimeout(function() {
-                $('#client_contact_id').val('{{ $data->client_contact_id }}');
-            }, 1200);
-        }, 500);
-    </script>
-    @endif
     @endsection
 </x-office-layout>

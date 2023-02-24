@@ -21,6 +21,14 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">CRM</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Client Contact</li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -76,6 +84,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            <input type="hidden" id="data" value="{{$data}}">
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="client_id" id="client_id" class="form-select form-select-solid">
@@ -116,7 +125,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control form-control-solid" id="email" name="email" placeholder="Enter Email" value="{{ $data->email }}" />
+                                    <input type="email" class="form-control form-control-solid format_email" id="email" name="email" placeholder="Enter Email" value="{{ $data->email }}" />
                                     <label for="email">Email</label>
                                 </div>
                             </div>
@@ -209,103 +218,17 @@
             obj_select('regency_id');
             obj_select('village_id');
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $(document).ready(function() {
-                $("#country_id").change(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('office.master.regional.filter_province') }}",
-                        data: {
-                            country: $("#country_id").val(),
-                        },
-                        success: function(response) {
-                            $("#province_id").removeAttr("disabled");
-                            $("#province_id").html(response);
-                            $("#province_id").append("<option disabled selected>Select Province</option>");
-                        }
-                    });
-                });
-                $("#province_id").change(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('office.master.regional.filter_regency') }}",
-                        data: {
-                            province: $("#province_id").val(),
-                        },
-                        success: function(response) {
-                            $("#regency_id").removeAttr("disabled");
-                            $("#regency_id").html(response);
-                            $("#regency_id").append("<option disabled selected>Select Regency</option>");
-                        }
-                    });
-                });
-                $("#regency_id").change(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('office.master.regional.filter_district') }}",
-                        data: {
-                            regency: $("#regency_id").val()
-                        },
-                        success: function(response) {
-                            $("#district_id").removeAttr("disabled");
-                            $("#district_id").html(response);
-                            $("#district_id").append("<option disabled selected>Select District</option>");
-                        }
-                    });
-                });
-                $("#district_id").change(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('office.master.regional.filter_village') }}",
-                        data: {
-                            district: $("#district_id").val()
-                        },
-                        success: function(response) {
-                            $("#village_id").removeAttr("disabled");
-                            $("#village_id").html(response);
-                            $("#village_id").append("<option disabled selected>Select Village</option>");
-                        }
-                    });
-                });
-                $("#village_id").change(function(){
-                    $.ajax({
-                        type: "POST",
-                        url: "{{route('office.master.regional.filter_postcode')}}",
-                        data: {village : $("#village_id").val()},
-                        success: function(response){
-                            $("#postcode").val(response);
-                        }
-                    });
-                });
-            });
+            get_province('country_id', 'province_id');
+            get_regency('province_id', 'regency_id');
+            get_district('regency_id', 'district_id');
+            get_village('district_id', 'village_id');
+            get_postcode('village_id', 'postcode');
+
+            var getData = $('#data').val();
+            var data =  JSON.parse(getData);
+            if (data.id != null) {
+                get_regional_data('country_id', 'province_id', 'regency_id', 'district_id', 'village_id', data.country_id, data.province_id, data.regency_id, data.district_id, data.village_id);
+            }
         </script>
-        @if ($data->country_id)
-            <script>
-                $('#country_id').val('{{ $data->country_id }}');
-                setTimeout(function() {
-                    $('#country_id').trigger('change');
-                    setTimeout(function() {
-                        $('#province_id').val('{{ $data->province_id }}');
-                        $('#province_id').trigger('change');
-                        setTimeout(function() {
-                            $('#regency_id').val('{{ $data->regency_id }}');
-                            $('#regency_id').trigger('change');
-                            setTimeout(function() {
-                                $('#district_id').val('{{ $data->district_id }}');
-                                $('#district_id').trigger('change');
-                                setTimeout(function() {
-                                    $('#village_id').val('{{ $data->village_id }}');
-                                    $('#village_id').trigger('change');
-                                }, 1200);
-                            }, 1200);
-                        }, 1200);
-                    }, 1200);
-                }, 500);
-            </script>
-        @endif
     @endsection
 </x-office-layout>

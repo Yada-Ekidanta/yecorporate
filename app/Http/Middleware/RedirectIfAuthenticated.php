@@ -23,10 +23,10 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if ($guard == "employees" && Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::DASHBOARD);
+                return redirect('/office/dashboard');
             }
             elseif ($guard == "clients" && Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::DASHBOARD);
+                return redirect('/client/dashboard');
             }
             elseif ($guard == "vendor" && Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::DASHBOARD);

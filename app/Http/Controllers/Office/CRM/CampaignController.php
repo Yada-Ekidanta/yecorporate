@@ -16,7 +16,7 @@ class CampaignController extends Controller
     {
         if($request->ajax())
         {
-            $collection = Campaign::where('st','LIKE','%'.$request->keyword.'%')->paginate(10);
+            $collection = Campaign::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);
             return view('pages.office.crm.campaign.list', compact('collection'));
         }
         return view('pages.office.crm.campaign.main');
@@ -33,6 +33,7 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'name' => 'required',
             'st' => 'required',
             'campaign_type_id' => 'required',
             'budget' => 'required',
@@ -40,7 +41,6 @@ class CampaignController extends Controller
             'end_at' => 'required',
             'target_list' => 'required',
             'ex_target_list' => 'required',
-            'desc' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -53,6 +53,7 @@ class CampaignController extends Controller
         $employee_id = Auth::guard('employees')->user()->id;
         $campaign = new Campaign();
         $campaign->employee_id = $employee_id;
+        $campaign->name = $request->name;
         $campaign->st = $request->st;
         $campaign->campaign_type_id = $request->campaign_type_id;
         $campaign->budget = $request->budget;
@@ -96,6 +97,7 @@ class CampaignController extends Controller
     public function update(Request $request, Campaign $campaign)
     {
         $validator = Validator::make($request->all(), [
+            'name' => 'required',
             'st' => 'required',
             'campaign_type_id' => 'required',
             'budget' => 'required',
@@ -103,7 +105,6 @@ class CampaignController extends Controller
             'end_at' => 'required',
             'target_list' => 'required',
             'ex_target_list' => 'required',
-            'desc' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -114,6 +115,7 @@ class CampaignController extends Controller
         }
         $employee_id = Auth::guard('employees')->user()->id;
         $campaign->employee_id = $employee_id;
+        $campaign->name = $request->name;
         $campaign->st = $request->st;
         $campaign->campaign_type_id = $request->campaign_type_id;
         $campaign->budget = $request->budget;

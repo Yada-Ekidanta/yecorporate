@@ -140,7 +140,7 @@ class OpportunityController extends Controller
 
     public function updateLeadSource(Request $request, Opportunity $opportunity)
     {
-        $opportunity->lead_source_id = $request->lead_source;
+        $opportunity->opportunities_stage_id = $request->opportunities_stage;
         $opportunity->update();
 
         return response()->json([

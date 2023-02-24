@@ -21,7 +21,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Master</li>
+                    <li class="breadcrumb-item text-muted">CRM</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -84,6 +84,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            <input type="hidden" id="data" value="{{ $data }}">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
                                     <input type="text" class="form-control form-control-solid" id="name" name="name" placeholder="Enter Name" value="{{ $data->name }}" />
@@ -110,7 +111,7 @@
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="opportunities_stage_id" id="opportunitie_stage_id" class="form-select form-select-solid">
-                                        <option disabled selected>Select Opportunities Stage</option>
+                                        <option disabled selected>Select Opportunity Stage</option>
                                         @foreach ($opportunityStage as $item)
                                             <option value="{{ $item->id }}" {{ $data->opportunities_stage_id === $item->id ? 'selected' : '' }}>
                                                 {{ $item->name }}</option>
@@ -120,14 +121,19 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="number" class="form-control form-control-solid" id="amount" name="amount" placeholder="Enter Amount" value="{{ $data->amount }}" />
+                                    <input type="text" class="form-control form-control-solid ribuan" id="amount" name="amount" placeholder="Enter Amount" value="{{ $data->amount }}" />
                                     <label for="name">Amount</label>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="number" class="form-control form-control-solid" id="probability" name="probability" placeholder="Enter Probability" value="{{ $data->probability }}" />
-                                    <label for="name">Probability</label>
+                                <div class="form-group">
+                                    <select name="probability" id="probability" class="form-select form-select-solid">
+                                        <option disabled selected>Select Probability</option>
+                                        @for ($i = 1 ; $i <= 10 ; $i++)
+                                            <option value="{{ $i }}" {{ $data->probability == $i ? 'selected' : '' }}>
+                                                {{ $i }}</option>
+                                        @endfor
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
@@ -178,34 +184,15 @@
         obj_select('client_contact_id');
         obj_select('opportunitie_stage_id');
         obj_select('lead_source_id');
+        obj_select('probability');
         obj_date('close_date');
 
-        $(document).ready(function() {
-            $("#client_id").on('change', function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.crm.client-contact.filter-contact') }}",
-                    data: {
-                        option: "<option disabled>Select Client Contact</option>",
-                        client_id: $(this).val(),
-                    },
-                    success: function(response) {
-                        $("#client_contact_id").html(response);
-                    }
-                });
-            });
-        });
+        var getData = $('#data').val();
+        var data = JSON.parse(getData);
+        get_contact('client_id', 'client_contact_id')
+        if (data.id != null) {
+            get_contact_data('client_id', 'client_contact_id', data.client_id, data.client_contact_id)
+        }
     </script>
-    @if ($data->client_id)
-    <script>
-        $('#client_id').val('{{ $data->client_id }}');
-        setTimeout(function() {
-            $('#client_id').trigger('change');
-            setTimeout(function() {
-                $('#client_contact_id').val('{{ $data->client_contact_id }}');
-            }, 1200);
-        }, 500);
-    </script>
-    @endif
     @endsection
 </x-office-layout>

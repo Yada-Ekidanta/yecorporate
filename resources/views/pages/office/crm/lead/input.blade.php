@@ -23,6 +23,14 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">CRM</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Leads</li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -87,6 +95,7 @@
                     </div>
                     <div class="card-body transition-fade">
                         <div class="form-group row">
+                            <input type="hidden" id="data" value="{{ $data }}">
                             <div class="col-4 mb-3">
                                 <div class="form-group">
                                     <select name="client_id" id="client_id" class="form-select form-select-solid">
@@ -115,7 +124,7 @@
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control form-control-solid" id="opportunity_amount"
+                                    <input type="text" class="form-control form-control-solid ribuan" id="opportunity_amount"
                                     name="opportunity_amount" placeholder="Enter Opportunity Amount"
                                     value="{{ $data->opportunity_amount }}" />
                                     <label for="opportunity_amount">Opportunity Amount</label>
@@ -126,9 +135,19 @@
                                     <select name="campaign_id" id="campaign_id" class="form-select form-select-solid">
                                         <option disabled selected>Select Campaign</option>
                                         @foreach ($campaign as $item)
+                                            {{ $status = ''; }}
+                                            @if ($item->st == 0)
+                                                {{ $status = 'Planning' }}
+                                            @elseif ($item->st == 1)
+                                                {{ $status = 'Active' }}
+                                            @elseif ($item->st == 2)
+                                                {{ $status = 'Inactive' }}
+                                            @elseif ($item->st == 3)
+                                                {{ $status = 'Completed' }}
+                                            @endif
                                             <option value="{{ $item->id }}"
                                                 {{ $data->campaign_id === $item->id ? 'selected' : '' }}>
-                                                {{ $item->targetList->name . ' (' . $item->campaignType->name . ')' }}</option>
+                                                {{ $item->name . ' (' . $status . ')' }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -183,32 +202,12 @@
         obj_select('campaign_id')
         obj_select('st')
 
-        $(document).ready(function() {
-            $("#client_id").on('change', function() {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('office.crm.client-contact.filter-contact') }}",
-                    data: {
-                        option: "<option disabled>Select Client Contact</option>",
-                        client_id: $(this).val(),
-                    },
-                    success: function(response) {
-                        $("#client_contact_id").html(response);
-                    }
-                });
-            });
-        });
+        var getData = $('#data').val();
+        var data = JSON.parse(getData);
+        get_contact('client_id', 'client_contact_id')
+        if (data.id != null) {
+            get_contact_data('client_id', 'client_contact_id', data.client_id, data.client_contact_id)
+        }
     </script>
-    @if ($data->client_id)
-    <script>
-        $('#client_id').val('{{ $data->client_id }}');
-        setTimeout(function() {
-            $('#client_id').trigger('change');
-            setTimeout(function() {
-                $('#client_contact_id').val('{{ $data->client_contact_id }}');
-            }, 1200);
-        }, 500);
-    </script>
-    @endif
     @endsection
 </x-office-layout>

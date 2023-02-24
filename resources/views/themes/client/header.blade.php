@@ -18,7 +18,7 @@
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="../../demo1/dist/index.html" class="d-lg-none">
-                <img alt="Logo" src="assets/media/logos/default-small.svg" class="h-30px" />
+                <img alt="Logo" src="{{asset('metronic/media/logos/default-small.svg')}}" class="h-30px" />
             </a>
         </div>
         <!--end::Mobile logo-->
@@ -694,7 +694,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-4">
-                                                <img src="assets/media/stock/600x600/img-82.jpg" class="rounded mw-100" alt="" />
+                                                <img src="{{asset('metronic/media/stock/600x600/img-82.jpg')}}" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -804,7 +804,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-7">
-                                                <img src="assets/media/stock/900x600/46.jpg" class="rounded mw-100" alt="" />
+                                                <img src="{{asset('metronic/media/stock/900x600/46.jpg')}}" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -1525,7 +1525,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-5 pe-lg-5">
-                                                <img src="assets/media/stock/600x600/img-84.jpg" class="rounded mw-100" alt="" />
+                                                <img src="{{asset('metronic/media/stock/600x600/img-84.jpg')}}" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -1596,7 +1596,7 @@
                                             <!--end:Col-->
                                             <!--begin:Col-->
                                             <div class="col-lg-8">
-                                                <img src="assets/media/stock/900x600/44.jpg" class="rounded mw-100" alt="" />
+                                                <img src="{{asset('metronic/media/stock/900x600/44.jpg')}}" class="rounded mw-100" alt="" />
                                             </div>
                                             <!--end:Col-->
                                         </div>
@@ -2995,7 +2995,7 @@
                                     <!--end:Col-->
                                     <!--begin:Col-->
                                     <div class="col-lg-6 mb-3 py-lg-3 pe-lg-8 d-flex align-items-center">
-                                        <img src="assets/media/stock/900x600/45.jpg" class="rounded mw-100" alt="" />
+                                        <img src="{{asset('metronic/media/stock/900x600/45.jpg')}}" class="rounded mw-100" alt="" />
                                     </div>
                                     <!--end:Col-->
                                 </div>
@@ -3088,7 +3088,7 @@
                     <!--begin::Search-->
                     <div id="kt_header_search" class="header-search d-flex align-items-stretch" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-menu-trigger="auto" data-kt-menu-overflow="false" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-end">
                         <!--begin::Search toggle-->
-                        <div class="d-flex align-items-center" data-kt-search-element="toggle" id="kt_header_search_toggle">
+                        <div class="d-flex align-items-center d-none" data-kt-search-element="toggle" id="kt_header_search_toggle">
                             <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                                 <span class="svg-icon svg-icon-2 svg-icon-md-1">
@@ -3180,7 +3180,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-6.jpg" alt="" />
+                                                <img src="{{asset('metronic/media/avatars/300-6.jpg')}}" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3195,7 +3195,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-2.jpg" alt="" />
+                                                <img src="{{asset('metronic/media/avatars/300-2.jpg')}}" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3210,7 +3210,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-9.jpg" alt="" />
+                                                <img src="{{asset('metronic/media/avatars/300-9.jpg')}}" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3225,7 +3225,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-14.jpg" alt="" />
+                                                <img src="{{asset('metronic/media/avatars/300-14.jpg')}}" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3240,7 +3240,7 @@
                                         <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
-                                                <img src="assets/media/avatars/300-11.jpg" alt="" />
+                                                <img src="{{asset('metronic/media/avatars/300-11.jpg')}}" alt="" />
                                             </div>
                                             <!--end::Symbol-->
                                             <!--begin::Title-->
@@ -3259,7 +3259,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/brand-logos/volicity-9.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="{{asset('metronic/media/svg/brand-logos/volicity-9.svg')}}" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -3276,7 +3276,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/brand-logos/tvit.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="{{asset('metronic/media/svg/brand-logos/tvit.svg')}}" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -3293,7 +3293,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/misc/infography.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="{{asset('metronic/media/svg/misc/infography.svg')}}" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -3310,7 +3310,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/brand-logos/leaf.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="{{asset('metronic/media/svg/brand-logos/leaf.svg')}}" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -3327,7 +3327,7 @@
                                             <!--begin::Symbol-->
                                             <div class="symbol symbol-40px me-4">
                                                 <span class="symbol-label bg-light">
-                                                    <img class="w-20px h-20px" src="assets/media/svg/brand-logos/tower.svg" alt="" />
+                                                    <img class="w-20px h-20px" src="{{asset('metronic/media/svg/brand-logos/tower.svg')}}" alt="" />
                                                 </span>
                                             </div>
                                             <!--end::Symbol-->
@@ -3830,7 +3830,7 @@
                 <!--begin::Activities-->
                 <div class="app-navbar-item ms-1 ms-md-3">
                     <!--begin::Drawer toggle-->
-                    <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">
+                    <div class="d-none btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
                         <span class="svg-icon svg-icon-2 svg-icon-md-1">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3846,7 +3846,7 @@
                 </div>
                 <!--end::Activities-->
                 <!--begin::Notifications-->
-                <div class="app-navbar-item ms-1 ms-md-3">
+                <div class="d-none app-navbar-item ms-1 ms-md-3">
                     <!--begin::Menu- wrapper-->
                     <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'click'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
@@ -4147,7 +4147,7 @@
                                     <!--end::Section-->
                                     <!--begin::Illustration-->
                                     <div class="text-center px-4">
-                                        <img class="mw-100 mh-200px" alt="image" src="assets/media/illustrations/sketchy-1/1.png" />
+                                        <img class="mw-100 mh-200px" alt="image" src="{{asset('metronic/media/illustrations/sketchy-1/1.png')}}" />
                                     </div>
                                     <!--end::Illustration-->
                                 </div>
@@ -4387,7 +4387,7 @@
                 </div>
                 <!--end::Notifications-->
                 <!--begin::Chat-->
-                <div class="app-navbar-item ms-1 ms-md-3">
+                <div class="d-none app-navbar-item ms-1 ms-md-3">
                     <!--begin::Menu wrapper-->
                     <a class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px position-relative nav-link" href="#">
                         <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
@@ -4405,7 +4405,7 @@
                 </div>
                 <!--end::Chat-->
                 <!--begin::My apps links-->
-                <div class="app-navbar-item ms-1 ms-md-3">
+                <div class="d-none app-navbar-item ms-1 ms-md-3">
                     <!--begin::Menu wrapper-->
                     <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'click'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -4797,12 +4797,12 @@
                         <div class="separator my-2"></div>
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
+                        <div class="menu-item px-5 d-none">
                             <a href="#" class="menu-link px-5">My Profile</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
+                        <div class="menu-item px-5 d-none">
                             <a href="../../demo1/dist/apps/projects/list.html" class="menu-link px-5">
                                 <span class="menu-text">My Projects</span>
                                 <span class="menu-badge">
@@ -4812,13 +4812,13 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
+                        <div class="menu-item px-5 d-none" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
                             <a href="#" class="menu-link px-5">
                                 <span class="menu-title">My Subscription</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <!--begin::Menu sub-->
-                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                            <div class="menu-sub menu-sub-dropdown w-175px py-4 d-none">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
                                     <a href="../../demo1/dist/account/referrals.html" class="menu-link px-5">Referrals</a>
@@ -4841,7 +4841,7 @@
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu separator-->
-                                <div class="separator my-2"></div>
+                                <div class="separator my-2 d-none"></div>
                                 <!--end::Menu separator-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
@@ -4858,15 +4858,15 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
+                        <div class="menu-item px-5 d-none">
                             <a href="../../demo1/dist/account/statements.html" class="menu-link px-5">My Statements</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->
-                        <div class="separator my-2"></div>
+                        <div class="separator my-2 d-none"></div>
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
+                        <div class="menu-item px-5 d-none" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
                             <a href="#" class="menu-link px-5">
                                 <span class="menu-title position-relative">Language
                                 <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
@@ -4919,14 +4919,17 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5 my-1">
+                        <div class="menu-item px-5 my-1 d-none">
                             <a href="../../demo1/dist/account/settings.html" class="menu-link px-5">Account Settings</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{route('client.auth.logout')}}" class="menu-link px-5">Sign Out</a>
+                            <a href="#" class="menu-link px-5" onclick="event.preventDefault(); document.getElementById('logout').submit();">Sign Out</a>
                         </div>
+                        <form action="{{ route('client.auth.logout') }}" method="post" id="logout">
+                            @csrf
+                        </form>
                         <!--end::Menu item-->
                     </div>
                     <!--end::User account menu-->

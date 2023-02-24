@@ -37,6 +37,7 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->integer('employee_id')->default(0)->comment('assigned employee');
+            $table->string('name');
             $table->integer('st')->default(0)->comment('0 = Planning, 1 = Active, 2 = Inactive, 3 = Complete');
             $table->integer('campaign_type_id')->comment('select campaign type');
             $table->string('budget')->comment('angka saja, tidak pakai koma atau titik');
@@ -83,7 +84,7 @@ return new class extends Migration
             $table->enum('st',['Active','Non Active'])->nullable();
             $table->string('avatar')->nullable();
             $table->timestamp('last_seen')->nullable();
-            $table->timestamps();   
+            $table->timestamps();
             $table->softDeletes();
         });
         Schema::create('client_contacts', function (Blueprint $table) {

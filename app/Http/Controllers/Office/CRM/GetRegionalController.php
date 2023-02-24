@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Office\CRM;
 
 use App\Http\Controllers\Controller;
+use App\Models\Regional\Country;
 use App\Models\Regional\District;
 use App\Models\Regional\Province;
 use App\Models\Regional\Regency;
 use App\Models\Regional\Village;
-use Illuminate\Http\Request;
 
 class GetRegionalController extends Controller
 {
-    public function filter_province(Request $request)
+    public function get_province(Country $country)
     {
-        // dd($request->country);
-        $collection = Province::where('country_id', $request->country)->orderBy('name', 'asc')->get();
+        $collection = Province::where('country_id', $country->id)->orderBy('name', 'asc')->get();
         $list = "";
         foreach ($collection as $row) {
             $list .= "<option value='$row->id'>$row->name</option>";
@@ -22,9 +21,9 @@ class GetRegionalController extends Controller
         return $list;
     }
 
-    public function filter_regency(Request $request)
+    public function get_regency(Province $province)
     {
-        $collection = Regency::where('province_id', $request->province)->orderBy('name', 'asc')->get();
+        $collection = Regency::where('province_id', $province->id)->orderBy('name', 'asc')->get();
         $list = "";
         foreach ($collection as $row) {
             $list .= "<option value='$row->id'>$row->name</option>";
@@ -32,9 +31,9 @@ class GetRegionalController extends Controller
         return $list;
     }
 
-    public function filter_district(Request $request)
+    public function get_district(Regency $regency)
     {
-        $collection = District::where('regency_id', $request->regency)->orderBy('name', 'asc')->get();
+        $collection = District::where('regency_id', $regency->id)->orderBy('name', 'asc')->get();
         $list = "";
         foreach ($collection as $row) {
             $list .= "<option value='$row->id'>$row->name</option>";
@@ -42,9 +41,9 @@ class GetRegionalController extends Controller
         return $list;
     }
 
-    public function filter_village(Request $request)
+    public function get_village(District $district)
     {
-        $collection = Village::where('district_id', $request->district)->orderBy('name', 'asc')->get();
+        $collection = Village::where('district_id', $district->id)->orderBy('name', 'asc')->get();
         $list = "";
         foreach ($collection as $row) {
             $list .= "<option value='$row->id'>$row->name</option>";
@@ -52,9 +51,8 @@ class GetRegionalController extends Controller
         return $list;
     }
 
-    public function filter_postcode(Request $request)
+    public function get_postcode(Village $village)
     {
-        $collection = Village::where('id',$request->village)->first();
-        return $collection->postcode;
+        return $village->postcode;
     }
 }

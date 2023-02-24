@@ -64,7 +64,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
+                            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="#">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -76,7 +76,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
+                            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="#">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -88,7 +88,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
+                            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="#">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -100,7 +100,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
+                            <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="#">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -113,7 +113,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/dashboards/bidding.html">
+                                <a class="menu-link" href="#">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>

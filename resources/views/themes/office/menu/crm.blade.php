@@ -8,7 +8,22 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div data-kt-menu-trigger="click" class="menu-item menu-accordion" data-no-swup>
+<div data-kt-menu-trigger="click"
+    class="menu-item menu-accordion
+    {{
+        request()->is('office/client-type*') ||
+        request()->is('office/lead-source*') ||
+        request()->is('office/opportunity-stage*') ||
+        request()->is('office/campaign-type*') ||
+        request()->is('office/target-list*') ||
+        request()->is('office/client-contract-type*') ||
+        request()->is('office/company-industry*') ||
+        request()->is('office/tax*') ||
+        request()->is('office/case-type*') ||
+        request()->is('office/shipping-provider*') ||
+        request()->is('office/task-stage*') ? 'here show' : ''
+    }}"
+    data-no-swup>
     <!--begin:Menu link-->
     <span class="menu-link" data-no-swup>
         <span class="menu-icon">
@@ -27,7 +42,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.client-type.index')}}">
+            <a class="menu-link {{ request()->is('office/client-type*') ? 'active' : '' }}" href="{{route('office.master.client-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -39,7 +54,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.company-industry.index') }}">
+            <a class="menu-link {{ request()->is('office/company-industry*') ? 'active' : '' }}" href="{{route('office.master.company-industry.index') }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -49,7 +64,7 @@
         </div>
         <!--end:Menu item-->
         <!--begin:Menu item-->
-        <div class="menu-item">
+        <div class="menu-item d-none">
             <!--begin:Menu link-->
             <a class="menu-link" href="{{route('office.master.document-folder.index')}}">
                 <span class="menu-bullet">
@@ -61,7 +76,7 @@
         </div>
         <!--end:Menu item-->
         <!--begin:Menu item-->
-        <div class="menu-item">
+        <div class="menu-item d-none">
             <!--begin:Menu link-->
             <a class="menu-link" href="{{route('office.master.document-type.index')}}">
                 <span class="menu-bullet">
@@ -75,7 +90,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.target-list.index')}}">
+            <a class="menu-link {{ request()->is('office/target-list*') ? 'active' : '' }}" href="{{route('office.master.target-list.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -87,7 +102,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.campaign-type.index')}}">
+            <a class="menu-link {{ request()->is('office/campaign-type*') ? 'active' : '' }}" href="{{route('office.master.campaign-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -99,7 +114,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.tax.index')}}">
+            <a class="menu-link {{ request()->is('office/tax*') ? 'active' : '' }}" href="{{route('office.master.tax.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -111,7 +126,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.client-contract-type.index')}}">
+            <a class="menu-link {{ request()->is('office/client-contract-type*') ? 'active' : '' }}" href="{{route('office.master.client-contract-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -123,7 +138,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.lead-source.index')}}">
+            <a class="menu-link {{ request()->is('office/lead-source*') ? 'active' : '' }}" href="{{route('office.master.lead-source.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -135,7 +150,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.opportunity-stage.index')}}">
+            <a class="menu-link {{ request()->is('office/opportunity-stage*') ? 'active' : '' }}" href="{{route('office.master.opportunity-stage.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -147,7 +162,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.case-type.index')}}">
+            <a class="menu-link {{ request()->is('office/case-type*') ? 'active' : '' }}" href="{{route('office.master.case-type.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -159,7 +174,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.shipping-provider.index')}}">
+            <a class="menu-link {{ request()->is('office/shipping-provider*') ? 'active' : '' }}" href="{{route('office.master.shipping-provider.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -171,7 +186,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.task-stage.index')}}">
+            <a class="menu-link {{ request()->is('office/task-stage*') ? 'active' : '' }}" href="{{route('office.master.task-stage.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -187,7 +202,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{route('office.crm.accounts.index')}}">
+    <a class="menu-link {{ request()->is('office/crm/accounts*') ? 'active' : '' }}" href="{{route('office.crm.accounts.index')}}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -203,7 +218,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.crm.client-contact.index') }}">
+    <a class="menu-link {{ request()->is('office/crm/client-contact*') ? 'active' : '' }}" href="{{ route('office.crm.client-contact.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -217,9 +232,9 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item" data-no-swup>
+<div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{route('office.crm.leads.index')}}" data-no-swup>
+    <a class="menu-link {{ request()->is('office/crm/leads*') ? 'active' : '' }}" href="{{route('office.crm.leads.index')}}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -233,9 +248,9 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item" data-no-swup>
+<div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{route('office.crm.opportunity.index')}}" data-no-swup>
+    <a class="menu-link {{ request()->is('office/crm/opportunity*') ? 'active' : '' }}" href="{{route('office.crm.opportunity.index')}}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -254,7 +269,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.crm.services.index') }}">
+    <a class="menu-link {{ request()->is('office/crm/services*') ? 'active' : '' }}" href="{{ route('office.crm.services.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -322,7 +337,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.crm.common-case.index') }}">
+    <a class="menu-link {{ request()->is('office/crm/common-case*') ? 'active' : '' }}" href="{{ route('office.crm.common-case.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">
@@ -442,7 +457,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.crm.campaign.index') }}">
+    <a class="menu-link {{ request()->is('office/crm/campaign*') ? 'active' : '' }}" href="{{ route('office.crm.campaign.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">

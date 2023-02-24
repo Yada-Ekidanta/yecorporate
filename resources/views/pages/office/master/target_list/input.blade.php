@@ -82,17 +82,18 @@
                         </div>
                     </div>
                     <div class="card-body transition-fade">
-                        <div class="form-group row">
+                        <div class="row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Target List" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
                                 </div>
                             </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <textarea name="desc" class="form-control">{{$data->desc}}</textarea>
-                                    <label for="name">Desc</label>
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <label for="desc" class="form-label ms-1">Description</label>
+                                    <div id="desc" style="width: 100%; height: 175px"></div>
+                                    <textarea hidden name="desc" class="form-control">{{$data->desc}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +103,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this Target List ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.target-list.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this Target List ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.target-list.destroy',$data->id)}}','{{route('office.master.target-list.index')}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif
@@ -111,4 +112,9 @@
             </div>
         </div>
     </div>
+    @section('custom_js')
+        <script>
+            obj_quill('desc')
+        </script>
+    @endsection
 </x-office-layout>
