@@ -83,37 +83,37 @@
                     </div>
                     <div class="card-body transition-fade">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="bill_id">Bill</label>
                                             <select name="bill_id" id="bill_id" class="form-select">
-                                                @foreach ($bill_id as $bill)
-                                                    <option value="{{ $bill->id }}" {{ $bill->id === $data->bill_id || $bill->id === old('bill_id') ? 'selected' : '' }}>{{ $bill->name }}</option>
+                                                @foreach ($bills as $bill)
+                                                    <option value="{{ $bill->id }}" {{ $bill->id === $data->bill_id || $bill->id === old('bill_id') ? 'selected' : '' }}>{{ $bill->bill_id }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="amount">Amount</label>
                                             <input type="number" class="form-control" id="amount" name="amount"  value="{{$data->amount}}"/>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="date">Date</label>
                                             <input type="date" class="form-control" id="date" name="date" placeholder="102" value="{{$data->date}}"/>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                </div>
+                                <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="desc">Description</label>
-                                            <textarea class="form-control" id="desc" name="desc" value="{{$data->desc}}"/> </textarea>
+                                            <textarea class="form-control" id="desc" name="desc" value="{{$data->desc}}"></textarea>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                         </div>                     
                     </div>

@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Office\Finance\Income;
 
 use App\Http\Controllers\Controller;
 use App\Models\Finance\Income\Credit;
+use App\Models\Finance\Income\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Master\ProductCategory;
-use App\Models\Finance\Income\Invoice;
+
 class CreditController extends Controller
 {
     public function __construct()
@@ -38,10 +38,10 @@ class CreditController extends Controller
             ], 200);
         }
         $credit = new credit;
-        $credit->invoice_id        = $request->invoice_id;
-            $credit->date        = $request->date;
-            $credit->amount      = $request->amount;
-            $credit->description = $request->description;
+        $credit->invoice_id = $request->invoice_id;
+        $credit->date = $request->date;
+        $credit->amount = $request->amount;
+        $credit->desc = $request->desc;
         $credit->save();
         return response()->json([
             'alert' => 'success',
@@ -66,10 +66,10 @@ class CreditController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $credit->invoice_id        = $request->invoice_id;
-            $credit->date        = $request->date;
-            $credit->amount      = $request->amount;
-            $credit->description = $request->description;
+        $credit->invoice_id = $request->invoice_id;
+        $credit->date = $request->date;
+        $credit->amount = $request->amount;
+        $credit->description = $request->description;
         $credit->update();
         return response()->json([
             'alert' => 'success',

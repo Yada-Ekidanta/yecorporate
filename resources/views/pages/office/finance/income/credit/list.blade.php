@@ -16,7 +16,7 @@
             <td>{{ (!empty($invoice->client_id)?$invoice->client_id->name:'-') }}</td>
             <td>{{$item->date}}</td>
             <td>{{$item->amount}}</td>
-            <td>{{$item->description}}</td>
+            <td>{{$item->desc}}</td>
             <td>
                 <a href="{{route('office.finance.credit.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

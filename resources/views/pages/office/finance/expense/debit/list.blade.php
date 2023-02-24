@@ -12,11 +12,11 @@
     <tbody class="text-gray-600 fw-semibold">
         @forelse ($collection as $key => $item)
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{$item->bill_id}}</td>
+            <td>{{$item->vendor_id}}</td>
+            <td>{{$item->date}}</td>
+            <td>{{$item->amount}}</td>
+            <td>{{$item->desc}}</td>
             <td>
                 <a href="{{route('office.finance.debit.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

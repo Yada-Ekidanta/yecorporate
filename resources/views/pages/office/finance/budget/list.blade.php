@@ -13,7 +13,6 @@
             <td>{{$item->name}}</td>
             <td>{{$item->from}}</td>
             <td>{{$item->period}}</td>
-            <td>{{$item->status}}</td>
             <td>
                 <a href="{{route('office.finance.budget.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

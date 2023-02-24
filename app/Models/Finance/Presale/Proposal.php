@@ -2,6 +2,8 @@
 
 namespace App\Models\Finance\Presale;
 
+use App\Models\Finance\Presale\ProposalProduct;
+use App\Models\Master\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,9 +21,14 @@ class Proposal extends Model
         return $this->hasMany('App\Models\Finance\Presale\ProposalProduct', 'proposal_id', 'id');
     }
 
-    public function customer()
+    public function client()
     {
-        return $this->hasOne('App\Models\Customer', 'id', 'customer_id');
+        return $this->hasOne(Client::class, 'client_id');
+    }
+
+    public function proposalProduct()
+    {
+        return $this->hasMany(ProposalProduct::class, 'proposal_id');
     }
 
     public function getSubTotal()
@@ -74,7 +81,7 @@ class Proposal extends Model
     public static function change_status($proposal_id, $status)
     {
 
-        $proposal         = Proposal::find($proposal_id);
+        $proposal = Proposal::find($proposal_id);
         $proposal->status = $status;
         $proposal->update();
     }
@@ -91,14 +98,14 @@ class Proposal extends Model
     public static function customers($customer)
     {
 
-        $categoryArr  = explode(',', $customer);
+        $categoryArr = explode(',', $customer);
         $unitRate = 0;
         foreach ($categoryArr as $customer) {
             if ($customer == 0) {
                 $unitRate = '';
             } else {
-                $customer        = Customer::find($customer);
-                $unitRate        = $customer->name;
+                $customer = Customer::find($customer);
+                $unitRate = $customer->name;
             }
         }
 
@@ -106,11 +113,11 @@ class Proposal extends Model
     }
     public static function ProposalCategory($category)
     {
-        $categoryArr  = explode(',', $category);
+        $categoryArr = explode(',', $category);
         $categoryRate = 0;
         foreach ($categoryArr as $category) {
-            $category    = ProductServiceCategory::find($category);
-            $categoryRate        = $category->name;
+            $category = ProductServiceCategory::find($category);
+            $categoryRate = $category->name;
         }
 
         return $categoryRate;

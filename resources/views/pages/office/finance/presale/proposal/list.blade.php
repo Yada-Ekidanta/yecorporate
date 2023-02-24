@@ -21,7 +21,7 @@
             </td>
             <td>{{$item->proposal_id}}</td>
             <td>{{$item->client_id}}</td>
-            <td>{{$item->product_category_id}}</td>
+            <td>{{$item->category_id}}</td>
             <td>{{$item->issue_date}}</td>
             <td>
                 @if($item->st == 0)

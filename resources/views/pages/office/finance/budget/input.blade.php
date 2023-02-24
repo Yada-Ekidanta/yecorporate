@@ -81,43 +81,37 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body transition-fade">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-6 pt-5">
-                                        <div class="form-group">
-                                            <label class="form-label text-gray-700 fw-bold" for="Name">Name</label>
-                                            <input type="text" class="form-control" id="Name" name="Name" placeholder="102" value="{{$data->Name}}"/>
-                                        </div>
+                    <div class="card bg-none card-box mt-3">
+                        <div class="card-body">
+                            {{ Form::open(array('url' => 'budget','class'=>'w-100')) }}
+                            <div class="row">
+
+                                <div class="form-group col-md-4">
+                                    {{ Form::label('name', __('Name'),['class'=>'form-label']) }}
+                                    {{ Form::text('name',null, array('class' => 'form-control','required'=>'required')) }}
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    {{ Form::label('period', __('Budget Period'),['class'=>'form-label']) }}
+                                    {{ Form::select('period', $periods,null, array('class' => 'form-control select period','required'=>'required')) }}
+
+                                </div>
+
+                                <div class="form-group  col-md-4">
+                                    <div class="btn-box">
+                                        {{ Form::label('year', __('Year'),['class'=>'form-label']) }}
+                                        {{ Form::select('year',$yearList,isset($_GET['year'])?$_GET['year']:'', array('class' => 'form-control select')) }}
                                     </div>
                                 </div>
+
                             </div>
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="form-group col-md-4">
-                                        {{ Form::label('period', __('Budget Period'),['class'=>'form-label']) }}
-                                        {{ Form::select('period', $periods,null, array('class' => 'form-control select period','required'=>'required')) }}
-                    
-                                    </div>
-                                    <div class="col-md-6 pt-5">
-                                        <div class="form-group  col-md-4">
-                                            <div class="btn-box">
-                                                {{ Form::label('year', __('Year'),['class'=>'form-label']) }}
-                                                {{ Form::select('year',array('class' => 'form-control select')) }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           
                         </div>
-                        
                     </div>
+
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body table-border-style">
-                
+
                                 <!---- Start Monthly Budget ------------------------------------------------------------------------>
                                 <div class="table-responsive budget_plan d-block"  id="monthly">
                                     <table class="table  mb-0" id="dataTable-manual">
@@ -136,7 +130,7 @@
                                         <tr>
                                             <th colspan="14" class="text-dark light_blue"><span>{{__('Income :')}}</span></th>
                                         </tr>
-                
+
                                         @foreach ($incomeproduct as $productService)
                                             <tr>
                                                 <td>{{$productService->name}}</td>
@@ -150,7 +144,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                
+
                                         <tr>
                                             <td class="text-dark">{{__('Total :')}}</td>
                                             @foreach($monthList as $month)
@@ -162,13 +156,13 @@
                                                 <span class="income text-dark">0.00</span>
                                             </td>
                                         </tr>
-                
+
                                         <!------------------   Expense Category ----------------------------------->
-                
+
                                         <tr>
                                             <th colspan="14" class="text-dark light_blue"><span>{{__('Expense :')}}</span></th>
                                         </tr>
-                
+
                                         @foreach ($expenseproduct as $productService)
                                             <tr>
                                                 <td>{{$productService->name}}</td>
@@ -182,7 +176,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                
+
                                         <tr>
                                             <td  class="text-dark">{{__('Total :')}}</span></td>
                                             @foreach($monthList as $month)
@@ -193,23 +187,30 @@
                                             <td>
                                                 <span class="expense text-dark">0.00</span>
                                             </td>
-                
+
                                         </tr>
-                
+
                                         </tbody>
-                
+
                                     </table>
-                
-                                    <div class="modal-footer">
-                                        <input type="button" value="{{__('Cancel')}}" onclick="location.href = '{{route("budget.index")}}';" class="btn btn-light">
-                                        <input type="submit" value="{{__('Create')}}" class="btn  btn-primary">
-                                    </div>
-                
+
+                                    <div class="card">
+                    <div class="card-footer">
+                        <button id="tombol_simpan" onclick="handle_upload('#tombol_simpan','#form_input','{{$data->id ? 'PATCH' : 'POST'}}');" class="btn btn-sm btn-{{$data->id ? 'warning' : 'success'}}">
+                            {{$data->id ? 'Update' : 'Create'}}
+                        </button>
+                        @if($data->id)
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this Proposal ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.finance.proposal.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                        @endif
+                    </div>
+                </div>
                                 </div>
-                
+
                                 <!---- End Monthly Budget ----->
-                
-                
+
+
                                 <!---- Start Quarterly Budget ----------------------------------------------------------------------->
                                 <div class="table-responsive budget_plan d-none" id="quarterly">
                                     <table class="table mb-0" id="dataTable-manual">
@@ -227,14 +228,14 @@
                                         <tr>
                                             <th colspan="37" class="text-dark light_blue"><span>{{__('Income :')}}</span></th>
                                         </tr>
-                
+
                                         @foreach ($incomeproduct as $productService)
                                             <tr>
                                                 <td>{{$productService->name}}</td>
                                                 @foreach($quarterly_monthlist as $month)
                                                     <td>
                                                         <input type="number" class="form-control income_data {{$month}}_income" data-month="{{$month}}"
-                                                               name="income[{{$productService->id}}][{{$month}}]" value="0" id="income_data_{{$month}}">
+                                                            name="income[{{$productService->id}}][{{$month}}]" value="0" id="income_data_{{$month}}">
                                                     </td>
                                                 @endforeach
                                                 <td class="text-end totalIncome  text-dark">
@@ -242,7 +243,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                
+
                                         <tr>
                                             <td class="text-dark">{{__('Total :')}}</td>
                                             @foreach($quarterly_monthlist as $month)
@@ -254,15 +255,15 @@
                                                 <span class="income  text-dark">0.00</span>
                                             </td>
                                         </tr>
-                
-                
-                
+
+
+
                                         <!------------------   Expense Category ----------------------------------->
-                
+
                                         <tr>
                                             <th colspan="14" class="text-dark light_blue"><span>{{__('Expense :')}}</span></th>
                                         </tr>
-                
+
                                         @foreach ($expenseproduct as $productService)
                                             <tr>
                                                 <td>{{$productService->name}}</td>
@@ -276,7 +277,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                
+
                                         <tr>
                                             <td  class="text-dark">{{__('Total :')}}</span></td>
                                             @foreach($quarterly_monthlist as $month)
@@ -287,21 +288,21 @@
                                             <td class="text-end">
                                                 <span class="expense  text-dark">0.00</span>
                                             </td>
-                
+
                                         </tr>
-                
+
                                         </tbody>
-                
+
                                     </table>
                                     <div class="modal-footer">
-                                        <input type="button" value="{{__('Cancel')}}" onclick="location.href = '{{route("budget.index")}}';" class="btn btn-light">
+                                        <input type="button" value="{{__('Cancel')}}" onclick="location.href = '{{route("office.finance.budget.index")}}';" class="btn btn-light">
                                         <input type="submit" value="{{__('Create')}}" class="btn  btn-primary">
                                     </div>
                                 </div>
-                
+
                                 <!---- End Quarterly Budget ----->
-                
-                
+
+
                                 <!---Start Half-Yearly Budget --------------------------------------------------------------------->
                                 <div class="table-responsive budget_plan d-none" id="half-yearly">
                                     <table class="table  mb-0" id="dataTable-manual">
@@ -319,7 +320,7 @@
                                         <tr>
                                             <th colspan="14" class="text-dark light_blue"><span>{{__('Income :')}}</span></th>
                                         </tr>
-                
+
                                         @foreach ($incomeproduct as $productService)
                                             <tr>
                                                 <td>{{$productService->name}}</td>
@@ -333,7 +334,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                
+
                                         <tr>
                                             <td class="text-dark">{{__('Total :')}}</td>
                                             @foreach($half_yearly_monthlist as $month)
@@ -345,13 +346,13 @@
                                                 <span class="income text-dark">0.00</span>
                                             </td>
                                         </tr>
-                
+
                                         <!------------------   Expense Category ----------------------------------->
-                
+
                                         <tr>
                                             <th colspan="14" class="text-dark light_blue"><span>{{__('Expense :')}}</span></th>
                                         </tr>
-                
+
                                         @foreach ($expenseproduct as $productService)
                                             <tr>
                                                 <td>{{$productService->name}}</td>
@@ -365,7 +366,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                
+
                                         <tr>
                                             <td  class="text-dark">{{__('Total :')}}</span></td>
                                             @foreach($half_yearly_monthlist as $month)
@@ -376,20 +377,20 @@
                                             <td class="text-end">
                                                 <span class="expense text-dark">0.00</span>
                                             </td>
-                
+
                                         </tr>
-                
+
                                         </tbody>
-                
+
                                     </table>
                                     <div class="modal-footer">
-                                        <input type="button" value="{{__('Cancel')}}" onclick="location.href = '{{route("budget.index")}}';" class="btn btn-light">
+                                        <input type="button" value="{{__('Cancel')}}" onclick="location.href = '{{route("office.finance.budget.index")}}';" class="btn btn-light">
                                         <input type="submit" value="{{__('Create')}}" class="btn  btn-primary">
                                     </div>
                                 </div>
-                
+
                                 <!---End Half-Yearly Budget ----->
-                
+
                                 <!---Start Yearly Budget --------------------------------------------------------------------------------->
                                 <div class="table-responsive budget_plan d-none" id="yearly">
                                     <table class="table  mb-0" id="dataTable-manual">
@@ -407,13 +408,13 @@
                                         <tr>
                                             <th colspan="14" class="text-dark light_blue"><span>{{__('Income :')}}</span></th>
                                         </tr>
-                
+
                                         @foreach ($incomeproduct as $productService)
                                             <tr>
                                                 <td>{{$productService->name}}</td>
-                
+
                                                 @foreach($yearly_monthlist as $month)
-                
+
                                                     <td>
                                                         <input type="number" class="form-control income_data {{$month}}_income" data-month="{{$month}}" name="income[{{$productService->id}}][{{$month}}]" value="{{!empty($budget['income_data'][$productService->id][$month])?$budget['income_data'][$productService->id][$month]:0}}" id="income_data_{{$month}}">
                                                     </td>
@@ -423,7 +424,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                
+
                                         <tr>
                                             <td class="text-dark">{{__('Total :')}}</td>
                                             @foreach($yearly_monthlist as $month)
@@ -435,13 +436,13 @@
                                                 <span class="income text-dark">0.00</span>
                                             </td>
                                         </tr>
-                
+
                                         <!------------------   Expense Category ----------------------------------->
-                
+
                                         <tr>
                                             <th colspan="14" class="text-dark light_blue"><span>{{__('Expense :')}}</span></th>
                                         </tr>
-                
+
                                         @foreach ($expenseproduct as $productService)
                                             <tr>
                                                 <td>{{$productService->name}}</td>
@@ -455,7 +456,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                
+
                                         <tr>
                                             <td  class="text-dark">{{__('Total :')}}</span></td>
                                             @foreach($yearly_monthlist as $month)
@@ -466,28 +467,32 @@
                                             <td class="text-end">
                                                 <span class="expense text-dark">0.00</span>
                                             </td>
-                
+
                                         </tr>
-                
+
                                         </tbody>
-                
+
                                     </table>
-                   
-                    <div class="card-footer">
-                        <button id="tombol_simpan" onclick="handle_upload('#tombol_simpan','#form_input','{{$data->id ? 'PATCH' : 'POST'}}');" class="btn btn-sm btn-{{$data->id ? 'warning' : 'success'}}">
-                            {{$data->id ? 'Update' : 'Create'}}
-                        </button>
-                        @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this budget ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.finance.budget.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
-                        @endif
+                                    <div class="modal-footer">
+                                        <input type="button" value="{{__('Cancel')}}" onclick="location.href = '{{route("office.finance.budget.index")}}';" class="btn btn-light">
+                                        <input type="submit" value="{{__('Create')}}" class="btn  btn-primary">
+                                </div>
+                                </div>
+
+                                <!---End Yearly Budget ----->
+
+
+
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    
+</x-office-layout>
+@section('costum_js')
     <script>
         //Income Total
         $(document).on('keyup', '.income_data', function () {
@@ -579,4 +584,4 @@
 
 
     </script>
-</x-office-layout>
+@endsection

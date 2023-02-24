@@ -378,7 +378,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.finance.ledger.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -390,7 +390,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link" href="{{route('office.finance.balance.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -407,30 +407,6 @@
                     <span class="bullet bullet-dot"></span>
                 </span>
                 <span class="menu-title">Trial Balance</span>
-            </a>
-            <!--end:Menu link-->
-        </div>
-        <!--end:Menu item-->
-        <!--begin:Menu item-->
-        <div class="menu-item">
-            <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Expense</span>
-            </a>
-            <!--end:Menu link-->
-        </div>
-        <!--end:Menu item-->
-        <!--begin:Menu item-->
-        <div class="menu-item">
-            <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Transfer Balance</span>
             </a>
             <!--end:Menu link-->
         </div>

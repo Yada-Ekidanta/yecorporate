@@ -85,7 +85,7 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
                                 </div>
                             </div>

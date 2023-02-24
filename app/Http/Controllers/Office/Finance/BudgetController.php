@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Office\Finance;
 
 use App\Http\Controllers\Controller;
 use App\Models\Finance\Budget;
+use App\Models\Master\Client;
+use App\Models\Master\IncomeType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Master\Client;
+
 class BudgetController extends Controller
 {
     public function __construct()
@@ -17,26 +19,28 @@ class BudgetController extends Controller
     {
         if ($request->ajax()) {
             $periods = Budget::$period;
-            $data['monthList'] = $month = $this->yearMonth();          //Monthly
+            $data['monthList'] = $month = $this->yearMonth(); //Monthly
 
-            $data['quarterly_monthlist'] = [                          //Quarterly
-                                                                      'Jan-Mar',
-                                                                      'Apr-Jun',
-                                                                      'Jul-Sep',
-                                                                      'Oct-Dec',
+            $data['quarterly_monthlist'] = [ //Quarterly
+                'Jan-Mar',
+                'Apr-Jun',
+                'Jul-Sep',
+                'Oct-Dec',
             ];
 
-            $data['half_yearly_monthlist'] = [                     // Half - Yearly
-                                                                   'Jan-Jun',
-                                                                   'Jul-Dec',
+            $data['half_yearly_monthlist'] = [ // Half - Yearly
+                'Jan-Jun',
+                'Jul-Dec',
             ];
 
-            $data['yearly_monthlist'] = [                   // Yearly
-                                                            'Jan-Dec',
+            $data['yearly_monthlist'] = [ // Yearly
+                'Jan-Dec',
             ];
-
 
             $data['yearList'] = $this->yearList();
+            $incomeproduct = IncomeType::orderBy('name', 'asc')->get();
+            $expenseproduct = IncomeType::orderBy('name', 'asc')->get();
+
             $collection = Budget::where('id', 'LIKE', '%' . $request->keyword . '%')->paginate(10);
             return view('pages.office.finance.budget.list', compact('collection', 'periods', 'incomeproduct', 'expenseproduct'), $data);
         }
@@ -44,33 +48,37 @@ class BudgetController extends Controller
     }
     public function create()
     {
-            $periods = Budget::$period;
-            $data1['monthList'] = $month = $this->yearMonth();          //Monthly
+        $periods = Budget::$period;
+        $monthList = $month = $this->yearMonth(); //Monthly
 
-            $data1['quarterly_monthlist'] = [                          //Quarterly
-                                                                      'Jan-Mar',
-                                                                      'Apr-Jun',
-                                                                      'Jul-Sep',
-                                                                      'Oct-Dec',
-            ];
+        $quarterly_monthlist = [ //Quarterly
+            'Jan-Mar',
+            'Apr-Jun',
+            'Jul-Sep',
+            'Oct-Dec',
+        ];
 
-            $data1['half_yearly_monthlist'] = [                     // Half - Yearly
-                                                                   'Jan-Jun',
-                                                                   'Jul-Dec',
-            ];
+        $half_yearly_monthlist = [ // Half - Yearly
+            'Jan-Jun',
+            'Jul-Dec',
+        ];
 
-            $data1['yearly_monthlist'] = [                   // Yearly
-                                                            'Jan-Dec',
-            ];
+        $yearly_monthlist = [ // Yearly
+            'Jan-Dec',
+        ];
 
+        $yearList = $this->yearList();
+        $incomeproduct = IncomeType::orderBy('name', 'asc')->get();
+        $expenseproduct = IncomeType::orderBy('name', 'asc')->get();
 
-            $data1['yearList'] = $this->yearList();
-        return view('pages.office.finance.budget.input', ['periods'=> $periods, 'data1'=> $data1, 'data' => new Budget]);
+        return view('pages.office.finance.budget.input', ['expenseproduct' => $expenseproduct, 'incomeproduct' => $incomeproduct,
+            'monthList' => $monthList, 'quarterly_monthlist' => $quarterly_monthlist, 'half_yearly_monthlist' => $half_yearly_monthlist,
+            'yearly_monthlist' => $yearly_monthlist, 'yearList' => $yearList, 'periods' => $periods, 'data' => new Budget]);
     }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-         
+
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -79,16 +87,12 @@ class BudgetController extends Controller
             ], 200);
         }
         $budget = new Budget;
-        $budget->client_id      = $request->client_id;
-            $budget->subject     = $request->subject;
-            $budget->type        = $request->type;
-            $budget->value       = $request->value;
-            $budget->start_date  = $request->start_date;
-            $budget->end_date    = $request->end_date;
-            $budget->status    = $request->status;
-            $budget->description = $request->description;
-            $budget->created_by  = 1;
-
+        $budget->name = $request->name;
+        $budget->from = $request->year;
+        $budget->period = $request->period;
+        $budget->income_data = json_encode($request->income);
+        $budget->expense_data = json_encode($request->expense);
+        $budget->created_by = 1;
         $budget->save();
         return response()->json([
             'alert' => 'success',
@@ -108,7 +112,7 @@ class BudgetController extends Controller
     public function update(Request $request, Budget $budget)
     {
         $validator = Validator::make($request->all(), [
-          
+
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -116,15 +120,15 @@ class BudgetController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $budget->client_id      = $request->client_id;
-            $budget->subject     = $request->subject;
-            $budget->type        = $request->type;
-            $budget->value       = $request->value;
-            $budget->start_date  = $request->start_date;
-            $budget->end_date    = $request->end_date;
-            $budget->status    = $request->status;
-            $budget->description = $request->description;
-            $budget->created_by  = 1;
+        $budget->client_id = $request->client_id;
+        $budget->subject = $request->subject;
+        $budget->type = $request->type;
+        $budget->value = $request->value;
+        $budget->start_date = $request->start_date;
+        $budget->end_date = $request->end_date;
+        $budget->status = $request->status;
+        $budget->description = $request->description;
+        $budget->created_by = 1;
 
         $budget->update();
         return response()->json([
@@ -172,14 +176,12 @@ class BudgetController extends Controller
         return $month;
     }
 
-
     public function yearList()
     {
         $starting_year = date('Y', strtotime('-5 year'));
-        $ending_year   = date('Y');
+        $ending_year = date('Y');
 
-        foreach(range($ending_year, $starting_year) as $year)
-        {
+        foreach (range($ending_year, $starting_year) as $year) {
             $years[$year] = $year;
         }
 

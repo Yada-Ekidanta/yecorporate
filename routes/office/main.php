@@ -1,20 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Office\AuthController;
 use App\Http\Controllers\Office\DashboardController;
 use App\Http\Controllers\Office\Finance\Banking\AccountController;
 use App\Http\Controllers\Office\Finance\Banking\TransferController;
-use App\Http\Controllers\Office\Finance\De\JournalEntriesController;
-use App\Http\Controllers\Office\Finance\De\ChartOfAccountController;
-use App\Http\Controllers\Office\Finance\Expense\BillController;
-use App\Http\Controllers\Office\Finance\Expense\PaymentController;
-use App\Http\Controllers\Office\Finance\Expense\DebitNoteController;
-use App\HTtp\Controllers\Office\Finance\De\TrialController;
-use App\Http\Controllers\Office\Finance\GoalController;
-use App\Http\Controllers\Office\Finance\ContractController;
 use App\Http\Controllers\Office\Finance\BudgetController;
-
+use App\Http\Controllers\Office\Finance\ContractController;
+use App\HTtp\Controllers\Office\Finance\De\BalanceController;
+use App\Http\Controllers\Office\Finance\De\ChartOfAccountController;
+use App\Http\Controllers\Office\Finance\De\JournalEntriesController;
+use App\Http\Controllers\Office\Finance\De\LedgerController;
+use App\HTtp\Controllers\Office\Finance\De\TrialController;
+use App\Http\Controllers\Office\Finance\Expense\BillController;
+use App\Http\Controllers\Office\Finance\Expense\DebitNoteController;
+use App\Http\Controllers\Office\Finance\Expense\PaymentController;
+use App\Http\Controllers\Office\Finance\GoalController;
 use App\Http\Controllers\Office\Finance\Income\CreditController;
 use App\Http\Controllers\Office\Finance\Income\InvoiceController;
 use App\Http\Controllers\Office\Finance\Income\RevenueController;
@@ -25,46 +25,47 @@ use App\Http\Controllers\Office\Master\AllowanceOptionController;
 use App\Http\Controllers\Office\Master\AssetController;
 use App\Http\Controllers\Office\Master\AwardTypeController;
 use App\Http\Controllers\Office\Master\BankController;
-use App\Http\Controllers\Office\Master\KbliController;
-use App\Http\Controllers\Office\Master\RoleController;
-use App\Http\Controllers\Office\Master\ProductController;
-use App\Http\Controllers\Office\Master\DocumentController;
-use App\Http\Controllers\Office\Master\EmployeeController;
-use App\Http\Controllers\Office\Master\GoalTypeController;
-use App\Http\Controllers\Office\Master\JobStageController;
-use App\Http\Controllers\Office\Master\RegionalController;
-use App\Http\Controllers\Office\Setting\CompanyController;
-use App\Http\Controllers\Office\Master\LeaveTypeController;
-use App\Http\Controllers\Office\Master\TaskStageController;
 use App\Http\Controllers\Office\Master\ClientTypeController;
 use App\Http\Controllers\Office\Master\CompetencyController;
+use App\Http\Controllers\Office\Master\DeductionOptionController;
 use App\Http\Controllers\Office\Master\DepartmentController;
-use App\Http\Controllers\Office\Master\IncomeTypeController;
-use App\Http\Controllers\Office\Master\LeadSourceController;
-use App\Http\Controllers\Office\Master\LoanOptionController;
-use App\Http\Controllers\Office\Master\MailConfigController;
-use App\Http\Controllers\Office\Master\ExpenseTypeController;
-use App\Http\Controllers\Office\Master\PaymentTypeController;
-use App\Http\Controllers\Office\Master\PayslipTypeController;
-use App\Http\Controllers\Office\Master\ProductUnitController;
-use App\Http\Controllers\Office\Setting\PermissionController;
-use App\Http\Controllers\Office\Master\DocumentTypeController;
-use App\Http\Controllers\Office\Setting\CompanyBankController;
+use App\Http\Controllers\Office\Master\DocumentController;
 use App\Http\Controllers\Office\Master\DocumentFolderController;
 use App\Http\Controllers\Office\Master\DocumentOptionController;
-use App\Http\Controllers\Office\Setting\CompanyBranchController;
-use App\Http\Controllers\Office\Setting\CompanyPolicyController;
-use App\Http\Controllers\Office\Master\DeductionOptionController;
+use App\Http\Controllers\Office\Master\DocumentTypeController;
+use App\Http\Controllers\Office\Master\EmployeeController;
+use App\Http\Controllers\Office\Master\ExpenseTypeController;
+use App\Http\Controllers\Office\Master\GoalTypeController;
+use App\Http\Controllers\Office\Master\IncomeTypeController;
+use App\Http\Controllers\Office\Master\JobStageController;
+use App\Http\Controllers\Office\Master\KbliController;
+use App\Http\Controllers\Office\Master\LeadSourceController;
+use App\Http\Controllers\Office\Master\LeaveTypeController;
+use App\Http\Controllers\Office\Master\LoanOptionController;
+use App\Http\Controllers\Office\Master\MailConfigController;
+use App\Http\Controllers\Office\Master\OpportunityStageController;
+use App\Http\Controllers\Office\Master\PaymentTypeController;
+use App\Http\Controllers\Office\Master\PayslipTypeController;
 use App\Http\Controllers\Office\Master\PerformanceTypeController;
 use App\Http\Controllers\Office\Master\ProductCategoryController;
-use App\Http\Controllers\Office\Master\OpportunityStageController;
+use App\Http\Controllers\Office\Master\ProductController;
+use App\Http\Controllers\Office\Master\ProductUnitController;
+use App\Http\Controllers\Office\Master\RegionalController;
+use App\Http\Controllers\Office\Master\RoleController;
 use App\Http\Controllers\Office\Master\ShippingProviderController;
 use App\Http\Controllers\Office\Master\TargetListController;
+use App\Http\Controllers\Office\Master\TaskStageController;
 use App\Http\Controllers\Office\Master\TaxController;
 use App\Http\Controllers\Office\Master\TerminationTypeController;
 use App\Http\Controllers\Office\Master\TrainerController;
 use App\Http\Controllers\Office\Master\TrainingTypeController;
 use App\Http\Controllers\Office\ProfileController;
+use App\Http\Controllers\Office\Setting\CompanyBankController;
+use App\Http\Controllers\Office\Setting\CompanyBranchController;
+use App\Http\Controllers\Office\Setting\CompanyController;
+use App\Http\Controllers\Office\Setting\CompanyPolicyController;
+use App\Http\Controllers\Office\Setting\PermissionController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,13 +90,13 @@ Route::group(['domain' => ''], function () {
             Route::post('do-forgot', [AuthController::class, 'do_forgot'])->name('doforgot');
             Route::post('do-reset', [AuthController::class, 'do_reset'])->name('doreset');
         });
-            
+
         Route::middleware(['auth:employees'])->group(function () {
             Route::prefix('dashboard')->name('dashboard.')->group(function () {
                 Route::get('', [DashboardController::class, 'index'])->name('index');
                 Route::get('ecommerce', [DashboardController::class, 'ecommerce'])->name('ecommerce');
             });
-            Route::name('setting.')->group(function(){ 
+            Route::name('setting.')->group(function () {
                 Route::resource('permission', PermissionController::class);
                 Route::resource('company', CompanyController::class);
                 Route::resource('company-branch', CompanyBranchController::class);
@@ -105,12 +106,12 @@ Route::group(['domain' => ''], function () {
                 Route::get('image-logo/{id}', [CompanyController::class, 'displayImageLogo'])->name('image.displayImageLogo');
                 Route::get('image-icon/{id}', [CompanyController::class, 'displayImageIcon'])->name('image.displayImageIcon');
             });
-            Route::name('master.')->group(function(){
-                Route::get('regional/{regional}/create',[RegionalController::class, 'create_province'])->name('regional.create_province');
-                Route::post('regional/store-province',[RegionalController::class, 'store_province'])->name('regional.store_province');
-                Route::get('regional/{regional}/{province}/edit-province',[RegionalController::class, 'edit_province'])->name('regional.edit_province');
-                Route::patch('regional/{province}/update-province',[RegionalController::class, 'update_province'])->name('regional.update_province');
-                Route::delete('regional/{province}/destroy-province',[RegionalController::class, 'destroy_province'])->name('regional.destroy_province');
+            Route::name('master.')->group(function () {
+                Route::get('regional/{regional}/create', [RegionalController::class, 'create_province'])->name('regional.create_province');
+                Route::post('regional/store-province', [RegionalController::class, 'store_province'])->name('regional.store_province');
+                Route::get('regional/{regional}/{province}/edit-province', [RegionalController::class, 'edit_province'])->name('regional.edit_province');
+                Route::patch('regional/{province}/update-province', [RegionalController::class, 'update_province'])->name('regional.update_province');
+                Route::delete('regional/{province}/destroy-province', [RegionalController::class, 'destroy_province'])->name('regional.destroy_province');
 
                 Route::get('province/{province}/show_regency', [RegionalController::class, 'show_regency'])->name('regional.show_regency');
                 Route::get('province/{province}/create', [RegionalController::class, 'create_regency'])->name('regional.create_regency');
@@ -169,10 +170,10 @@ Route::group(['domain' => ''], function () {
                 Route::resource('payment-type', PaymentTypeController::class);
                 Route::resource('payslip-type', PayslipTypeController::class);
                 Route::resource('performance-type', PerformanceTypeController::class);
-                Route::get('position/{position}/permission',[PositionController::class, 'permission'])->name('position.permission');
-                Route::get('position/{department}/create',[PositionController::class, 'createPosition'])->name('position.create-position');
-                Route::get('positon/{department}/{position}/edit',[PositionController::class, 'editPosition'])->name('position.edit-position');
-                Route::post('role/save',[RoleController::class, 'store'])->name('role.store');
+                Route::get('position/{position}/permission', [PositionController::class, 'permission'])->name('position.permission');
+                Route::get('position/{department}/create', [PositionController::class, 'createPosition'])->name('position.create-position');
+                Route::get('positon/{department}/{position}/edit', [PositionController::class, 'editPosition'])->name('position.edit-position');
+                Route::post('role/save', [RoleController::class, 'store'])->name('role.store');
                 Route::resource('position', PositionController::class);
                 Route::resource('product-category', ProductCategoryController::class);
                 Route::resource('product-unit', ProductUnitController::class);
@@ -207,6 +208,8 @@ Route::group(['domain' => ''], function () {
                 Route::resource('revenue', RevenueController::class);
                 Route::resource('contract', ContractController::class);
                 Route::resource('budget', BudgetController::class);
+                Route::resource('ledger', LedgerController::class);
+                Route::resource('balance', BalanceController::class);
 
             });
             Route::prefix('project')->name('project.')->group(function () {

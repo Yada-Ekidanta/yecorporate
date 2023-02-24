@@ -105,10 +105,10 @@
                                     <input type="date" class="form-control" id="date" name="date" value="{{$data->date}}"/>
                                 </div>
                             </div>
-                            <div class="col-4 mb-3">
+                            <div class="col-6 mb-3">
                                 <div class="form-group">
-                                    <label class="form-label text-gray-700 fw-bold" for="description">Description</label>
-                                    <input type="textarea" class="form-control" id="description" name="description" value="{{$data->description}}"/>
+                                    <label class="form-label text-gray-700 fw-bold" for="desc">Description</label>
+                                    <input type="textarea" class="form-control" id="desc" name="desc" value="{{$data->desc}}"/>
                                 </div>
                             </div>
                             

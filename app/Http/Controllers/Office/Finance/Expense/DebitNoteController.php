@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Office\Finance\Expense;
 
 use App\Http\Controllers\Controller;
+use App\Models\Finance\Expense\Bill;
+use App\Models\Finance\Expense\DebitNote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Finance\Expense\DebitNote;
-use App\Models\Finance\Expense\Bill;
+
 class DebitNoteController extends Controller
 {
     public function __construct()
@@ -21,10 +22,11 @@ class DebitNoteController extends Controller
         }
         return view('pages.office.finance.expense.debit.main');
     }
-    public function create(Bill $bill_id)
+    public function create()
     {
-        $billDue = Bill::where('id', $bill_id)->first();
-        return view('pages.office.finance.expense.debit.input', ['billDue' => $billDue,'bill_id' => $bill_id, 'data' => new DebitNote]);
+        $bills = Bill::orderBy('id', 'asc')->get();
+
+        return view('pages.office.finance.expense.debit.input', ['bills' => $bills, 'data' => new DebitNote]);
     }
     public function store(Request $request)
     {
@@ -36,7 +38,12 @@ class DebitNoteController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
+
         $debit = new DebitNote;
+        $debit->bill_id = $request->bill_id;
+        $debit->date = $request->date;
+        $debit->amount = $request->amount;
+        $debit->desc = $request->desc;
 
         $debit->save();
         return response()->json([
@@ -75,5 +82,12 @@ class DebitNoteController extends Controller
             'alert' => 'success',
             'message' => 'DebitNote has been deleted',
         ], 200);
+    }
+
+    public function getbill(Request $request)
+    {
+
+        $bill = Bill::where('id', $request->bill_id)->first();
+        echo json_encode($bill->getDue());
     }
 }

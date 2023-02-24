@@ -88,7 +88,7 @@
                                     <div class="col-md-6 pt-5">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="subject">Subject</label>
-                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="102" value="{{$data->subject}}"/>
+                                            <input type="text" class="form-control" id="subject" name="subject" value="{{$data->subject}}"/>
                                         </div>
                                     </div>
                                 </div>

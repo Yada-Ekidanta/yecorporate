@@ -1,9 +1,6 @@
 <table class="table align-middle table-row-dashed fs-6 gy-5">
     <thead>
         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-            <th >
-                No
-            </th>
             <th>Invoice</th>
             <th>Client</th>
             <th>Issue Date</th>
@@ -16,10 +13,12 @@
     <tbody class="text-gray-600 fw-semibold">
         @forelse ($collection as $key => $item)
         <tr>
-            <td>
-                {{$key+ $collection->firstItem()}}
-            </td>
-            
+            <td>{{$item->invoice_id}}</td>
+            <td>{{$item->client_id}}</td> 
+            <td>{{$item->issue_date}}</td> 
+            <td>{{$item->due_at}}</td> 
+            <td>{{$item->st}}</td>
+            <td>{{$item->st}}</td>            
             <td>
                 <a href="{{route('office.finance.invoice.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

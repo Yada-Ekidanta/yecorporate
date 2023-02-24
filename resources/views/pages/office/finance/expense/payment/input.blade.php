@@ -85,19 +85,19 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 pt-5">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="date">Date</label>
                                             <input type="date" class="form-control" id="date" name="date" placeholder="102" value="{{$data->date}}"/>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 pt-5">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="amount">Amount</label>
                                             <input type="number" class="form-control" id="amount" name="amount"  value="{{$data->amount}}" />
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 pt-5">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="account_id">Account</label>
                                             <select name="account_id" id="account_id" class="form-select">
@@ -107,7 +107,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 pt-5">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="vender_id">Vendor</label>
                                             <select name="vender_id" id="vender_id" class="form-select">
@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 pt-5">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="description">Description</label>
                                             <textarea class="form-control" id="description" name="description" value="{{$data->description}}"/> </textarea>
@@ -131,7 +131,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 pt-5">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="category_id">Kategori</label>
                                             <select name="category_id" id="category_id" class="form-select">
@@ -141,7 +141,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 pt-5">
                                         <div class="form-group">
                                             <label class="form-label text-gray-700 fw-bold" for="reference">Reference</label>
                                             <input type="text" class="form-control" id="reference" name="reference" value="{{$data->reference}}"/>

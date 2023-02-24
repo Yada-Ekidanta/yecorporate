@@ -1,9 +1,6 @@
 <table class="table align-middle table-row-dashed fs-6 gy-5">
     <thead>
         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-            <th >
-                No
-            </th>
             <th>Retainers</th>
             <th>Client</th>
             <th>Category</th>
@@ -15,10 +12,23 @@
     <tbody class="text-gray-600 fw-semibold">
         @forelse ($collection as $key => $item)
         <tr>
+            <td>{{$item->retainer_id}}</td>
+            <td>{{$item->client_id}}</td>
+            <td>{{$item->category_id}}</td>
+            <td>{{$item->issue_date}}</td>
             <td>
-                {{$key+ $collection->firstItem()}}
+                @if($item->status == 0)
+                    <span class="badge fix_badge bg-primary p-2 px-3 rounded">{{$item->status}}</span>
+                @elseif($item->status == 1)
+                    <span class="badge fix_badge bg-info p-2 px-3 rounded">{{$item->status}}</span>
+                @elseif($item->status == 2)
+                    <span class="badge fix_badge bg-secondary p-2 px-3 rounded">{{$item->status}}</span>
+                @elseif($item->status == 3)
+                    <span class="badge fix_badge bg-warning p-2 px-3 rounded">{{$item->status}}</span>
+                @elseif($item->status == 4)
+                    <span class="badge fix_badge bg-danger p-2 px-3 rounded">{{$item->status}}</span>
+                @endif
             </td>
-            
             <td>
                 <a href="{{route('office.finance.retainers.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">

@@ -59,8 +59,8 @@
     <!--end::Toolbar-->
     <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
         <div id="kt_app_content_container" class="app-container container-fluid">
-            <div class="card">
-                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.finance.bill.index')}}" action="{{$data->id ? route('office.finance.bill.update',$data->id) : route('office.finance.bill.store')}}">
+            <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.finance.bill.index')}}" action="{{$data->id ? route('office.finance.bill.update',$data->id) : route('office.finance.bill.store')}}">
+                <div class="card">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
@@ -81,10 +81,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body transition-fade">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
+                </div>
+                <div class="row mt-5 mb-5">
+                    <div class="col-md-2">
+                        <div class="card">
+                            <div class="card-header border-0 pt-6">
+                                <div class="card-title">
+                                    <div class="d-flex align-items-center position-relative my-1">
+                                        <h1>General Info</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body transition-fade">
+                                <div class="form-group mt-5">
                                     <label class="form-label text-gray-700 fw-bold" for="vendor_id">Vendor</label>
                                     <select name="vendor_id" id="vendor_id" class="form-select">
                                         @foreach ($vendors as $vendor)
@@ -92,176 +101,203 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label text-gray-700 fw-bold" for="bill_date">Bill Date</label>
-                                            <input type="date" class="form-control" id="bill_date" name="bill_date" placeholder="102" value="{{$data->bill_date}}"/>
-                                        </div>
+                                <div class="col-mt-5">
+                                    <div class="form-group">
+                                        <label class="form-label text-gray-700 fw-bold" for="date">Issue Date</label>
+                                        <input type="date" class="form-control" id="date" name="date" placeholder="102" value="{{$data->date}}"/>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label text-gray-700 fw-bold" for="due_date">Due Date</label>
-                                            <input type="date" class="form-control" id="due_date" name="due_date" placeholder="102" value="{{$data->due_date}}"/>
-                                        </div>
+                                </div>
+                                <div class="col-mt-5">
+                                    <div class="form-group">
+                                        <label class="form-label text-gray-700 fw-bold" for="due_at">Due Date</label>
+                                        <input type="date" class="form-control" id="due_at" name="due_at" value="{{$data->due_at}}"/>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label text-gray-700 fw-bold" for="number">Bill Number</label>
-                                            <input type="number" class="form-control" id="number" name="number" placeholder="#PROP00001" value="{{$data->number}}"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label text-gray-700 fw-bold" for="product_category_id">Kategori</label>
-                                            <select name="product_category_id" id="product_category_id" class="form-select">
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}" {{ $category->id === $data->product_category_id || $category->id === old('product_category_id') ? 'selected' : '' }}>{{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label text-gray-700 fw-bold" for="order_id">Order Number</label>
-                                            <input type="number" class="form-control" id="order_id" name="order_id"  value="{{$data->order_id}}" disabled/>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label text-gray-700 fw-bold" for="bill_number">Bill Number</label>
+                                    <input type="text" class="form-control" id="bill_number" name="bill_number" placeholder="" value="BILL000{{$bill_number}}" disabled/>
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label class="form-label text-gray-700 fw-bold" for="category_id">Category</label>
+                                    <select name="category_id" id="category_id" class="form-select">
+                                        @foreach ($categories as $categories)
+                                            <option value="{{ $categories->id }}" {{ $categories->id === $data->category_id || $categories->id === old('category_id') ? 'selected' : '' }}>{{ $categories->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-mt-5">
+                                    <div class="form-group">
+                                        <label class="form-label text-gray-700 fw-bold" for="order_number">Order Number</label>
+                                        <input type="number" class="form-control" id="order_number" name="order_number" value="{{$data->order_number}}"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
-                    <div class="col-12">
-                        <h5 class="h4 d-inline-block font-weight-400 mb-4">{{__('Product & Services')}}</h5>
-                        <div class="card repeater">
-                            <div class="item-section py-4">
-                                <div class="row justify-content-between align-items-center">
-                                    <div class="col-md-12 d-flex align-items-center justify-content-between justify-content-md-end">
-                                        <div class="all-button-box">
-                                            <a href="#" data-repeater-create="" class="btn btn-primary mr-2" data-toggle="modal" data-target="#add-bank">
-                                                <i class="ti ti-plus"></i> {{__('Add item')}}
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div id="kt_docs_repeater_basic">
+                                <div class="card-header border-0 pt-6">
+                                    <div class="card-title">
+                                        <div class="d-flex align-items-center position-relative my-1">
+                                            <h1>List Item</h1>
+                                        </div>
+                                    </div>
+                                    <div class="card-toolbar">
+                                        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                            <a href="javascript:;" data-repeater-create class="btn btn-light-primary">
+                                                <i class="la la-plus"></i>Add
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body mt-3">
-                                <div class="table-responsive">
-                                    <table class="table mb-0" data-repeater-list="items">
-                                        <thead>
-                                        <tr>
-                                            <th>{{__('Items')}}</th>
-                                            <th>{{__('Quantity')}}</th>
-                                            <th>{{__('Price')}} </th>
-                                            <th>{{__('Tax')}} (%)</th>
-                                            <th>{{__('Discount')}}</th>
-                                            <th class="text-end">{{__('Amount')}} <br>
-                                                <small class="text-danger font-weight-bold">{{__('before tax & discount')}}</small>
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody class="ui-sortable" data-repeater-item>
-                                        <tr>
-                                            <td width="25%" class="form-group">
-                                                <div class="form-group pt-0">
-                                                    <select name="product_service" id="product_service" class="form-select">
-                                                        @foreach ($productservices as $productservice)
-                                                            <option value="{{ $productservice->id }}" {{ $productservice->id === $data->product_service || $productservice->id === old('product_service') ? 'selected' : '' }}>{{ $productservice->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td class="form-group price-input input-group search-form">
-                                                <div class="form-group pt-0">
-                                                    <input type="number" class="form-control quantity" id="rates" name="rates" value="{{$data->rates}}"/>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group pt-0">
-                                                    <input type="number" class="form-control price" id="rates" name="rates" value="{{$data->rates}}"/>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group pt-0">
-                                                    
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group pt-0">
-                                                    <input type="text" class="form-control" id="price" name="price" value="{{$data->price}}"/>
-                                                </div>
-                                            </td>
-                                            <td class="text-end amount">
-                                                0.00
-                                            </td>
-                                            <td>
-                                                <a href="#" class="ti ti-trash text-white repeater-action-btn bg-danger ms-2 bs-pass-para" data-repeater-delete></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" id="desc" placeholder="Description" name="desc" value="{{$data->desc}}"/> </textarea>
-                                                </div>
-                                            </td>
-                                            <td colspan="5"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                               
-                                            </td>
-                                            <td colspan="5"></td>
-                                        </tr>
-                                        
-                                        </tbody>
-                                        <tfoot>
-                                        <tr class="border-none">
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td></td>
-                                            <td><strong>{{__('Sub Total')}}</strong></td>
-                                            <td class="text-end subTotal">0.00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td></td>
-                                            <td><strong>{{__('Discount')}}</strong></td>
-                                            <td class="text-end totalDiscount">0.00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td></td>
-                                            <td><strong>{{__('Tax')}}</strong></td>
-                                            <td class="text-end totalTax">0.00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td class="blue-text border-none"><strong>{{__('Total Amount')}}</strong></td>
-                                            <td class="text-end totalAmount blue-text border-none"></td>
-                                            <td></td>
-                                        </tr>
-                                        
-                                        </tfoot>
-                                    </table>
+                                <div id="kt_docs_repeater_basic">
+                                    <div class="card-body transition-fade">
+                                        <div class="form-group">
+                                            <div data-repeater-list="kt_docs_repeater_basic">
+                                                @if ($data->id)
+                                                    @foreach ($data->BillItem as $key => $varian)
+                                                        <div data-repeater-item>
+                                                            <input type="hidden" name="id" value="{{ $varian->id }}">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Items</th>
+                                                                        <th>qty</th>
+                                                                        <th>Price</th>
+                                                                        <th>Tax (%)</th>
+                                                                        <th>Discount</th>
+                                                                        <th  class="text-end">Amount <br>
+                                                                        <small class="text-danger font-weight-bold">Before tax & discount</small>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <input type="text" name="name" class="form-control mb-2 mb-md-0" value="{{ $varian->name }}"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="text" name="qty" class="form-control mb-2 mb-md-0 qty number_only" value="{{ $varian->qty }}"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="text" name="price" class="form-control mb-2 mb-md-0 price number_only" value="{{ $varian->price }}"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="text" name="tax" class="form-control mb-2 mb-md-0 tax_rate number_only" value="{{ $varian->tax }}"/>
+                                                                            <input type="hidden" name="tax" class="form-control mb-2 mb-md-0 tax_price number_only" value="{{ $varian->tax }}"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="text" name="discount" class="form-control mb-2 mb-md-0 discount number_only" value="{{ $varian->discount }}"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            Rp. <span class="text-end amount" id="amount">0</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <textarea name="desc" class="form-control mb-2 mb-md-0"></textarea>
+                                                                        </td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                                                <i class="la la-trash-o"></i>Delete
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                <div data-repeater-item>
+                                                        <table>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Items</th>
+                                                                    <th>qty</th>
+                                                                    <th>Price</th>
+                                                                    <th>Tax (%)</th>
+                                                                    <th>Discount</th>
+                                                                    <th  class="text-end">Amount <br>
+                                                                    <small class="text-danger font-weight-bold">Before tax & discount</small>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="text" name="name" class="form-control mb-2 mb-md-0"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" name="qty" class="form-control mb-2 mb-md-0 qty number_only"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" name="price" class="form-control mb-2 mb-md-0 price number_only"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" name="tax" class="form-control mb-2 mb-md-0 tax_rate number_only"/>
+                                                                        <input type="hidden" name="tax" class="form-control mb-2 mb-md-0 tax_price number_only"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" name="discount" class="form-control mb-2 mb-md-0 discount number_only"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        Rp. <span class="text-end amount" id="amount">0</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2">
+                                                                        <textarea name="desc" class="form-control mb-2 mb-md-0"></textarea>
+                                                                    </td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                                            <i class="la la-trash-o"></i>Delete
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4"></td>
+                                        <td class="text-end">Sub Total </td>
+                                        <td>Rp. <span class="sub_total">0</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"></td>
+                                        <td class="text-end">Discount</td>
+                                        <td>Rp. <span class="total_discount">0</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"></td>
+                                        <td class="text-end">Tax</td>
+                                        <td>Rp. <span class="total_tax">0</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"></td>
+                                        <td class="text-end">Grand Total</td>
+                                        <td>Rp. <span class="grand_total">0</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="card-footer">
                         <button id="tombol_simpan" onclick="handle_upload('#tombol_simpan','#form_input','{{$data->id ? 'PATCH' : 'POST'}}');" class="btn btn-sm btn-{{$data->id ? 'warning' : 'success'}}">
                             {{$data->id ? 'Update' : 'Create'}}
@@ -272,8 +308,139 @@
                         </button>
                         @endif
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
+    @section('custom_js')
+    <script>
+        obj_date('issue_date');
+        $('#kt_docs_repeater_basic').repeater({
+            initEmpty: false,
+
+            defaultValues: {
+                'text-input': 'foo'
+            },
+
+            show: function () {
+                $(this).slideDown();
+            },
+
+            hide: function (deleteElement) {
+                $(this).slideUp(deleteElement);
+            }
+        });
+        $(document).on('keyup', '.qty', function () {
+            var quntityTotalTaxPrice = 0;
+
+            var el = $(this).parent().parent().parent().parent();
+            var quantity = $(this).val();
+            var price = $(el.find('.price')).val();
+            var discount = $(el.find('.discount')).val();
+
+            var totalItemPrice = (quantity * price);
+            var amount = (totalItemPrice);
+            $(el.find('.amount')).html(amount);
+
+            var totalItemTaxRate = $(el.find('.tax_rate')).val();
+            var itemTaxPrice = parseFloat((totalItemTaxRate / 100) * (totalItemPrice));
+            $(el.find('.tax_price')).val(itemTaxPrice.toFixed(2));
+
+
+            var totalItemTaxPrice = 0;
+            var itemTaxPriceInput = $('.tax_price');
+            for (var j = 0; j < itemTaxPriceInput.length; j++) {
+                totalItemTaxPrice += parseFloat(itemTaxPriceInput[j].value);
+            }
+
+
+            var inputs = $(".amount");
+            var subTotal = 0;
+            for (var i = 0; i < inputs.length; i++) {
+                subTotal = parseFloat(subTotal) + parseFloat($(inputs[i]).html());
+            }
+            $('.sub_total').html(subTotal.toFixed(2));
+            $('.total_tax').html(totalItemTaxPrice.toFixed(2));
+
+            $('.grand_total').html((parseFloat(subTotal) + parseFloat(totalItemTaxPrice)).toFixed(2));
+        });
+        $(document).on('keyup', '.price', function () {
+            var el = $(this).parent().parent().parent().parent();
+            var price = $(this).val();
+            var quantity = $(el.find('.qty')).val();
+            var discount = $(el.find('.discount')).val();
+            var totalItemPrice = (quantity * price);
+
+            var amount = (totalItemPrice);
+            $(el.find('.amount')).html(amount);
+
+
+            var totalItemTaxRate = $(el.find('.tax_rate')).val();
+            var itemTaxPrice = parseFloat((totalItemTaxRate / 100) * (totalItemPrice));
+            $(el.find('.tax_price')).val(itemTaxPrice.toFixed(2));
+
+
+            var totalItemTaxPrice = 0;
+            var itemTaxPriceInput = $('.tax_price');
+            for (var j = 0; j < itemTaxPriceInput.length; j++) {
+                totalItemTaxPrice += parseFloat(itemTaxPriceInput[j].value);
+            }
+
+
+            var inputs = $(".amount");
+            var subTotal = 0;
+            for (var i = 0; i < inputs.length; i++) {
+                subTotal = parseFloat(subTotal) + parseFloat($(inputs[i]).html());
+            }
+            $('.total_tax').html(totalItemTaxPrice.toFixed(2));
+
+            $('.sub_total').html(subTotal.toFixed(2));
+            $('.grand_total').html((parseFloat(subTotal) + parseFloat(totalItemTaxPrice)).toFixed(2));
+
+        })
+
+        $(document).on('keyup', '.discount', function () {
+            var el = $(this).parent().parent().parent().parent();
+            var discount = $(this).val();
+            var price = $(el.find('.price')).val();
+
+            var quantity = $(el.find('.qty')).val();
+            var totalItemPrice = (quantity * price);
+
+            var totalItemTaxRate = $(el.find('.tax_rate')).val();
+            var itemTaxPrice = parseFloat((totalItemTaxRate / 100) * (totalItemPrice));
+            $(el.find('.tax_price')).val(itemTaxPrice.toFixed(2));
+
+
+            var totalItemTaxPrice = 0;
+            var itemTaxPriceInput = $('.tax_price');
+            for (var j = 0; j < itemTaxPriceInput.length; j++) {
+                totalItemTaxPrice += parseFloat(itemTaxPriceInput[j].value);
+            }
+
+
+            var totalItemDiscountPrice = 0;
+            var itemDiscountPriceInput = $('.discount');
+
+            for (var k = 0; k < itemDiscountPriceInput.length; k++) {
+
+                totalItemDiscountPrice += parseFloat((itemDiscountPriceInput[k].value / 100) * (totalItemPrice));
+            }
+
+            var amount = (totalItemPrice);
+            $(el.find('.amount')).html(amount);
+
+            var inputs = $(".amount");
+            var subTotal = 0;
+            for (var i = 0; i < inputs.length; i++) {
+                subTotal = parseFloat(subTotal) + parseFloat($(inputs[i]).html());
+            }
+            $('.sub_total').html(subTotal.toFixed(2));
+            $('.total_discount').html(totalItemDiscountPrice.toFixed(2));
+            $('.total_tax').html(totalItemTaxPrice.toFixed(2));
+
+            $('.grand_total').html((parseFloat(subTotal) - parseFloat(totalItemDiscountPrice) + parseFloat(totalItemTaxPrice)).toFixed(2));
+        })
+    </script>
+    @endsection
 </x-office-layout>

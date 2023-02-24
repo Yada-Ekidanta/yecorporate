@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Office\Finance\De;
 
 use App\Http\Controllers\Controller;
+use App\Models\Finance\De\ChartOfAccount;
+use App\Models\Finance\De\JournalEntries;
+use App\Models\Master\JournalItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Finance\De\JournalEntries;
+
 class JournalEntriesController extends Controller
 {
     public function __construct()
@@ -23,18 +26,14 @@ class JournalEntriesController extends Controller
     public function create()
     {
         $journalId = $this->journalNumber();
+        $accounts = ChartOfAccount::orderBy('name', 'asc')->get();
 
-        return view('pages.office.finance.de.journal.input', ['journalId' => $journalId, 'data' => new JournalEntries]);
+        return view('pages.office.finance.de.journal.input', ['accounts' => $accounts, 'journalId' => $journalId, 'data' => new JournalEntries]);
     }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'type' => 'required',
-            'from' => 'required',
-            'to' => 'required',
-            'amount' => 'required',
-            'is_display' => 'required',
+
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -42,15 +41,22 @@ class JournalEntriesController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $journalentries = new JournalEntries;
-        $journalentries->name = $request->name;
-        $journalentries->type = $request->type;
-        $journalentries->from = $request->from;
-        $journalentries->to = $request->to;
-        $journalentries->amount = $request->amount;
-        $journalentries->is_display = isset($request->is_display) ? 1 : 0;
+        $journal = new JournalEntries();
+        $journal->journal_id = $this->journalNumber();
+        $journal->date = $request->date;
+        $journal->reference = $request->reference;
+        $journal->desc = $request->desc;
+        $journal->save();
 
-        $journalentries->save();
+        foreach ($request->kt_docs_repeater_basic as $key => $value) {
+            $journalItem = new JournalItem();
+            $journalItem->journal_id = $journal->id;
+            $journalItem->account_id = $value['account_id'];
+            $journalItem->debit = isset($value['debit']) ? $value['debit'] : 0;
+            $journalItem->credit = isset($value['credit']) ? $value['credit'] : 0;
+            $journalItem->save();
+        }
+
         return response()->json([
             'alert' => 'success',
             'message' => 'JournalEntries has been saved',
@@ -67,12 +73,7 @@ class JournalEntriesController extends Controller
     public function update(Request $request, JournalEntries $journalentries)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'type' => 'required',
-            'from' => 'required',
-            'to' => 'required',
-            'amount' => 'required',
-            'is_display' => 'required',
+
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -80,12 +81,6 @@ class JournalEntriesController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $journalentries->name = $request->name;
-        $journalentries->type = $request->type;
-        $journalentries->from = $request->from;
-        $journalentries->to = $request->to;
-        $journalentries->amount = $request->amount;
-        $journalentries->is_display = isset($request->is_display) ? 1 : 0;
 
         $journalentries->update();
         return response()->json([
@@ -102,11 +97,10 @@ class JournalEntriesController extends Controller
         ], 200);
     }
 
-    function journalNumber()
+    public function journalNumber()
     {
         $latest = JournalEntries::where('created_by', '=', \Auth::user())->latest()->first();
-        if(!$latest)
-        {
+        if (!$latest) {
             return 1;
         }
 

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Office\Finance\Presale;
 
 use App\Http\Controllers\Controller;
+use App\Models\Finance\Presale\RetainerItems;
 use App\Models\Finance\Presale\Retainers;
+use App\Models\Master\Client;
+use App\Models\Master\IncomeType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Master\ProductCategory;
-use App\Models\Master\ProductService;
+
 class RetainersController extends Controller
 {
     public function __construct()
@@ -24,9 +26,11 @@ class RetainersController extends Controller
     }
     public function create()
     {
-        $categories = ProductCategory::orderBy('name', 'asc')->get();
-        $productservices = ProductService::orderBy('name', 'asc')->get();
-        return view('pages.office.finance.presale.retainers.input', ['productservices' => $productservices, 'categories' => $categories, 'data' => new Retainers]);
+        $clients = Client::orderBy('name', 'asc')->get();
+        $retainers_number = $this->retainersnumber();
+        $categories = IncomeType::orderBy('name', 'asc')->get();
+
+        return view('pages.office.finance.presale.retainers.input', ['categories' => $categories, 'retainers_number' => $retainers_number, 'clients' => $clients, 'data' => new Retainers]);
     }
     public function store(Request $request)
     {
@@ -38,9 +42,26 @@ class RetainersController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $Retainers = new Retainers;
+        $retainer = new Retainers;
+        $retainer->retainer_id = $this->retainersnumber();
+        $retainer->client_id = $request->client_id;
+        $retainer->issue_date = $request->issue_date;
+        $retainer->category_id = $request->category_id;
+        $retainer->discount_apply = isset($request->discount_apply) ? 1 : 0;
+        $retainer->created_by = 1;
+        $retainer->save();
 
-        $Retainers->save();
+        foreach ($request->kt_docs_repeater_basic as $key => $value) {
+            $retainerItems = new RetainerItems;
+            $retainerItems->retainer_id = $retainer->id;
+            $retainerItems->name = $value['name'];
+            $retainerItems->qty = $value['qty'];
+            $retainerItems->tax = $value['tax'];
+            $retainerItems->discount = $value['discount'];
+            $retainerItems->price = $value['price'];
+            $retainerItems->desc = $value['desc'];
+            $retainerItems->save();
+        }
         return response()->json([
             'alert' => 'success',
             'message' => 'Retainers has been saved',
@@ -52,7 +73,11 @@ class RetainersController extends Controller
     }
     public function edit(Retainers $Retainers)
     {
-        return view('pages.office.finance.presale.retainers.input', ['data' => $Retainers]);
+        $clients = Client::orderBy('name', 'asc')->get();
+        $retainers_number = $this->retainersnumber();
+        $categories = IncomeType::orderBy('name', 'asc')->get();
+
+        return view('pages.office.finance.presale.retainers.input', ['categories' => $categories, 'retainers_number' => $retainers_number, 'clients' => $clients, 'data' => $Retainers]);
     }
     public function update(Request $request, Retainers $Retainers)
     {
@@ -77,5 +102,16 @@ class RetainersController extends Controller
             'alert' => 'success',
             'message' => 'Retainers has been deleted',
         ], 200);
+    }
+    public function retainersnumber()
+    {
+        // $latest = Utility::getValByName('proposal_starting_number');
+        $latest = Retainers::where('created_by', '=', 1)->latest()->first();
+        if (!$latest) {
+            return 1;
+        }
+
+        return $latest->retainer_id + 1;
+        return $latest;
     }
 }
