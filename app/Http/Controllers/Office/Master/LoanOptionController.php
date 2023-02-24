@@ -17,13 +17,13 @@ class LoanOptionController extends Controller
     {
         if($request->ajax()){
             $collection = LoanOption::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
-            return view('pages.office.master.loan_option.list', compact('collection'));
+            return view('pages.office.hrm.master.loan_option.list', compact('collection'));
         }
-        return view('pages.office.master.loan_option.main');
+        return view('pages.office.hrm.master.loan_option.main');
     }
     public function create()
     {
-        return view('pages.office.master.loan_option.input', ['data' => new LoanOption]);
+        return view('pages.office.hrm.master.loan_option.input', ['data' => new LoanOption]);
     }
     public function store(Request $request)
     {
@@ -51,7 +51,7 @@ class LoanOptionController extends Controller
     }
     public function edit(LoanOption $loanOption)
     {
-        return view('pages.office.master.loan_option.input', ['data' => $loanOption]);
+        return view('pages.office.hrm.master.loan_option.input', ['data' => $loanOption]);
     }
     public function update(Request $request, LoanOption $loanOption)
     {

@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
     use HasFactory;
-    public $table = 'documents';
+    public $table = 'document_uploads';
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'position_id');
+    }
 }

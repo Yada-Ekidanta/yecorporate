@@ -44,4 +44,4 @@
         @endforelse
     </tbody>
 </table>
-{{$collection->links('themes.office.pagination')}}
+{{$collection->links('themes.office.hrm.pagination')}}

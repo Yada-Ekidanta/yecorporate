@@ -18,13 +18,13 @@ class LeaveTypeController extends Controller
     {
         if($request->ajax()){
             $collection = LeaveType::paginate(10);;
-            return view('pages.office.master.leave_type.list', compact('collection'));
+            return view('pages.office.hrm.master.leave_type.list', compact('collection'));
         }
-        return view('pages.office.master.leave_type.main');
+        return view('pages.office.hrm.master.leave_type.main');
     }
     public function create()
     {
-        return view('pages.office.master.leave_type.input', ['data' => new LeaveType]);
+        return view('pages.office.hrm.master.leave_type.input', ['data' => new LeaveType]);
     }
     public function store(Request $request)
     {
@@ -46,7 +46,7 @@ class LeaveTypeController extends Controller
         $leaveType->save();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Loan Option has been saved',
+            'message' => 'Leave Type has been saved',
         ], 200);
     }
     public function show(LeaveType $LeaveType)
@@ -55,7 +55,7 @@ class LeaveTypeController extends Controller
     }
     public function edit(LeaveType $leaveType)
     {
-        return view('pages.office.master.leave_type.input', ['data' => $leaveType]);
+        return view('pages.office.hrm.master.leave_type.input', ['data' => $leaveType]);
     }
     public function update(Request $request, LeaveType $leaveType)
     {
@@ -76,7 +76,7 @@ class LeaveTypeController extends Controller
         $leaveType->update();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Loan Option has been updated',
+            'message' => 'Leave Type has been updated',
         ], 200);
     }
     public function destroy(LeaveType $leaveType)
@@ -84,7 +84,7 @@ class LeaveTypeController extends Controller
         $leaveType->delete();
         return response()->json([
             'alert' => 'success',
-            'message' => 'Loan Option has been deleted',
+            'message' => 'Leave Type has been deleted',
         ], 200);
     }
 }

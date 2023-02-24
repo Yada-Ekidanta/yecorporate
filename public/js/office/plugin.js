@@ -481,6 +481,7 @@ function get_province(country_id, province_id) {
             type: "GET",
             url: "/office/get-province/" + $(this).val(),
             success: function(response) {
+                $("#" + province_id).removeAttr('disabled');
                 $("#" + province_id).html(response);
                 $("#" + province_id).prepend("<option disabled selected>Select Province</option>");
             }
@@ -494,6 +495,7 @@ function get_regency(province_id, regency_id) {
             type: "GET",
             url: "/office/get-regency/" + $(this).val(),
             success: function(response) {
+                $("#" + regency_id).removeAttr('disabled');
                 $("#" + regency_id).html(response);
                 $("#" + regency_id).prepend("<option disabled selected>Select Regency</option>");
             }
@@ -507,6 +509,7 @@ function get_district(regency_id, district_id) {
             type: "GET",
             url: "/office/get-district/" + $(this).val(),
             success: function(response) {
+                $("#" + district_id).removeAttr('disabled');
                 $("#" + district_id).html(response);
                 $("#" + district_id).prepend("<option disabled selected>Select District</option>");
             }
@@ -520,6 +523,7 @@ function get_village(district_id, village_id) {
             type: "GET",
             url: "/office/get-village/" + $(this).val(),
             success: function(response) {
+                $("#" + village_id).removeAttr('disabled');
                 $("#" + village_id).html(response);
                 $("#" + village_id).prepend("<option disabled selected>Select Village</option>");
             }
@@ -566,4 +570,3 @@ function get_regional_data
         }, 1200);
     }, 500);
 }
-

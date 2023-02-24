@@ -85,22 +85,14 @@
                         <div class="form-group row">
                             <div class="col-8 mb-3">
                                 <div class="form-floating mb-3">
-                                    <select name="company_branch_id" placeholder="Name" class="form-select">
-                                    @if($data->id == null)
-                                    @foreach ($company_branch as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                    @endforeach
-                                    @else
-                                    @foreach ($company_branch as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == $data->company_branch_id ? 'selected' : '' }}>
-                                            {{ $item->name }}
-                                        </option>
-                                    @endforeach
-                                    @endif
+                                    <select name="company_branch_id" data-placeholder="Select company branch" id="company_branch_id" placeholder="Name" class="form-select">
+                                        <option value=""></option>
+                                        @foreach ($company_branch as $item)
+                                            <option value="{{ $item->id }}" {{ $item->id == $data->company_branch_id ? 'selected' : '' }}>
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
-                                    <label for="company_branch_id">Company Branch</label>
                                 </div>
 
                                 <div class="form-floating mb-3">
@@ -143,6 +135,7 @@
         obj_startdatenow('purchase_at');
         obj_startdatenow('supported_at');
         obj_quill('desc');
+        obj_select('company_branch_id');
     </script>
     @endsection
 </x-office-layout>

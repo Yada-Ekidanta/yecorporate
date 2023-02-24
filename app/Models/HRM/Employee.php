@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class Employee extends Authenticatable
 {
@@ -42,6 +43,7 @@ class Employee extends Authenticatable
             return "<div class='symbol-label fs-3 bg-light-danger text-danger'>".$name."</div>" . $simbol;
         }
     }
+
     public function department()
     {
         return $this->belongsTo(Department::class,'department_id','id');
@@ -55,6 +57,11 @@ class Employee extends Authenticatable
     public function position ()
     {
         return $this->belongsTo(Position::class,'position_id','id');
+    }
+
+    public function employee_bank_account()
+    {
+        return $this->hasMany(EmployeeBankAccount::class);
     }
     public function chat ()
     {
@@ -76,4 +83,22 @@ class Employee extends Authenticatable
         }
         return round($total);
     }
+
+    public static function employee_name($name)
+    {
+        
+        $employee=Employee::where('id',$name)->first();
+        if(!empty($employee))
+        {
+            return $employee->name;
+        } 
+    }
+
+    // public static function join()
+    // {
+    //     $data = DB::table('employees')
+    //     ->join('employee_bank_accounts', 'employees.employee_bank_account_id', 'employee_bank_accounts.id')
+    //     ->select('employees.*', 'employee_bank_accounts.id as bank_id',);
+    //     return $data;
+    // }
 }

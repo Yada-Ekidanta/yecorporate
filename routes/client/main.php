@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\AuthController;
-use App\Http\Controllers\Client\ProfileController;
-use App\Http\Controllers\Client\DashboardController;
+// use App\Http\Controllers\Client\ProfileController;
+// use App\Http\Controllers\Client\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +43,7 @@ Route::group(['domain' => ''], function() {
             //     Route::get('apikey',[ProfileController::class, 'apikey'])->name('apikey');
             //     Route::get('log',[ProfileController::class, 'log'])->name('log');
             // });
-            Route::post('logout',[AuthController::class, 'do_logout'])->name('auth.logout');
+            Route::get('logout',[AuthController::class, 'do_logout'])->name('auth.logout');
         });
     });
 });

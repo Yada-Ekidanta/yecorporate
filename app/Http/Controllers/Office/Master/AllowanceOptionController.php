@@ -18,13 +18,13 @@ class AllowanceOptionController extends Controller
     {
         if($request->ajax()){
             $collection = AllowanceOption::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
-            return view('pages.office.master.allowance.list', compact('collection'));
+            return view('pages.office.hrm.master.allowance.list', compact('collection'));
         }
-        return view('pages.office.master.allowance.main');
+        return view('pages.office.hrm.master.allowance.main');
     }
     public function create()
     {
-        return view('pages.office.master.allowance.input', ['data' => new AllowanceOption]);
+        return view('pages.office.hrm.master.allowance.input', ['data' => new AllowanceOption]);
     }
     public function store(Request $request)
     {
@@ -53,7 +53,7 @@ class AllowanceOptionController extends Controller
     }
     public function edit(AllowanceOption $allowance)
     {
-        return view('pages.office.master.allowance.input', ['data' => $allowance]);
+        return view('pages.office.hrm.master.allowance.input', ['data' => $allowance]);
     }
     public function update(Request $request, AllowanceOption $allowance)
     {

@@ -17,13 +17,13 @@ class GoalTypeController extends Controller
     {
         if($request->ajax()){
             $collection = GoalType::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
-            return view('pages.office.master.goal_type.list', compact('collection'));
+            return view('pages.office.hrm.master.goal_type.list', compact('collection'));
         }
-        return view('pages.office.master.goal_type.main');
+        return view('pages.office.hrm.master.goal_type.main');
     }
     public function create()
     {
-        return view('pages.office.master.goal_type.input', ['data' => new GoalType]);
+        return view('pages.office.hrm.master.goal_type.input', ['data' => new GoalType]);
     }
     public function store(Request $request)
     {
@@ -51,7 +51,7 @@ class GoalTypeController extends Controller
     }
     public function edit(GoalType $goalType)
     {
-        return view('pages.office.master.goal_type.input', ['data' => $goalType]);
+        return view('pages.office.hrm.master.goal_type.input', ['data' => $goalType]);
     }
     public function update(Request $request, GoalType $goalType)
     {

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Office\Master;
+namespace App\Http\Controllers\Office\Hrm;
 
 use App\Http\Controllers\Controller;
 use App\Models\HRM\Document;
+use App\Models\HRM\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class DocumentController extends Controller
@@ -26,15 +28,20 @@ class DocumentController extends Controller
 
     public function create()
     {
+        $position = Position::all();
         return view('pages.office.hrm.document.input', [
             'data' => new Document(),
+            'position' => $position,
         ]);
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'position_id' => 'required',
             'name' => 'required',
+            'attachment' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -44,13 +51,20 @@ class DocumentController extends Controller
             ], 200);
         }
         $document = new Document;
+        $document->position_id = $request->position_id;
         $document->name = $request->name;
-        if($request->is_required != null){
-            $document->is_required = 1;
-        }else{
-            $document->is_required = 0;
+        if (request()->file('attachment')){
+            $file = request()->file('attachment')->store('files/document/attachment');
+            $document->attachment = $file;
+        } else {
+            $document->attachment = $document->attachment;
         }
-        $document->created_by = Auth::guard('employees')->user()->id;
+        if($request->is_private != null){
+            $document->is_private = 'y';
+        }else{
+            $document->is_private = 'n';
+        }
+        $document->desc = $request->desc;
         $document->save();
         return response()->json([
             'alert' => 'success',
@@ -65,15 +79,20 @@ class DocumentController extends Controller
 
     public function edit(Document $document)
     {
+        $position = Position::all();
         return view('pages.office.hrm.document.input', [
-            'data' => new $document(),
+            'data' => $document,
+            'position' => $position,
         ]);
     }
 
     public function update(Request $request,Document $document)
     {
         $validator = Validator::make($request->all(), [
+            'position_id' => 'required',
             'name' => 'required',
+            'attachment' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails())
         {
@@ -82,15 +101,24 @@ class DocumentController extends Controller
                 'message' => $validator->errors()->first(),
             ], 200);
         }
-        $document = new Document;
+        $document->position_id = $request->position_id;
         $document->name = $request->name;
-        if($request->is_required != null){
-            $document->is_required = 1;
-        }else{
-            $document->is_required = 0;
+        if (request()->file('attachment')){
+            if($document->logo != null){
+                Storage::delete($document->logo);
+            }
+            $file = request()->file('attachment')->store('files/document/attachment');
+            $document->attachment = $file;
+        } else {
+            $document->attachment = $document->attachment;
         }
-        $document->created_by = Auth::guard('employees')->user()->id;
-        $document->update();
+        if($request->is_private != null){
+            $document->is_private = 'y';
+        }else{
+            $document->is_private = 'n';
+        }
+        $document->desc = $request->desc;
+        $document->save();
         return response()->json([
             'alert' => 'success',
             'message' => 'Document Updated',
@@ -99,10 +127,21 @@ class DocumentController extends Controller
 
     public function destroy(Document $document)
     {
+        Storage::delete($document->logo);
         $document->delete();
         return response()->json([
             'alert' => 'success',
             'message' => 'Document Deleted',
         ]);
+    }
+
+    public function downloadAttachment($id)
+    {
+        $document  = Document::findOrFail($id);
+        try {
+            return Storage::download($document->attachment);
+        } catch (\Exception $th) {
+            return $th->getMessage();
+        }
     }
 }

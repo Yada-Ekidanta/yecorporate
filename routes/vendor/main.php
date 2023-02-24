@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Vendor\AuthController;
-use App\Http\Controllers\Vendor\ProfileController;
-use App\Http\Controllers\Vendor\DashboardController;
+// use App\Http\Controllers\Vendor\ProfileController;
+// use App\Http\Controllers\Vendor\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,20 +28,20 @@ Route::group(['domain' => 'https://vendor.yadaekidanta.com'], function() {
             Route::post('do-reset',[AuthController::class, 'do_reset'])->name('doreset');
         });
         Route::middleware(['auth:vendors'])->group(function(){
-            Route::prefix('dashboard')->name('dashboard.')->group(function(){
-                Route::get('',[DashboardController::class, 'index'])->name('index');
-            });
-            Route::prefix('profile')->name('profile.')->group(function(){
-                Route::get('',[ProfileController::class, 'index'])->name('index');
-                Route::get('setting',[ProfileController::class, 'setting'])->name('setting');
-                Route::get('security',[ProfileController::class, 'security'])->name('security');
-                Route::get('activity',[ProfileController::class, 'activity'])->name('activity');
-                Route::get('billing',[ProfileController::class, 'billing'])->name('billing');
-                Route::get('statement',[ProfileController::class, 'statement'])->name('statement');
-                Route::get('referral',[ProfileController::class, 'referral'])->name('referral');
-                Route::get('apikey',[ProfileController::class, 'apikey'])->name('apikey');
-                Route::get('log',[ProfileController::class, 'log'])->name('log');
-            });
+            // Route::prefix('dashboard')->name('dashboard.')->group(function(){
+            //     Route::get('',[DashboardController::class, 'index'])->name('index');
+            // });
+            // Route::prefix('profile')->name('profile.')->group(function(){
+            //     Route::get('',[ProfileController::class, 'index'])->name('index');
+            //     Route::get('setting',[ProfileController::class, 'setting'])->name('setting');
+            //     Route::get('security',[ProfileController::class, 'security'])->name('security');
+            //     Route::get('activity',[ProfileController::class, 'activity'])->name('activity');
+            //     Route::get('billing',[ProfileController::class, 'billing'])->name('billing');
+            //     Route::get('statement',[ProfileController::class, 'statement'])->name('statement');
+            //     Route::get('referral',[ProfileController::class, 'referral'])->name('referral');
+            //     Route::get('apikey',[ProfileController::class, 'apikey'])->name('apikey');
+            //     Route::get('log',[ProfileController::class, 'log'])->name('log');
+            // });
             Route::get('logout',[AuthController::class, 'do_logout'])->name('auth.logout');
         });
     });

@@ -18,13 +18,13 @@ class DeductionOptionController extends Controller
     {
         if($request->ajax()){
             $collection = DeductionOption::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
-            return view('pages.office.master.deduction_option.list', compact('collection'));
+            return view('pages.office.hrm.master.deduction_option.list', compact('collection'));
         }
-        return view('pages.office.master.deduction_option.main');
+        return view('pages.office.hrm.master.deduction_option.main');
     }
     public function create()
     {
-        return view('pages.office.master.deduction_option.input', ['data' => new DeductionOption]);
+        return view('pages.office.hrm.master.deduction_option.input', ['data' => new DeductionOption]);
     }
     public function store(Request $request)
     {
@@ -53,7 +53,7 @@ class DeductionOptionController extends Controller
     }
     public function edit(DeductionOption $deductionOption)
     {
-        return view('pages.office.master.deduction_option.input', ['data' => $deductionOption]);
+        return view('pages.office.hrm.master.deduction_option.input', ['data' => $deductionOption]);
     }
     public function update(Request $request, DeductionOption $deductionOption)
     {

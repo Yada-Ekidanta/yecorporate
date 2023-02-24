@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Office\Master;
+namespace App\Http\Controllers\Office\Hrm\Training;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Trainer;
@@ -13,13 +13,13 @@ class TrainerController extends Controller
     {
         if($request->ajax()){
             $collection = Trainer::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
-            return view('pages.office.master.trainer.list', compact('collection'));
+            return view('pages.office.hrm.training.trainer.list', compact('collection'));
         }
-        return view('pages.office.master.trainer.main');
+        return view('pages.office.hrm.training.trainer.main');
     }
     public function create()
     {
-        return view('pages.office.master.trainer.input', ['data' => new Trainer]);
+        return view('pages.office.hrm.training.trainer.input', ['data' => new Trainer]);
     }
     public function store(Request $request)
     {
@@ -55,7 +55,7 @@ class TrainerController extends Controller
     }
     public function edit(Trainer $trainer)
     {
-        return view('pages.office.master.trainer.input', ['data' => $trainer]);
+        return view('pages.office.hrm.training.trainer.input', ['data' => $trainer]);
     }
     public function update(Request $request, Trainer $trainer)
     {

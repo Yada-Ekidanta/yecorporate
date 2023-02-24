@@ -19,7 +19,7 @@ class PositionController extends Controller
 
     public function createPosition(Department $department)
     {
-        return view('pages.office.master.position.input', [
+        return view('pages.office.hrm.master.position.input', [
             'data' => new Position(),
             'department' => $department,
         ]);
@@ -60,7 +60,7 @@ class PositionController extends Controller
     }
     public function editPosition(Department $department, Position $position )
     {
-        return view('pages.office.master.position.input', [
+        return view('pages.office.hrm.master.position.input', [
             'data' => $position,
             'department' => $department,
         ]);
@@ -97,7 +97,7 @@ class PositionController extends Controller
     public function permission(Position $position)
     {
         $modules = Permission::get();
-        return view('pages.office.master.position.input-permission', [
+        return view('pages.office.hrm.master.position.input-permission', [
             'data' => new RolePermission,
             'position' => $position,
             'modules' => $modules,

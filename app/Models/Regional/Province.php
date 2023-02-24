@@ -10,4 +10,6 @@ class Province extends Model
 {
     use HasFactory,SoftDeletes;
     public $timestamps = false;
+
+    public $table = 'provinces';
 }
