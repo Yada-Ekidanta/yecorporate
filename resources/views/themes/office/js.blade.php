@@ -23,6 +23,7 @@ if ( document.documentElement ) {
 <script src="{{asset('metronic/js/scripts.bundle.js')}}"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Vendors Javascript(used for this page only)-->
+<script src="{{asset('metronic/plugins/custom/formrepeater/formrepeater.bundle.js')}}"></script>
 <!--end::Vendors Javascript-->
 <!--begin::Custom Javascript(used for this page only)-->
 <script src="{{asset('js/swup.min.js')}}"></script>

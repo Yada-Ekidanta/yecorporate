@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Contact Type</li>
+                    <li class="breadcrumb-item text-muted">Contract Type</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -123,7 +123,7 @@
                                         <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
                                     </svg>
                                 </span>
-                                Add Contract
+                                Add Contract Type
                             </a>
                         </div>
                         <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">

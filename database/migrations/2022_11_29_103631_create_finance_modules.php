@@ -91,7 +91,7 @@ return new class extends Migration
             $table->id();
             $table->integer('invoice_id')->default(0);
             $table->integer('client_id')->default(0);
-            $table->float('amount',20,0)->default(0);
+            $table->float('amount', 20, 0)->default(0);
             $table->date('date')->nullable();
             $table->longText('desc')->nullable();
             $table->timestamps();
@@ -100,7 +100,7 @@ return new class extends Migration
             $table->id();
             $table->integer('bill_id')->default(0);
             $table->integer('vendor_id')->default(0);
-            $table->float('amount',20,0)->default(0);
+            $table->float('amount', 20, 0)->default(0);
             $table->date('date')->nullable();
             $table->longText('desc')->nullable();
             $table->timestamps();
@@ -109,7 +109,7 @@ return new class extends Migration
             $table->id();
             $table->integer('category_id')->default(0);
             $table->longText('desc')->nullable();
-            $table->float('amount',20,0)->default(0);
+            $table->float('amount', 20, 0)->default(0);
             $table->date('date')->nullable();
             $table->integer('project_id')->nullable();
             $table->integer('employee_id')->nullable();
@@ -123,7 +123,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('from');
             $table->string('to');
-            $table->float('amount',20,0)->default(0);
+            $table->float('amount', 20, 0)->default(0);
             $table->integer('is_display')->default(0);
             $table->integer('created_by')->default(0);
             $table->timestamps();
@@ -134,9 +134,9 @@ return new class extends Migration
             $table->integer('quotation_id')->default(0);
             $table->integer('invoice_id')->default(0);
             $table->integer('sales_id')->default(0);
-            $table->string('name');
-            $table->string('code');
-            $table->date('date');
+            $table->string('name')->nullable();
+            $table->string('code')->nullable();
+            $table->date('date')->nullable();
             $table->integer('opportunity_id')->default(0);
             $table->integer('st')->default(0);
             $table->integer('client_id')->default(0);
@@ -185,8 +185,8 @@ return new class extends Migration
             $table->integer('journal_id')->default(0);
             $table->integer('åccount_id')->default(0);
             $table->longText('desc');
-            $table->float('debit',20,0)->default(0);
-            $table->float('credit',20,0)->default(0);
+            $table->float('debit', 20, 0)->default(0);
+            $table->float('credit', 20, 0)->default(0);
             $table->timestamps();
         });
         Schema::create('other_payments', function (Blueprint $table) {
@@ -194,7 +194,7 @@ return new class extends Migration
             $table->integer('employee_id')->default(0);
             $table->string('title');
             $table->string('amount');
-            $table->enum('type',['fixed','percentage']);
+            $table->enum('type', ['fixed', 'percentage']);
             $table->timestamps();
         });
         Schema::create('payments', function (Blueprint $table) {
@@ -214,10 +214,10 @@ return new class extends Migration
         Schema::create('proposal_products', function (Blueprint $table) {
             $table->id();
             $table->integer('proposal_id')->default(0);
-            $table->integer('product_id')->default(0);
-            $table->float('qty',20,0)->default(0);
-            $table->float('discount',20,0)->default(0);
-            $table->float('price',20,0)->default(0);
+            $table->string('name')->default(0);
+            $table->float('qty', 20, 0)->default(0);
+            $table->float('discount', 20, 0)->default(0);
+            $table->float('price', 20, 0)->default(0);
             $table->string('tax')->nullable();
             $table->longText('desc')->nullable();
             $table->timestamps();
@@ -324,6 +324,6 @@ return new class extends Migration
      */
     public function down()
     {
-        
+
     }
 };

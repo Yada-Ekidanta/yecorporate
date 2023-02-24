@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Office\Master;
 
-use Illuminate\Http\Request;
-use App\Models\Master\GoalType;
 use App\Http\Controllers\Controller;
+use App\Models\Master\GoalType;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class GoalTypeController extends Controller
@@ -15,23 +15,29 @@ class GoalTypeController extends Controller
     }
     public function index(Request $request)
     {
-        if($request->ajax()){
-            $collection = GoalType::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
-            return view('pages.office.hrm.master.goal_type.list', compact('collection'));
+        if ($request->ajax()) {
+            $collection = GoalType::where('name', 'LIKE', '%' . $request->keyword . '%')->paginate(10);
+            return view('pages.office.master.goal_type.list', compact('collection'));
         }
         return view('pages.office.hrm.master.goal_type.main');
     }
     public function create()
     {
-        return view('pages.office.hrm.master.goal_type.input', ['data' => new GoalType]);
+        $goalType = [
+            'Invoice',
+            'Bill',
+            'Revenue',
+            'Payment',
+        ];
+
+        return view('pages.office.master.goal_type.input', ['goalType' => $goalType, 'data' => new GoalType]);
     }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'alert' => 'error',
                 'message' => $validator->errors()->first(),
@@ -58,8 +64,7 @@ class GoalTypeController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
                 'alert' => 'error',
                 'message' => $validator->errors()->first(),

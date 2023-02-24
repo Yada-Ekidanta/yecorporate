@@ -2,11 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Office\AuthController;
-use App\Http\Controllers\Office\ProfileController;
 use App\Http\Controllers\Office\Crm\LeadsController;
 use App\Http\Controllers\Office\DashboardController;
 use App\Http\Controllers\Office\Crm\ClientController;
-use App\Http\Controllers\Office\Hrm\ContractController;
+use App\Http\Controllers\Office\Hrm\ContractController AS HRMContractController;
 use App\Http\Controllers\Office\Hrm\Others\EventController;
 use App\Http\Controllers\Office\Hrm\Others\AnnouncementController;
 use App\Http\Controllers\Office\Hrm\Others\AwardController;
@@ -15,7 +14,7 @@ use App\Http\Controllers\Office\Hrm\Others\HolidayController;
 use App\Http\Controllers\Office\Hrm\Others\PromotionController;
 use App\Http\Controllers\Office\Hrm\Others\ResignationController;
 use App\Http\Controllers\Office\Hrm\Others\TerminationController;
-use App\Http\Controllers\Office\Hrm\Others\TransferController;
+use App\Http\Controllers\Office\Hrm\Others\TransferController AS HRMTransferController;
 use App\Http\Controllers\Office\Hrm\Others\TravelController;
 use App\Http\Controllers\Office\Hrm\Others\WarningController;
 use App\Http\Controllers\Office\Hrm\Recruitment\JobController;
@@ -23,35 +22,49 @@ use App\Http\Controllers\Office\Hrm\TicketController;
 use App\Http\Controllers\Office\Hrm\Timesheet\AttendanceController;
 use App\Http\Controllers\Office\Hrm\Timesheet\LeaveController;
 use App\Http\Controllers\Office\Hrm\Timesheet\TimesheetController;
-use App\Http\Controllers\Office\Hrm\Training\TrainerController;
+use App\Http\Controllers\Office\Hrm\Training\TrainerController AS HRMTrainerController;
 use App\Http\Controllers\Office\Hrm\Training\TrainingListController;
-use App\Http\Controllers\Office\Master\TaxController;
-use App\Http\Controllers\Office\Master\BankController;
 use App\Http\Controllers\Office\Master\KbliController;
-use App\Http\Controllers\Office\Master\RoleController;
 use App\Http\Controllers\Office\Crm\CampaignController;
-use App\Http\Controllers\Office\Master\AssetController;
-use App\Http\Controllers\Office\Master\ProductController;
 use App\Http\Controllers\Office\CRM\GetRegionalController;
 use App\Http\Controllers\Office\Crm\OpportunityController;
 use App\Http\Controllers\Office\Master\CaseTypeController;
-use App\Http\Controllers\Office\Master\DocumentController;
-use App\Http\Controllers\Office\Master\EmployeeController;
-use App\Http\Controllers\Office\Master\GoalTypeController;
 use App\Http\Controllers\Office\Master\JobStageController;
 use App\Http\Controllers\Office\Master\PositionController;
-use App\Http\Controllers\Office\Master\RegionalController;
-use App\Http\Controllers\Office\Master\AwardTypeController;
-use App\Http\Controllers\Office\Master\TaskStageController;
 use App\Http\Controllers\Office\Crm\ClientContactController;
+use App\Http\Controllers\Office\Finance\Banking\AccountController;
+use App\Http\Controllers\Office\Finance\Banking\TransferController;
+use App\Http\Controllers\Office\Finance\BudgetController;
+use App\Http\Controllers\Office\Finance\ContractController;
+use App\HTtp\Controllers\Office\Finance\De\BalanceController;
+use App\Http\Controllers\Office\Finance\De\ChartOfAccountController;
+use App\Http\Controllers\Office\Finance\De\JournalEntriesController;
+use App\Http\Controllers\Office\Finance\De\LedgerController;
+use App\HTtp\Controllers\Office\Finance\De\TrialController;
+use App\Http\Controllers\Office\Finance\Expense\BillController;
+use App\Http\Controllers\Office\Finance\Expense\DebitNoteController;
+use App\Http\Controllers\Office\Finance\Expense\PaymentController;
+use App\Http\Controllers\Office\Finance\GoalController;
+use App\Http\Controllers\Office\Finance\Income\CreditController;
+use App\Http\Controllers\Office\Finance\Income\InvoiceController;
+use App\Http\Controllers\Office\Finance\Income\RevenueController;
+use App\HTtp\Controllers\Office\Finance\OrderController;
+use App\Http\Controllers\Office\Finance\Presale\ProposalController;
+use App\Http\Controllers\Office\Finance\Presale\RetainersController;
+use App\Http\Controllers\Office\Master\AssetController;
+use App\Http\Controllers\Office\Master\AwardTypeController;
+use App\Http\Controllers\Office\Master\BankController;
 use App\Http\Controllers\Office\Master\ClientTypeController;
 use App\Http\Controllers\Office\Master\CompetencyController;
 use App\Http\Controllers\Office\Master\DepartmentController;
+use App\Http\Controllers\Office\Master\DocumentController;
+use App\Http\Controllers\Office\Master\EmployeeController;
+use App\Http\Controllers\Office\Master\GoalTypeController;
 use App\Http\Controllers\Office\Master\IncomeTypeController;
 use App\Http\Controllers\Office\Master\LeadSourceController;
+use App\Http\Controllers\Office\Master\LeaveTypeController;
 use App\Http\Controllers\Office\Master\LoanOptionController;
 // use App\Http\Controllers\Office\Master\MailConfigController;
-use App\Http\Controllers\Office\Master\TargetListController;
 use App\Http\Controllers\Office\Communication\ChatController;
 use App\Http\Controllers\Office\Crm\CallController;
 use App\Http\Controllers\Office\Crm\ClientContractController;
@@ -61,28 +74,36 @@ use App\Http\Controllers\Office\Crm\CommonCaseController;
 use App\Http\Controllers\Office\Master\ExpenseTypeController;
 use App\Http\Controllers\Office\Master\PaymentTypeController;
 use App\Http\Controllers\Office\Master\PayslipTypeController;
-use App\Http\Controllers\Office\Master\ProductUnitController;
-use App\Http\Controllers\Office\Setting\PermissionController;
 use App\Http\Controllers\Office\Master\CampaignTypeController;
 use App\Http\Controllers\Office\Master\DocumentTypeController;
-use App\Http\Controllers\Office\Master\TrainingTypeController;
 use App\Http\Controllers\Office\Master\DocumentFolderController;
 use App\Http\Controllers\Office\Master\DocumentOptionController;
 use App\Http\Controllers\Office\Master\AllowanceOptionController;
 use App\Http\Controllers\Office\Master\DeductionOptionController;
-use App\Http\Controllers\Office\Master\PerformanceTypeController;
-use App\Http\Controllers\Office\Master\ProductCategoryController;
-use App\Http\Controllers\Office\Master\TerminationTypeController;
 use App\Http\Controllers\Office\Master\OpportunityStageController;
-use App\Http\Controllers\Office\Master\ShippingProviderController;
 use App\Http\Controllers\Office\Setting\CompanyIndustryController;
 use App\Http\Controllers\Office\Master\ClientContractTypeController;
 use App\Http\Controllers\Office\Master\EmployeeContractTypeController;
 use App\Http\Controllers\Office\Crm\ServicesController;
+use App\Http\Controllers\Office\Master\PerformanceTypeController;
+use App\Http\Controllers\Office\Master\ProductCategoryController;
+use App\Http\Controllers\Office\Master\ProductController;
+use App\Http\Controllers\Office\Master\ProductUnitController;
+use App\Http\Controllers\Office\Master\RegionalController;
+use App\Http\Controllers\Office\Master\RoleController;
+use App\Http\Controllers\Office\Master\ShippingProviderController;
+use App\Http\Controllers\Office\Master\TargetListController;
+use App\Http\Controllers\Office\Master\TaskStageController;
+use App\Http\Controllers\Office\Master\TaxController;
+use App\Http\Controllers\Office\Master\TerminationTypeController;
+use App\Http\Controllers\Office\Master\TrainerController;
+use App\Http\Controllers\Office\Master\TrainingTypeController;
+use App\Http\Controllers\Office\ProfileController;
 use App\Http\Controllers\Office\Setting\CompanyBankController;
 use App\Http\Controllers\Office\Setting\CompanyBranchController;
 use App\Http\Controllers\Office\Setting\CompanyController;
 use App\Http\Controllers\Office\Setting\CompanyPolicyController;
+use App\Http\Controllers\Office\Setting\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +129,7 @@ Route::group(['domain' => ''], function () {
             Route::post('do-forgot', [AuthController::class, 'do_forgot'])->name('doforgot');
             Route::post('do-reset', [AuthController::class, 'do_reset'])->name('doreset');
         });
+
         Route::middleware(['auth:employees'])->group(function () {
             Route::resource('chat', ChatController::class);
             Route::prefix('dashboard')->name('dashboard.')->group(function () {
@@ -162,7 +184,7 @@ Route::group(['domain' => ''], function () {
                 Route::resource('employee', EmployeeController::class);
                 Route::prefix('payroll')->name('payroll.')->group(function(){
                     Route::resource('set-salary', AwardController::class);
-                    Route::resource('payslip', TransferController::class);
+                    Route::resource('payslip', HRMTransferController::class);
                 });
                 Route::prefix('timesheet')->name('timesheet.')->group(function(){
                     Route::resource('timesheet', TimesheetController::class);
@@ -173,18 +195,18 @@ Route::group(['domain' => ''], function () {
                 });
                 Route::prefix('performance')->name('performance.')->group(function(){
                     Route::resource('indicator', AwardController::class);
-                    Route::resource('appraisal', TransferController::class);
-                    Route::resource('goal-tracking', TransferController::class);
+                    Route::resource('appraisal', HRMTransferController::class);
+                    Route::resource('goal-tracking', HRMTransferController::class);
                 });
                 Route::prefix('training')->name('training.')->group(function(){
                     Route::resource('training_list', TrainingListController::class);
                 });
                 Route::prefix('recruitment')->name('recruitment.')->group(function(){
                     Route::resource('job-list', JobController::class);
-                    Route::resource('job-application', TransferController::class);
-                    Route::resource('job-candidate', TransferController::class);
-                    Route::resource('job-on-boarding', TransferController::class);
-                    Route::resource('interview-schedule', TransferController::class);
+                    Route::resource('job-application', HRMTransferController::class);
+                    Route::resource('job-candidate', HRMTransferController::class);
+                    Route::resource('job-on-boarding', HRMTransferController::class);
+                    Route::resource('interview-schedule', HRMTransferController::class);
                 });
                 Route::prefix('others')->name('others.')->group(function(){
                     Route::resource('award', AwardController::class);
@@ -198,7 +220,7 @@ Route::group(['domain' => ''], function () {
                     Route::resource('announcement', AnnouncementController::class);
                     Route::resource('holiday', HolidayController::class);
                 });
-                Route::resource('contract', ContractController::class);
+                Route::resource('contract', HRMContractController::class);
                 Route::resource('ticket', TicketController::class);
                 Route::resource('event', EventController::class);
                 Route::resource('meeting', EventController::class);
@@ -317,6 +339,26 @@ Route::group(['domain' => ''], function () {
                 Route::get('get-contact/{client}', [ClientContactController::class, 'filterClientContacts'])->name('client-contact.filter-contact');
             });
             Route::prefix('finance')->name('finance.')->group(function () {
+                Route::resource('proposal', ProposalController::class);
+                Route::resource('retainers', RetainersController::class);
+                Route::resource('account', AccountController::class);
+                Route::resource('transfer', TransferController::class);
+                Route::resource('invoice', InvoiceController::class);
+                Route::resource('credit', CreditController::class);
+                Route::resource('goal', GoalController::class);
+                Route::resource('order', OrderController::class);
+                Route::resource('trial', TrialController::class);
+                Route::resource('journal', JournalEntriesController::class);
+                Route::resource('chart', ChartOfAccountController::class);
+                Route::resource('bill', BillController::class);
+                Route::resource('payment', PaymentController::class);
+                Route::resource('debit', DebitNoteController::class);
+                Route::resource('revenue', RevenueController::class);
+                Route::resource('contract', ContractController::class);
+                Route::resource('budget', BudgetController::class);
+                Route::resource('ledger', LedgerController::class);
+                Route::resource('balance', BalanceController::class);
+
             });
             Route::prefix('project')->name('project.')->group(function () {
             });

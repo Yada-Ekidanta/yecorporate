@@ -574,7 +574,7 @@ return new class extends Migration
             $table->longText('saturation_deduction')->nullable();
             $table->longText('other_payment')->nullable();
             $table->longText('overtime')->nullable();
-            $table->integer('created_by')->nullable();
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
     }
