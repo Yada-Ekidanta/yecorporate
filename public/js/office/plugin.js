@@ -60,7 +60,7 @@ function obj_quill(obj) {
                     header: [1, 2, false]
                 }],
                 ['bold', 'italic', 'underline'],
-                ['image', 'code-block']
+                // ['image', 'code-block']
             ]
         },
         placeholder: 'Type your text here...',
@@ -100,7 +100,13 @@ function obj_date_time(obj) {
         enableTime: true,
     });
 }
-
+function obj_date_timenow(obj) {
+    $("#" + obj).flatpickr({
+        dateFormat: "Y-m-d H:i",
+        enableTime: true,
+        minDate: "today"
+    });
+}
 function obj_date(obj) {
     $("#" + obj).flatpickr({
         dateFormat: "Y-m-d",

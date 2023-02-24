@@ -28,6 +28,25 @@ use App\Http\Controllers\Office\Master\KbliController;
 use App\Http\Controllers\Office\Crm\CampaignController;
 use App\Http\Controllers\Office\CRM\GetRegionalController;
 use App\Http\Controllers\Office\Crm\OpportunityController;
+use App\Http\Controllers\Office\PM\TaskController;
+use App\Http\Controllers\Office\PM\TeamController;
+use App\Http\Controllers\Office\PM\ZoomController;
+use App\Http\Controllers\Office\ProfileController;
+use App\Http\Controllers\Office\DashboardController;
+use App\Http\Controllers\Office\Master\DocumentController;
+use App\Http\Controllers\Office\Master\TaxController;
+use App\Http\Controllers\Office\PM\ProjectController;
+use App\Http\Controllers\Office\PM\TrackerController;
+use App\Http\Controllers\Office\Master\BankController;
+use App\Http\Controllers\Office\Master\KbliController;
+use App\Http\Controllers\Office\Master\RoleController;
+use App\Http\Controllers\Office\PM\CalendarController;
+use App\Http\Controllers\Office\PM\TodoListController;
+use App\Http\Controllers\Office\Master\AssetController;
+use App\Http\Controllers\Office\PM\InvoicePMController;
+use App\Http\Controllers\office\PM\MilestoneController;
+use App\Http\Controllers\Office\Master\ProductController;
+use App\Http\Controllers\Office\Master\TrainerController;
 use App\Http\Controllers\Office\Master\CaseTypeController;
 use App\Http\Controllers\Office\Master\JobStageController;
 use App\Http\Controllers\Office\Master\PositionController;
@@ -71,6 +90,7 @@ use App\Http\Controllers\Office\Crm\ClientContractController;
 use App\Http\Controllers\Office\Crm\ClientDocumentController;
 use App\Http\Controllers\Office\Crm\ClientMeetingController;
 use App\Http\Controllers\Office\Crm\CommonCaseController;
+use App\Http\Controllers\Office\Master\TargetListController;
 use App\Http\Controllers\Office\Master\ExpenseTypeController;
 use App\Http\Controllers\Office\Master\PaymentTypeController;
 use App\Http\Controllers\Office\Master\PayslipTypeController;
@@ -104,6 +124,7 @@ use App\Http\Controllers\Office\Setting\CompanyBranchController;
 use App\Http\Controllers\Office\Setting\CompanyController;
 use App\Http\Controllers\Office\Setting\CompanyPolicyController;
 use App\Http\Controllers\Office\Setting\PermissionController;
+use App\Http\Controllers\Office\PM\TimesheetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -360,7 +381,31 @@ Route::group(['domain' => ''], function () {
                 Route::resource('balance', BalanceController::class);
 
             });
-            Route::prefix('project')->name('project.')->group(function () {
+            Route::prefix('pm')->name('pm.')->group(function(){
+                Route::resource('project', ProjectController::class);
+                Route::resource('milestone', MilestoneController::class);
+                Route::get('milestone/{project}/index',[MilestoneController::class, 'index'])->name('milestone.index');
+                Route::get('milestone/{project}/create',[MilestoneController::class, 'create'])->name('milestone.create');
+                Route::post('milestone/{project}/store',[MilestoneController::class, 'store'])->name('milestone.store');
+                Route::resource('invoice-pm', InvoicePMController::class);
+                Route::resource('tracker', TrackerController::class);
+                // Route::put('tracker/carryOn/{tracker}',[TrackerController::class, 'carry_on'])->name('tracker.carry_on');
+                Route::post('/fetch-task/{id}',[TrackerController::class, 'fetchTask'])->name('tracker.fetchTask');
+                Route::resource('task', TaskController::class);
+                Route::get('task/{project}/index',[TaskController::class, 'index'])->name('task.index');
+                Route::get('task/{project}/create',[TaskController::class, 'create'])->name('task.create');
+                Route::post('task/{project}/store',[TaskController::class, 'store'])->name('task.store');
+                Route::resource('team', TeamController::class);
+                Route::get('team/{project}/index',[TeamController::class, 'index'])->name('team.index');
+                Route::get('team/{project}/create',[TeamController::class, 'create'])->name('team.create');
+                Route::post('team/{project}/store',[TeamController::class, 'store'])->name('team.store');
+                Route::resource('todo-list', TodoListController::class);
+                Route::get('todo-list/{task}/create',[TodoListController::class, 'create'])->name('todo-list.create');
+                Route::post('todo-list/{task}/store',[TodoListController::class, 'store'])->name('todo-list.store');
+                Route::put('todo-list/{todo_list}',[TodoListController::class, 'updateStatus'])->name('todo-list.updateStatus');
+                Route::resource('zoom', ZoomController::class);
+                Route::resource('calender', CalendarController::class);
+                Route::resource('time-sheet', TimesheetController::class);
             });
             Route::prefix('setting')->name('setting.')->group(function () {
             });
@@ -375,7 +420,7 @@ Route::group(['domain' => ''], function () {
                 Route::get('apikey', [ProfileController::class, 'apikey'])->name('apikey');
                 Route::get('log', [ProfileController::class, 'log'])->name('log');
             });
-            Route::post('logout', [AuthController::class, 'do_logout'])->name('auth.logout');
+            Route::get('logout', [AuthController::class, 'do_logout'])->name('auth.logout');
         });
     });
 });

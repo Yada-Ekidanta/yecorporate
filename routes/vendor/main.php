@@ -28,9 +28,9 @@ Route::group(['domain' => 'https://vendor.yadaekidanta.com'], function() {
             Route::post('do-reset',[AuthController::class, 'do_reset'])->name('doreset');
         });
         Route::middleware(['auth:vendors'])->group(function(){
-            // Route::prefix('dashboard')->name('dashboard.')->group(function(){
-            //     Route::get('',[DashboardController::class, 'index'])->name('index');
-            // });
+            Route::prefix('dashboard')->name('dashboard.')->group(function(){
+                // Route::get('',[DashboardController::class, 'index'])->name('index');
+            });
             // Route::prefix('profile')->name('profile.')->group(function(){
             //     Route::get('',[ProfileController::class, 'index'])->name('index');
             //     Route::get('setting',[ProfileController::class, 'setting'])->name('setting');

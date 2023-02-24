@@ -75,7 +75,7 @@ class Employee extends Authenticatable
         $columns    = preg_grep('/(.+ed_at)|(.*id)/', array_keys($profile->makeHidden(['nip','jobdesc','email_verified_at','google_id','paypal','password','remember_token','last_seen','created_at','updated_at','department_id','avatar','position_id'])->toArray()), PREG_GREP_INVERT);
         $per_column = count($columns) > 1 ? 100 / count($columns) : 0;
         $total      = 0;
-    
+
         foreach ($profile->toArray() as $key => $value) {
             if ($value !== NULL && $value !== [] && in_array($key, $columns)) {
                 $total += $per_column;
@@ -84,21 +84,7 @@ class Employee extends Authenticatable
         return round($total);
     }
 
-    public static function employee_name($name)
-    {
-        
-        $employee=Employee::where('id',$name)->first();
-        if(!empty($employee))
-        {
-            return $employee->name;
-        } 
+    public function team() {
+        return $this->hasMany(Team::class, 'employee_id');
     }
-
-    // public static function join()
-    // {
-    //     $data = DB::table('employees')
-    //     ->join('employee_bank_accounts', 'employees.employee_bank_account_id', 'employee_bank_accounts.id')
-    //     ->select('employees.*', 'employee_bank_accounts.id as bank_id',);
-    //     return $data;
-    // }
 }

@@ -190,6 +190,18 @@ document.addEventListener("swup:contentReplaced", () => {
     obj_date('close_date');
     obj_date('publish_date');
     obj_date('expiration_date');
+    obj_startdatenow('start_date');
+    obj_startdatenow('end_date');
+    obj_startdatenow('start_at');
+    obj_startdatenow('end_at');
+    obj_startdatenow('due_date');
+    obj_date_timenow('start_date_time');
+    obj_select('form-select-employee');
+    obj_select('form-select-project');
+    obj_select('form-select-task');
+    obj_select('form-select-status');
+    obj_select('form-select-priority');
+    obj_select('form-select-milestone');
     setTimeout(() => {
         if ($('#desc').length > 0) {
             obj_quill('desc');

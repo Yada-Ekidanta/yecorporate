@@ -68,7 +68,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Engage modals-->
 		<!--end::Engage modals-->
 		<!--begin::Engage toolbar-->
-		<div class="engage-toolbar d-flex position-fixed px-5 fw-bold zindex-2 top-50 end-0 transform-90 mt-5 mt-lg-20 gap-2">
+		<div class="engage-toolbar d-flex position-fixed px-5 fw-bold zindex-2 top-50 end-0 transform-90 mt-5 mt-lg-20 gap-2 d-none">
 			<!--begin::Demos drawer toggle-->
 			<button id="kt_engage_demos_toggle" class="engage-demos-toggle engage-btn btn shadow-sm fs-6 px-4 rounded-top-0 d-none" title="Check out 30 more demos" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-dismiss="click" data-bs-trigger="hover">
 				<span id="kt_engage_demos_label">Demos</span>

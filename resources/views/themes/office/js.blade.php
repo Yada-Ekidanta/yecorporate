@@ -16,6 +16,7 @@ if ( document.documentElement ) {
     }
     document.documentElement.setAttribute("data-theme", themeMode);
 }
+
 </script>
 <script>var hostUrl = "assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
@@ -31,6 +32,4 @@ if ( document.documentElement ) {
 <script src="{{asset('js/office/plugin.js')}}"></script>
 <script src="{{asset('js/office/method.js')}}"></script>
 <script src="{{asset('js/office/main.js')}}"></script>
-<script src="{{asset('metronic/plugins/custom/formrepeater/formrepeater.bundle.js')}}"></script>
-<script src="{{asset('metronic/plugins/custom/jkanban/jkanban.bundle.js')}}"></script>
 <!--end::Custom Javascript-->
