@@ -2,7 +2,7 @@
 
 namespace App\Notifications\CRM\Lead;
 
-use App\Models\CRM\Lead;
+use App\Models\CRM\Leads;
 use App\Models\HRM\Employee;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -13,7 +13,7 @@ class CreateLeadNotification extends Notification
 {
     use Queueable;
     protected $lead,$employee;
-    public function __construct(Lead $lead,Employee $employee)
+    public function __construct(Leads $lead,Employee $employee)
     {
         $this->lead = $lead;
         $this->employee = $employee;
@@ -24,7 +24,7 @@ class CreateLeadNotification extends Notification
     }
     public function toMail($notifiable)
     {
-        // 
+        //
     }
     public function toArray($notifiable)
     {

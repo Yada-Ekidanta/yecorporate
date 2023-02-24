@@ -1,5 +1,12 @@
 <!--begin:Menu item-->
-<div data-kt-menu-trigger="click" class="menu-item menu-accordion" data-no-swup>
+<div data-kt-menu-trigger="click"
+    class="menu-item menu-accordion
+    {{
+        request()->is('office/bank*') ||
+        request()->is('office/kbli*') ||
+        request()->is('office/regional*') ? 'here show' : ''
+     }}"
+    data-no-swup>
     <!--begin:Menu link-->
     <span class="menu-link" data-no-swup>
         <span class="menu-icon">
@@ -18,11 +25,11 @@
     <!--end:Menu link-->
     <!--begin:Menu sub-->
     <div class="menu-sub menu-sub-accordion">
-        
+
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.bank.index')}}">
+            <a class="menu-link {{ request()->is('office/bank*') ? 'active' : '' }}" href="{{route('office.master.bank.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -34,7 +41,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.kbli.index')}}">
+            <a class="menu-link {{ request()->is('office/kbli*') ? 'active' : '' }}" href="{{route('office.master.kbli.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -46,7 +53,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a class="menu-link" href="{{route('office.master.regional.index')}}">
+            <a class="menu-link {{ request()->is('office/regional*') ? 'active' : '' }}" href="{{route('office.master.regional.index')}}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>

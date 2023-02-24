@@ -207,7 +207,7 @@ function obj_select_multiple(obj) {
 }
 
 function obj_select_ajax(obj, title, url) {
-    $('.select2_ajax').select2({
+    $('#' + obj).select2({
         placeholder: title,
         width: '90%',
         language: {
@@ -242,6 +242,20 @@ function obj_select_ajax(obj, title, url) {
                     })
                 };
             }
+        }
+    });
+}
+
+function obj_repeater(obj) {
+    $('#' + obj).repeater({
+        initEmpty: false,
+
+        show: function() {
+            $(this).slideDown();
+        },
+
+        hide: function(deleteElement) {
+            $(this).slideUp(deleteElement);
         }
     });
 }
@@ -431,3 +445,125 @@ function swa_message(type, msg) {
         timer: 2000
     });
 }
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+function get_contact(client_id, contact_id) {
+    $("#" + client_id).change(function() {
+        $.ajax({
+            type: "GET",
+            url: "/office/crm/get-contact/" + $(this).val(),
+            success: function(response) {
+                $("#" + contact_id).html(response);
+                $("#" + contact_id).prepend("<option disabled selected>Select Client Contact</option>");
+            }
+        });
+    });
+}
+
+function get_contact_data(client_id, contact_id, client_id_data, contact_id_data) {
+    $('#' + client_id).val(client_id_data);
+    setTimeout(function() {
+        $('#' + client_id).trigger('change');
+        setTimeout(function() {
+            $('#' + contact_id).val(contact_id_data);
+        }, 1200);
+    }, 500);
+}
+
+function get_province(country_id, province_id) {
+    $("#" + country_id).change(function() {
+        $.ajax({
+            type: "GET",
+            url: "/office/get-province/" + $(this).val(),
+            success: function(response) {
+                $("#" + province_id).html(response);
+                $("#" + province_id).prepend("<option disabled selected>Select Province</option>");
+            }
+        });
+    });
+}
+
+function get_regency(province_id, regency_id) {
+    $("#" + province_id).change(function() {
+        $.ajax({
+            type: "GET",
+            url: "/office/get-regency/" + $(this).val(),
+            success: function(response) {
+                $("#" + regency_id).html(response);
+                $("#" + regency_id).prepend("<option disabled selected>Select Regency</option>");
+            }
+        });
+    });
+}
+
+function get_district(regency_id, district_id) {
+    $("#" + regency_id).change(function() {
+        $.ajax({
+            type: "GET",
+            url: "/office/get-district/" + $(this).val(),
+            success: function(response) {
+                $("#" + district_id).html(response);
+                $("#" + district_id).prepend("<option disabled selected>Select District</option>");
+            }
+        });
+    });
+}
+
+function get_village(district_id, village_id) {
+    $("#" + district_id).change(function() {
+        $.ajax({
+            type: "GET",
+            url: "/office/get-village/" + $(this).val(),
+            success: function(response) {
+                $("#" + village_id).html(response);
+                $("#" + village_id).prepend("<option disabled selected>Select Village</option>");
+            }
+        });
+    });
+}
+
+function get_postcode(village_id, postcode) {
+    $("#" + village_id).change(function() {
+        $.ajax({
+            type: "GET",
+            url: "/office/get-postcode/" + $(this).val(),
+            success: function(response) {
+                $("#" + postcode).val(response);
+            }
+        });
+    });
+}
+
+function get_regional_data
+    (
+    country_id, province_id, regency_id, district_id, village_id,
+    country_id_data, province_id_data, regency_id_data, district_id_data, village_id_data
+    )
+{
+    $('#' + country_id).val(country_id_data);
+    setTimeout(function() {
+        $('#' + country_id).trigger('change');
+        setTimeout(function() {
+            $('#' + province_id).val(province_id_data);
+            $('#' + province_id).trigger('change');
+            setTimeout(function() {
+                $('#' + regency_id).val(regency_id_data);
+                $('#' + regency_id).trigger('change');
+                setTimeout(function() {
+                    $('#' + district_id).val(district_id_data);
+                    $('#' + district_id).trigger('change');
+                    setTimeout(function() {
+                        $('#' + village_id).val(village_id_data );
+                        $('#' + village_id).trigger('change');
+                    }, 1200);
+                }, 1200);
+            }, 1200);
+        }, 1200);
+    }, 500);
+}
+

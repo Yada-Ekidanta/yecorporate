@@ -37,6 +37,7 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->integer('employee_id')->default(0)->comment('assigned employee');
+            $table->string('name');
             $table->integer('st')->default(0)->comment('0 = Planning, 1 = Active, 2 = Inactive, 3 = Complete');
             $table->integer('campaign_type_id')->comment('select campaign type');
             $table->string('budget')->comment('angka saja, tidak pakai koma atau titik');
@@ -90,6 +91,7 @@ return new class extends Migration
             $table->id();
             $table->integer('employee_id')->default(0)->comment('assigned employee');
             $table->integer('client_id')->default(0)->comment('didapat dari id client saat create');
+            $table->string('title')->nullable();
             $table->string('name')->nullable();
             $table->string('phone',15)->nullable();
             $table->string('email')->nullable();
@@ -111,7 +113,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('subject');
             $table->string('value');
-            $table->integer('contract_type_id')->default(0);
+            $table->integer('client_contract_type_id')->default(0);
             $table->date('start_at')->comment('tanggal tidak boleh kurang dari tanggal sekarang');
             $table->date('end_at')->comment('tanggal harus lebih atau sama dengan start at');
             $table->longText('desc')->nullable();
@@ -206,7 +208,7 @@ return new class extends Migration
             $table->integer('opportunity_id')->default(0)->comment('select option dari opportunity');
             $table->date('publish_date')->comment('tanggal tidak boleh kurang dari tanggal sekarang');
             $table->date('expiration_date')->comment('tanggal harus lebih atau sama dengan publish date');
-            $table->integer('st')->default(0)->comment('0 = Active, 1 = Draft, 32 = Expired, 3 = Canceled');
+            $table->integer('st')->default(0)->comment('0 = Active, 1 = Draft, 2 = Expired, 3 = Canceled');
             $table->longText('desc')->nullable();
             $table->string('attachment')->nullable();
             $table->timestamps();
@@ -215,17 +217,11 @@ return new class extends Migration
             $table->id();
             $table->integer('employee_id')->default(0)->comment('assigned employee');
             $table->integer('client_id')->default(0)->comment('didapat dari id client saat create');
+            $table->integer('client_contact_id')->default(0)->comment('didapat dari id client saat create');
+            $table->integer('campaign_id')->default(0)->comment('didapat dari id campaign saat create');
             $table->string('title')->nullable();
-            $table->string('name')->nullable();
-            $table->string('phone',15)->nullable();
-            $table->string('email')->nullable();
-            $table->string('address')->nullable();
-            $table->integer('country_id')->default(0)->comment('select country');
-            $table->integer('province_id')->default(0)->comment('select province by country yg di pilih');
-            $table->integer('regency_id')->default(0)->comment('select regency by province yg di pilih');
-            $table->bigInteger('district_id')->default(0)->comment('select district by regency yg di pilih');
-            $table->bigInteger('village_id')->default(0)->comment('select village by district yg di pilih');
-            $table->string('postcode',5)->nullable()->comment('postcode bisa di isi manual atau didapat dari village yg di pilih');
+            $table->string('opportunity_amount')->default(0);
+            $table->integer('st')->default(0)->comment('0 = New, 1 = Assigned, 2 = In Process, 3 = Converted, 4 = Recycled, 5 = Dead');
             $table->longText('description')->nullable();
             $table->integer('created_by')->default(0);
             $table->timestamps();

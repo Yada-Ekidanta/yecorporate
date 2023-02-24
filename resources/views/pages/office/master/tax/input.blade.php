@@ -1,4 +1,4 @@
-<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Taxes">
+<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Tax">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Taxes</li>
+                    <li class="breadcrumb-item text-muted">Tax</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -64,7 +64,7 @@
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} tax</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Tax</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
@@ -85,14 +85,8 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Tax" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="rates" name="rates" placeholder="102" value="{{$data->rates}}"/>
-                                    <label for="name">Rates</label>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +96,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this tax ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.tax.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this Tax ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.tax.destroy',$data->id)}}','{{route('office.master.tax.index')}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

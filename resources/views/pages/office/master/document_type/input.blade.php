@@ -85,29 +85,8 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$data->name}}"/>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Document Type" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
-                                </div>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <div class="form-floating">
-                                    <select name="employee_id" placeholder="Name" class="form-select"
-                                    readonly>
-                                    @if($data->id == null)
-                                    @foreach ($employees as $employee)
-                                        <option value="{{ $employee->id }}">
-                                            {{ $employee->name }}
-                                        </option>
-                                    @endforeach
-                                    @else
-                                    @foreach ($employees as $employee)
-                                        <option value="{{ $employee->id }}" {{ $employee->id == $data->employee_id ? 'selected' : '' }}>
-                                            {{ $employee->name }}
-                                        </option>
-                                    @endforeach
-                                    @endif
-                                    </select>
-                                    <label for="employee_id">Employee Id</label>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +96,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.document-type.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this Document Type ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.document-type.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif
