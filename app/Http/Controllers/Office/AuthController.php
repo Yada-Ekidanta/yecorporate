@@ -185,8 +185,8 @@ class AuthController extends Controller
     }
     public function do_logout()
     {
-        $employee = Auth::guard('employees')->user();
-        Auth::logout($employee);
+        // $employee = Auth::guard('employees')->user();
+        Auth::logout();
         return redirect()->route('office.auth.index');
     }
 }

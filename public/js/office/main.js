@@ -31,33 +31,52 @@ const options = {
     linkSelector: '.menu-link:not([data-no-swup]), .menu-item:not([data-no-swup]), .nav-link:not([data-no-swup])',
     animationSelector: '[class="app-toolbar"]',
 };
+
 const swup = new Swup(options);
 // document.addEventListener("swup:contentReplaced",init);
 document.addEventListener("swup:contentReplaced", () => {
+    get_province('country_id', 'province_id');
+    get_regency('province_id', 'regency_id');
+    get_district('regency_id', 'district_id');
+    get_village('district_id', 'village_id');
+    get_postcode('village_id', 'postcode');
+    if ($('#data').length > 0 ) {
+        var getData = $('#data').val();
+        var data =  JSON.parse(getData);
+        if (data.id != null) {
+            get_regional_data('country_id', 'province_id', 'regency_id', 'district_id', 'village_id', data.country_id, data.province_id, data.regency_id, data.district_id, data.village_id);
+        }
+    }
     load_list(1);
     obj_autosize();
+    obj_select('district_id');
+    obj_select('province_id');
+    obj_select('regency_id');
+    obj_select('village_id');
+    obj_select('country_id');
     obj_select('employee_id');
     obj_select('leave_type_id');
     obj_select('department_id');
+    obj_select('bank_id');
+    obj_select('priority');
     obj_select('company_branch_id');
     obj_select('position_id');
-    obj_select('award_type');
+    obj_select('award_type_id');
     obj_select('termination_type');
-    obj_date('date');
-    obj_date('resignation_date');
-    obj_date('start_at');
-    obj_date('start_date');
-    obj_date('end_date');
-    obj_date('promotion_date');
-    obj_date('complaint_date');
-    obj_date('end_at');
-    obj_date('termination_date');
-    obj_date('notice_date');
-    obj_date('transfer_date');
-    obj_quill('desc');
-    obj_quill('leave_reason');
-    obj_quill('remark');
-    obj_quill('description');
+    obj_startdatenow('purchase_at');
+    obj_startdatenow('supported_at');
+    obj_startdatenow('date');
+    obj_date('date_birth');
+    obj_startdatenow('resignation_date');
+    obj_startdatenow('start_at');
+    obj_startdatenow('start_date');
+    obj_startdatenow('end_date');
+    obj_startdatenow('promotion_date');
+    obj_startdatenow('complaint_date');
+    obj_startdatenow('end_at');
+    obj_startdatenow('termination_date');
+    obj_startdatenow('notice_date');
+    obj_startdatenow('transfer_date');
     obj_time();
     obj_date_time();
     obj_date();
@@ -67,7 +86,29 @@ document.addEventListener("swup:contentReplaced", () => {
     obj_startdatenow('purchase_at');
     obj_startdatenow('supported_at');
     setTimeout(() => {
-        obj_quill('desc');
+        if ($('#desc').length > 0) {
+            obj_quill('desc');
+        }
+    }, 1000);
+    setTimeout(() => {
+        if ($('#leave_reason').length > 0) {
+            obj_quill('leave_reason');
+        }
+    }, 1000);
+    setTimeout(() => {
+        if ($('#remark').length > 0) {
+            obj_quill('remark');
+        }
+    }, 1000);
+    setTimeout(() => {
+        if ($('#description').length > 0) {
+            obj_quill('description');
+        }
+    }, 1000);
+    setTimeout(() => {
+        if ($('#address').length > 0) {
+            obj_quill('address');
+        }
     }, 1000);
     $('.ribuan').keyup(function (event) {
         if (event.which >= 37 && event.which <= 40) return;
@@ -103,5 +144,33 @@ document.addEventListener("swup:contentReplaced", () => {
     Inputmask({
         "mask": "99.999.999.9-999.999"
     }).mask(".npwp_format");
-    
+
+    $('.menu-item a').each(function() {
+        let menuLink = $(this).attr('href');
+        let currentUrl = window.location.href;
+        let regex = new RegExp(menuLink);
+        let menuLink2 = $(this).attr('href') + '/.*';
+        let regex2 = new RegExp(menuLink2);
+
+        if (regex.test(currentUrl) || regex2.test(currentUrl)) {
+          $(this).addClass('active');
+        } else {
+          $(this).removeClass('active');
+        }
+    });
+
+    $('.menu-link a').each(function() {
+        let menuLink = $(this).attr('href');
+        let currentUrl = window.location.href;
+        let regex = new RegExp(menuLink);
+        let menuLink2 = $(this).attr('href') + '/.*';
+        let regex2 = new RegExp(menuLink2);
+
+        if (regex.test(currentUrl) || regex2.test(currentUrl)) {
+          $(this).addClass('active');
+        } else {
+          $(this).removeClass('active');
+        }
+    });
+
 });

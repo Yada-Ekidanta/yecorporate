@@ -137,7 +137,7 @@
     @section('custom_js')
     <script>
         obj_select('employee_id');
-        obj_date('promotion_date');
+        obj_startdatenow('promotion_date');
         obj_quill('description');
     </script>
     @endsection

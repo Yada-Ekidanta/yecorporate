@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Office\AuthController;
 use App\Http\Controllers\Office\ProfileController;
 use App\Http\Controllers\Office\DashboardController;
+use App\Http\Controllers\Office\Hrm\ContractController;
 use App\Http\Controllers\Office\Hrm\DocumentController;
 use App\Http\Controllers\Office\Hrm\EmployeeController;
+use App\Http\Controllers\Office\Hrm\GetRegionalController;
 use App\Http\Controllers\Office\Hrm\Others\EventController;
 use App\Http\Controllers\Office\Hrm\Others\AnnouncementController;
 use App\Http\Controllers\Office\Hrm\Others\AwardController;
@@ -17,16 +19,19 @@ use App\Http\Controllers\Office\Hrm\Others\TerminationController;
 use App\Http\Controllers\Office\Hrm\Others\TransferController;
 use App\Http\Controllers\Office\Hrm\Others\TravelController;
 use App\Http\Controllers\Office\Hrm\Others\WarningController;
+use App\Http\Controllers\Office\Hrm\Recruitment\JobController;
+use App\Http\Controllers\Office\Hrm\TicketController;
 use App\Http\Controllers\Office\Hrm\Timesheet\AttendanceController;
 use App\Http\Controllers\Office\Hrm\Timesheet\LeaveController;
 use App\Http\Controllers\Office\Hrm\Timesheet\TimesheetController;
+use App\Http\Controllers\Office\Hrm\Training\TrainerController;
+use App\Http\Controllers\Office\Hrm\Training\TrainingListController;
 use App\Http\Controllers\Office\Master\TaxController;
 use App\Http\Controllers\Office\Master\BankController;
 use App\Http\Controllers\Office\Master\KbliController;
 use App\Http\Controllers\Office\Master\RoleController;
 use App\Http\Controllers\Office\Master\AssetController;
 use App\Http\Controllers\Office\Master\ProductController;
-use App\Http\Controllers\Office\Master\TrainerController;
 use App\Http\Controllers\Office\Master\CaseTypeController;
 use App\Http\Controllers\Office\Master\GoalTypeController;
 use App\Http\Controllers\Office\Master\JobStageController;
@@ -41,7 +46,7 @@ use App\Http\Controllers\Office\Master\DepartmentController;
 use App\Http\Controllers\Office\Master\IncomeTypeController;
 use App\Http\Controllers\Office\Master\LeadSourceController;
 use App\Http\Controllers\Office\Master\LoanOptionController;
-use App\Http\Controllers\Office\Master\MailConfigController;
+// use App\Http\Controllers\Office\Master\MailConfigController;
 use App\Http\Controllers\Office\Master\TargetListController;
 use App\Http\Controllers\Office\Master\ExpenseTypeController;
 use App\Http\Controllers\Office\Master\PaymentTypeController;
@@ -80,7 +85,6 @@ use App\Http\Controllers\Office\Setting\CompanyPolicyController;
 
 Route::group(['domain' => ''], function() {
     Route::prefix('office')->name('office.')->group(function(){
-
         Route::redirect('/','/auth');
         Route::prefix('auth')->name('auth.')->group(function(){
             Route::get('',[AuthController::class, 'index'])->name('index');
@@ -132,6 +136,7 @@ Route::group(['domain' => ''], function() {
                     Route::resource('payment-type', PaymentTypeController::class);
                     Route::resource('employee-contract-type', EmployeeContractTypeController::class);
                 });
+                Route::get('employee/{employee}/{bank}/edit',[EmployeeController::class, 'editEmployee'])->name('employee.edit-employee');
                 Route::resource('employee', EmployeeController::class);
                 Route::prefix('payroll')->name('payroll.')->group(function(){
                     Route::resource('set-salary', AwardController::class);
@@ -150,12 +155,10 @@ Route::group(['domain' => ''], function() {
                     Route::resource('goal-tracking', TransferController::class);
                 });
                 Route::prefix('training')->name('training.')->group(function(){
-                    Route::resource('indicator', AwardController::class);
-                    Route::resource('appraisal', TransferController::class);
-                    Route::resource('goal-tracking', TransferController::class);
+                    Route::resource('training_list', TrainingListController::class);
                 });
-                Route::prefix('reqruitment')->name('reqruitment.')->group(function(){
-                    Route::resource('job-list', AwardController::class);
+                Route::prefix('recruitment')->name('recruitment.')->group(function(){
+                    Route::resource('job-list', JobController::class);
                     Route::resource('job-application', TransferController::class);
                     Route::resource('job-candidate', TransferController::class);
                     Route::resource('job-on-boarding', TransferController::class);
@@ -173,8 +176,8 @@ Route::group(['domain' => ''], function() {
                     Route::resource('announcement', AnnouncementController::class);
                     Route::resource('holiday', HolidayController::class);
                 });
-                Route::resource('contract', EventController::class);
-                Route::resource('ticket', EventController::class);
+                Route::resource('contract', ContractController::class);
+                Route::resource('ticket', TicketController::class);
                 Route::resource('event', EventController::class);
                 Route::resource('meeting', EventController::class);
                 Route::resource('online-meeting', EventController::class);
@@ -182,6 +185,12 @@ Route::group(['domain' => ''], function() {
                 Route::get('document-attachment/{id}', [DocumentController::class, 'downloadAttachment'])->name('document.attachment');
             });
             Route::name('master.')->group(function(){
+                Route::get('get-province/{country}',[GetRegionalController::class, 'get_province'])->name('get_province');
+                Route::get('get-regency/{province}',[GetRegionalController::class, 'get_regency']);
+                Route::get('get-district/{regency}',[GetRegionalController::class, 'get_district']);
+                Route::get('get-village/{district}',[GetRegionalController::class, 'get_village']);
+                Route::get('get-postcode/{village}',[GetRegionalController::class, 'get_postcode']);
+
                 Route::get('regional/{regional}/create',[RegionalController::class, 'create_province'])->name('regional.create_province');
                 Route::post('regional/store-province',[RegionalController::class, 'store_province'])->name('regional.store_province');
                 Route::get('regional/{regional}/{province}/edit-province',[RegionalController::class, 'edit_province'])->name('regional.edit_province');
@@ -225,7 +234,7 @@ Route::group(['domain' => ''], function() {
                 Route::delete('kbli/{kbli}/destroy-sub',[KbliController::class, 'destroy_sub'])->name('kbli.destroy_sub');
                 Route::resource('kbli', KbliController::class);
                 Route::resource('lead-source', LeadSourceController::class);
-                Route::resource('mail-config', MailConfigController::class);
+                // Route::resource('mail-config', MailConfigController::class);
                 Route::resource('opportunity-stage', OpportunityStageController::class);
                 Route::post('role/save',[RoleController::class, 'store'])->name('role.store');
                 Route::resource('product-category', ProductCategoryController::class);
@@ -236,7 +245,7 @@ Route::group(['domain' => ''], function() {
                 Route::resource('task-stage', TaskStageController::class);
                 Route::resource('tax', TaxController::class);
                 Route::resource('trainer', TrainerController::class);
-                Route::resource('vendor', VendorController::class);
+                // Route::resource('vendor', VendorController::class);
             });
             Route::prefix('crm')->name('crm.')->group(function(){
             });
@@ -257,7 +266,7 @@ Route::group(['domain' => ''], function() {
                 Route::get('apikey',[ProfileController::class, 'apikey'])->name('apikey');
                 Route::get('log',[ProfileController::class, 'log'])->name('log');
             });
-            Route::get('logout',[AuthController::class, 'do_logout'])->name('auth.logout');
+            Route::post('logout', [AuthController::class, 'do_logout'])->name('auth.logout');
         });
     });
 });

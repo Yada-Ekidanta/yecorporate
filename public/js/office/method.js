@@ -218,3 +218,51 @@ function handle_success(response){
 function handle_error(result){
     toastify_message(result.responseJSON.message);
 }
+function handle_confirm_custom(title, confirm_title, deny_title, method, route, redirect){
+    Swal.fire({
+        showClass: {
+            popup: 'animate__animated animate__fadeInDownBig'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__hinge'
+        },
+        position: 'top-end',
+        title: title,
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: confirm_title,
+        denyButtonText: deny_title,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            loading();
+            $.ajax({
+                type: method,
+                url: route,
+                dataType: 'json',
+                success: function(response) {
+                    if(response.alert == "success"){
+                        handle_success(response);
+                    }else{
+                        toastify_message(response.message);
+                    }
+                    setTimeout(() => {
+                        // window.history.pushState(null, null, $(form).data('redirect-url'));
+                        // swup.preloadPage($(form).data('redirect-url'));
+                        swup.loadPage({
+                            url: redirect, // route of request (defaults to current url)
+                            // method: 'GET', // method of request (defaults to "GET")
+                            // data: data, // data passed into XMLHttpRequest send method
+                            // customTransition: '' // name of your transition used for adding custom class to html element and choosing custom animation in swupjs (as setting data-swup-transition attribute on link)
+                        });
+                    }, 1000);
+                },
+                error: function(xhr) {
+                    handle_error(xhr);
+                },
+            });
+        } else if (result.isDenied) {
+            toastify_message("You cancel this confirmation");
+            // custom_message(response.alert,response.message);
+        }
+    });
+}

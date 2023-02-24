@@ -159,8 +159,8 @@
         obj_select('leave_type_id');
         obj_quill('remark');
         obj_quill('leave_reason');
-        obj_date('start_at');
-        obj_date('end_at');
+        obj_startdatenow('start_at');
+        obj_startdatenow('end_at');
     </script>
     @endsection
 </x-office-layout>

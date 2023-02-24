@@ -192,8 +192,8 @@
     </div>
     @section('custom_js')
     <script>
-        obj_date('start_date');
-        obj_date('end_date');
+        obj_startdatenow('start_date');
+        obj_startdatenow('end_date');
         obj_quill('desc');
     </script>
     @endsection

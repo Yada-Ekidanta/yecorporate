@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Office\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Models\Regional\Country;
 use App\Models\Setting\Company;
 use App\Models\Setting\CompanyBank;
 use Illuminate\Http\Request;
@@ -30,9 +31,11 @@ class CompanyBranchController extends Controller
     public function create()
     {
         $company = Company::all();
+        $country = Country::select('name', 'id')->get();
         return view('pages.office.setting.company_branch.input', [
             'data' => new CompanyBranch(),
             'company' => $company,
+            'country' => $country,
         ]);
     }
 

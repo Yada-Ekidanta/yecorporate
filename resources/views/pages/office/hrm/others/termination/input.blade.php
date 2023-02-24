@@ -150,8 +150,8 @@
     <script>
         obj_select('employee_id');
         obj_select('termination_type');
-        obj_date('notice_date');
-        obj_date('termination_date');
+        obj_startdatenow('notice_date');
+        obj_startdatenow('termination_date');
         obj_quill('description');
     </script>
     @endsection

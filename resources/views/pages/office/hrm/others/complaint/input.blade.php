@@ -64,7 +64,7 @@
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Award</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Complaint</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
@@ -149,7 +149,7 @@
     @section('custom_js')
     <script>
         obj_select('employee_id');
-        obj_date('complaint_date');
+        obj_startdatenow('complaint_date');
         obj_quill('description');
     </script>
     @endsection

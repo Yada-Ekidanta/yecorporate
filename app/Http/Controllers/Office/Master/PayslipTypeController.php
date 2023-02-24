@@ -18,13 +18,13 @@ class PayslipTypeController extends Controller
     {
         if($request->ajax()){
             $collection = PayslipType::where('name','LIKE','%'.$request->keyword.'%')->paginate();;
-            return view('pages.office.master.payslip_type.list', compact('collection'));
+            return view('pages.office.hrm.master.payslip_type.list', compact('collection'));
         }
-        return view('pages.office.master.payslip_type.main');
+        return view('pages.office.hrm.master.payslip_type.main');
     }
     public function create()
     {
-        return view('pages.office.master.payslip_type.input', ['data' => new PayslipType]);
+        return view('pages.office.hrm.master.payslip_type.input', ['data' => new PayslipType]);
     }
     public function store(Request $request)
     {
@@ -54,7 +54,7 @@ class PayslipTypeController extends Controller
     public function edit($id)
     {
         $payslip = PayslipType::findOrFail($id);
-        return view('pages.office.master.payslip_type.input', ['data' => $payslip]);
+        return view('pages.office.hrm.master.payslip_type.input', ['data' => $payslip]);
     }
     public function update(Request $request, $id)
     {

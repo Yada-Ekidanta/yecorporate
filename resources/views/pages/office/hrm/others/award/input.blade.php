@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="award_type" data-placeholder="Select a employee.." id="award_type" class="form-select form-select-solid form-select-lg">
+                                    <select name="award_type_id" data-placeholder="Select a award.." id="award_type_id" class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
                                         @foreach ($award_type as $item)
                                             <option value="{{ $item->id }}" {{ $item->id == $data->employee_id ? 'selected' : '' }}>
@@ -124,10 +124,10 @@
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
-                                <label for="desc">Description</label>
+                                <label for="description">Description</label>
                                 <div class="form-floating">
-                                    <div id="desc">{!!$data->desc!!}</div>
-                                    <textarea class="form-control d-none" name="desc">{{$data->desc}}</textarea>
+                                    <div id="description">{!!$data->desc!!}</div>
+                                    <textarea class="form-control d-none" name="description">{{$data->desc}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -149,9 +149,9 @@
     @section('custom_js')
     <script>
         obj_select('employee_id');
-        obj_select('award_type');
-        obj_date('date');
-        obj_quill('desc');
+        obj_select('award_type_id');
+        obj_startdatenow('date');
+        obj_quill('description');
     </script>
     @endsection
 </x-office-layout>

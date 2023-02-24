@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-light-primary btn-sm btn-hover-scale me-3 d-none" data-bs-toggle="modal" data-bs-target="#kt_modal_export_users">
+                            <button type="button" class="btn btn-primary btn-sm btn-hover-scale me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_export_users">
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect opacity="0.3" x="12.75" y="4.25" width="12" height="2" rx="1" transform="rotate(90 12.75 4.25)" fill="currentColor" />
@@ -124,7 +124,17 @@
                                 </span>
                                 Export
                             </button>
-                            <a href="{{route('office.hrm.others.timesheet.create')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                            <button type="button" class="btn btn-primary btn-sm btn-hover-scale me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_export_users">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect opacity="0.3" x="12.75" y="4.25" width="12" height="2" rx="1" transform="rotate(90 12.75 4.25)" fill="currentColor" />
+                                        <path d="M12.0573 6.11875L13.5203 7.87435C13.9121 8.34457 14.6232 8.37683 15.056 7.94401C15.4457 7.5543 15.4641 6.92836 15.0979 6.51643L12.4974 3.59084C12.0996 3.14332 11.4004 3.14332 11.0026 3.59084L8.40206 6.51643C8.0359 6.92836 8.0543 7.5543 8.44401 7.94401C8.87683 8.37683 9.58785 8.34458 9.9797 7.87435L11.4427 6.11875C11.6026 5.92684 11.8974 5.92684 12.0573 6.11875Z" fill="currentColor" />
+                                        <path opacity="0.3" d="M18.75 8.25H17.75C17.1977 8.25 16.75 8.69772 16.75 9.25C16.75 9.80228 17.1977 10.25 17.75 10.25C18.3023 10.25 18.75 10.6977 18.75 11.25V18.25C18.75 18.8023 18.3023 19.25 17.75 19.25H5.75C5.19772 19.25 4.75 18.8023 4.75 18.25V11.25C4.75 10.6977 5.19771 10.25 5.75 10.25C6.30229 10.25 6.75 9.80228 6.75 9.25C6.75 8.69772 6.30229 8.25 5.75 8.25H4.75C3.64543 8.25 2.75 9.14543 2.75 10.25V19.25C2.75 20.3546 3.64543 21.25 4.75 21.25H18.75C19.8546 21.25 20.75 20.3546 20.75 19.25V10.25C20.75 9.14543 19.8546 8.25 18.75 8.25Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                Import
+                            </button>
+                            <a href="{{route('office.hrm.timesheet.timesheet.create')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
@@ -191,6 +201,52 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-header mt-3 border-0">
+                
+                    <div class="card-toolbar">
+                        <div class="col-3 mb-3 me-3">
+                            <div class="form-floating">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control form-control-solid" id="start_date" name="start_date" placeholder="Indonesia" value=""/>
+                                    <label for="start_date">Start Date</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3 me-3">
+                            <div class="form-floating">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control form-control-solid" id="end_date" name="end_date" placeholder="Indonesia" value=""/>
+                                    <label for="end_date">End Date</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3 me-3">
+                            <div class="form-floating">
+                                <select name="select_employee" id="select_employee" aria-label="Select a employee" data-control="select2" data-placeholder="Employee.." class="form-select form-select-solid form-select-lg">
+                                    <option value=""></option>
+                                    <option value="All">All</option>
+                                </select>
+                            </div>
+                        </div>
+                        <a href="" class="btn btn-sm btn-hover-scale btn-icon btn-active-color-info w-30px h-30px me-3" >
+                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        </a>
+                        <a href="" class="btn btn-sm btn-hover-scale btn-icon btn-active-color-danger w-30px h-30px" >
+                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"/>
+                                <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="currentColor"/>
+                                <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="currentColor"/>
+                            </svg>
+                        </span>
+                        </a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <div id="list_result"></div>
@@ -201,6 +257,9 @@
     </div>
     @section('custom_js')
         <script>
+            obj_date('start_date');
+            obj_date('end_date');
+            obj_select('select_employee');
             load_list(1);
         </script>
     @endsection

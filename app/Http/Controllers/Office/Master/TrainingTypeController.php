@@ -18,13 +18,13 @@ class TrainingTypeController extends Controller
     {
         if($request->ajax()){
             $collection = TrainingType::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
-            return view('pages.office.master.training_type.list', compact('collection'));
+            return view('pages.office.hrm.master.training_type.list', compact('collection'));
         }
-        return view('pages.office.master.training_type.main');
+        return view('pages.office.hrm.master.training_type.main');
     }
     public function create()
     {
-        return view('pages.office.master.training_type.input', ['data' => new TrainingType]);
+        return view('pages.office.hrm.master.training_type.input', ['data' => new TrainingType]);
     }
     public function store(Request $request)
     {
@@ -53,7 +53,7 @@ class TrainingTypeController extends Controller
     }
     public function edit(TrainingType $trainingType)
     {
-        return view('pages.office.master.training_type.input', ['data' => $trainingType]);
+        return view('pages.office.hrm.master.training_type.input', ['data' => $trainingType]);
     }
     public function update(Request $request, TrainingType $trainingType)
     {

@@ -174,7 +174,7 @@
         obj_select('company_branch_id');
         obj_select('department_id');
         obj_select('position_id');
-        obj_date('transfer_date');
+        obj_startdatenow('transfer_date');
         obj_quill('desc');
     </script>
     @endsection

@@ -19,14 +19,14 @@ class DocumentTypeController extends Controller
     {
         if($request->ajax()){
             $collection = DocumentType::where('name','LIKE','%'.$request->keyword.'%')->paginate(10);;
-            return view('pages.office.master.document_type.list', compact('collection'));
+            return view('pages.office.hrm.master.document_type.list', compact('collection'));
         }
-        return view('pages.office.master.document_type.main');
+        return view('pages.office.hrm.master.document_type.main');
     }
     public function create()
     {
         $employees = Employee::all();
-        return view('pages.office.master.document_type.input', [
+        return view('pages.office.hrm.master.document_type.input', [
             'data' => new DocumentType,
             'employees' => $employees,
         ]);
@@ -62,7 +62,7 @@ class DocumentTypeController extends Controller
     public function edit(DocumentType $documentType)
     {
         $employees = Employee::all();
-        return view('pages.office.master.document_type.input', [
+        return view('pages.office.hrm.master.document_type.input', [
             'data' => $documentType,
             'employees' => $employees,
         ]);

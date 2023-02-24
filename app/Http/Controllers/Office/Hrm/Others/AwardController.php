@@ -37,7 +37,7 @@ class AwardController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'employee_id' => 'required',
-            'award_type' => 'required',
+            'award_type_id' => 'required',
             'date' => 'required',
             'gift' => 'required',
             'description' => 'required',
@@ -50,7 +50,7 @@ class AwardController extends Controller
         }
         $award = new Award;
         $award->employee_id = $request->employee_id;
-        $award->award_type = $request->award_type;
+        $award->award_type_id = $request->award_type_id;
         $award->date = $request->date;
         $award->gift = $request->gift;
         $award->description = $request->description;

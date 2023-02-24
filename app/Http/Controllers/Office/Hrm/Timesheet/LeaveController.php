@@ -18,9 +18,9 @@ class LeaveController extends Controller
     {
         if($request->ajax()){
             $collection = Leave::paginate(10);;
-            return view('pages.office.hrm.timesheet.timesheet.list', compact('collection'));
+            return view('pages.office.hrm.timesheet.manage-leave.list', compact('collection'));
         }
-        return view('pages.office.hrm.timesheet.timesheet.main');
+        return view('pages.office.hrm.timesheet.manage-leave.main');
     }
 
     public function create()

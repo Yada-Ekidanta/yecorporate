@@ -1,4 +1,4 @@
-<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Termination">
+<x-office-layout title="{{$data->id ? 'Update' : 'Create'}} Timesheet">
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
         <!--begin::Toolbar container-->
@@ -37,7 +37,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Termination</li>
+                    <li class="breadcrumb-item text-muted">Timesheet</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -68,16 +68,16 @@
     <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
-                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.hrm.others.termination.index')}}" action="{{$data->id ? route('office.hrm.others.termination.update',$data->id) : route('office.hrm.others.termination.store')}}">
+                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.hrm.timesheet.timesheet.index')}}" action="{{$data->id ? route('office.hrm.timesheet.timesheet.update',$data->id) : route('office.hrm.timesheet.timesheet.store')}}">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
-                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Termination</h1>
+                                <h1>Form {{$data->id ? 'Update' : 'Create'}} Timesheet</h1>
                             </div>
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a id="back_form_button" href="{{route('office.hrm.others.termination.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a id="back_form_button" href="{{route('office.hrm.timesheet.timesheet.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
@@ -91,50 +91,21 @@
                     </div>
                     <div class="card-body transition-fade">
                         <div class="form-group row">
-                            <div class="col-6 mb-3">
+                            <div class="col-12 mb-3">
                                 <div class="form-floating">
                                     <select name="employee_id" aria-label="Select a Employee" data-control="select2" data-placeholder="Select a Employee.." class="form-select form-select-solid form-select-lg">
-                                        <option value=""></option>
-                                        @if($data->id == null)
-                                        @foreach ($employee as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                        @endforeach
-                                        @else
                                         @foreach ($employee as $item)
                                             <option value="{{ $item->id }}" {{ $item->id == $data->employee_id ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <div class="form-floating">
-                                    <select name="termination_type" aria-label="Select a termination type" data-control="select2" data-placeholder="Select a termination type.." class="form-select form-select-solid form-select-lg">
-                                        <option value=""></option>
-                                        @if($data->id == null)
-                                        @foreach ($termination_type as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                        @endforeach
-                                        @else
-                                        @foreach ($termination_type as $item)
-                                            <option value="{{ $item->id }}" {{ $item->id == $data->termination_type ? 'selected' : '' }}>
-                                                {{ $item->name }}
-                                            </option>
-                                        @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control datestartnow" id="notice_date" name="notice_date" placeholder="Indonesia" value="{{$data->notice_date}}"/>
+                                        <input type="text" class="form-control form-control-solid datestartnow" id="notice_date" name="notice_date" placeholder="Indonesia" value="{{$data->notice_date}}"/>
                                         <label for="notice_date">Notice Date</label>
                                     </div>
                                 </div>
@@ -142,16 +113,16 @@
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control datestartnow" id="termination_date" name="termination_date" placeholder="Indonesia" value="{{$data->termination_date}}"/>
+                                        <input type="text" class="form-control form-control-solid datestartnow" id="termination_date" name="termination_date" placeholder="Indonesia" value="{{$data->termination_date}}"/>
                                         <label for="termination_date">Termination Date</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
-                                <label for="description">Description</label>
+                                <label for="description">Remark</label>
                                 <div class="form-floating">
                                     <div id="description">{!!$data->description!!}</div>
-                                    <textarea class="form-control d-none" name="description">{{$data->description}}</textarea>
+                                    <textarea class="form-control form-control-solid d-none" name="description">{{$data->description}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +132,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.others.termination.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.timesheet.timesheet.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif
@@ -172,8 +143,8 @@
     </div>
     @section('custom_js')
     <script>
-        obj_date('notice_date');
-        obj_date('termination_date');
+        obj_startdatenow('notice_date');
+        obj_startdatenow('termination_date');
         obj_quill('description');
     </script>
     @endsection

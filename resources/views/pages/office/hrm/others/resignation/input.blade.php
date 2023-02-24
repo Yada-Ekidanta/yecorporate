@@ -141,8 +141,8 @@
     @section('custom_js')
     <script>
         obj_select('employee_id');
-        obj_date('notice_date');
-        obj_date('resignation_date');
+        obj_startdatenow('notice_date');
+        obj_startdatenow('resignation_date');
         obj_quill('description');
     </script>
     @endsection

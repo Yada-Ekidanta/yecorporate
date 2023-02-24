@@ -4,6 +4,7 @@
             <th class="w-10px pe-2">
                 No
             </th>
+            
             <th class="min-w-125px">Employee ID</th>
             <th class="min-w-125px">Name</th>
             <th class="min-w-125px">Email</th>
@@ -20,22 +21,22 @@
                 {{$key+ $collection->firstItem()}}
             </td>
             <td>
-                <span>{{$item->nip}}</span>
+                <span>{{$item->nip ?? ''}}</span>
             </td>
             <td>
-                <span>{{$item->name}}</span>
+                <span>{{$item->name ?? ''}}</span>
             </td>
             <td>
                 <span>{{$item->email}}</span>
             </td>
             <td>
-                <span>{{$item->name}}</span>
+                <span>{{$item->branch->name ?? ''}}</span>
             </td>
             <td>
                 <span>{{$item->department->name}}</span>
             </td>
             <td class="text-end">
-                <a href="{{route('office.master.document-type.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
+                <a href="{{route('office.hrm.employee.edit-employee',['employee'=>$item->id,'bank'=>$item->id])}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="currentColor"/>
@@ -44,7 +45,7 @@
                         </svg>
                     </span>
                 </a>
-                <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.master.document-type.destroy',$item->id)}}');" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-danger w-30px h-30px">
+                <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.employee.destroy',$item->id)}}');" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-danger w-30px h-30px">
                     <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"/>
@@ -57,7 +58,7 @@
         </tr>
         @empty
         <tr>
-            <td align="center" colspan="4">No Data</td>
+            <td align="center" colspan="7">No Data</td>
         </tr>
         @endforelse
     </tbody>

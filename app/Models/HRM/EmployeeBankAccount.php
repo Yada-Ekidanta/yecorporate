@@ -9,4 +9,9 @@ class EmployeeBankAccount extends Model
 {
     use HasFactory;
     public $table = 'employee_bank_accounts';
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

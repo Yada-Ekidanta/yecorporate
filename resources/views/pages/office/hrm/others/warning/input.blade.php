@@ -164,7 +164,7 @@
     </div>
     @section('custom_js')
     <script>
-        obj_date('warning_date');
+        obj_startdatenow('warning_date');
         obj_quill('description');
     </script>
     @endsection
