@@ -2,19 +2,41 @@
 
 namespace App\Http\Controllers\Office\Crm;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Models\CRM\Leads;
+use App\Models\CRM\Client;
 use App\Models\CRM\Campaign;
+use Illuminate\Http\Request;
+use Goutte\Client AS GClient;
+use App\Models\CRM\ClientContact;
+use Google\Service\MyBusiness;
+use Google\Client as GoogleClient;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\CRM\Client;
-use App\Models\CRM\ClientContact;
-use App\Models\CRM\Leads;
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpClient\HttpClient;
 
 class LeadsController extends Controller
 {
     public function index(Request $request)
     {
+        $client = new GoogleClient();
+        $client->setApplicationName('My Business App');
+        $client->setAuthConfig('/path/to/your/json/key/file.json');
+        $client->setScopes([Google_Service_MyBusiness::MYBUSINESS_BASIC]);
+        
+        // $client = HttpClient::create();
+        // $response = $client->request('GET', 'https://angel.co/companies?company_types[]=Startup');
+        // $html = $response->getContent();
+
+        // $crawler = new Crawler($html);
+        // $crawler->filter('div.base.startup')->each(function ($company) {
+        //     $name = $company->filter('a.startup-link')->text();
+        //     $description = $company->filter('div.pitch')->text();
+        //     $location = $company->filter('div.location')->text();
+
+        //     echo $name . ' - ' . $description . ' - ' . $location . '<br>';
+        // });
         if($request->ajax())
         {
             $collection = Leads::with('client')

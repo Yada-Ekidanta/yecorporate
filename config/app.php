@@ -187,6 +187,7 @@ return [
          */
         Jenssegers\Agent\AgentServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Weidner\Goutte\GoutteServiceProvider::class,
         // SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         /*
          * Application Service Providers...
@@ -214,6 +215,7 @@ return [
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Goutte' => Weidner\Goutte\GoutteFacade::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
