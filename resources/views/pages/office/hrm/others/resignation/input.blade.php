@@ -116,10 +116,10 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-12 mb-3">
-                                <label for="description">Reason</label>
+                                <label for="desc">Reason</label>
                                 <div class="form-floating">
-                                    <div id="description">{!!$data->description!!}</div>
-                                    <textarea class="form-control d-none" name="description">{{$data->description}}</textarea>
+                                    <div id="desc">{!!$data->desc!!}</div>
+                                    <textarea class="form-control d-none" name="desc">{{$data->desc}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +143,7 @@
         obj_select('employee_id');
         obj_startdatenow('notice_date');
         obj_startdatenow('resignation_date');
-        obj_quill('description');
+        obj_quill('desc');
     </script>
     @endsection
 </x-office-layout>

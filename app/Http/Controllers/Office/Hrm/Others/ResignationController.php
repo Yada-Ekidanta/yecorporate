@@ -36,7 +36,7 @@ class ResignationController extends Controller
             'employee_id' => 'required',
             'resignation_date' => 'required',
             'notice_date' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -48,7 +48,7 @@ class ResignationController extends Controller
         $resignation->employee_id = $request->employee_id;
         $resignation->resignation_date = $request->resignation_date;
         $resignation->notice_date = $request->notice_date;
-        $resignation->description = $request->description;
+        $resignation->desc = $request->desc;
         $resignation->created_by = Auth::guard('employees')->user()->id;
         $resignation->save();
         return response()->json([
@@ -77,7 +77,7 @@ class ResignationController extends Controller
             'employee_id' => 'required',
             'resignation_date' => 'required',
             'notice_date' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -88,7 +88,7 @@ class ResignationController extends Controller
         $resignation->employee_id = $request->employee_id;
         $resignation->resignation_date = $request->resignation_date;
         $resignation->notice_date = $request->notice_date;
-        $resignation->description = $request->description;
+        $resignation->descr= $request->desc;
         $resignation->created_by = Auth::guard('employees')->user()->id;
         $resignation->update();
         return response()->json([

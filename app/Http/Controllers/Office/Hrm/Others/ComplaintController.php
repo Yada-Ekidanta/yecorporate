@@ -33,10 +33,10 @@ class ComplaintController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'complaint_from' => 'required',
-            'complaint_against' => 'required',
+            'complaint_again' => 'required',
             'title' => 'required',
-            'complaint_date' => 'required',
-            'description' => 'required',
+            'date' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -46,10 +46,10 @@ class ComplaintController extends Controller
         }
         $complaint = new Complaint;
         $complaint->complaint_from = $request->complaint_from;
-        $complaint->complaint_against = $request->complaint_against;
+        $complaint->complaint_again = $request->complaint_again;
         $complaint->title = $request->title;
-        $complaint->complaint_date = $request->complaint_date;
-        $complaint->description = $request->description;
+        $complaint->date = $request->date;
+        $complaint->desc = $request->desc;
         $complaint->created_by = Auth::guard('employees')->user()->id;
         $complaint->save();
         return response()->json([
@@ -76,10 +76,10 @@ class ComplaintController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'complaint_from' => 'required',
-            'complaint_against' => 'required',
+            'complaint_again' => 'required',
             'title' => 'required',
-            'complaint_date' => 'required',
-            'description' => 'required',
+            'date' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -88,10 +88,10 @@ class ComplaintController extends Controller
             ], 200);
         }
         $complaint->complaint_from = $request->complaint_from;
-        $complaint->complaint_against = $request->complaint_against;
+        $complaint->complaint_again = $request->complaint_again;
         $complaint->title = $request->title;
-        $complaint->complaint_date = $request->complaint_date;
-        $complaint->description = $request->description;
+        $complaint->date = $request->date;
+        $complaint->desc = $request->desc;
         $complaint->created_by = Auth::guard('employees')->user()->id;
         $complaint->update();
         return response()->json([

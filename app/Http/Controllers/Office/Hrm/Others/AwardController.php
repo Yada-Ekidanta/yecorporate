@@ -40,7 +40,7 @@ class AwardController extends Controller
             'award_type_id' => 'required',
             'date' => 'required',
             'gift' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -53,7 +53,7 @@ class AwardController extends Controller
         $award->award_type_id = $request->award_type_id;
         $award->date = $request->date;
         $award->gift = $request->gift;
-        $award->description = $request->description;
+        $award->desc = $request->desc;
         $award->created_by = Auth::guard('employees')->user()->id;
         $award->save();
         return response()->json([
@@ -87,7 +87,7 @@ class AwardController extends Controller
             'award_type' => 'required',
             'date' => 'required',
             'gift' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -99,7 +99,7 @@ class AwardController extends Controller
         $award->award_type = $request->award_type;
         $award->date = $request->date;
         $award->gift = $request->gift;
-        $award->description = $request->description;
+        $award->desc = $request->desc;
         $award->created_by = Auth::guard('employees')->user()->id;
         $award->update();
         return response()->json([

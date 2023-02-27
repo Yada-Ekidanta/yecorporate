@@ -78,7 +78,7 @@
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
                                     <div class="form-floating bg-gray">
-                                        <input type="text" class="form-control form-control-solid " id="title" name="title" placeholder="Indonesia" value="{{$data->name}}"/>
+                                        <input type="text" class="form-control form-control-solid " id="title" name="title" placeholder="Indonesia" value="{{$data->title}}"/>
                                         <label for="title">Title</label>
                                     </div>
                                 </div>
@@ -99,13 +99,14 @@
                                 <div class="form-floating">
                                     <select name="priority" data-placeholder="Ticket for priority" id="priority" class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
-                                        <option value="critical">Critical</option>
-                                        <option value="high">High</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="low">Low</option>
+                                        <option value="critical" {{ $data->priority == 'critical' ? 'selected' : '' }} >Critical</option>
+                                        <option value="high" {{ $data->priority == 'high' ? 'selected' : '' }}>High</option>
+                                        <option value="medium" {{ $data->priority == 'medium' ? 'selected' : '' }}>Medium</option>
+                                        <option value="low" {{ $data->priority == 'low' ? 'selected' : '' }}>Low</option>
                                     </select>
                                 </div>
                             </div>
+                            
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
                                     <div class="form-floating">
@@ -114,6 +115,19 @@
                                     </div>
                                 </div>
                             </div>
+
+                            @if($data->id != null)
+                            <div class="col-12 mb-3">
+                                <div class="form-floating">
+                                    <select name="st" data-placeholder="Ticket for status" id="st" class="form-select form-select-solid form-select-lg">
+                                        <option value=""></option>
+                                        <option value="close" {{ $data->st == 'close' ? 'selected' : '' }} >Close</option>
+                                        <option value="onhold" {{ $data->st == 'onhold' ? 'selected' : '' }}>On Hold</option>
+                                        <option value="open" {{ $data->st == 'open' ? 'selected' : '' }}>Open</option>
+                                    </select>
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="card-footer">
@@ -134,6 +148,7 @@
     <script>
         obj_select('employee_id');
         obj_select('priority');
+        obj_select('st');
         obj_startdatenow('end_date');
     </script>
     @endsection

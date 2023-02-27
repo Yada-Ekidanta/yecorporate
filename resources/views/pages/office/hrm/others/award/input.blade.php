@@ -124,10 +124,10 @@
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
-                                <label for="description">Description</label>
+                                <label for="desc">Description</label>
                                 <div class="form-floating">
-                                    <div id="description">{!!$data->desc!!}</div>
-                                    <textarea class="form-control d-none" name="description">{{$data->desc}}</textarea>
+                                    <div id="desc">{!!$data->desc!!}</div>
+                                    <textarea class="form-control d-none" name="desc">{{$data->desc}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
         obj_select('employee_id');
         obj_select('award_type_id');
         obj_startdatenow('date');
-        obj_quill('description');
+        obj_quill('desc');
     </script>
     @endsection
 </x-office-layout>

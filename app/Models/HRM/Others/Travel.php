@@ -18,7 +18,7 @@ class Travel extends Model
         'end_date',
         'purpose_of_visit',
         'place_of_visit',
-        'description',
+        'desc',
         'created_by',
     ];
 

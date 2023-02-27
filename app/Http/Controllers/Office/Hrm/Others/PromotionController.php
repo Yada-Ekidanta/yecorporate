@@ -35,7 +35,7 @@ class PromotionController extends Controller
             'employee_id' => 'required',
             'promotion_title' => 'required',
             'promotion_date' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -45,10 +45,9 @@ class PromotionController extends Controller
         }
         $promotion = new Promotion();
         $promotion->employee_id = $request->employee_id;
-        $promotion->designation_id = 0;
         $promotion->promotion_title = $request->promotion_title;
         $promotion->promotion_date = $request->promotion_date;
-        $promotion->description = $request->description;
+        $promotion->desc = $request->desc;
         $promotion->created_by = Auth::guard('employees')->user()->id;
         $promotion->save();
         return response()->json([
@@ -77,7 +76,7 @@ class PromotionController extends Controller
             'employee_id' => 'required',
             'promotion_title' => 'required',
             'promotion_date' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -86,10 +85,9 @@ class PromotionController extends Controller
             ], 200);
         }
         $promotion->employee_id = $request->employee_id;
-        $promotion->designation_id = 0;
         $promotion->promotion_title = $request->promotion_title;
         $promotion->promotion_date = $request->promotion_date;
-        $promotion->description = $request->description;
+        $promotion->desc = $request->desc;
         $promotion->created_by = Auth::guard('employees')->user()->id;
         $promotion->update();
         return response()->json([

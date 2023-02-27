@@ -37,7 +37,7 @@ class TravelController extends Controller
             'end_date' => 'required',
             'purpose_of_visit' => 'required',
             'place_of_visit' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -51,7 +51,7 @@ class TravelController extends Controller
         $travel->end_date = $request->end_date;
         $travel->purpose_of_visit = $request->purpose_of_visit;
         $travel->place_of_visit = $request->place_of_visit;
-        $travel->description = $request->description;
+        $travel->desc = $request->desc;
         $travel->created_by = Auth::guard('employees')->user()->id;
         $travel->save();
         return response()->json([
@@ -82,7 +82,7 @@ class TravelController extends Controller
             'end_date' => 'required',
             'purpose_of_visit' => 'required',
             'place_of_visit' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -95,7 +95,7 @@ class TravelController extends Controller
         $travel->end_date = $request->end_date;
         $travel->purpose_of_visit = $request->purpose_of_visit;
         $travel->place_of_visit = $request->place_of_visit;
-        $travel->description = $request->description;
+        $travel->desc = $request->desc;
         $travel->created_by = Auth::guard('employees')->user()->id;
         $travel->update();
         return response()->json([

@@ -49,18 +49,19 @@
         <!--end::Toolbar container-->
     </div>
     <!--end::Toolbar-->
+    @if ($data->st == 'open')
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-10">
             <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
                 <div id="kt_app_content_container" class="app-container container-fluid">
                     <div class="card">
-                        <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.hrm.ticket.index')}}" action="{{ route('office.hrm.ticket.store') }}">
+                        <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.hrm.ticket.edit',$data->id)}}" action="{{ route('office.hrm.reply.store') }}">
                             <div class="card-header border-0 pt-6">
                                 <div class="card-title">
                                     <div class="d-flex align-items-center position-relative my-1">
                                         <h1>Support Reply</h1>
                                         &nbsp;&nbsp;&nbsp;
-                                        <a href="#" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
+                                        <a href="{{route('office.hrm.ticket.edit',$data->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                                             <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="currentColor"/>
@@ -74,10 +75,11 @@
                             </div>
                             <div class="card-body transition-fade">
                                 <div class="form-group row">
+                                    <input type="hidden" value="{{ $data->id }}" name="ticket_id">
                                     <div class="col-10 mb-3">
                                         <div class="form-floating">
-                                            <div id="remark" name="remark"></div>
-                                            <textarea class="form-control d-none" id="remark" name="remark"></textarea>
+                                            <div id="desc" name="desc"></div>
+                                            <textarea class="form-control d-none" id="desc" name="desc"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-2 mb-3">
@@ -99,36 +101,60 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        @endif
+    </div>
+    <div class="row">    
+        @foreach ($ticketreply as $reply)
+        <div class="col-lg-10">
             <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
                 <div id="kt_app_content_container" class="app-container container-fluid">
                     <div class="card">
-                        {{-- @foreach ($ticketreply as $reply) --}}
-                            <div class="card">
-                                <ul class="list-group team-msg">
-                                    <div class="card-header d-flex justify-content-between">
-                                        <h5> p
-                                        </h5>
-                                        <span>p</span>
+                            <div class="card card-flush overflow-hidden h-lg-100">
+                                <!--begin::Header-->
+                                <div class="card-header pt-5">
+                                    <!--begin::Title-->
+                                    <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label fw-bold text-dark">Company</span>
+                                        <span class="text-gray-400 mt-1 fw-semibold fs-6">reply</span>
+                                    </h3>
+                                    <!--end::Title-->
+                                    <!--begin::Toolbar-->
+                                    <div class="card-toolbar">
+                                        <!--begin::Daterangepicker(defined in src/js/layout/app.js)-->
+                                        <div class="btn btn-sm btn-light d-flex align-items-center px-4">
+                                            <!--begin::Display range-->
+                                            <div class="text-gray-600 fw-bold">{{ $reply->created_at->diffForHumans() }}</div>
+                                            <!--end::Display range-->
+                                            <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                                            
+                                            <!--end::Svg Icon-->
+                                        </div>
+                                        <!--end::Daterangepicker-->
                                     </div>
-                                    <div class="card-body">
-                                        <p>p </p>
-                                    </div>
-
-                                </ul>
+                                    <!--end::Toolbar-->
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Card body-->
+                                <div class="card-body">
+                                    <!--begin::Chart-->
+                                    <div id="kt_charts_widget_36" class="min-h-auto w-100 ps-4 pe-6"><p>{!! $reply->desc !!} </p></div>
+                                    <!--end::Chart-->
+                                </div>
+                                <!--end::Card body-->
                             </div>
-                        {{-- @endforeach --}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
-    @section('custom_js')
-    <script>
-        obj_quill('remark');
-        obj_select('employee_id');
-        obj_select('priority');
-        obj_startdatenow('end_date');
-    </script>
-    @endsection
+        
+    @if ($data->st == 'open')    
+        @section('custom_js')
+        <script>
+            obj_quill('desc');
+        </script>
+        @endsection
+    @endif
 </x-office-layout>

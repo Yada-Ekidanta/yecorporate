@@ -22,16 +22,16 @@
                 <span>{{ !empty($item->complaintFrom($item->complaint_from)) ? $item->complaintFrom($item->complaint_from)->name : ''}}</span>
             </td>
             <td>
-                <span>{{ !empty($item->complaintAgainst($item->complaint_against)) ? $item->complaintAgainst($item->complaint_against)->name : '' }}</span>
+                <span>{{ !empty($item->complaintAgainst($item->complaint_again)) ? $item->complaintAgainst($item->complaint_again)->name : '' }}</span>
             </td>
             <td>
                 <span>{{$item->title}}</span>
             </td>
             <td>
-                <span>{{$item->complaint_date}}</span>
+                <span>{{$item->date}}</span>
             </td>
             <td>
-                <span>{!! $item->description!!}</span>
+                <span>{!! $item->desc!!}</span>
             </td>
             <td class="text-end">
                 <a href="{{route('office.hrm.others.complaint.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">

@@ -178,6 +178,8 @@ Route::group(['domain' => ''], function() {
                 });
                 Route::resource('contract', ContractController::class);
                 Route::resource('ticket', TicketController::class);
+                Route::post('reply/store', [TicketController::class, 'changereply'])->name('reply.store');
+                Route::get('reply/edit/{id}', [TicketController::class, 'reply'])->name('reply.edit');
                 Route::resource('event', EventController::class);
                 Route::resource('meeting', EventController::class);
                 Route::resource('online-meeting', EventController::class);

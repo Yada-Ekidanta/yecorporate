@@ -65,7 +65,7 @@
                                 </div>
                                 <p class="text-muted text-sm mt-4 mb-2"></p>
                                 <h6 class="mb-3">{{ __('Total Ticket') }}</h6>
-                                <h3 class="mb-0"> 5 </h3>
+                                <h3 class="mb-0">{{ $countTicket }} </h3>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                                 </div>
                                 <p class="text-muted text-sm mt-4 mb-2"></p>
                                 <h6 class="mb-3">{{ __('Open Ticket') }}</h6>
-                                <h3 class="mb-0">5</h3>
+                                <h3 class="mb-0">{{ $countOpenTicket }}</h3>
                             </div>
                         </div>
                     </div>
@@ -96,8 +96,8 @@
                                     </span>
                                 </div>
                                 <p class="text-muted text-sm mt-4 mb-2"></p>
-                                <h6 class="mb-3">{{ __('Close Ticket') }}</h6>
-                                <h3 class="mb-0">5</h3>
+                                <h6 class="mb-3">{{ __('Hold Ticket') }}</h6>
+                                <h3 class="mb-0">{{ $countonHoldTicket }}</h3>
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                                 </div>
                                 <p class="text-muted text-sm mt-4 mb-2"></p>
                                 <h6 class="mb-3">{{ __('Close Ticket') }}</h6>
-                                <h3 class="mb-0">5</h3>
+                                <h3 class="mb-0">{{ $countCloseTicket }}</h3>
                             </div>
                         </div>
                     </div>
@@ -258,39 +258,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                                        <form id="kt_modal_export_users_form" class="form" action="#">
-                                            <div class="fv-row mb-10">
-                                                <label class="fs-6 fw-semibold form-label mb-2">Select Roles:</label>
-                                                <select name="role" data-control="select2" data-placeholder="Select a role" data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                    <option></option>
-                                                    <option value="Administrator">Administrator</option>
-                                                    <option value="Analyst">Analyst</option>
-                                                    <option value="Developer">Developer</option>
-                                                    <option value="Support">Support</option>
-                                                    <option value="Trial">Trial</option>
-                                                </select>
-                                            </div>
-                                            <div class="fv-row mb-10">
-                                                <label class="required fs-6 fw-semibold form-label mb-2">Select Export Format:</label>
-                                                <select name="format" data-control="select2" data-placeholder="Select a format" data-hide-search="true" class="form-select form-select-solid fw-bold">
-                                                    <option></option>
-                                                    <option value="excel">Excel</option>
-                                                    <option value="pdf">PDF</option>
-                                                    <option value="cvs">CVS</option>
-                                                    <option value="zip">ZIP</option>
-                                                </select>
-                                            </div>
-                                            <div class="text-center">
-                                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                                                <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                                    <span class="indicator-label">Submit</span>
-                                                    <span class="indicator-progress">Please wait...
-                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <input type="hidden" id="ticket_arr" value="{{ $ticket_arr }}">
                                 </div>
                             </div>
                         </div>
@@ -305,8 +273,23 @@
         </div>
     </div>
     @section('custom_js')
+        <script src="{{ asset('metronic/plugins/global/apexcharts.min.js') }}"></script>
         <script>
-            load_list(1);
+            (() => {
+                load_list(1);
+                let ticket_arr = $('#ticket_arr').val();
+                const chartOptions = chart_js(JSON.parse(ticket_arr));
+                console.log(chartOptions);
+                var chart = new ApexCharts(document.querySelector("#projects-chart"), chartOptions);
+                chart.render();
+                swup.on('pageView', () => {
+                    console.log('called')
+                    if(document.querySelector("#projects-chart")) {
+                        var chart = new ApexCharts(document.querySelector("#projects-chart"), chartOptions);
+                        chart.render();
+                    }
+                });
+            })();
         </script>
     @endsection
 </x-office-layout>

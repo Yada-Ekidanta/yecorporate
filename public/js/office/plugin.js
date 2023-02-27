@@ -438,6 +438,35 @@ $.ajaxSetup({
     }
 });
 
+function chart_js(ticket_arr) {
+    // console.log(ticket_arr);
+    console.log('Called');
+    var options = {
+        chart: {
+            height: 140,
+            type: 'donut',
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        plotOptions: {
+            pie: {
+                donut: {
+                    size: '70%',
+                }
+            }
+        },
+        series: ticket_arr,
+        colors: ["#3ec9d6", '#6fd943', '#fd7e14', '#ff3a6e'],
+        labels: ["Total", "Open", "Hold", "Close"],
+        legend: {
+            show: false
+        }
+    };
+
+    return options;
+}   
+
 function get_province(country_id, province_id) {
     $("#" + country_id).change(function() {
         $.ajax({

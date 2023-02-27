@@ -85,10 +85,10 @@
                         <div class="form-group row">
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="employee_id" data-placeholder="Select employee..." id="employee_id" class="form-select form-select-solid form-select-lg">
+                                    <select name="complaint_from" data-placeholder="Select complaint from..." id="complaint_from" class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
                                         @foreach ($employee as $item)
-                                            <option value="{{ $item->id }}" {{ $item->id == $data->employee_id ? 'selected' : '' }}>
+                                            <option value="{{ $item->id }}" {{ $item->id == $data->complaint_from ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
@@ -97,10 +97,10 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="employee_id" data-placeholder="Select employee..." id="employee_id" class="form-select form-select-solid form-select-lg">
+                                    <select name="complaint_again" data-placeholder="Select complaint again..." id="complaint_again" class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
                                         @foreach ($employee as $item)
-                                            <option value="{{ $item->id }}" {{ $item->id == $data->employee_id ? 'selected' : '' }}>
+                                            <option value="{{ $item->id }}" {{ $item->id == $data->complaint_again ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
@@ -118,16 +118,16 @@
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control datestartnow" id="complaint_date" name="complaint_date" placeholder="Indonesia" value="{{$data->complaint_date}}"/>
-                                        <label for="complaint_date">Complaint Date</label>
+                                        <input type="text" class="form-control datestartnow" id="date" name="date" placeholder="Indonesia" value="{{$data->date}}"/>
+                                        <label for="date">Complaint Date</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
-                                <label for="description">Description</label>
+                                <label for="desc">Description</label>
                                 <div class="form-floating">
-                                    <div id="description">{!!$data->description!!}</div>
-                                    <textarea class="form-control d-none" name="description">{{$data->description}}</textarea>
+                                    <div id="desc">{!!$data->desc!!}</div>
+                                    <textarea class="form-control d-none" name="desc">{{$data->desc}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -148,9 +148,10 @@
     </div>
     @section('custom_js')
     <script>
-        obj_select('employee_id');
-        obj_startdatenow('complaint_date');
-        obj_quill('description');
+        obj_select('complaint_again');
+        obj_select('complaint_from');
+        obj_startdatenow('date');
+        obj_quill('desc');
     </script>
     @endsection
 </x-office-layout>

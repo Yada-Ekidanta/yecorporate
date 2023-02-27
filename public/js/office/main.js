@@ -59,7 +59,10 @@ document.addEventListener("swup:contentReplaced", () => {
     obj_select('department_id');
     obj_select('bank_id');
     obj_select('priority');
+    obj_select('complaint_again');
+    obj_select('complaint_from');
     obj_select('company_branch_id');
+    obj_select('st');
     obj_select('position_id');
     obj_select('award_type_id');
     obj_select('termination_type');
@@ -110,6 +113,12 @@ document.addEventListener("swup:contentReplaced", () => {
             obj_quill('address');
         }
     }, 1000);
+    
+    if ($('#ticket_arr').length > 0) {
+        let ticket_arr = $('#ticket_arr').val();
+        chart_js(ticket_arr);
+    }
+
     $('.ribuan').keyup(function (event) {
         if (event.which >= 37 && event.which <= 40) return;
         // format number

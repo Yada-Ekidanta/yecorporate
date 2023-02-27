@@ -27,7 +27,7 @@
                 <span>{{$item->resignation_date}}</span>
             </td>
             <td>
-                <span>{!! $item->description!!}</span>
+                <span>{!! $item->desc!!}</span>
             </td>
             <td class="text-end">
                 <a href="{{route('office.hrm.others.resignation.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">

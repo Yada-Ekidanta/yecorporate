@@ -22,7 +22,7 @@ class Award extends Model
 
     public function awardType()
     {
-        return $this->hasOne(AwardType::class, 'id', 'award_type');
+        return $this->hasOne(AwardType::class, 'id', 'award_type_id');
     }
 
     public function employee()
