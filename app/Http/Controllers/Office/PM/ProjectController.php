@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Office\PM;
 
-use App\Models\PM\Project;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\PM\Milestone;
 use App\Models\PM\Task;
 use App\Models\PM\Team;
+use App\Models\PM\Project;
+use App\Models\PM\TodoList;
+use App\Models\PM\Milestone;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,7 +56,11 @@ class ProjectController extends Controller
             'budget' => 'required',
             'currency' => 'required',
             'status' => 'required',
-            'desc' => 'required',
+            'desc' => ['required', function($attribute, $value, $fail) {
+                if (str_word_count($value) > 60) {
+                    $fail("Description is too long, use core description");
+                }
+            }],
             'image' => 'required|image',
         ]);
 
@@ -110,11 +115,17 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-
         $count = Task::where('project_id', $project->id)->count();
         $milestones = Milestone::where('project_id', $project->id)->paginate(3);
         $tasks = Task::where('project_id', $project->id)->paginate(3);
         $teams = Team::where('project_id', $project->id)->paginate(3);
+        $todo_list = TodoList::join('tasks', 'todo_list.task_id', '=', 'tasks.id')->where('tasks.project_id', $project->id)->count();
+        $todo_list_done = TodoList::where('status', 4)->count();
+        if ($todo_list == 0) {
+            $todo_list_percentage = 0;
+        } else {
+            $todo_list_percentage = round(($todo_list_done / $todo_list) * 100);
+        }
 
         return view('pages.office.pm.project.detail',
         [
@@ -122,7 +133,8 @@ class ProjectController extends Controller
             'count' => $count,
             'milestones' => $milestones,
             'tasks' => $tasks,
-            'teams' => $teams
+            'teams' => $teams,
+            'todo_list_percentage' => $todo_list_percentage,
         ]);
     }
 
@@ -154,7 +166,11 @@ class ProjectController extends Controller
             'budget' => 'required',
             'currency' => 'required',
             'status' => 'required',
-            'desc' => 'required',
+            'desc' => ['required', function($attribute, $value, $fail) {
+                if (str_word_count($value) > 60) {
+                    $fail("Description is too long, use core description");
+                }
+            }],
             'image' => 'image',
         ]);
 

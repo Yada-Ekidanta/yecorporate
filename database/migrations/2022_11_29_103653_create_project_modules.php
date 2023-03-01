@@ -83,7 +83,8 @@ return new class extends Migration
             $table->timestamp('end_time')->nullable();
             $table->date('date');
             $table->string('total_time')->default(0);
-            $table->string('is_active');
+            $table->boolean('is_active')->default(0);
+            $table->boolean('is_paused')->default(0);
             $table->integer('created_by');
             $table->timestamps();
         });

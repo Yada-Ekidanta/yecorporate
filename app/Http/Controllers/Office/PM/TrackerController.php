@@ -89,14 +89,22 @@ class TrackerController extends Controller
         $tracker->end_time = $request->end_time;
         $tracker->total_time = $request->total_time;
         $tracker->is_active = $request->is_active;
+        $tracker->is_paused = $request->is_paused;
         $tracker->save();
     }
 
-    // public function carry_on(Request $request, Tracker $tracker)
-    // {
-    //     $tracker->is_active = $request->is_active;
-    //     $tracker->save();
-    // }
+    public function pause(Request $request, Tracker $tracker)
+    {
+        $tracker->is_paused = $request->is_paused;
+        $tracker->end_time = $request->end_time;
+        $tracker->save();
+    }
+
+    public function resume(Request $request, Tracker $tracker)
+    {
+        $tracker->is_paused = $request->is_paused;
+        $tracker->save();
+    }
 
     /**
      * Remove the specified resource from storage.

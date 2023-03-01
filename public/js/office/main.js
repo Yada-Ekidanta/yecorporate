@@ -104,9 +104,23 @@ document.addEventListener("swup:contentReplaced", () => {
         let regex2 = new RegExp(menuLink2);
 
         if (regex.test(currentUrl) || regex2.test(currentUrl)) {
-          $(this).addClass('active');
+            localStorage.removeItem('menuActive');
+            $(this).addClass('active');
         } else {
-          $(this).removeClass('active');
+            $(this).removeClass('active');
         }
     });
+
+    let idDetailUrl = $('#detail-active');
+
+    idDetailUrl.ready(function() {
+        localStorage.setItem('menuActive', 'project');
+    });
+
+    let menuDetailActive = localStorage.getItem('menuActive');
+
+    if (menuDetailActive === 'project') {
+        let menuActive = $('#project');
+        menuActive.addClass('active');
+    }
 });

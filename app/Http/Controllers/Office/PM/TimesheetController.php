@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Office\PM;
 
 use App\Models\PM\Tracker;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class TimesheetController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $TimeSheet = Tracker::select(DB::raw("date, SUM(TIME_TO_SEC(total_time)) as total_time"))->groupBy('date')->get();
+            $TimeSheet = Tracker::where('created_by', Auth::guard('employees')->user()->id)->select(DB::raw("date, SUM(TIME_TO_SEC(total_time)) as total_time"))->groupBy('date')->get();
 
             $data = [];
 

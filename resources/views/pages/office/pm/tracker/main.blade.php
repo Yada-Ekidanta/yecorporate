@@ -59,6 +59,7 @@
                             <input type="hidden" id="end_time" name="end_time"/>
                             <input type="hidden" id="date" name="date"/>
                             <input type="hidden" id="is_active" name="is_active"/>
+                            <input type="hidden" id="is_paused" name="is_paused"/>
                             <input type="hidden" id="total_time" name="total_time"/>
                             <div class="col-md-4">
                                 <div class="form-floating">

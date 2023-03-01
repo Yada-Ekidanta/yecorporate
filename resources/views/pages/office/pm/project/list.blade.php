@@ -46,7 +46,7 @@
                                 </svg>
                             </span>
                         </a>
-                        <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this project ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$item->id)}}');" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-danger w-30px h-30px">
+                        <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this project ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$item->id)}}');" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-danger w-30px h-30px {{ $item->status != 'Closed' ? 'd-none' : '' }}">
                             <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"/>
@@ -69,10 +69,10 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9 mb-5">
         @foreach($collection as $key => $item)
             <div class="col-md-4">
-                <div class="card card-flush h-md-100 bg-secondary">
+                <div class="card card-flush h-md-100 bg-secondary shadow-sm">
                     <div class="card-header">
                         <div class="card-title">
-                            <h2>{{$item->name}}</h2>
+                            <h2 class="me-3">{{ $item->name }}</h2>
                         </div>
                     </div>
                     <div class="card-body pt-1">
@@ -82,7 +82,7 @@
                     </div>
                     <div class="card-footer flex-wrap pt-0">
                         <a href="{{route('office.pm.project.edit',$item->id)}}" class="menu-link btn btn-light btn-active-warning my-1 me-2">Edit</a>
-                        <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this project ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$item->id)}}');" class="btn btn-light btn-active-danger my-1 my-1">Delete</a>
+                        <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this project ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$item->id)}}');" class="btn btn-light btn-active-danger my-1 my-1 {{ $item->status != 'Closed' ? 'd-none' : '' }}">Delete</a>
                     </div>
                 </div>
             </div>

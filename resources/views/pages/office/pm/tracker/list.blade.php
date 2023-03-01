@@ -106,6 +106,7 @@
                 hour = Math.floor(totalSeconds /3600);
                 minute = Math.floor((totalSeconds - hour*3600)/60);
                 seconds = totalSeconds - (hour*3600 + minute*60);
+
                 $('#hour').html(hour);
                 $('#minute').html(minute);
                 $('#seconds').html(seconds);
@@ -113,6 +114,7 @@
 
             $( "#start-btn" ).click(function() {
                 location.reload(true);
+
                 let start_date = new Date();
                 let start_month = start_date.getMonth()+1;
                 let start_day = start_date.getDate();
@@ -120,35 +122,33 @@
                 ((''+start_month).length<2 ? '0' : '') + start_month + '-' +
                 ((''+start_day).length<2 ? '0' : '') + start_day;
                 let time = start_date.getHours() + ":" + start_date.getMinutes() + ":" + start_date.getSeconds();
+
                 $('#start_time').val(output_start+' '+time);
                 $('#date').val(output_start);
                 $('#start-btn').hide();
                 $('#stop').show();
+
                 intervalId = setInterval(startTimer, 1000);
-                localStorage.removeItem("curentTime");
+
                 $('#is_active').val(1);
                 $('#total_time').val('0:0:0');
+
                 $.post('{{route('office.pm.tracker.store')}}', $('#form_input').serialize(), function(data) {
                     $('#id').val(data.id);
                 });
+
+                localStorage.removeItem('status');
+                localStorage.removeItem('seconds')
             });
 
             $( "#pause" ).click(function() {
                 $('#pause').hide();
                 $('#resume').removeClass('d-none').show();
+
                 clearInterval(intervalId);
-                localStorage.setItem("curentTime", totalSeconds);
-            });
 
-            $( "#resume" ).click(function() {
-                $('#resume').hide();
-                $('#pause').show();
-                intervalId = setInterval(startTimer, 1000);
-                totalSeconds = localStorage.getItem("curentTime");
-            });
+                $('#is_paused').val(1);
 
-            $( "#stop" ).click(function() {
-                location.reload(true);
                 let end_date = new Date();
                 let end_month = end_date.getMonth()+1;
                 let end_day = end_date.getDate();
@@ -156,14 +156,66 @@
                 ((''+end_month).length<2 ? '0' : '') + end_month + '-' +
                 ((''+end_day).length<2 ? '0' : '') + end_day;
                 let time = end_date.getHours() + ":" + end_date.getMinutes() + ":" + end_date.getSeconds();
+
+                $('#end_time').val(output_end+' '+time);
+
+                let url = '{{route('office.pm.tracker.pause', 'id_tracker')}}';
+                url = url.replace('id_tracker', "{{ $status ? $status->id : null }}");
+                $.ajax({
+                    url: url,
+                    type: 'PUT',
+                    data: $('#form_input').serialize(),
+                    success: function(data) {
+                        $('#id').val(data.id);
+                    }
+                });
+
+                localStorage.removeItem('status');
+            });
+
+            $( "#resume" ).click(function() {
+                location.reload(true);
+
+                $('#resume').hide();
+                $('#pause').show();
+                $('#is_paused').val(0);
+
+                let url = '{{route('office.pm.tracker.pause', 'id_tracker')}}';
+                url = url.replace('id_tracker', "{{ $status ? $status->id : null }}");
+                $.ajax({
+                    url: url,
+                    type: 'PUT',
+                    data: $('#form_input').serialize(),
+                    success: function(data) {
+                        $('#id').val(data.id);
+                    }
+                });
+
+                localStorage.setItem('status', 'resume');
+            });
+
+            $( "#stop" ).click(function() {
+                location.reload(true);
+
+                let end_date = new Date();
+                let end_month = end_date.getMonth()+1;
+                let end_day = end_date.getDate();
+                let output_end = end_date.getFullYear() + '-' +
+                ((''+end_month).length<2 ? '0' : '') + end_month + '-' +
+                ((''+end_day).length<2 ? '0' : '') + end_day;
+                let time = end_date.getHours() + ":" + end_date.getMinutes() + ":" + end_date.getSeconds();
+
                 $('#end_time').val(output_end+' '+time);
                 $('#start-btn').show();
                 $('#stop').hide();
-                localStorage.removeItem("curentTime");
+
                 if (intervalId)
                 clearInterval(intervalId);
+
                 $('#is_active').val(0);
+                $('#is_paused').val(0);
                 $('#total_time').val(hour+':'+minute+':'+seconds);
+
                 let url = '{{route('office.pm.tracker.update', 'id_tracker')}}';
                 url = url.replace('id_tracker', "{{ $status ? $status->id : null }}");
                 $.ajax({
@@ -174,23 +226,47 @@
                         $('#id').val(data.id);
                     }
                 });
+
+                localStorage.removeItem('status');
+                localStorage.removeItem('seconds');
             });
 
-            if ({!! $status ? $status : "false" !!} != false) {
-                let start_date = moment("{{ $status ? $status->start_time : null }}");
-                let now = moment();
-                let curent_time = now.diff(start_date, 'seconds');
+            const activeTracker = {!! json_encode($status); !!};
 
-                totalSeconds = curent_time;
-                // let storedCurentTime = localStorage.getItem("curentTime");
+            if (activeTracker != null) {
+                if (activeTracker.is_active && activeTracker.is_paused) {
+                    let start_date = moment("{{ $status ? $status->start_time : null }}");
+                    let end_date = moment("{{ $status ? $status->end_time : null }}");
+                    let differentTimePaused = end_date.diff(start_date, 'seconds');
 
-                // if (storedCurentTime != false) {
-                //     totalSeconds += storedCurentTime;
-                // } else {
-                //     totalSeconds = curent_time;
-                // }
+                    let paused_hour = Math.floor(differentTimePaused /3600);
+                    let paused_minute = Math.floor((differentTimePaused - paused_hour*3600)/60);
+                    let paused_seconds = differentTimePaused - (paused_hour*3600 + paused_minute*60);
 
-                intervalId = setInterval(startTimer, 1000);
+                    $('#hour').html(paused_hour);
+                    $('#minute').html(paused_minute);
+                    $('#seconds').html(paused_seconds);
+
+                    let final_seconds = parseInt(paused_hour)*3600 + parseInt(paused_minute)*60 + parseInt(paused_seconds);
+                    localStorage.setItem('seconds', final_seconds);
+
+                    $('#pause').hide();
+                    $('#resume').removeClass('d-none').show();
+                }
+
+                if (activeTracker.is_active && !activeTracker.is_paused) {
+                    let timeToSec = moment();
+                    let start_date = moment("{{ $status ? $status->start_time : null }}");
+                    let curent_time_start = timeToSec.diff(start_date, 'seconds');
+
+                    if (localStorage.getItem('status') === 'resume') {
+                        totalSeconds += parseInt(localStorage.getItem("seconds"));
+                    } else {
+                        totalSeconds = curent_time_start;
+                    }
+
+                    intervalId = setInterval(startTimer, 1000);
+                }
             }
         });
     }

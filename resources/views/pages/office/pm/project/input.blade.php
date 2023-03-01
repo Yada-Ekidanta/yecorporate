@@ -85,7 +85,7 @@
                         <div class="mb-5">
                             <div class="form-floating">
                                 <input type="text" class="form-control form-control-solid" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
-                                <label for="name">Name</label>
+                                <label for="name">Project Name</label>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -151,7 +151,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                            <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$data->id)}}', '{{route('office.pm.project.index')}}');" class="btn btn-sm btn-danger">
+                            <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.pm.project.destroy',$data->id)}}', '{{route('office.pm.project.index')}}');" class="btn btn-sm btn-danger {{ $data->status != 'Closed' ? 'd-none' : '' }}">
                                 Delete
                             </button>
                         @endif

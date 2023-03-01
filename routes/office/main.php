@@ -73,6 +73,9 @@ use App\Http\Controllers\Office\PM\TimesheetController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/', function () {
+//     return redirect('https://yadaekidanta.com/');
+// });
 
 Route::group(['domain' => ''], function() {
     Route::prefix('office')->name('office.')->group(function(){
@@ -196,7 +199,8 @@ Route::group(['domain' => ''], function() {
                 Route::post('milestone/{project}/store',[MilestoneController::class, 'store'])->name('milestone.store');
                 Route::resource('invoice-pm', InvoicePMController::class);
                 Route::resource('tracker', TrackerController::class);
-                // Route::put('tracker/carryOn/{tracker}',[TrackerController::class, 'carry_on'])->name('tracker.carry_on');
+                Route::put('tracker/pause/{tracker}',[TrackerController::class, 'pause'])->name('tracker.pause');
+                Route::put('tracker/resume/{tracker}',[TrackerController::class, 'resume'])->name('tracker.resume');
                 Route::post('/fetch-task/{id}',[TrackerController::class, 'fetchTask'])->name('tracker.fetchTask');
                 Route::resource('task', TaskController::class);
                 Route::get('task/{project}/index',[TaskController::class, 'index'])->name('task.index');

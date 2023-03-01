@@ -85,7 +85,7 @@
                         <div class="mb-5">
                             <div class="form-floating">
                                 <input type="text" class="form-control form-control-solid" id="title" name="title" placeholder="Indonesia" value="{{$data->title}}"/>
-                                <label for="title">Title</label>
+                                <label for="title">Meeting Title</label>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -100,7 +100,7 @@
                             <div class="col-6 mb-5">
                                 <div class="form-floating">
                                     <input type="text" class="form-control form-control-solid" id="start_date_time" name="start_date" placeholder="Indonesia" value="{{$data->start_date}}"/>
-                                    <label for="start_date_time">Start Date</label>
+                                    <label for="start_date_time">Meeting Time</label>
                                 </div>
                             </div>
                         </div>

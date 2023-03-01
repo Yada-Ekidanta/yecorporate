@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Detail <a href="{{ route('office.pm.project.index') }}" class="mx-2 text-muted">Project</a> {{ $data->name }}</li>
+                    <li class="breadcrumb-item text-muted">Detail Project {{ $data->name }}</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -60,8 +60,15 @@
                             </div>
                             <div class="col-md-9 mt-9">
                                 <div class="card-title">
-                                    <h1>{{ $data->name }}</h1>
-                                    <span>{{ $data->status }}</span>
+                                    <h1 class="mb-3">{{ $data->name }}</h1>
+                                    @if ($data->status == 'In Progres')
+                                        <span class="badge py-3 px-3 fs-7 badge-light-success">{{ $data->status }}</span>
+                                    @elseif( $data->status == 'On Hold')
+                                        <span class="badge py-3 px-3 fs-7 badge-light-warning">{{ $data->status }}</span>
+                                    @elseif( $data->status == 'Closed')
+                                        <span class="badge py-3 px-3 fs-7 badge-light-danger">{{ $data->status }}</span>
+                                    @endif
+                                    {{-- <span>{{ $data->status }}</span> --}}
                                 </div>
                             </div>
                         </div>
@@ -107,7 +114,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="mx-auto bg-light" style="border-radius: 50%; width:105px; height:105px; margin-top: -20px;">
-                                        <h1 class="text-center pt-12">{{ $data->budget }} {{ $data->currency }}</h1>
+                                        <h1 class="text-center pt-12">{{ $data->currency }}{{ $data->budget }}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -118,23 +125,20 @@
                             <div class="card card-flush bg-secondary">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h2>Teams</h2>
-                                    </div>
-                                    <div class="card-title">
-                                        <a href="{{route('office.pm.team.create', $data->id)}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
-                                            <span class="svg-icon svg-icon-2">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
-                                                    <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            Add
-                                        </a>
+                                        <h2>Percentage Project</h2>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="container bg-light rounded pb-3">
-                                        <div id="list_team"></div>
+                                    <div class="container bg-light rounded pb-5 pt-3">
+                                        <div class="d-flex align-items-center flex-column w-100">
+                                            <div class="d-flex justify-content-between fw-bold fs-6 opacity-75 w-100 mt-auto mb-2">
+                                                <span>Progres</span>
+                                                <span>{{ $todo_list_percentage }}%</span>
+                                            </div>
+                                            <div class="h-8px mx-3 w-100 bg-dark bg-opacity-50 rounded">
+                                                <div class="bg-dark rounded h-8px" role="progressbar" style="width: {{ $todo_list_percentage }}%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -143,14 +147,39 @@
                 </div>
             </div>
             <div class="row mb-5">
-                <div class="col-12">
+                <div class="col-6">
+                    <div class="card card-flush bg-secondary">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>Teams</h2>
+                            </div>
+                            <div class="card-title">
+                                <a href="{{route('office.pm.team.create', $data->id)}}" class="btn btn-primary btn-sm btn-hover-scale menu-link" id="detail-active">
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
+                                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    Add
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="container bg-light rounded pb-3">
+                                <div id="list_team"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
                     <div class="card card-flush bg-secondary">
                         <div class="card-header">
                             <div class="card-title">
                                 <h2>Milestones</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{route('office.pm.milestone.create', $data->id)}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a href="{{route('office.pm.milestone.create', $data->id)}}" class="btn btn-primary btn-sm btn-hover-scale menu-link" id="detail-active">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />
@@ -177,7 +206,7 @@
                                 <h2>List Tasks</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{route('office.pm.task.create', $data->id)}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a href="{{route('office.pm.task.create', $data->id)}}" class="btn btn-primary btn-sm btn-hover-scale menu-link" id="detail-active">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor" />

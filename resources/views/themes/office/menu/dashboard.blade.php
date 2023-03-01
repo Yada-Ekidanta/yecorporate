@@ -33,7 +33,7 @@
         </div>
         <!--end:Menu item-->
         <!--begin:Menu item-->
-        <div class="menu-item">
+        <div class="menu-item d-none">
             <!--begin:Menu link-->
             <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
                 <span class="menu-bullet">
@@ -45,7 +45,7 @@
         </div>
         <!--end:Menu item-->
         <!--begin:Menu item-->
-        <div class="menu-item">
+        <div class="menu-item d-none">
             <!--begin:Menu link-->
             <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
                 <span class="menu-bullet">
@@ -57,7 +57,7 @@
         </div>
         <!--end:Menu item-->
         <!--begin:Menu item-->
-        <div class="menu-item">
+        <div class="menu-item d-none">
             <!--begin:Menu link-->
             <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
                 <span class="menu-bullet">
@@ -69,7 +69,7 @@
         </div>
         <!--end:Menu item-->
         <!--begin:Menu item-->
-        <div class="menu-item">
+        <div class="menu-item d-none">
             <!--begin:Menu link-->
             <a class="menu-link {{request()->is('dashboard/ecommerce') ? 'active' : ''}}" href="{{route('office.dashboard.ecommerce')}}">
                 <span class="menu-bullet">
@@ -82,7 +82,7 @@
         <!--end:Menu item-->
         <div class="menu-inner flex-column collapse" id="kt_app_sidebar_menu_dashboards_collapse">
             <!--begin:Menu item-->
-            <div class="menu-item">
+            <div class="menu-item d-none">
                 <!--begin:Menu link-->
                 <a class="menu-link" href="../../demo1/dist/dashboards/bidding.html">
                     <span class="menu-bullet">
@@ -94,7 +94,7 @@
             </div>
             <!--end:Menu item-->
         </div>
-        <div class="menu-item" data-no-swup>
+        <div class="menu-item d-none" data-no-swup>
             <div class="menu-content">
                 <a class="btn btn-flex btn-color-primary d-flex flex-stack fs-base p-0 ms-2 mb-2 toggle collapsible collapsed" data-bs-toggle="collapse" href="#kt_app_sidebar_menu_dashboards_collapse" data-kt-toggle-text="Show Less" data-no-swup>
                     <span data-kt-toggle-text-target="true">Show 12 More</span>

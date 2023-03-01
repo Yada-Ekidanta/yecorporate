@@ -10,7 +10,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link {{ Request::is('office/pm/project*') ? 'active' : '' }}" href="{{ route('office.pm.project.index') }}">
+    <a class="menu-link {{ Request::is('office/pm/project*') ? 'active' : '' }}" href="{{ route('office.pm.project.index') }}" id="project">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
             <span class="svg-icon svg-icon-2">

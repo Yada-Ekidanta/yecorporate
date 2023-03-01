@@ -95,7 +95,7 @@
                             <div class="col-6 mb-5">
                                 <div class="form-floating">
                                     <input type="text" class="form-control form-control-solid" id="name" name="name" placeholder="Indonesia" value="{{$data->name}}"/>
-                                    <label for="name">Name</label>
+                                    <label for="name">Task Name</label>
                                 </div>
                             </div>
                         </div>
