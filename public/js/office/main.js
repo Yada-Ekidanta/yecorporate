@@ -40,8 +40,8 @@ document.addEventListener("swup:contentReplaced", () => {
     get_district('regency_id', 'district_id');
     get_village('district_id', 'village_id');
     get_postcode('village_id', 'postcode');
-    if ($('#data').length > 0 ) {
-        var getData = $('#data').val();
+    if ($('#available').length > 0 ) {
+        var getData = $('#available').val();
         var data =  JSON.parse(getData);
         if (data.id != null) {
             get_regional_data('country_id', 'province_id', 'regency_id', 'district_id', 'village_id', data.country_id, data.province_id, data.regency_id, data.district_id, data.village_id);
@@ -59,10 +59,13 @@ document.addEventListener("swup:contentReplaced", () => {
     obj_select('department_id');
     obj_select('bank_id');
     obj_select('priority');
+    obj_select('company_id');
     obj_select('complaint_again');
     obj_select('complaint_from');
     obj_select('company_branch_id');
     obj_select('st');
+    obj_select('warning_by');
+    obj_select('warning_to');
     obj_select('position_id');
     obj_select('award_type_id');
     obj_select('termination_type');

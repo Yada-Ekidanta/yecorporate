@@ -159,7 +159,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.others.transfer.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this transfer ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.others.transfer.destroy',$data->id)}}', '{{ route('office.hrm.others.transfer.index') }}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

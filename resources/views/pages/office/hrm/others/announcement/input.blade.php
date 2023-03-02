@@ -93,61 +93,37 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="company_branch_id" aria-label="Select a company branch" data-control="select2" data-placeholder="Select a company branch.." class="form-select form-select-solid form-select-lg">
+                                    <select name="company_branch_id" id="company_branch_id" aria-label="Select a company branch" data-control="select2" data-placeholder="Select a company branch.." class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
-                                        @if($data->id == null)
-                                        @foreach ($company_branch as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                        @endforeach
-                                        @else
                                         @foreach ($company_branch as $item)
                                             <option value="{{ $item->id }}" {{ $item->id == $data->company_branch_id ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="employee_id" aria-label="Select a Employee" data-control="select2" data-placeholder="Select a Employee.." class="form-select form-select-solid form-select-lg">
+                                    <select name="employee_id" id="employee_id" aria-label="Select a Employee" data-control="select2" data-placeholder="Select a Employee.." class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
-                                        @if($data->id == null)
-                                        @foreach ($employee as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                        @endforeach
-                                        @else
                                         @foreach ($employee as $item)
                                             <option value="{{ $item->id }}" {{ $item->id == $data->employee_id ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="department_id" aria-label="Select a department" data-control="select2" data-placeholder="Select a department.." class="form-select form-select-solid form-select-lg">
+                                    <select name="department_id" id="department_id" aria-label="Select a department" data-control="select2" data-placeholder="Select a department.." class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
-                                        @if($data->id == null)
-                                        @foreach ($department as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                        @endforeach
-                                        @else
                                         @foreach ($department as $item)
                                             <option value="{{ $item->id }}" {{ $item->id == $data->department_id ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -181,7 +157,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this announcement ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.others.announcement.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this announcement ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.others.announcement.destroy',$data->id)}}', '{{ route('office.hrm.others.announcement.index') }}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif
@@ -192,6 +168,9 @@
     </div>
     @section('custom_js')
     <script>
+        obj_select('employee_id');
+        obj_select('company_branch_id');
+        obj_select('departement');
         obj_startdatenow('start_date');
         obj_startdatenow('end_date');
         obj_quill('desc');

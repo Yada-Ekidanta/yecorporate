@@ -85,20 +85,12 @@
                         <div class="form-group row">
                             <div class="col-4 mb-3">
                                 <div class="form-floating mb-3">
-                                    <select name="company_id" placeholder="Name" class="form-select">
-                                    @if($data->id == null)
-                                    @foreach ($company as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                    @endforeach
-                                    @else
+                                    <select name="company_id" id="company_id" placeholder="Name" class="form-select">
                                     @foreach ($company as $item)
                                         <option value="{{ $item->id }}" {{ $item->id == $data->company_id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
-                                    @endif
                                     </select>
                                     <label for="company_id">Company</label>
                                 </div>
@@ -107,26 +99,10 @@
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$data->name}}"/>
                                     <label for="name">Name</label>
                                 </div>
-
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="address" name="address" placeholder="address" value="{{$data->address}}"/>
-                                    <label for="address">Address</label>
-                                </div>
-
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="instruction" name="instruction" placeholder="instruction" value="{{$data->instruction}}"/>
                                     <label for="instruction">Instruction</label>
                                 </div>
-
-                                <div class="form-floating mb-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="is_primary" value="{{$data->is_primary}}" id="flexCheckChecked" {{ $data->is_primary ? "checked" : " "}}>
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Is Primary
-                                        </label>
-                                    </div>
-                                </div>
-
                             </div>
                             <div class="col-4 mb-3">
                                 <div class="form-group mb-3">
@@ -158,19 +134,26 @@
                                         <option disabled selected>Select Village</option>
                                     </select>
                                 </div>
-                                <div class="form-floating">
+                                <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Enter Postcode" value="{{ $data->postcode }}" />
                                     <label for="postcode">Postcode</label>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea rows="90" class="form-control" name="address">{{$data->address}}</textarea>
+                                        <label for="address">Address</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" value="{{$data}}" id="available" >
                     <div class="card-footer">
                         <button id="tombol_simpan" onclick="handle_upload('#tombol_simpan','#form_input','{{$data->id ? 'PATCH' : 'POST'}}');" class="btn btn-sm btn-{{$data->id ? 'warning' : 'success'}}">
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.setting.company-branch.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this comapany branch ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.setting.company-branch.destroy',$data->id)}}', '{{ route('office.setting.company-branch.index') }}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif
@@ -181,109 +164,24 @@
     </div>
     @section('custom_js')
         <script>
+            obj_select('company_id');
             obj_select('country_id');
             obj_select('district_id');
             obj_select('province_id');
             obj_select('regency_id');
             obj_select('village_id');
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $(document).ready(function() {
-                $("#country_id").change(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('office.master.regional.filter_province') }}",
-                        data: {
-                            country: $("#country_id").val(),
-                        },
-                        success: function(response) {
-                            $("#province_id").removeAttr("disabled");
-                            $("#province_id").html(response);
-                            $("#province_id").append("<option disabled selected>Select Province</option>");
-                        }
-                    });
-                });
-                $("#province_id").change(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('office.master.regional.filter_regency') }}",
-                        data: {
-                            province: $("#province_id").val(),
-                        },
-                        success: function(response) {
-                            $("#regency_id").removeAttr("disabled");
-                            $("#regency_id").html(response);
-                            $("#regency_id").append("<option disabled selected>Select Regency</option>");
-                        }
-                    });
-                });
-                $("#regency_id").change(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('office.master.regional.filter_district') }}",
-                        data: {
-                            regency: $("#regency_id").val()
-                        },
-                        success: function(response) {
-                            $("#district_id").removeAttr("disabled");
-                            $("#district_id").html(response);
-                            $("#district_id").append("<option disabled selected>Select District</option>");
-                        }
-                    });
-                });
-                $("#district_id").change(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('office.master.regional.filter_village') }}",
-                        data: {
-                            district: $("#district_id").val()
-                        },
-                        success: function(response) {
-                            $("#village_id").removeAttr("disabled");
-                            $("#village_id").html(response);
-                            $("#village_id").append("<option disabled selected>Select Village</option>");
-                        }
-                    });
-                });
-                $("#village_id").change(function(){
-                    $.ajax({
-                        type: "POST",
-                        url: "{{route('office.master.regional.filter_postcode')}}",
-                        data: {village : $("#village_id").val()},
-                        success: function(response){
-                            $("#postcode").val(response);
-                        }
-                    });
-                });
-            });
+            get_province('country_id', 'province_id');
+            get_regency('province_id', 'regency_id');
+            get_district('regency_id', 'district_id');
+            get_village('district_id', 'village_id');
+            get_postcode('village_id', 'postcode');
+
+            var getData = $('#available').val();
+            var data =  JSON.parse(getData);
+            if (data.id != null) {
+                get_regional_data('country_id', 'province_id', 'regency_id', 'district_id', 'village_id');
+            }
         </script>
-        @if ($data->country_id)
-            <script>
-                $('#country_id').val('{{ $data->country_id }}');
-                setTimeout(function() {
-                    $('#country_id').trigger('change');
-                    setTimeout(function() {
-                        $('#province_id').val('{{ $data->province_id }}');
-                        $('#province_id').trigger('change');
-                        setTimeout(function() {
-                            $('#regency_id').val('{{ $data->regency_id }}');
-                            $('#regency_id').trigger('change');
-                            setTimeout(function() {
-                                $('#district_id').val('{{ $data->district_id }}');
-                                $('#district_id').trigger('change');
-                                setTimeout(function() {
-                                    $('#village_id').val('{{ $data->village_id }}');
-                                    $('#village_id').trigger('change');
-                                }, 1200);
-                            }, 1200);
-                        }, 1200);
-                    }, 1200);
-                }, 500);
-            </script>
-        @endif
     @endsection       
 </x-office-layout>

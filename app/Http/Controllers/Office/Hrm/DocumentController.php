@@ -118,7 +118,7 @@ class DocumentController extends Controller
             $document->is_private = 'n';
         }
         $document->desc = $request->desc;
-        $document->save();
+        $document->update();
         return response()->json([
             'alert' => 'success',
             'message' => 'Document Updated',
@@ -127,7 +127,7 @@ class DocumentController extends Controller
 
     public function destroy(Document $document)
     {
-        Storage::delete($document->logo);
+        Storage::delete($document->attachment);
         $document->delete();
         return response()->json([
             'alert' => 'success',

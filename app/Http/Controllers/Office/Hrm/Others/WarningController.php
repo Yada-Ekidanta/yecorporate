@@ -37,7 +37,7 @@ class WarningController extends Controller
             'warning_to' => 'required',
             'subject' => 'required',
             'warning_date' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -50,7 +50,7 @@ class WarningController extends Controller
         $warning->warning_to = $request->warning_to;
         $warning->subject = $request->subject;
         $warning->warning_date = $request->warning_date;
-        $warning->description = $request->description;
+        $warning->desc = $request->desc;
         $warning->created_by = Auth::guard('employees')->user()->id;
         $warning->save();
         return response()->json([
@@ -80,7 +80,7 @@ class WarningController extends Controller
             'warning_to' => 'required',
             'subject' => 'required',
             'warning_date' => 'required',
-            'description' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -92,7 +92,7 @@ class WarningController extends Controller
         $warning->warning_to = $request->warning_to;
         $warning->subject = $request->subject;
         $warning->warning_date = $request->warning_date;
-        $warning->description = $request->description;
+        $warning->desc = $request->desc;
         $warning->created_by = Auth::guard('employees')->user()->id;
         $warning->update();
         return response()->json([

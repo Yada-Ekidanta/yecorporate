@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\HRM\Employee;
 use App\Models\HRM\Timesheet\Leave;
 use App\Models\Master\LeaveType;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -54,8 +55,8 @@ class LeaveController extends Controller
         }
         $employee = Employee::where('id', '=', Auth::user()->id)->first();
         $leave_type = LeaveType::find($request->leave_type_id);
-        $startDate = new \DateTime($request->start_date);
-        $endDate = new \DateTime($request->end_date);
+        $startDate = new DateTime($request->start_at);
+        $endDate = new DateTime($request->end_at);
         $total_leave_days = !empty($startDate->diff($endDate)) ? $startDate->diff($endDate)->days : 0;
         if($leave_type->days >= $total_leave_days) {
             $leave = new Leave;
@@ -78,8 +79,9 @@ class LeaveController extends Controller
                 'alert' => 'success',
                 'message' => 'Manage Leave Created',
             ]);
-        } else {
-            return redirect()->back()->response()->json([
+        } 
+        else {
+            return response()->json([
                 'alert' => 'danger',
                 'message' => __('Leave type '.$leave_type->name.' is provide maximum '.$leave_type->days."  days please make sure your selected days is under ". $leave_type->days.' days.'),
             ]); 
@@ -123,8 +125,8 @@ class LeaveController extends Controller
             ], 200);
         }
         $leave_type = LeaveType::find($request->leave_type_id);
-        $startDate = new \DateTime($request->start_date);
-        $endDate = new \DateTime($request->end_date);
+        $startDate = new \DateTime($request->start_at);
+        $endDate = new \DateTime($request->end_at);
         $total_leave_days = !empty($startDate->diff($endDate)) ? $startDate->diff($endDate)->days : 0;
         if($leave_type->days >= $total_leave_days) {
             $leave->employee_id = $request->employee_id;
@@ -150,6 +152,17 @@ class LeaveController extends Controller
         }
     }
 
+    public function changeaction(Request $request, $id)
+    {
+        $leave = Leave::findOrFail($id);
+        $leave->st = "Approved";
+        $leave->update();
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Action Leave Approved',
+        ]);
+    }
+
     public function destroy($id)
     {
         $leave = Leave::findOrFail($id);
@@ -157,6 +170,16 @@ class LeaveController extends Controller
         return response()->json([
             'alert' => 'success',
             'message' => 'Leave Deleted',
+        ]);
+    }
+    public function cangeActionDestroy($id)
+    {
+        $leave = Leave::findOrFail($id);
+        $leave->st = "Denied";
+        $leave->update();
+        return response()->json([
+            'alert' => 'success',
+            'message' => 'Action Leave Rejected',
         ]);
     }
 

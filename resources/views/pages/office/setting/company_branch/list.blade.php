@@ -25,7 +25,7 @@
                 <span>{{$item->name}}</span>
             </td>
             <td>
-                <span>{{$item->address}}</span>
+                <span>{{ $item->address }}</span>
             </td>
             <td>
                 <span>{{$item->instruction}}</span>

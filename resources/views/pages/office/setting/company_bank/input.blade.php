@@ -86,19 +86,11 @@
                             <div class="col-8 mb-3">
                                 <div class="form-floating mb-3">
                                     <select name="company_branch_id" placeholder="Name" class="form-select">
-                                    @if($data->id == null)
-                                    @foreach ($company_branch as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                    @endforeach
-                                    @else
                                     @foreach ($company_branch as $item)
                                         <option value="{{ $item->id }}" {{ $item->id == $data->company_branch_id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
-                                    @endif
                                     </select>
                                     <label for="company_branch_id">Company Branch</label>
                                 </div>
@@ -110,19 +102,11 @@
 
                                 <div class="form-floating mb-3">
                                     <select name="bank_id" placeholder="Name" class="form-select">
-                                    @if($data->id == null)
-                                    @foreach ($bank as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                    @endforeach
-                                    @else
                                     @foreach ($bank as $item)
                                         <option value="{{ $item->id }}" {{ $item->id == $data->bank_id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach
-                                    @endif
                                     </select>
                                     <label for="bank_id">Bank</label>
                                 </div>
@@ -141,16 +125,6 @@
                                     <input type="text" class="form-control" id="branch_name" name="branch_name" placeholder="branch_name" value="{{$data->branch_name}}"/>
                                     <label for="branch_name">Branch Name</label>
                                 </div>
-
-                                <div class="form-floating mb-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="is_primary" value="{{$data->is_primary}}" id="flexCheckChecked" {{ $data->is_primary ? "checked" : " "}}>
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Is Primary
-                                        </label>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -159,7 +133,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.setting.company-bank.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this company bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.setting.company-bank.destroy',$data->id)}}', '{{ route('office.setting.company-bank.index') }}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

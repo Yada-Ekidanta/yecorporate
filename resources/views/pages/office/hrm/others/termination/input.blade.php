@@ -97,10 +97,10 @@
                             </div>
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="termination_type" data-placeholder="Select termination type..." id="termination_type" class="form-select form-select-solid form-select-lg">
+                                    <select name="termination_type_id" data-placeholder="Select termination type..." id="termination_type_id" class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
-                                        @foreach ($employee as $item)
-                                            <option value="{{ $item->id }}" {{ $item->id == $data->termination_type ? 'selected' : '' }}>
+                                        @foreach ($termination_type as $item)
+                                            <option value="{{ $item->id }}" {{ $item->id == $data->termination_type_id ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
@@ -124,10 +124,10 @@
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
-                                <label for="description">Description</label>
+                                <label for="desc">Description</label>
                                 <div class="form-floating">
-                                    <div id="description">{!!$data->description!!}</div>
-                                    <textarea class="form-control d-none" name="description">{{$data->description}}</textarea>
+                                    <div id="desc">{!!$data->desc!!}</div>
+                                    <textarea class="form-control d-none" name="desc">{{$data->desc}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.others.termination.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this termination ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.others.termination.destroy',$data->id)}}', '{{ route('office.hrm.others.termination.index') }}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif
@@ -149,10 +149,10 @@
     @section('custom_js')
     <script>
         obj_select('employee_id');
-        obj_select('termination_type');
+        obj_select('termination_type_id');
         obj_startdatenow('notice_date');
         obj_startdatenow('termination_date');
-        obj_quill('description');
+        obj_quill('desc');
     </script>
     @endsection
 </x-office-layout>

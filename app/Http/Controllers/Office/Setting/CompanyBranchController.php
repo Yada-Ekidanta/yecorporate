@@ -103,10 +103,12 @@ class CompanyBranchController extends Controller
     public function edit($id)
     {
         $company = Company::all();
+        $country = Country::select('name', 'id')->get();
         $company_branch = CompanyBranch::findOrFail($id);
         return view('pages.office.setting.company_branch.input', [
             'data' => $company_branch,
             'company' => $company,
+            'country' => $country,
         ]);
     }
 

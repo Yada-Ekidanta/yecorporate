@@ -47,20 +47,21 @@
                     <div class="badge bg-warning p-2 px-3 rounded">{{ $item->st }}</div>
                 @elseif($item->st == 'Approved')
                     <div class="badge bg-success p-2 px-3 rounded">{{ $item->st }}</div>
-                @elseif($item->st == "Reject")
+                @elseif($item->st == "Denied")
                     <div class="badge bg-danger p-2 px-3 rounded">{{ $item->st }}</div>
                 @endif
             </td>
             <td class="text-end">
                 <div class="d-flex">
-                    {{-- <a href="{{route('office.hrm.timesheet.action',$item->id)}}" type="button" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-primary w-30px h-30px" data-bs-toggle="modal" data-bs-target="#manage_leave">
+                    <a href="{{route('office.hrm.timesheet.action',$item->id)}}" class="btn me-1 btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-primary w-30px h-30px menu-link" >
                         <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/>
                             </svg>
                         </span>
-                    </a> --}}
-                    <a href="{{route('office.hrm.timesheet.manage-leave.edit',$item->id)}}" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
+                    </a>
+
+                    <a href="{{route('office.hrm.timesheet.manage-leave.edit',$item->id)}}" class="btn me-1 btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-warning w-30px h-30px menu-link">
                         <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="currentColor"/>
@@ -69,6 +70,7 @@
                             </svg>
                         </span>
                     </a>
+
                     <a href="javascript:;" onclick="handle_confirm('Are you sure want to delete this bank ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.timesheet.manage-leave.destroy',$item->id)}}');" class="btn btn-sm btn-hover-scale btn-icon btn-bg-light btn-active-color-danger w-30px h-30px">
                         <span class="svg-icon svg-icon-5 svg-icon-gray-700">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

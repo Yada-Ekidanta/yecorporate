@@ -38,8 +38,8 @@ class TerminationController extends Controller
             'employee_id' => 'required',
             'notice_date' => 'required',
             'termination_date' => 'required',
-            'termination_type' => 'required',
-            'description' => 'required',
+            'termination_type_id' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -51,8 +51,8 @@ class TerminationController extends Controller
         $termination->employee_id = $request->employee_id;
         $termination->notice_date = $request->notice_date;
         $termination->termination_date = $request->termination_date;
-        $termination->termination_type = $request->termination_type;
-        $termination->description = $request->description;
+        $termination->termination_type_id = $request->termination_type_id;
+        $termination->desc = $request->desc;
         $termination->created_by = Auth::guard('employees')->user()->id;
         $termination->save();
         return response()->json([
@@ -83,8 +83,8 @@ class TerminationController extends Controller
             'employee_id' => 'required',
             'notice_date' => 'required',
             'termination_date' => 'required',
-            'termination_type' => 'required',
-            'description' => 'required',
+            'termination_type_id' => 'required',
+            'desc' => 'required',
         ]);
         if ($validator->fails()){
             return response()->json([
@@ -95,8 +95,8 @@ class TerminationController extends Controller
         $termination->employee_id = $request->employee_id;
         $termination->notice_date = $request->notice_date;
         $termination->termination_date = $request->termination_date;
-        $termination->termination_type = $request->termination_type;
-        $termination->description = $request->description;
+        $termination->termination_type_id = $request->termination_type_id;
+        $termination->desc = $request->desc;
         $termination->created_by = Auth::guard('employees')->user()->id;
         $termination->update();
         return response()->json([

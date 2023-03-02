@@ -83,48 +83,33 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 mb-5">
-                                <div class="form-floating">
-                                    <div class="form-check">
-                                        <input class="form-check-input mb-5" type="checkbox" name="is_private" value="{{$data->is_private}}" id="flexCheckChecked" {{ $data->is_private == 'y' ? "checked" : " "}}>
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Is Private
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            
                             <div class="col-6 mb-3">
-                                <div class="form-floating">
-                                    <div class="form-floating">
-                                        
-                                        <div class="col-lg-6 mb-3">
-                                            Attachment :
+                                <div class="form-floating mb-3">
+                                    @if (isset($data) && $data->attachment )
+                                    <div class="row">
+                                        <div class="col-md-8 mb-3">
+                                            <input disabled class="form-control" value="data already exists">
                                         </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
-                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-1.jpg)"></div>
-                                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                    <input type="file" name="attachment" accept=".png, .jpg, .jpeg" />
-                                                    <input type="hidden" name="avatar_remove" />
-                                                </label>
-                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                                    <i class="bi bi-x fs-2"></i>
-                                                </span>
-                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                                    <i class="bi bi-x fs-2"></i>
-                                                </span>
-                                            </div>
-                                            <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                        <div class="col-md-4 mb-3">
+                                            <a href="{{ route('office.hrm.document.attachment', $data->id) }}"><input disabled class="form-control bg-primary" value="donwload"></a> 
                                         </div>
                                     </div>
+                                    
+                                    <input type="file" class="form-control" name="attachment" id="attachment">
+                                    
+                                    @elseif ($data->attachment == null)
+                                    <input type="file" class="form-control" name="attachment" id="attachment">
+                                    @endif
+                                    @if(!$data->id)
+                                        <label for="attachment">attachment</label>
+                                    @endif
                                 </div>
                             </div>
-                            
+                        </div>
+                        <div class="form-group row">
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="position_id" data-placeholder="Select a position..." id="position_id" class="form-select form-select-solid form-select-lg">
+                                    <select name="position_id" data-placeholder="Select a position..." id="position_id" class="form-select form-select-solid">
                                         <option value=""></option>
                                         @foreach ($position as $item)
                                             <option value="{{ $item->id }}" {{ $item->id == $data->position_id ? 'selected' : '' }}>
@@ -135,7 +120,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-12 mb-3">
+                            <div class="col-6 mb-3">
                                 <label for="desc">Description</label>
                                 <div class="form-floating">
                                     <div id="desc">{!!$data->desc!!}</div>
@@ -149,7 +134,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.document.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this award ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.document.destroy',$data->id)}}', '{{ route('office.hrm.document.index') }}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

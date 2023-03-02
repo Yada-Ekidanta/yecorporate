@@ -19,6 +19,6 @@ class Termination extends Model
 
     public function terminationType()
     {
-        return $this->hasOne(TerminationType::class, 'id', 'termination_type');
+        return $this->hasOne(TerminationType::class, 'id', 'termination_type_id');
     }
 }

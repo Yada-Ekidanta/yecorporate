@@ -60,7 +60,7 @@
     <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="card">
-                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.setting.company-policy.index')}}" action="{{$data->id ? route('office.setting.company-policy.update',$data->id) : route('office.setting.company-policy.store')}}">
+                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.setting.policy.index')}}" action="{{$data->id ? route('office.setting.policy.update',$data->id) : route('office.setting.policy.store')}}">
                     <div class="card-header border-0 pt-6">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <a id="back_form_button" href="{{route('office.setting.company-policy.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                <a id="back_form_button" href="{{route('office.setting.policy.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
                                     <span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
@@ -108,9 +108,27 @@
                                     </div>
                                 </div>
 
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="attachment" name="attachment" placeholder="attachment" value="{{$data->attachment}}"/>
-                                    <label for="attachment">Attachment</label>
+                                <div class="col-12 mb-3">
+                                    <div class="form-floating mb-3">
+                                        @if (isset($data) && $data->attachment )
+                                        <div class="row">
+                                            <div class="col-md-8 mb-3">
+                                                <input disabled class="form-control" value="data already exists">
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <a href="{{ route('office.setting.company-policy.attachment', $data->id) }}"><input disabled class="form-control bg-primary" value="donwload"></a> 
+                                            </div>
+                                        </div>
+                                        
+                                        <input type="file" class="form-control" name="attachment" id="attachment">
+                                        
+                                        @elseif ($data->attachment == null)
+                                        <input type="file" class="form-control" name="attachment" id="attachment">
+                                        @endif
+                                        @if(!$data->id)
+                                            <label for="attachment">attachment</label>
+                                        @endif
+                                    </div>
                                 </div>
 
                             </div>
@@ -121,7 +139,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.setting.company-policy.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this company policy ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.setting.policy.destroy',$data->id)}}', '{{ route('office.setting.policy.index') }}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif

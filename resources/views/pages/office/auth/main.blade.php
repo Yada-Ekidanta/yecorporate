@@ -52,7 +52,7 @@
                 <!--begin::Actions-->
                 <div class="d-flex flex-stack">
                     <!--begin::Submit-->
-                    <button id="tombol_login" onclick="handle_post('#tombol_login','#form_login');" class="btn btn-primary me-2 flex-shrink-0">
+                    <button id="tombol_login" data-no-swup onclick="handle_post('#tombol_login','#form_login');" class="btn btn-primary me-2 flex-shrink-0">
                         <!--begin::Indicator label-->
                         <span class="indicator-label" data-kt-translate="sign-in-submit">Sign In</span>
                         <!--end::Indicator label-->

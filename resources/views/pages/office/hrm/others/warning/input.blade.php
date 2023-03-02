@@ -85,41 +85,25 @@
                         <div class="form-group row">
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="warning_by" aria-label="Select a Warning By" data-control="select2" data-placeholder="Select a Warning By.." class="form-select form-select-solid form-select-lg">
+                                    <select name="warning_by" id="warning_by" aria-label="Select a Warning By" data-control="select2" data-placeholder="Select a Warning By.." class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
-                                        @if($data->id == null)
-                                        @foreach ($employee as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                        @endforeach
-                                        @else
                                         @foreach ($employee as $item)
                                             <option value="{{ $item->id }}" {{ $item->id == $data->warning_by ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 mb-3">
                                 <div class="form-floating">
-                                    <select name="warning_to" aria-label="Select a Warning To" data-control="select2" data-placeholder="Select a Warning To.." class="form-select form-select-solid form-select-lg">
+                                    <select name="warning_to" id="warning_to" aria-label="Select a Warning To" data-control="select2" data-placeholder="Select a Warning To.." class="form-select form-select-solid form-select-lg">
                                         <option value=""></option>
-                                        @if($data->id == null)
-                                        @foreach ($employee as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                        @endforeach
-                                        @else
                                         @foreach ($employee as $item)
                                             <option value="{{ $item->id }}" {{ $item->id == $data->warning_to ? 'selected' : '' }}>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -140,10 +124,10 @@
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
-                                <label for="description">Description</label>
+                                <label for="desc">Description</label>
                                 <div class="form-floating">
-                                    <div id="description">{!!$data->description!!}</div>
-                                    <textarea class="form-control d-none" name="description">{{$data->description}}</textarea>
+                                    <div id="desc">{!!$data->desc!!}</div>
+                                    <textarea class="form-control d-none" name="desc">{{$data->desc}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +137,7 @@
                             {{$data->id ? 'Update' : 'Create'}}
                         </button>
                         @if($data->id)
-                        <button type="button" onclick="handle_confirm('Are you sure want to delete this department ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.others.warning.destroy',$data->id)}}');" class="btn btn-sm btn-danger">
+                        <button type="button" onclick="handle_confirm_custom('Are you sure want to delete this warning ?', 'Yes, i`m sure', 'No, i`m not','DELETE','{{route('office.hrm.others.warning.destroy',$data->id)}}', '{{ route('office.hrm.others.warning.index') }}');" class="btn btn-sm btn-danger">
                             Delete
                         </button>
                         @endif
@@ -165,7 +149,9 @@
     @section('custom_js')
     <script>
         obj_startdatenow('warning_date');
-        obj_quill('description');
+        obj_select('warning_by');
+        obj_select('warning_to');
+        obj_quill('desc');
     </script>
     @endsection
 </x-office-layout>

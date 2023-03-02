@@ -7,6 +7,7 @@ use App\Models\Setting\CompanyPolicy;
 use App\Models\Setting\CompanyBank;
 use Illuminate\Http\Request;
 use App\Models\Setting\CompanyBranch;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CompanyPolicyController extends Controller
@@ -47,7 +48,12 @@ class CompanyPolicyController extends Controller
         $company_policy->company_branch_id = $request->company_branch_id;
         $company_policy->title = $request->title;
         $company_policy->desc = $request->desc;
-        $company_policy->attachment = $request->attachment;
+        if (request()->file('attachment')){
+            $file = request()->file('attachment')->store('files/company_policy/attachment');
+            $company_policy->attachment = $file;
+        } else {
+            $company_policy->attachment = $company_policy->attachment;
+        }
         $company_policy->save();
         return response()->json([
             'alert' => 'success',
@@ -68,7 +74,7 @@ class CompanyPolicyController extends Controller
     public function edit($id)
     {
         $company_policy = CompanyPolicy::findOrFail($id);
-        $company_branch = CompanyPolicy::all();
+        $company_branch = CompanyBranch::all();
         return view('pages.office.setting.company_policy.input', [
             'data' => $company_policy,
             'company_branch' => $company_branch,
@@ -93,8 +99,12 @@ class CompanyPolicyController extends Controller
         $company_policy->company_branch_id = $request->company_branch_id;
         $company_policy->title = $request->title;
         $company_policy->desc = $request->desc;
-        $company_policy->attachment = $request->attachment;
-        $company_policy->save();
+        if (request()->file('attachment')){
+            $file = request()->file('attachment')->store('files/company_policy/attachment');
+            $company_policy->attachment = $file;
+        } else {
+            $company_policy->attachment = $company_policy->attachment;
+        }
         $company_policy->update();
         return response()->json([
             'alert' => 'success',
@@ -105,10 +115,21 @@ class CompanyPolicyController extends Controller
     public function destroy($id)
     {
         $company_policy = CompanyPolicy::findOrFail($id);
+        Storage::delete($company_policy->attachment);
         $company_policy->delete();
         return response()->json([
             'alert' => 'success',
             'message' => 'Company Policy Deleted',
         ]);
+    }
+
+    public function downloadAttachment($id)
+    {
+        $company_policy  = CompanyPolicy::findOrFail($id);
+        try {
+            return Storage::download($company_policy->attachment);
+        } catch (\Exception $th) {
+            return $th->getMessage();
+        }
     }
 }

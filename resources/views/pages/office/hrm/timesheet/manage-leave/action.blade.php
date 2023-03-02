@@ -1,50 +1,170 @@
-<div class="modal fade" id="manage_leave" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="fw-bold">Export Users{{ $leave->id }}</h2>
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                    <span class="svg-icon svg-icon-1">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-                        </svg>
-                    </span>
-                </div>
+<x-office-layout title="{{'Action'}} Manage Leave">
+    <!--begin::Toolbar-->
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6 animation-class">
+        <!--begin::Toolbar container-->
+        <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+            <!--begin::Page title-->
+            <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                <!--begin::Title-->
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">{{config('app.name')}}</h1>
+                <!--end::Title-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                        <a href="{{route('office.dashboard.index')}}" class="text-muted text-hover-primary menu-link">Dashboard</a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">Timesheet</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">Manage Leave</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">{{'Action'}}</li>
+                    <!--end::Item-->
+                </ul>
+                <!--end::Breadcrumb-->
             </div>
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <form id="manage_leave_form" class="form" action="#">
-                    <div class="fv-row mb-10">
-                        <label class="fs-6 fw-semibold form-label mb-2">Select Roles:</label>
-                        <select name="role" data-control="select2" data-placeholder="Select a role" data-hide-search="true" class="form-select form-select-solid fw-bold">
-                            <option></option>
-                            <option value="Administrator">Administrator</option>
-                            <option value="Analyst">Analyst</option>
-                            <option value="Developer">Developer</option>
-                            <option value="Support">Support</option>
-                            <option value="Trial">Trial</option>
-                        </select>
+            <!--end::Page title-->
+            <!--begin::Actions-->
+            <div class="d-flex align-items-center gap-2 gap-lg-3 d-none">
+                <!--begin::Secondary button-->
+                <a href="#" class="btn btn-sm fw-bold bg-body btn-color-gray-700 btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a>
+                <!--end::Secondary button-->
+                <!--begin::Primary button-->
+                <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Add Target</a>
+                <!--end::Primary button-->
+            </div>
+            <!--end::Actions-->
+        </div>
+        <!--end::Toolbar container-->
+    </div>
+    <!--end::Toolbar-->
+    <div id="kt_app_content" class="app-content flex-column-fluid py-3 py-lg-6 animation-class delay3">
+        <div id="kt_app_content_container" class="app-container container-fluid">
+            <div class="card">
+                <form class="form w-100" novalidate="novalidate" id="form_input" data-redirect-url="{{route('office.hrm.timesheet.manage-leave.index')}}" action="{{route('office.hrm.timesheet.changeaction',$leave->id)}}">
+                    <div class="card-header border-0 pt-6">
+                        <div class="card-title">
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <h1>Leave Action</h1>
+                            </div>
+                        </div>
+                        <div class="card-toolbar">
+                            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                <a id="back_form_button" href="{{route('office.hrm.timesheet.manage-leave.index')}}" class="btn btn-primary btn-sm btn-hover-scale menu-link">
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="currentColor"/>
+                                            <path opacity="0.3" d="M9.6 20V4L2.3 11.3C1.9 11.7 1.9 12.3 2.3 12.7L9.6 20Z" fill="currentColor"/>
+                                        </svg>
+                                    </span>
+                                    Back
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="fv-row mb-10">
-                        <label class="required fs-6 fw-semibold form-label mb-2">Select Export Format:</label>
-                        <select name="format" data-control="select2" data-placeholder="Select a format" data-hide-search="true" class="form-select form-select-solid fw-bold">
-                            <option></option>
-                            <option value="excel">Excel</option>
-                            <option value="pdf">PDF</option>
-                            <option value="cvs">CVS</option>
-                            <option value="zip">ZIP</option>
-                        </select>
+                    <div class="card-body transition-fade">
+                        <div class="form-group row">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered align-middle table-row-dashed fs-6 gy-5">
+                                        <tbody class="text-whitetext-center-600 fw-semibold text-center">
+                                            <tr class="text-start">
+                                                <td>
+                                                    Employee
+                                                </td>
+                                                
+                                                <td>
+                                                    {{ $employee->name }}
+                                                </td>
+                                            </tr>
+                                            <tr class="text-start">
+                                                <td>
+                                                    Leave Type
+                                                </td>
+                                                
+                                                <td>
+                                                    {{ $leavetype->title . ', ' . $leavetype->days }}
+                                                </td>
+                                            </tr>
+                                             
+                                            <tr class="text-start">
+                                                <td>
+                                                    Start Date
+                                                </td>
+                                                
+                                                <td>
+                                                    {{ $leave->start_at }}
+                                                </td>
+                                            </tr>
+                                             
+                                            <tr class="text-start">
+                                                <td>
+                                                    End Date
+                                                </td>
+                                                
+                                                <td>
+                                                    {{ $leave->end_at }}
+                                                </td>
+                                            </tr>
+                                             
+                                            <tr class="text-start">
+                                                <td>
+                                                    Leave Reason
+                                                </td>
+                                                
+                                                <td>
+                                                    {!! $leave->leave_reason !!}
+                                                </td>
+                                            </tr>
+
+                                            <tr class="text-start">
+                                                <td>
+                                                    Status
+                                                </td>
+                                                
+                                                <td>
+                                                    {{ $leave->st }}
+                                                </td>
+                                            </tr>
+                                             <input type="hidden" value="Approved" name="confirm">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                            <span class="indicator-label">Submit</span>
-                            <span class="indicator-progress">Please wait...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    <div class="card-footer">
+                        
+                        <button id="tombol_simpan" name="confirm" value="1" onclick="handle_upload('#tombol_simpan','#form_input','{{$leave->id ? 'PATCH' : 'POST'}}');" class="btn btn-sm btn-{{$leave->id ? 'primary' : 'success'}}">
+                            {{$leave->id ? 'Approved' : 'Create'}}
                         </button>
+                        @if($leave->id)
+                        <button type="button" onclick="handle_confirm('Reject this leave ?', 'Yes, i`m sure', 'No, i`m not','PATCH','{{route('office.hrm.timesheet.action.destroy',$leave->id)}}');" class="btn btn-sm btn-danger">
+                            Reject
+                        </button>
+                        @endif
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
+</x-office-layout>

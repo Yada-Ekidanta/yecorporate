@@ -106,7 +106,8 @@ Route::group(['domain' => ''], function() {
                 Route::resource('company', CompanyController::class);
                 Route::resource('company-branch', CompanyBranchController::class);
                 Route::resource('company-bank', CompanyBankController::class);
-                Route::resource('company-policy', CompanyPolicyController::class);
+                Route::resource('policy', CompanyPolicyController::class);
+                Route::get('attachment.download/{id}', [CompanyPolicyController::class, 'downloadAttachment'])->name('company-policy.attachment');
                 Route::get('company-branch-policy/{id}', [CompanyBranchController::class, 'showPolicy'])->name('company-branch.show-policy');
                 Route::get('image-logo/{id}', [CompanyController::class, 'displayImageLogo'])->name('image.displayImageLogo');
                 Route::get('image-icon/{id}', [CompanyController::class, 'displayImageIcon'])->name('image.displayImageIcon');
@@ -146,7 +147,9 @@ Route::group(['domain' => ''], function() {
                     Route::resource('timesheet', TimesheetController::class);
                     Route::resource('manage-leave', LeaveController::class);
                     Route::get('manage-leave-export', [LeaveController::class, 'export'])->name('export'); 
-                    Route::get('action', [LeaveController::class, 'action'])->name('action'); 
+                    Route::get('action/{id}', [LeaveController::class, 'action'])->name('action'); 
+                    Route::patch('changeaction/{id}', [LeaveController::class, 'changeaction'])->name('changeaction'); 
+                    Route::patch('action.destroy/{id}', [LeaveController::class, 'cangeActionDestroy'])->name('action.destroy'); 
                     Route::resource('attandance', AttendanceController::class);
                 });
                 Route::prefix('performance')->name('performance.')->group(function(){

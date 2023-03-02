@@ -113,7 +113,8 @@ class TicketController extends Controller
     {
         $ticket = Ticket::findOrFail($id);
         $employee = Employee::all();
-        $ticket_reply = TicketReply::all();
+        $ticket_reply = TicketReply::where('ticket_id', $id)->get();
+        // dd($ticket_reply);
         return view('pages.office.hrm.ticket.reply', [
             'data' => $ticket,
             'ticketreply' => $ticket_reply,
@@ -145,7 +146,7 @@ class TicketController extends Controller
         $ticket->ticket_created =  Auth::guard('employees')->user()->id;
         $ticket->created_by = Auth::guard('employees')->user()->id;
         $ticket->st = $request->st;
-        $ticket->save();
+        $ticket->update();
         return response()->json([
             'alert' => 'success',
             'message' => 'Ticket Updated',

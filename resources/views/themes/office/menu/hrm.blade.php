@@ -740,9 +740,9 @@
 </div>
 <!--end:Menu item-->
 <!--begin:Menu item-->
-<div class="menu-item">
+<div class="menu-item" data-no-swup>
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{ route('office.hrm.ticket.index') }}">
+    <a class="menu-link" data-no-swup href="{{ route('office.hrm.ticket.index') }}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/finance/fin002.svg-->
             <span class="svg-icon svg-icon-2">
@@ -806,7 +806,7 @@
 <!--begin:Menu item-->
 <div class="menu-item">
     <!--begin:Menu link-->
-    <a class="menu-link" href="{{route('office.setting.company-policy.index')}}">
+    <a class="menu-link" href="{{route('office.setting.policy.index')}}">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
             <span class="svg-icon svg-icon-2">
